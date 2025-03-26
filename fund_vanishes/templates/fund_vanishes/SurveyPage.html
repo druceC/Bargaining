@@ -1,0 +1,113 @@
+{% extends "global/Page.html" %}
+
+{% block title %}
+    <!-- Final Survey 🎉 -->
+{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Full-page centering */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0044cc, #6A0DAD); /* Consistent vibrant blue/purple theme */
+        color: white;
+        margin: 0;
+        /* height: 100vh; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Outer wrapper to ensure perfect centering */
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .survey-container {
+        background: white;
+        width: 90%;
+        max-width: 600px;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        animation: popIn 0.6s ease-in-out;
+    }
+
+    @keyframes popIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .survey-header {
+        font-size: 28px;
+        font-weight: bold;
+        color: #6A0DAD;
+        margin-bottom: 10px;
+    }
+
+    .survey-subtext {
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .btn-start {
+        background: linear-gradient(135deg, #6A0DAD, #0044cc);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-start:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 8px 18px rgba(106, 13, 173, 0.3);
+    }
+
+    .emoji {
+        font-size: 24px;
+        animation: bounce 1.2s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+</style>
+
+<div class="wrapper">
+    <div class="survey-container">
+        <div class="survey-header">Almost There!</div>
+        <div class="survey-subtext">You're almost there! Let's wrap this up. <span class="emoji"></span></div>
+        
+        <button class="btn-start" onclick="startSurvey()">Start Survey</button>
+    </div>
+</div>
+
+<script>
+    function startSurvey() {
+        // Redirects to the first survey page (adjust as needed)
+        window.location.href = "/Part1a";
+    }
+</script>
+
+{% endblock %}

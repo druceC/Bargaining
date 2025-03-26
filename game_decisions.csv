@@ -1,0 +1,217 @@
+Timestamp,Participant_ID,Round,Period,Page,Action,Field,Value
+2025-03-07T09:49:33.173083,1,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-07T09:49:33.173248,1,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-07T09:49:33.173282,1,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-07T09:49:33.720278,2,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-07T09:49:33.720436,2,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-07T09:49:33.720460,2,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-07T09:49:34.322805,3,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-07T09:49:34.322894,3,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-07T09:49:34.322915,3,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-07T09:49:39.028709,1,1,1,VoterPage,Voted,vote,True
+2025-03-07T09:49:39.880587,2,1,1,VoterPage,Voted,vote,True
+2025-03-07T09:49:40.575966,3,1,1,VoterPage,Voted,vote,True
+2025-03-21T01:46:15.004064,3,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T01:46:15.004183,3,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T01:46:15.004223,3,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T01:46:15.660225,2,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T01:46:15.660333,2,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T01:46:15.660355,2,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T01:46:16.353710,1,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T01:46:16.353846,1,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T01:46:16.353868,1,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T02:32:27.626336,1,1,1,VoterPage,Voted,vote,True
+2025-03-21T02:32:28.415558,2,1,1,VoterPage,Voted,vote,True
+2025-03-21T02:32:29.296297,3,1,1,VoterPage,Voted,vote,True
+2025-03-21T03:02:17.792989,3,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T03:02:17.793075,3,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T03:02:17.793099,3,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T03:02:18.485698,2,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T03:02:18.485822,2,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T03:02:18.485848,2,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T03:02:19.362347,1,1,1,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T03:02:19.362461,1,1,1,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T03:02:19.362486,1,1,1,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T03:02:23.260354,1,1,1,VoterPage,Voted,vote,True
+2025-03-21T03:02:23.949032,2,1,1,VoterPage,Voted,vote,False
+2025-03-21T03:02:24.581326,3,1,1,VoterPage,Voted,vote,True
+2025-03-21T03:39:31.368827,1,1,1,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T03:39:31.368936,1,1,1,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T03:39:31.368967,1,1,1,ProposerPage,Submitted Proposal,s3,30
+2025-03-21T03:39:32.087838,2,1,1,ProposerPage,Submitted Proposal,s1,30
+2025-03-21T03:39:32.087938,2,1,1,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T03:39:32.087960,2,1,1,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T03:39:32.724688,3,1,1,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T03:39:32.724799,3,1,1,ProposerPage,Submitted Proposal,s2,30
+2025-03-21T03:39:32.724820,3,1,1,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T03:39:37.544219,1,1,1,VoterPage,Voted,vote,False
+2025-03-21T03:39:38.973377,2,1,1,VoterPage,Voted,vote,True
+2025-03-21T03:39:39.901920,3,1,1,VoterPage,Voted,vote,False
+2025-03-21T04:48:23.918049,1,1,1,ProposerPage,Submitted Proposal,s1,30
+2025-03-21T04:48:23.918237,1,1,1,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T04:48:23.918268,1,1,1,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T04:48:24.595122,2,1,1,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T04:48:24.595295,2,1,1,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T04:48:24.595321,2,1,1,ProposerPage,Submitted Proposal,s3,30
+2025-03-21T04:48:25.410860,3,1,1,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T04:48:25.410950,3,1,1,ProposerPage,Submitted Proposal,s2,30
+2025-03-21T04:48:25.410974,3,1,1,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T04:48:30.188744,1,1,1,VoterPage,Voted,vote,True
+2025-03-21T04:48:30.982370,2,1,1,VoterPage,Voted,vote,False
+2025-03-21T04:48:31.719768,3,1,1,VoterPage,Voted,vote,False
+2025-03-21T04:52:45.248840,1,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:52:45.248983,1,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:52:45.249016,1,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:52:45.854827,2,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:52:45.854949,2,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:52:45.854989,2,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:52:46.399735,3,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:52:46.399816,3,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:52:46.399837,3,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:52:49.099941,1,2,2,VoterPage,Voted,vote,True
+2025-03-21T04:52:49.645822,2,2,2,VoterPage,Voted,vote,True
+2025-03-21T04:52:50.338888,3,2,2,VoterPage,Voted,vote,True
+2025-03-21T04:52:57.310847,1,3,3,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:52:57.310893,1,3,3,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:52:57.310903,1,3,3,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:52:59.172260,2,3,3,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:52:59.172356,2,3,3,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:52:59.172385,2,3,3,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:53:01.059489,3,3,3,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:53:01.059578,3,3,3,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:53:01.059599,3,3,3,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:53:03.999364,1,3,3,VoterPage,Voted,vote,False
+2025-03-21T04:53:04.488981,2,3,3,VoterPage,Voted,vote,True
+2025-03-21T04:53:05.179311,3,3,3,VoterPage,Voted,vote,False
+2025-03-21T04:53:12.757744,1,4,4,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:53:12.757840,1,4,4,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:53:12.757866,1,4,4,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:53:14.528419,2,4,4,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:53:14.528519,2,4,4,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:53:14.528548,2,4,4,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:53:17.449080,3,4,4,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:53:17.449221,3,4,4,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:53:17.449242,3,4,4,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:53:21.017668,1,4,4,VoterPage,Voted,vote,True
+2025-03-21T04:53:21.626547,2,4,4,VoterPage,Voted,vote,True
+2025-03-21T04:53:22.299669,3,4,4,VoterPage,Voted,vote,True
+2025-03-21T04:53:33.656997,1,5,5,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:53:33.657132,1,5,5,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:53:33.657159,1,5,5,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:53:34.436181,2,5,5,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:53:34.436333,2,5,5,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:53:34.436376,2,5,5,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:53:35.101934,3,5,5,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T04:53:35.102049,3,5,5,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T04:53:35.102080,3,5,5,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T04:53:40.224678,1,5,5,VoterPage,Voted,vote,False
+2025-03-21T04:53:41.073940,2,5,5,VoterPage,Voted,vote,True
+2025-03-21T04:53:42.238530,3,5,5,VoterPage,Voted,vote,True
+2025-03-21T05:20:28.629372,1,1,1,ProposerPage,Submitted Proposal,s1,30
+2025-03-21T05:20:28.629533,1,1,1,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T05:20:28.629563,1,1,1,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:20:29.259319,2,1,1,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T05:20:29.259431,2,1,1,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T05:20:29.259453,2,1,1,ProposerPage,Submitted Proposal,s3,30
+2025-03-21T05:20:29.924902,3,1,1,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T05:20:29.925013,3,1,1,ProposerPage,Submitted Proposal,s2,30
+2025-03-21T05:20:29.925035,3,1,1,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:20:34.375068,1,1,1,VoterPage,Voted,vote,False
+2025-03-21T05:20:35.166175,2,1,1,VoterPage,Voted,vote,False
+2025-03-21T05:20:36.508379,3,1,1,VoterPage,Voted,vote,True
+2025-03-21T05:20:50.843178,1,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:20:50.843312,1,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:20:50.843337,1,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:20:51.479729,2,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:20:51.479837,2,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:20:51.479860,2,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:20:52.101749,3,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:20:52.101919,3,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:20:52.101945,3,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:20:58.419450,1,2,2,VoterPage,Voted,vote,True
+2025-03-21T05:20:58.990914,2,2,2,VoterPage,Voted,vote,True
+2025-03-21T05:20:59.686961,3,2,2,VoterPage,Voted,vote,True
+2025-03-21T05:21:13.541342,1,3,3,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:21:13.541519,1,3,3,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:21:13.541545,1,3,3,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:21:14.128191,2,3,3,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:21:14.128604,2,3,3,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:21:14.128634,2,3,3,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:21:14.772109,3,3,3,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:21:14.772247,3,3,3,ProposerPage,Submitted Proposal,s2,20
+2025-03-21T05:21:14.772286,3,3,3,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:21:20.018656,1,3,3,VoterPage,Voted,vote,True
+2025-03-21T05:21:20.756113,2,3,3,VoterPage,Voted,vote,True
+2025-03-21T05:21:21.442482,3,3,3,VoterPage,Voted,vote,False
+2025-03-21T05:21:37.086674,1,4,4,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:21:37.086830,1,4,4,ProposerPage,Submitted Proposal,s2,20
+2025-03-21T05:21:37.086854,1,4,4,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:21:37.801978,2,4,4,ProposerPage,Submitted Proposal,s1,20
+2025-03-21T05:21:37.802052,2,4,4,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:21:37.802072,2,4,4,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:21:38.793339,3,4,4,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:21:38.793384,3,4,4,ProposerPage,Submitted Proposal,s2,20
+2025-03-21T05:21:38.793395,3,4,4,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:23:27.165615,1,4,4,VoterPage,Voted,vote,True
+2025-03-21T05:23:27.849493,2,4,4,VoterPage,Voted,vote,False
+2025-03-21T05:23:28.558386,3,4,4,VoterPage,Voted,vote,True
+2025-03-21T05:28:56.261198,1,1,1,ProposerPage,Submitted Proposal,s1,30
+2025-03-21T05:28:56.261339,1,1,1,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T05:28:56.261364,1,1,1,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:28:56.913587,2,1,1,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T05:28:56.913731,2,1,1,ProposerPage,Submitted Proposal,s2,30
+2025-03-21T05:28:56.913763,2,1,1,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:28:57.654926,3,1,1,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T05:28:57.655119,3,1,1,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T05:28:57.655150,3,1,1,ProposerPage,Submitted Proposal,s3,30
+2025-03-21T05:29:02.591348,1,1,1,VoterPage,Voted,vote,False
+2025-03-21T05:29:03.577515,2,1,1,VoterPage,Voted,vote,False
+2025-03-21T05:29:04.249368,3,1,1,VoterPage,Voted,vote,True
+2025-03-21T05:29:21.480851,1,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:29:21.480969,1,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:29:21.480994,1,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:29:22.199521,2,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:29:22.199639,2,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:29:22.199668,2,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:29:22.911916,3,2,2,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:29:22.911977,3,2,2,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:29:22.911989,3,2,2,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:29:27.029123,1,2,2,VoterPage,Voted,vote,True
+2025-03-21T05:29:27.689177,2,2,2,VoterPage,Voted,vote,True
+2025-03-21T05:29:28.645344,3,2,2,VoterPage,Voted,vote,True
+2025-03-21T05:29:48.325933,1,3,3,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:29:48.326076,1,3,3,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T05:29:48.326104,1,3,3,ProposerPage,Submitted Proposal,s3,20
+2025-03-21T05:29:49.162855,2,3,3,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:29:49.162948,2,3,3,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:29:49.162969,2,3,3,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:29:49.954376,3,3,3,ProposerPage,Submitted Proposal,s1,15
+2025-03-21T05:29:49.954463,3,3,3,ProposerPage,Submitted Proposal,s2,15
+2025-03-21T05:29:49.954486,3,3,3,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:29:56.466642,1,3,3,VoterPage,Voted,vote,True
+2025-03-21T05:29:57.370896,2,3,3,VoterPage,Voted,vote,True
+2025-03-21T05:29:58.179576,3,3,3,VoterPage,Voted,vote,False
+2025-03-21T05:30:28.335570,1,4,4,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T05:30:28.335828,1,4,4,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:30:28.335867,1,4,4,ProposerPage,Submitted Proposal,s3,20
+2025-03-21T05:30:29.742182,2,4,4,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:30:29.742301,2,4,4,ProposerPage,Submitted Proposal,s2,20
+2025-03-21T05:30:29.742323,2,4,4,ProposerPage,Submitted Proposal,s3,0
+2025-03-21T05:30:34.057109,3,4,4,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:30:34.057213,3,4,4,ProposerPage,Submitted Proposal,s2,10
+2025-03-21T05:30:34.057237,3,4,4,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:30:43.183186,1,4,4,VoterPage,Voted,vote,True
+2025-03-21T05:30:44.458473,2,4,4,VoterPage,Voted,vote,False
+2025-03-21T05:30:45.468460,3,4,4,VoterPage,Voted,vote,True
+2025-03-21T05:31:13.124501,1,5,5,ProposerPage,Submitted Proposal,s1,12
+2025-03-21T05:31:13.124670,1,5,5,ProposerPage,Submitted Proposal,s2,8
+2025-03-21T05:31:13.124701,1,5,5,ProposerPage,Submitted Proposal,s3,10
+2025-03-21T05:31:14.106672,2,5,5,ProposerPage,Submitted Proposal,s1,10
+2025-03-21T05:31:14.106807,2,5,5,ProposerPage,Submitted Proposal,s2,15
+2025-03-21T05:31:14.106846,2,5,5,ProposerPage,Submitted Proposal,s3,5
+2025-03-21T05:31:14.913537,3,5,5,ProposerPage,Submitted Proposal,s1,0
+2025-03-21T05:31:14.913615,3,5,5,ProposerPage,Submitted Proposal,s2,0
+2025-03-21T05:31:14.913636,3,5,5,ProposerPage,Submitted Proposal,s3,30
+2025-03-21T05:31:21.208541,1,5,5,VoterPage,Voted,vote,True
+2025-03-21T05:31:22.158294,2,5,5,VoterPage,Voted,vote,True
+2025-03-21T05:31:22.987306,3,5,5,VoterPage,Voted,vote,True

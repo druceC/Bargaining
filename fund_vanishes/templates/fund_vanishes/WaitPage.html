@@ -1,0 +1,113 @@
+{% extends "global/Page.html" %}
+{% block title %} Please Wait {% endblock %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #ECF5FF; /* Light pastel blue */
+    }
+
+    .waiting-container {
+        max-width: 700px;
+        margin: auto;
+        padding: 40px;
+        text-align: center;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.08);
+        position: relative;
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #4A90E2; /* Soft blue accent */
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 17px;
+        color: #444;
+        line-height: 1.6;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .loading-text {
+        font-size: 18px;
+        font-weight: 600;
+        color: #5C8DBC; /* Medium pastel blue */
+        margin-top: 10px;
+        animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 1; }
+        100% { opacity: 0.5; }
+    }
+
+    .progress-bar-container {
+        width: 100%;
+        height: 12px;
+        background: #D6E9FF; /* Lightest blue */
+        border-radius: 6px;
+        overflow: hidden;
+        margin-top: 15px;
+        position: relative;
+    }
+
+    .progress-bar {
+        width: 0;
+        height: 100%;
+        background: #4A90E2; /* Soft blue */
+        border-radius: 6px;
+        animation: progress-animation 3s infinite linear;
+    }
+
+    @keyframes progress-animation {
+        0% { width: 0; }
+        50% { width: 75%; }
+        100% { width: 100%; }
+    }
+
+    .floating-bubble {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: #BFDFFF;
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: float 4s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); opacity: 0.6; }
+        50% { transform: translateY(-20px); opacity: 0.3; }
+        100% { transform: translateY(0px); opacity: 0.6; }
+    }
+
+    .bubble-1 { left: 20%; animation-delay: 0s; }
+    .bubble-2 { left: 50%; animation-delay: 1s; }
+    .bubble-3 { left: 80%; animation-delay: 2s; }
+
+</style>
+
+<div class="waiting-container">
+    <h1>Finding Your Group... 🔍</h1>
+    <p>Please wait while we're matching you with other participants.</p>
+    
+    <div class="progress-bar-container">
+        <div class="progress-bar"></div>
+    </div>
+
+    <p class="loading-text">Searching for players...</p>
+
+    <!-- Floating Bubbles for Subtle Animation -->
+    <div class="floating-bubble bubble-1"></div>
+    <div class="floating-bubble bubble-2"></div>
+    <div class="floating-bubble bubble-3"></div>
+</div>
+{% endblock %}

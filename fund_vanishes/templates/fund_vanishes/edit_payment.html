@@ -1,0 +1,191 @@
+{% extends "global/Page.html" %}
+
+{% block title %}
+    End of Game 💰
+{% endblock %}
+
+{% block content %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f4f0ff, #f9f9f9);
+        color: #333;
+    }
+
+    .container {
+        max-width: 650px;
+        margin: auto;
+        padding: 35px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        position: relative;
+    }
+
+    h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #6A0DAD;
+        margin-bottom: 20px;
+    }
+
+    .thank-you {
+        font-size: 22px;
+        font-weight: 600;
+        color: #4e0c86;
+        margin-bottom: 20px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .breakdown-section {
+        background: #f8f5ff;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 10px rgba(106, 13, 173, 0.1);
+    }
+
+    .breakdown-table, .bonus-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .breakdown-table th, .breakdown-table td,
+    .bonus-table th, .bonus-table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .breakdown-table th, .bonus-table th {
+        background: #6A0DAD;
+        color: white;
+        font-weight: 600;
+    }
+
+    .bonus-section {
+        font-size: 20px;
+        font-weight: bold;
+        color: #6A0DAD;
+        margin: 20px 0 10px;
+    }
+
+    .payment-summary {
+        font-size: 22px;
+        font-weight: 700;
+        color: #6A0DAD;
+        margin: 20px 0 10px;
+    }
+
+    .total-payment-box {
+        background: #e7dcff;
+        padding: 14px 26px;
+        border-radius: 10px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #4e0c86;
+        display: inline-block;
+        margin-top: 12px;
+        box-shadow: 0px 4px 10px rgba(106, 13, 173, 0.15);
+    }
+
+    .final-message {
+        font-size: 16px;
+        font-weight: 500;
+        color: #444;
+        margin-top: 20px;
+    }
+
+    .button-container {
+        margin-top: 25px;
+    }
+
+    .continue-button {
+        background-color: #6A0DAD;
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        display: inline-block;
+    }
+
+    .continue-button:hover {
+        background-color: #4e0c86;
+        transform: translateY(-2px);
+        box-shadow: 0px 6px 12px rgba(106, 13, 173, 0.2);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+</style>
+
+<div class="container">
+    <p class="thank-you">Thank you for joining!</p>
+
+    <!-- Payment Breakdown Section -->
+    <div class="breakdown-section">
+        <h3 class="payment-summary">Payment Breakdown</h3>
+        <table class="breakdown-table">
+            <tr>
+                <th>Participation Fee</th>
+                <td>$2</td>
+            </tr>
+            <tr>
+                <th>Survey Fee</th>
+                <td>$1</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Bonus Earnings Section -->
+    <p class="bonus-section">Bonus Earnings: 💰</p>
+    <table class="bonus-table">
+        <tr>
+            <th>Periods Selected</th>
+            <th>Your Share in Tokens</th>
+            <th>Equivalent in USD <br>(4 Tokens = $1)</th>
+        </tr>
+        {% for entry in selected_periods %}
+        <tr>
+            <td>Period {{ entry.period }}</td>
+            <td>{{ entry.tokens }}</td>
+            <td>${{ entry.usd_equivalent }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Total Final Payment -->
+    <p class="payment-summary">Your Total Final Payment:</p>
+    <p class="final-message">
+        Participation Fee ($2) + Survey Fee ($1) + Bonus Earnings =  
+    </p>
+    <div class="total-payment-box">
+        ${{ final_payment }}
+    </div>
+
+    <p class="final-message">
+        Your participation has been recorded. Please proceed to finalize your compensation.
+    </p>
+
+    <div class="button-container">
+        <form method="post">
+            <button type="submit" class="continue-button">Continue</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

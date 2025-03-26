@@ -1,0 +1,183 @@
+{% extends "global/Page.html" %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        /* font-family: 'Inter', sans-serif; */
+        font-family: 'Poppins', sans-serif;
+        background-color: #ECEAF3; /* Darker background for distinction */
+    }
+
+    .container {
+        max-width: 750px;
+        margin: auto;
+        padding: 40px;
+        text-align: left;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: #3A0066; /* Darker purple */
+        font-weight: 700;
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #4B0082;
+        font-weight: 600;
+        font-size: 22px;
+        margin-top: 28px;
+        margin-bottom: 12px;
+    }
+
+    h3 {
+        font-weight: 600;
+        font-size: 18px;
+        margin-top: 24px;
+        margin-bottom: 8px;
+        color: #2F004F;
+    }
+
+    p {
+        font-size: 16px;
+        color: #222; /* Darker text */
+        line-height: 1.7;
+        margin-bottom: 14px;
+    }
+
+    strong {
+        color: #222;
+    }
+
+    .highlight-red {
+        color: #B22222;
+        font-weight: 600;
+    }
+
+    .highlight-purple {
+        color: #4B0082;
+        font-weight: 600;
+    }
+
+    .highlight-blue {
+        color: #007BFF;
+        font-weight: 600;
+    }
+
+    .section-divider {
+        border-top: 1px solid #ddd;
+        margin: 24px 0;
+    }
+
+    ol {
+        padding-left: 20px;
+        font-size: 16px;
+        color: #222;
+        line-height: 1.7;
+        margin-bottom: 14px;
+    }
+
+    .next-instruction {
+        font-size: 16px;
+        font-weight: 500;
+        color: #4B0082;
+        margin-top: 24px;
+        text-align: center;
+    }
+
+    .next-button {
+        background-color: #6A0DAD; /* Bright Purple (Default) */
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        display: block;
+        margin: 24px auto 10px auto;
+        text-align: center;
+    }
+
+    .next-button:hover {
+        background-color: #3A0066; /* Darker Purple on Hover */
+        transform: translateY(-2px);
+        box-shadow: 0px 6px 12px rgba(58, 0, 102, 0.3);
+    }
+
+
+</style>
+
+<div class="container">
+    <h1>Brief Walkthrough</h1>
+
+    <h2>Example</h2>
+    <p>
+        Below, we provide an example for you to understand how the payoffs of the experiment work.
+    </p>
+
+    <p>
+        Consider a 3-person group with <strong class="highlight-purple">30 tokens</strong> to divide. 
+        Each participant submits a proposal for distributing the tokens among the group. 
+        The system randomly selects one of these proposals for voting.
+    </p>
+
+    <p>
+        Suppose the proposer allocates <strong>10 tokens</strong> to Subject 1, <strong>7 tokens</strong> to herself, 
+        and <strong>13 tokens</strong> to Subject 2. If Subject 1 votes in favor and 
+        Subject 2 votes against, the proposal is <strong>approved</strong> because the 
+        proposer is automatically counted in favor.
+    </p>
+
+    <p>
+        However, if the proposal is <strong>rejected</strong> (not at least <strong>2 votes in favor</strong>), 
+        the <span class="highlight-red">fund vanishes</span>, and each player receives <strong class="highlight-red">0 tokens</strong>.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <h2>Review of the Experiment</h2>
+    <ol>
+        <li>Everyone is randomly assigned into groups of 3 people.</li>
+        <li>There are <strong class="highlight-purple">30 tokens</strong> to divide (10 tokens = 1 USD).</li>
+        <li>Each participant submits a division of the 30 tokens.</li>
+        <li>One proposal is selected at random for voting.</li>
+        <li>Voting takes place.</li>
+        <li>
+            If a majority (<strong>at least 2 votes</strong>) accepts, the allocation is <strong>binding</strong>.
+        </li>
+        <li>
+            If a majority <strong>rejects</strong>, the <span class="highlight-red">fund vanishes</span>, 
+            and <strong>each participant receives 0 tokens</strong>.
+        </li>
+        <li>A new round begins with randomly selected members.</li>
+        <li>Only <strong class="highlight-purple">1 of the 5 rounds</strong> will be randomly chosen for payment.</li>
+    </ol>
+
+    <div class="section-divider"></div>
+
+    <h2>After the Experiment</h2>
+    <p>
+        A brief survey will follow, where we ask some follow-up questions. 
+        After completing the survey, the final screen will <strong>display your earnings</strong>.  
+    </p>
+
+    <p>
+        Please <strong>record this number</strong> on the receipt provided and complete the remaining fields, 
+        as they are necessary for processing your payment.
+    </p>
+
+    <div class="section-divider"></div>
+
+    <button class="next-button">Next</button>
+</div>
+
+{% endblock %}

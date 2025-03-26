@@ -1,0 +1,168 @@
+{% extends "global/Page.html" %}
+{% block title %} {% endblock %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        /* font-family: 'Inter', sans-serif; */
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    .container {
+        max-width: 750px;
+        margin: auto;
+        padding: 40px;
+        text-align: left;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+        color: #4B0082;
+        font-weight: 700;
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 18px;
+    }
+
+    h2 {
+        color: #4B0082;
+        font-weight: 600;
+        font-size: 22px;
+        margin-top: 28px;
+        margin-bottom: 12px;
+    }
+
+    h3 {
+        font-weight: 600;
+        font-size: 18px;
+        margin-top: 24px;
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #333;
+        line-height: 1.7;
+        margin-bottom: 14px;
+    }
+
+    strong {
+        color: #333;
+    }
+
+    .highlight-red {
+        color: #B22222;
+        font-weight: 600;
+    }
+
+    .highlight-purple {
+        color: #4B0082;
+        font-weight: 600;
+    }
+
+    .highlight-blue {
+        color: #007BFF;
+        font-weight: 600;
+    }
+
+    .section-divider {
+        border-top: 1px solid #ddd;
+        margin: 20px 0;
+    }
+
+    .next-instruction {
+        font-size: 16px;
+        font-weight: 500;
+        color: #4B0082;
+        margin-top: 24px;
+        text-align: center;
+    }
+
+    .next-button {
+        background-color: #6A0DAD; /* Bright Purple (Default) */
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        display: block;
+        margin: 24px auto 10px auto;
+        text-align: center;
+    }
+
+    .next-button:hover {
+        background-color: #3A0066; /* Darker Purple on Hover */
+        transform: translateY(-2px);
+        box-shadow: 0px 6px 12px rgba(58, 0, 102, 0.3);
+    }
+
+</style>
+
+<div class="container">
+    <h1>Experiment Instructions</h1>
+
+    <p>
+        This experiment follows a <strong class="highlight-purple">no-deception ethical policy</strong>, meaning these instructions fully describe what will happen. 
+        Before participating, please read the consent form and sign with your name, date, and signature.
+    </p>
+
+    <div class="section-divider"></div>
+    <br>
+    <h2>Overview</h2>
+    <p>
+        You will be part of a group of <strong>3 people</strong>. Each of you will propose a distribution of <strong class>30 tokens</strong> (4 tokens = 1 USD). 
+        One proposal will be randomly selected for voting. If a proposal is <span class="highlight-red">rejected</span>, the <strong class="highlight-red">30 tokens vanish</strong>, and all members receive <strong>0 tokens.</strong>
+    </p>
+
+    <div class="section-divider"></div>
+
+    <h2>Experiment Details</h2>
+    
+    <h3>1. Proposal</h3>
+    <p>
+        Each participant submits a division of 30 tokens. The total must be <strong>exactly 30</strong>, and shares must be whole numbers (0-30). 
+        The system will randomly select <strong>one proposal</strong> for voting.
+    </p>
+
+    <h3>2. Voting</h3>
+    <p>
+        You will see the selected proposal and the shares assigned to each member. 
+        You can vote <strong class="highlight-blue">“Accept”</strong> or <strong class="highlight-red">“Reject.”</strong>  
+        The proposal needs a <strong>simple majority</strong> (at least 2 votes) to pass. 
+        The proposer is automatically counted as voting in favor.
+    </p>
+
+    <p class="highlight-blue"><strong>If accepted:</strong></p>
+    <p>The result is binding, and new groups will be assigned in the next round.</p>
+
+    <p class="highlight-red"><strong>If rejected:</strong></p>
+    <p>The fund vanishes, and all members receive 0 tokens.</p>
+
+    <div class="section-divider"></div>
+
+    <h2>Your Earnings</h2>
+    <p>
+        <strong class="highlight-purple">Two</strong> out of the five rounds will be randomly selected for payment. 
+        Your earnings are based on the tokens you received in that round plus a <strong>$2</strong> fixed fee. After the experiment, you will then be paid <strong>$1</strong> for a brief survey.
+    </p>
+    <p>
+        Your final payment will be displayed on the final screen.
+    </p>
+    <div class="section-divider"></div>
+
+    <p class="next-instruction">
+        Please press <span style="color: #4B0082;">Next</span> to proceed.
+    </p>
+
+    <button class="next-button">Next</button>
+</div>
+
+{% endblock %}

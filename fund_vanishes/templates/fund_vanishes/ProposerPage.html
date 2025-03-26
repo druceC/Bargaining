@@ -1,0 +1,129 @@
+{{ block content }}
+
+<style>
+    /* General Styling */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+        padding: 40px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
+        text-align: center;
+    }
+
+    /* Period Display */
+    .period-box {
+        padding: 8px 15px;
+        background: #D1C4E9; /* Soft Lavender */
+        color: #4B0082;
+        font-weight: bold;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    /* Title */
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #4B0082;
+        margin-bottom: 10px;
+    }
+
+    /* Instructions */
+    p {
+        font-size: 16px;
+        color: #333;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    /* Form Grid */
+    .form-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Input Styling */
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #D1C4E9;
+        border-radius: 6px;
+        font-size: 16px;
+        text-align: center;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input:focus {
+        border-color: #4B0082;
+        box-shadow: 0px 0px 8px rgba(75, 0, 130, 0.3);
+        outline: none;
+    }
+
+    /* Submit Button */
+    .submit-button {
+        background-color: #6A0DAD;
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease-in-out;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+    .submit-button:hover {
+        background-color: #4B0082;
+        transform: scale(1.05);
+        box-shadow: 0px 6px 12px rgba(75, 0, 130, 0.2);
+    }
+
+</style>
+
+<div class="container">
+    <!-- Display Current Period -->
+    <div class="period-box">Period {{ group.current_period }}</div>
+
+    <!-- Instruction Section -->
+    <h1>Submit Your Proposal</h1>
+    <p>Please enter a division of shares for each participant.</p>
+    <p><strong>The total fund to share is 30 tokens.</strong></p>
+
+    <!-- Form -->
+    <form method="post">
+        <div class="form-container">
+            {% if player.id_in_group == 1 %}
+                {{ formfield group.s1 label="Participant 1 (YOU)" }}
+                {{ formfield group.s2 label="Participant 2" }}
+                {{ formfield group.s3 label="Participant 3" }}
+            {% elif player.id_in_group == 2 %}
+                {{ formfield group.s1 label="Participant 1" }}
+                {{ formfield group.s2 label="Participant 2 (YOU)" }}
+                {{ formfield group.s3 label="Participant 3" }}
+            {% elif player.id_in_group == 3 %}
+                {{ formfield group.s1 label="Participant 1" }}
+                {{ formfield group.s2 label="Participant 2" }}
+                {{ formfield group.s3 label="Participant 3 (YOU)" }}
+            {% endif %}
+        </div>
+
+        <!-- Submit Button -->
+        <button class="submit-button">Submit Proposal</button>
+    </form>
+</div>
+
+{{ endblock }}

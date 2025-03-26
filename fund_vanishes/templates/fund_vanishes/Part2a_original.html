@@ -1,0 +1,294 @@
+{{ block content }}
+
+{# Enhanced Survey Page UI #}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0044cc, #00aaff); /* Modern blue gradient */
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* height: 100vh; */
+        margin: 0;
+    }
+
+    .survey-container {
+        width: 90%;
+        max-width: 700px;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Outer wrapper to ensure perfect centering */
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .survey-header {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0044cc;
+        margin-bottom: 10px;
+    }
+
+    .survey-subtext {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress {
+        height: 100%;
+        width: 0%; /* Dynamically adjusted */
+        background: #0044cc;
+        transition: width 0.5s ease-in-out;
+    }
+
+    .form-container {
+        text-align: left;
+    }
+
+    .next-button {
+        background: #0044cc;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .next-button:hover {
+        background: #002a80;
+        transform: scale(1.05);
+    }
+
+    .note {
+        font-size: 14px;
+        color: #777;
+        margin-top: 15px;
+    }
+</style>
+
+<div class = "wrapper">
+    <div class="survey-container">
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    
+        <div class="form-container">
+            <!-- Number of Economics Courses Taken -->
+            {{ form.econ.label }}<br>
+            {{ form.econ }}<br>
+
+            <!-- Whether there is a political party they like -->
+            {{ form.party_like.label }}<br>
+            {{ form.party_like }}<br>
+        
+            <!-- Conditionally displayed field for party -->
+            <div id="otherTextContainer" style="display: none;">
+                {{ form.party.label }}<br>
+                {{ form.party }}<br>
+                <p id="error-message" style="color: red; display: none;">This field is required.</p>
+            </div>
+        
+            <!-- Conditionally displayed field for party_prox -->        
+            <div id="otherTextContainer_cit" style="display: none;">
+                {{ form.party_prox.label }}<br>
+                {{ form.party_prox }}<br><br>
+                <p id="error-message-2" style="color: red; display: none;">This field is requireds.</p>
+            </div>
+        </div>
+    
+        <button class="next-button" onclick="handleNextClick()">Next</button>
+        <div class="note">Click next to proceed.</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let progress = document.querySelector(".progress");
+        if (!progress) {
+            console.warn("Progress bar element not found!");
+            return;
+        }
+
+        // Party
+        let radioButtons = document.querySelectorAll('input[name="party_like"]');       // Select the radio buttons
+        let otherTextContainer = document.getElementById("otherTextContainer");
+        let otherTextInput = document.querySelectorAll('input[name="party"]');   // Get all volunt_hrs inputs
+
+        // Party Prox
+        let radioButtons_cit = document.querySelectorAll('input[name="party_like"]');       // Select the radio buttons
+        let otherTextContainer_cit = document.getElementById("otherTextContainer_cit");
+        let otherTextInput_cit = document.querySelectorAll('input[name="party_prox"]');   // Get all volunt_hrs inputs
+
+        if (!radioButtons.length) {
+            console.error(" No radio buttons found for 'party_like'. Check your formfields configuration.");
+            return;
+        }
+
+        // Display logic for place of birth
+        radioButtons.forEach(radio => {
+            radio.addEventListener("change", function() {
+                if (this.value == "1") {                                // If user selects "Yes"
+                    otherTextContainer.style.display = "block";
+                    otherTextContainer_cit.style.display = "block";
+                } else {
+                    otherTextContainer.style.display = "none";          // Clear input when hidden
+                    otherTextInput.value = ""; 
+                    otherTextInput_cit.value = "";                         
+                }
+            });
+        });
+
+        // Retrieve values from the template safely
+        let currentStep = parseInt("{{ survey_step }}", 10);  
+        let totalSteps = parseInt("{{ total_steps }}", 10);  
+
+        if (isNaN(currentStep)) {
+            console.error("survey_step is NaN. Setting default value: 1");
+            currentStep = 1;
+        }
+
+        if (isNaN(totalSteps)) {
+            console.error("total_steps is NaN. Setting default value: 16");
+            totalSteps = 12;
+        }
+
+        let progressWidth = (currentStep / totalSteps) * 100 + "%";
+        console.log(`🔹 Survey Step (from oTree): ${currentStep}`);
+        console.log(`🔹 Progress Width: ${progressWidth}`);
+
+        progress.style.width = progressWidth;
+    });
+
+    function updateProgress() {
+        let progress = document.querySelector(".progress");
+        let totalSteps = parseInt("{{ total_steps }}", 10);  
+        let nextStep = parseInt("{{ survey_step }}", 10) + 1;  
+
+        if (!isNaN(nextStep) && progress) {
+            let progressWidth = (nextStep / totalSteps) * 100 + "%";
+            progress.style.width = progressWidth;
+            console.log(`🚀 Updated Progress to Step ${nextStep}: ${progressWidth}`);
+        } else {
+            console.error("❌ Could not update progress - Invalid values detected.");
+        }
+    }
+
+    function toggleTextBox() {
+        let countryBirth = document.querySelectorAll('input[name="party_like"]:checked');
+        let textBoxContainer = document.getElementById("otherTextContainer");
+        let textBox = document.querySelectorAll('input[name="[party]"]:checked');
+
+        if (countryBirth.checked) {
+            textBoxContainer.style.display = "block";   // Show text input
+        } else {
+            textBoxContainer.style.display = "none";    // Hide text input
+            textBox.value = "";                         // Clear input when hidden
+        }
+    }
+
+    function toggleTextBox_2() {
+        let citizenship = document.querySelectorAll('input[name="party_like"]:checked');
+        let textBoxContainer = document.getElementById("otherTextContainer_cit");
+        let textBox = document.querySelectorAll('input[name="party_prox"]:checked');
+
+        if (citizenship.checked) {
+            textBoxContainer.style.display = "block";   // Show text input
+        } else {
+            textBoxContainer.style.display = "none";    // Hide text input
+            textBox.value = "";                         // Clear input when hidden
+        }
+    }
+
+    // Prevent form submission if party and party_prox is required but not answered
+    function validateForm() {
+        let selectedVolunteer = document.querySelector('input[name="party_like"]:checked');
+        let selectedHours = document.querySelector('input[name="party"]');
+        let selectedVolunteer2 = document.querySelector('input[name="party_like"]:checked');
+        let selectedHours2 = document.querySelector('input[name="party_prox"]:checked');
+
+        let errorMessage = document.getElementById("error-message");
+        let firstErrorField = null; // Track the first error field to scroll to
+        let errorMessage2 = document.getElementById("error-message-2");
+        let secondErrorField = null; // Track the first error field to scroll to
+
+        // If the person claims to have done volunteer work, require volunteer hours question
+        if (selectedVolunteer && selectedVolunteer.value == "1") { 
+            if (!selectedHours || selectedHours.value.trim() === "") {
+                errorMessage.style.display = "block"; // Show error message
+                firstErrorField = selectedHours;
+                return false;
+            } else {
+                errorMessage.style.display = "none"; // Hide error message if fixed
+            }
+        }
+        // If the person claims to have done volunteer work, require volunteer hours question
+        if (selectedVolunteer2 && selectedVolunteer2.value == "1") { 
+            if (!selectedHours2 || selectedHours2.value.trim() === "") {
+                errorMessage.style.display = "block"; // Show error message
+                secondErrorField = selectedHours2;
+                return false;
+            } else {
+                errorMessage2.style.display = "none"; // Hide error message if fixed
+            }
+        }
+
+        // Scroll to the first error field if there is one
+        if (firstErrorField) {
+            firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+            firstErrorField.focus();
+            return false; // Prevent form submission
+        }
+        if (secondErrorField) {
+            secondErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+            secondErrorField.focus();
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission if no errors
+    }
+
+    function handleNextClick() {
+        if (!validateForm()) {
+            event.preventDefault();
+            return false; // Prevent form submission if validation fails
+        }
+        updateProgress(); // Only runs if validateForm() passes
+        return true;
+    }
+
+</script>
+
+
+
+{{ endblock }}

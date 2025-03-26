@@ -1,0 +1,163 @@
+{{ block content }}
+
+{# Enhanced Survey Page UI #}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0044cc, #00aaff); /* Modern blue gradient */
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* height: 100vh; */
+        margin: 0;
+    }
+
+    .survey-container {
+        width: 90%;
+        max-width: 700px;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Outer wrapper to ensure perfect centering */
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .survey-header {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0044cc;
+        margin-bottom: 10px;
+    }
+
+    .survey-subtext {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress {
+        height: 100%;
+        width: 0%; /* Dynamically adjusted */
+        background: #0044cc;
+        transition: width 0.5s ease-in-out;
+    }
+
+    .form-container {
+        text-align: left;
+    }
+
+    .next-button {
+        background: #0044cc;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .next-button:hover {
+        background: #002a80;
+        transform: scale(1.05);
+    }
+
+    .note {
+        font-size: 14px;
+        color: #777;
+        margin-top: 15px;
+    }
+</style>
+
+<div class = "wrapper">
+    <div class="survey-container">
+        <!-- <div class="survey-header">Almost There! 🎯</div>
+        <div class="survey-subtext">Keep going! Your input matters.</div> -->
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    
+        <div class="form-container">
+            {{ formfields }}
+        </div>
+    
+        <button class="next-button" onclick="updateProgress()">Next</button>
+        <div class="note">Click next to proceed.</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let progress = document.querySelector(".progress");
+        if (!progress) {
+            console.warn("🚨 Progress bar element not found!");
+            return;
+        }
+
+        // Retrieve values from the template safely
+        let currentStep = parseInt("{{ survey_step }}", 10);  
+        let totalSteps = parseInt("{{ total_steps }}", 10);  
+
+        if (isNaN(currentStep)) {
+            console.error("❌ survey_step is NaN. Setting default value: 1");
+            currentStep = 1;
+        }
+
+        if (isNaN(totalSteps)) {
+            console.error("❌ total_steps is NaN. Setting default value: 16");
+            totalSteps = 12;
+        }
+
+        let progressWidth = (currentStep / totalSteps) * 100 + "%";
+        console.log(`🔹 Survey Step (from oTree): ${currentStep}`);
+        console.log(`🔹 Progress Width: ${progressWidth}`);
+
+        progress.style.width = progressWidth;
+    });
+
+    function updateProgress() {
+        let progress = document.querySelector(".progress");
+        let totalSteps = parseInt("{{ total_steps }}", 10);  
+        let nextStep = parseInt("{{ survey_step }}", 10) + 1;  
+
+        if (!isNaN(nextStep) && progress) {
+            let progressWidth = (nextStep / totalSteps) * 100 + "%";
+            progress.style.width = progressWidth;
+            console.log(`🚀 Updated Progress to Step ${nextStep}: ${progressWidth}`);
+        } else {
+            console.error("❌ Could not update progress - Invalid values detected.");
+        }
+    }
+</script>
+
+{{ endblock }}

@@ -1,0 +1,174 @@
+{% extends "global/Page.html" %}
+
+{% block title %}
+    Vote on the Proposal 🗳️
+{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Page Styling */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f5f0ff, #ffffff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 650px;
+        margin: auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
+        text-align: center;
+    }
+
+    /* Heading */
+    h2 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #6A0DAD;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #444;
+        line-height: 1.6;
+        margin-top: 10px;
+    }
+
+    /* Proposal Box */
+    .proposal-box {
+        background: rgba(106, 13, 173, 0.07);
+        border: 2px solid #6A0DAD;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px auto;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0px 4px 10px rgba(106, 13, 173, 0.1);
+    }
+
+    .proposal-box h4 {
+        color: #6A0DAD;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .proposal-box ul {
+        list-style: none;
+        padding: 0;
+        font-size: 16px;
+    }
+
+    .proposal-box li {
+        background: white;
+        padding: 12px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border-left: 4px solid #6A0DAD;
+        text-align: left;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px; /* Make numbers larger */
+    }
+
+    .fund-value {
+        font-size: 22px; /* Bigger numbers */
+        font-weight: bold;
+        color: #6A0DAD;
+    }
+
+    /* Voting Section */
+    .vote-question {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #6A0DAD;
+    }
+
+    .vote-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .vote-buttons button {
+        font-size: 18px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .vote-yes {
+        background-color: #28A745;
+        color: white;
+    }
+
+    .vote-no {
+        background-color: #DC3545;
+        color: white;
+    }
+
+    .vote-yes:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+        box-shadow: 0px 6px 14px rgba(40, 167, 69, 0.3);
+    }
+
+    .vote-no:hover {
+        background-color: #C82333;
+        transform: scale(1.05);
+        box-shadow: 0px 6px 14px rgba(220, 53, 69, 0.3);
+    }
+
+</style>
+
+<div class="container">
+    <!-- <h2>Vote on the Proposal 🗳️</h2> -->
+    <p><strong>Selected Proposer:</strong> Participant {{ selected_proposer_id }}</p>
+
+    <div class="proposal-box">
+        <h4>Fund Allocation:</h4>
+        <ul>
+            <li><strong>Player 1:</strong> <span class="fund-value">{{ selected_allocation.s1 }} tokens</span></li>
+            <li><strong>Player 2:</strong> <span class="fund-value">{{ selected_allocation.s2 }} tokens</span></li>
+            <li><strong>Player 3:</strong> <span class="fund-value">{{ selected_allocation.s3 }} tokens</span></li>
+        </ul>
+    </div>
+
+    <p class="vote-question">Do you accept this proposal?</p>
+
+    <form method="post">
+        <div class="vote-buttons">
+            <button type="submit" name="vote" value="1" class="vote-yes">✅ Yes</button>
+            <button type="submit" name="vote" value="0" class="vote-no">❌ No</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Show timer when 30 seconds are remaining
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+{% endblock %}

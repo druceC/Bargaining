@@ -1,0 +1,82 @@
+{{ block content }}
+
+<style>
+    /* Main container */
+    .wait-container {
+        text-align: center;
+        padding: 40px;
+        background: #EAF4FF; /* Softer pastel blue */
+        border-radius: 12px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
+        max-width: 700px;
+        margin: auto;
+        margin-top: 50px;
+    }
+
+    /* Header */
+    .wait-container h1 {
+        font-size: 26px;
+        font-weight: bold;
+        color: #003366; /* Deep navy blue */
+        margin-bottom: 10px;
+    }
+
+    /* Subtext */
+    .wait-container p {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Fixing Button Alignment */
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    /* Next Button */
+    .next-button {
+        background-color: #6A0DAD; /* Bright Purple */
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease-in-out;
+        text-align: center;
+        animation: bounce 1.5s infinite; /* Bounce effect */
+    }
+
+    .next-button:hover {
+        background-color: #4B0082; /* Deep Purple */
+        transform: scale(1.05);
+        box-shadow: 0px 6px 12px rgba(75, 0, 130, 0.2);
+    }
+
+    /* Bounce Animation */
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+</style>
+
+<div class="wait-container">
+    <h1>Group Created</h1>
+    <p>You have been matched with other participants.</p>
+
+    <!-- Button Wrapper -->
+    <div class="button-container">
+        {{ next_button }}
+    </div>
+
+    <i>Press next to continue</i>
+</div>
+
+{{ endblock }}

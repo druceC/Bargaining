@@ -1,0 +1,134 @@
+{% extends "global/Page.html" %}
+
+{% block title %}
+    Selecting Proposal 🎲
+{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Page Styling */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f4f0ff, #f9f9f9);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 40px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        position: relative;
+    }
+
+    /* Header Styling */
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #6A0DAD;
+        margin-bottom: 10px;
+    }
+
+    /* Loading Text */
+    .loading-text {
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 20px;
+    }
+
+    /* Dots Animation */
+    .dots span {
+        font-size: 24px;
+        font-weight: bold;
+        color: #6A0DAD;
+        animation: fade 1.5s infinite;
+    }
+
+    .dots span:nth-child(2) {
+        animation-delay: 0.3s;
+    }
+
+    .dots span:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+
+    @keyframes fade {
+        0%, 100% { opacity: 0; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Animated Hourglass */
+    .waiting-emoji {
+        font-size: 45px;
+        margin-top: 20px;
+        animation: bounce 1.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes bounce {
+        from { transform: translateY(0px); }
+        to { transform: translateY(-8px); }
+    }
+
+    /* Progress Bar */
+    .progress-container {
+        width: 100%;
+        height: 8px;
+        background: #e0d7ff;
+        border-radius: 5px;
+        margin-top: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress-bar {
+        width: 0%;
+        height: 100%;
+        background: #6A0DAD;
+        animation: progress 3s linear infinite alternate;
+    }
+
+    @keyframes progress {
+        0% { width: 0%; }
+        100% { width: 100%; }
+    }
+
+</style>
+
+<div class="container">
+    <h2>Waiting for all players to submit... 🎲</h2>
+    <p class="loading-text">This page will automatically proceed once all proposals are submitted.</p>
+
+    <div class="loading-animation">
+        <p class="dots"><span>.</span><span>.</span><span>.</span></p>
+        <div class="waiting-emoji">⏳</div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+</div>
+
+<script>
+    // Improved Auto-Refresh Logic to Prevent Infinite Refreshes
+    function checkPageStatus() {
+        fetch(window.location.href, { method: 'HEAD', cache: 'no-store' })
+            .then(response => {
+                if (response.ok) {
+                    setTimeout(checkPageStatus, 3000); // Continue checking
+                }
+            })
+            .catch(error => console.error("Connection lost, retrying..."));
+    }
+    checkPageStatus();
+</script>
+
+{% endblock %}

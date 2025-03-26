@@ -1,0 +1,26 @@
+{{ block content }}
+
+{# hides the time-out counter #}
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    // {# sets off counter at 30 seconds remaining #}
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+    You have now reached the end of the study. <br><br>
+    Thank you for your time, we wish you a nice day.
+
+
+{{ endblock }}
+
+

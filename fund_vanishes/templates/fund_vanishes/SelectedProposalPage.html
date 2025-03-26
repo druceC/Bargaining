@@ -1,0 +1,146 @@
+{% extends "global/Page.html" %}
+
+{% block title %}
+    Proposal Selected
+{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Page Styling */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f5f0ff, #ffffff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 650px;
+        margin: auto;
+        padding: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
+        text-align: center;
+    }
+
+    /* Heading */
+    h2 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #6A0DAD;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #444;
+        line-height: 1.6;
+        margin-top: 10px;
+    }
+
+    /* Proposal Box */
+    .proposal-box {
+        background: rgba(106, 13, 173, 0.07);
+        border: 2px solid #6A0DAD;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px auto;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0px 4px 10px rgba(106, 13, 173, 0.1);
+    }
+
+    .proposal-box h4 {
+        color: #6A0DAD;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .proposal-box ul {
+        list-style: none;
+        padding: 0;
+        font-size: 16px;
+    }
+
+    .proposal-box li {
+        background: white;
+        padding: 12px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border-left: 4px solid #6A0DAD;
+        text-align: left;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px; /* Make numbers larger */
+    }
+
+    .fund-value {
+        font-size: 22px; /* Bigger numbers */
+        font-weight: bold;
+        color: #6A0DAD;
+    }
+
+    /* Next Button */
+    .button-container {
+        margin-top: 20px;
+    }
+
+    .next-button {
+        background-color: #6A0DAD;
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        box-shadow: 0px 4px 10px rgba(106, 13, 173, 0.2);
+    }
+
+    .next-button:hover {
+        background-color: #540B99;
+        transform: translateY(-2px);
+        box-shadow: 0px 6px 14px rgba(106, 13, 173, 0.3);
+    }
+
+</style>
+
+<div class="container">
+    <!-- <h2>Selected Proposal 🎯</h2> -->
+    <p><strong> {{ selected_proposer_id }}</strong> has been randomly chosen as the proposer.</p>
+    
+    <p>The selected proposal is:</p>
+    
+    <div class="proposal-box">
+        <h4>Token Allocation:</h4>
+        <ul>
+            {% for key, value in relevant_proposal.items %}
+                <li> 
+                    <strong>
+                        {% if key == "s1" %} Player 1:
+                        {% elif key == "s2" %} Player 2:
+                        {% elif key == "s3" %} Player 3:
+                        {% else %} {{ key }} {% endif %}
+                    </strong> <span class="fund-value">{{ value }} tokens</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <p>Please review the proposal before proceeding to the voting stage.</p>
+
+    <div class="button-container">
+        <button class="next-button">Proceed to Voting</button>
+    </div>
+</div>
+
+{% endblock %}
