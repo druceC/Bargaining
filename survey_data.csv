@@ -1221,3 +1221,19 @@ Timestamp,Participant_ID,Round,Survey Page,Question,Response
 2025-03-26T06:30:16.012540,1,1,Gender,gen,4
 2025-03-26T06:30:16.012552,1,1,Gender,other_gender,sdf
 2025-03-26T06:30:16.012563,1,1,Gender,gen_cgi,6
+2025-03-27T04:32:55.557680,1,1,ProlificID,prolific_id, 
+2025-03-27T04:33:30.394774,2,1,ProlificID,prolific_id, 
+2025-03-27T04:35:41.221219,3,1,ProlificID,prolific_id, 123
+2025-03-27T04:36:22.354580,3,1,Nationality,spbrn,1
+2025-03-27T04:36:22.354674,3,1,Nationality,cntbrn,
+2025-03-27T04:36:22.354688,3,1,Nationality,spcit,1
+2025-03-27T04:36:22.354701,3,1,Nationality,other_cit,
+2025-03-27T04:36:22.354714,3,1,Nationality,primlang,234
+2025-03-27T04:36:25.106004,3,1,Education,degree,7
+2025-03-27T04:36:28.726136,3,1,Gender,sex,2
+2025-03-27T04:36:28.726205,3,1,Gender,gen,2
+2025-03-27T04:36:28.726221,3,1,Gender,other_gender,
+2025-03-27T04:36:28.726236,3,1,Gender,gen_cgi,5
+2025-03-27T04:36:31.293858,3,1,Income,inc,12
+2025-03-27T04:36:31.293941,3,1,Income,inc_hh,21
+2025-03-27T04:59:37.772297,1,1,ProlificID,prolific_id,12

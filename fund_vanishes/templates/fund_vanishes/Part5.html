@@ -74,10 +74,6 @@
         text-align: left;
     }
 
-    .question-group {
-        margin-bottom: 20px;
-    }
-
     .next-button {
         background: #0044cc;
         color: white;
@@ -112,18 +108,10 @@
         </div>
     
         <div class="form-container">
-            {{ form.rel.label }}<br>
-            {{ form.rel }}<br><br>
-
-            <!-- Container for volunteer hours radio buttons (hidden initially) -->
-            <div id="otherTextContainer" style="display: none;">
-                <p>{{ form.rel_spec.label }}</p>
-                {{form.rel_spec}}
-                <p id="error-message" style="color: red; display: none;">This field is required.</p>
-            </div>
+            {{ formfields }}
         </div>
     
-        <button class="next-button" onclick="handleNextClick()">Next</button>
+        <button class="next-button" onclick="updateProgress()">Next</button>
         <div class="note">Click next to proceed.</div>
     </div>
 </div>
@@ -135,26 +123,6 @@
             console.warn("🚨 Progress bar element not found!");
             return;
         }
-
-        let radioButtons = document.querySelectorAll('input[name="rel"]'); // Select the radio buttons
-        let otherTextContainer = document.getElementById("otherTextContainer");
-        let otherTextInput = document.getElementById('input[name="rel_spec"]');
-
-        if (!radioButtons.length) {
-            console.error("❌ No radio buttons found for 'rel_spec'. Check your formfields configuration.");
-            return;
-        }
-
-        radioButtons.forEach(radio => {
-            radio.addEventListener("change", function() {
-                if (this.value == "1") { // If user selects "Yes"
-                    otherTextContainer.style.display = "block";
-                } else {
-                    otherTextContainer.style.display = "none";
-                    // otherTextInput.value = "";  // Clear input when hidden
-                }
-            });
-        });
 
         // Retrieve values from the template safely
         let currentStep = parseInt("{{ survey_step }}", 10);  
@@ -190,56 +158,9 @@
             console.error("❌ Could not update progress - Invalid values detected.");
         }
     }
-
-    function toggleTextBox() {
-        let otherOption = document.getElementById("rel_spec");
-        let textBoxContainer = document.getElementById("otherTextContainer");
-        let textBox = document.getElementById("otherText");
-
-        if (otherGenderOption.checked) {
-            textBoxContainer.style.display = "block";  // Show text input
-        } else {
-            textBoxContainer.style.display = "none";   // Hide text input
-            textBox.value = "";  // Clear input when hidden
-        }
-    }
-
-    // Prevent form submission if volunt_hrs is required but not answered
-    function validateForm() {
-        let selectedVolunteer = document.querySelector('input[name="rel"]:checked');
-        let selectedHours = document.querySelector('input[name="rel_spec"]:checked');
-        let errorMessage = document.getElementById("error-message");
-        let firstErrorField = null; // Track the first error field to scroll to
-
-        // If the person claims to have done volunteer work, require volunteer hours question
-        if (selectedVolunteer && selectedVolunteer.value == "1") { 
-            if (!selectedHours || selectedHours.value.trim() === "") {
-                errorMessage.style.display = "block"; // Show error message
-                firstErrorField = selectedHours;
-                return false;
-            } else {
-                errorMessage.style.display = "none"; // Hide error message if fixed
-            }
-        }
-        // Scroll to the first error field if there is one
-        if (firstErrorField) {
-            firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-            firstErrorField.focus();
-            return false; // Prevent form submission
-        }
-
-        return true; // Allow form submission if no errors
-    }
-
-    function handleNextClick() {
-        if (!validateForm()) {
-            event.preventDefault();
-            return false; // Prevent form submission if validation fails
-        }
-        updateProgress(); // Only runs if validateForm() passes
-        return true;
-    }
-
 </script>
+
+
+
 
 {{ endblock }}

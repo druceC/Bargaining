@@ -1,13 +1,16 @@
 # Handle logic for experiment pages (welcome, proposal, voting, results)
 
 from otree.api import *
+from otree.api import Page
 from .models import Player
+from .utils import store_intro, store_survey_response, store_decision, store_earnings
 # from .survey import Player
-# from .survey import page_sequence as survey_pages
 from .models import Constants
 from .models import Group
 from .models import Subsession
 from otree.api import BaseSubsession
+from pathlib import Path
+from datetime import datetime
 import random
 import datetime
 import json
@@ -16,144 +19,35 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fund_vanishes.settings")
 from django.core.files.storage import default_storage
 
-# Global Variables
+# Set-up Questions
 NUM_ROUNDS = 5
+TIME_LIMIT = 60                  # Time limit per round in seconds
+
+# Variables for Progress Bar 
 INTRO_QUESTIONS = 4
 SURVEY_PAGES = 11
-CSV_FILE_PATH = "game_decisions.csv"
-SURVEY_CSV_FILE_PATH = "survey_data.csv"
-TIME_LIMIT = 60                                 # Time limit per round in seconds
 
-# -------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
-# GAME DATA STORAGE
+# INTRO QUESTIONS
 
-def ensure_csv_headers():
-    # Creates the CSV file with headers if it does not exist
-    if not default_storage.exists(CSV_FILE_PATH):
-        with default_storage.open(CSV_FILE_PATH, mode='w') as file:
-            writer = csv.writer(file)
-            writer.writerow([
-                "Timestamp", "Participant_ID", "Round", "Period", "Page", "Action", "Field", "Value"
-            ])
+class BasePage(Page):
+    def is_displayed(self):
+        # Always
 
-# Logs participant actions and decisions into a CSV file.
-def store_decision(player, page_name, action, data_dict):
-    
-    # Ensure headers exist
-    ensure_csv_headers()  
-
-    with default_storage.open(CSV_FILE_PATH, mode='a') as file:
-        writer = csv.writer(file)
-
-        for field, value in data_dict.items():
-            writer.writerow([
-                datetime.datetime.now().isoformat(),  # Timestamp
-                player.participant.id_in_session,     # Participant ID
-                player.round_number,                  # Round number
-                player.participant.vars.get('periods_played', 0),  # Period/Game of play
-                page_name,                            # Page name
-                action,                               # Action (e.g., "Submitted Proposal", "Voted")
-                field,                                # Field Name
-                value                                 # Value (Decision made)
-            ])
-
-# PRIMING / BASELINE DATA STORAGE
-
-def ensure_survey_csv_headers():
-    """Creates the survey CSV file with headers if it does not exist."""
-    if not default_storage.exists(SURVEY_CSV_FILE_PATH):
-        with default_storage.open(SURVEY_CSV_FILE_PATH, mode='w') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Timestamp", "Participant_ID", "Round", "Survey Page", "Question", "Response"])
-
-def store_survey_response(player, page_name, form_fields):
-    """Logs participant survey responses into a separate CSV file."""
-    ensure_survey_csv_headers()  # Ensure headers exist
-
-    with default_storage.open(SURVEY_CSV_FILE_PATH, mode='a') as file:  # Use 'a' to append responses
-        writer = csv.writer(file)
-
-        for field in form_fields:
-            response = getattr(player, field, None)  # Get survey response
-            
-            # Skip questions that haven't been answered
-            if response is None:
-                continue
-
-            writer.writerow([
-                datetime.datetime.now().isoformat(),  # Timestamp
-                player.participant.id_in_session,     # Participant ID
-                player.round_number,                  # Round number
-                page_name,                            # Survey page name
-                field,                                # Question (form field)
-                response                              # Response value
-            ])
-
-# -------------------------------------------------------------------
-
-# SURVEY DATA STORAGE
-
-def ensure_survey_csv_headers():
-    """Creates the survey CSV file with headers if it does not exist."""
-    if not default_storage.exists(SURVEY_CSV_FILE_PATH):
-        with default_storage.open(SURVEY_CSV_FILE_PATH, mode='w') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Timestamp", "Participant_ID", "Round", "Survey Page", "Question", "Response"])
-
-def store_survey_response(player, page_name, form_fields):
-    """Logs participant survey responses into a separate CSV file."""
-    ensure_survey_csv_headers()  # Ensure headers exist
-
-    with default_storage.open(SURVEY_CSV_FILE_PATH, mode='a') as file:  # Use 'a' to append responses
-        writer = csv.writer(file)
-
-        for field in form_fields:
-            response = getattr(player, field, None)  # Get survey response
-            
-            # Skip questions that haven't been answered
-            if response is None:
-                continue
-
-            writer.writerow([
-                datetime.datetime.now().isoformat(),  # Timestamp
-                player.participant.id_in_session,     # Participant ID
-                player.round_number,                  # Round number
-                page_name,                            # Survey page name
-                field,                                # Question (form field)
-                response                              # Response value
-            ])
-
-# -------------------------------------------------------------------
-
-# First screen where participants are welcomed and given general instructions
 class WelcomePage(Page):
     def is_displayed(self):
         return self.round_number == 1
 
-# Explain experiment instructions
 class ExperimentInstructions(Page):
     def is_displayed(self):
         return self.round_number == 1
 
-# Welcome Page to Survey
-class IntroQuestions(Page):
-    def is_displayed(self):
-        if 'surveyStep' not in self.participant.vars:
-            self.participant.vars['surveyStep'] = 0
-        return self.round_number == 1
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
-
-    def before_next_page(self):
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-# Explain experiment instructions
 class SampleInstructions(Page):
     def is_displayed(self):
         return self.round_number == 1
 
-# Mini quiz to ensure understanding before starting
+# Mini quiz to ensure understanding of game instructions
 class QuizPage(Page):
     form_model = 'player'
     form_fields = ['q1_quiz', 'q2_quiz', 'q3_quiz']
@@ -183,16 +77,51 @@ class QuizPage(Page):
         # Track total failed attempts across all questions
         if errors:
             self.player.total_num_failed_attempts += 1
+            print(f"Total failed attempts: {self.player.total_num_failed_attempts}") 
+            # Redirect to failed page after 3 attempts
+            if self.player.total_num_failed_attempts >= 3:
+                self.participant.vars['redirect_to_failed'] = True 
+                return 
             return errors  # Returns error messages to be displayed to the participant
     
-    # Redirect to failed.html if player fails quiz 3 times, otherwise go to waiting page
-    def before_next_page(self):
-        if self.player.total_num_failed_attempts >= 3:
-            self.participant.vars['redirect_to_failed'] = True  
+    
+    # def before_next_page(self):
+    #     if self.player.total_num_failed_attempts >= 3:
+    #         self.participant.vars['redirect_to_failed'] = True  
+    
+    # Redirect to failed.html
+    # def app_after_this_page(self, upcoming_apps):
+    #     if self.participant.vars.get('redirect_to_failed', False):
+    #         return 'fund_vanishes/FailedPage'  # Replace with your actual app/page path
+
+# Show this page if player fails the quiz
+# Displays failure message if the player fails the quiz after 3 attempts
+class FailedPage(Page):
+    def is_displayed(self):
+        return self.participant.vars.get('redirect_to_failed', False) 
+    
 
 # ---------------------------------------------------------------------------------------------------
 
 # PRELIMINARY QUESTIONS
+
+class IntroQuestions(Page):             # Page for Prolific ID Input
+    form_model = 'player'
+    form_fields = ['prolific_id']
+
+    def is_displayed(self):
+        # Initialize surveyStep
+        if 'surveyStep' not in self.participant.vars:
+            self.participant.vars['surveyStep'] = 1
+        return self.round_number == 1
+
+    def before_next_page(self):
+        # Progress bar for next page
+        self.participant.vars['surveyStep'] += 1
+        # To prevent duplicates
+        if not self.participant.vars.get("intro_saved", False):
+            store_intro(self.player)
+            self.participant.vars["intro_saved"] = True
 
 
 class Nationality(Page):
@@ -201,7 +130,7 @@ class Nationality(Page):
 
     # @staticmethod
     def is_displayed(self):
-        return True and self.round_number == 1
+        return self.round_number == 1
 
     def vars_for_template(self):
         return {
@@ -218,19 +147,19 @@ class Nationality(Page):
         
         if self.player.spcit != '2':        # If not 'No'
             self.player.other_cit = ''      # Clear the field
-    
+        
 
 class Education(Page):
     form_model = 'player'
     form_fields = ['degree']
      
     def is_displayed(self):
-        return True and self.round_number == 1
+        return self.round_number == 1
 
     def vars_for_template(self):
         return {
             "survey_step": 2,
-            "total_steps": INTRO_QUESTIONS  # Adjust based on survey length
+            "total_steps": INTRO_QUESTIONS  
         }
 
     def before_next_page(self):
@@ -252,7 +181,7 @@ class Gender(Page):
     }
 
     def is_displayed(self):
-        return True and self.round_number == 1
+        return self.round_number == 1
     
     def vars_for_template(self):
         return {
@@ -268,11 +197,14 @@ class Gender(Page):
         if self.player.gen != '4':
             self.player.other_gender = ''
         
-        # Use the provided gender label or a custom one if 'gen' == '4'
+        # Assign the provided gender label into "selected_gender" variable or a custom one if 'gen' == '4'
         if str(self.player.gen).strip() == "4":
             self.participant.vars["selected_gender"] = self.player.other_gender  # Custom term
         else:
             self.participant.vars["selected_gender"] = self.GENDER_CHOICES.get(str(self.player.gen), "Not specified")
+
+        # Save gender_cgi for templating in priming/baselin
+        self.participant.vars["gender_expression"] = self.player.gen_cgi
 
 
 class Income(Page):
@@ -280,7 +212,7 @@ class Income(Page):
     form_fields = ['inc','inc_hh']
     
     def is_displayed(self):
-        return True and self.round_number == 1
+        return self.round_number == 1
     
     def vars_for_template(self):
         return {
@@ -294,6 +226,8 @@ class Income(Page):
 
 
 # ---------------------------------------------------------------------------------------------------
+
+# GAME PAGES
 
 # Synchronization page that ensures all players are randomly regrouped each period
 class SyncTop(WaitPage):
@@ -341,12 +275,15 @@ class SyncTop(WaitPage):
         participant = player.participant
 
         # If a player times out, mark them as a dropout
-        if timeout_happened:
+        if self.timeout_happened:
             participant.is_dropout = True   # Mark participant as dropped out
             player.dropout = True           # Mark player as dropped out
 
 
 class CalculatePage(Page):
+    # Set autosubmit count
+    timeout_seconds = 5
+
     # Determine whether this page is displayed for a participant
     def is_displayed(self):
         for player in self.subsession.get_players():
@@ -354,6 +291,11 @@ class CalculatePage(Page):
             skip_round = self.player.participant.vars.get('skip_this_oTree_round', False)
             
             return next_period and not skip_round
+
+    def vars_for_template(self):
+        return {
+            'timeout_seconds': self.timeout_seconds
+        }
 
     # Handles logic before transitioning to the next page
     def before_next_page(self):
@@ -414,45 +356,75 @@ class WaitingPage(WaitPage):
     #         if p != proposer:
     #             p.player_role = "Voter"  # The remaining players are voters
 
-# Displays failure message if the player fails the quiz after 3 attempts
-class FailedPage(Page):
-    def is_displayed(self):
-        return self.participant.vars.get('redirect_to_failed', False)  
-
 # Submit Proposal Page: All players propose an allocation, then store
 class ProposerPage(Page):
     # Store data collected in this page at the group level
     form_model = 'group'  
     # Collect allocation values from participants
     form_fields = ['s1', 's2', 's3']  
+    # Set timeout count
+    timeout_seconds = 30
 
     # Provide player ID for template rendering
     def vars_for_template(self):
-        return {'id': self.player.id_in_group}
+        return {
+            'id': self.player.id_in_group,
+            'timeout_seconds': self.timeout_seconds
+        }
 
     # Store the proposer's id and submitted allocation before proceeding
-    def before_next_page(self):
+    def before_next_page(self, timeout_happened = False):
         proposer_id = self.player.id_in_group  
-        allocation = {
-            "s1":self.group.s1,
-            "s2":self.group.s2,
-            "s3":self.group.s3
-        }
-        # Store the proposal in the group for later voting
-        self.group.store_proposal(proposer_id, allocation)
 
-        # Store the proposal to csv before selection
-        store_decision(self.player, "ProposerPage", "Submitted Proposal", allocation)
+        # TIMEOUT: Handle case for when a timeout/dropout occurs    
+        if self.timeout_happened:
+            # Default failed allocation for timeout
+            self.group.s1 = -10
+            self.group.s2 = -10
+            self.group.s3 = -10
 
-        # Debugging print
-        proposals = json.loads(self.group.all_proposals_str)
-        print(f"\n[DEBUG] Current stored proposals after Player {proposer_id} submission: {proposals}")
+            # Set allocation dict
+            allocation = {
+                "s1":self.group.s1,
+                "s2":self.group.s2,
+                "s3":self.group.s3
+            }
+            # Set timeout flag
+            self.participant.vars["timed_out"] = True  
+
+            # Store the proposal in the group for later voting
+            self.group.store_proposal(proposer_id, allocation)
+
+            # Store default allocation in csv 
+            store_decision(self.player, "ProposerPage", "Timeout - Auto Proposal", allocation)
+
+            # Debugging print
+            proposals = json.loads(self.group.all_proposals_str)
+            print(f"\n[DEBUG] Current stored proposals after Player {proposer_id} submission: {proposals}")
+        
+        # Submit user's proposal
+        else:
+            # Set allocation dict
+            allocation = {
+                "s1":self.group.s1,
+                "s2":self.group.s2,
+                "s3":self.group.s3
+            }
+            # Store the proposal in the group for later voting
+            self.group.store_proposal(proposer_id, allocation)
+
+            # Store the proposal to csv before selection
+            store_decision(self.player, "ProposerPage", "Submitted Proposal", allocation)
+
+            # Debugging print
+            proposals = json.loads(self.group.all_proposals_str)
+            print(f"\n[DEBUG] Current stored proposals after Player {proposer_id} submission: {proposals}")
 
         # Select a proposal for voting after 3 submissions
         if len(proposals) == 3:
             self.group.select_random_proposal()
-            print("Confirmed \n")
-
+            print("Confirmed \n")    
+            
     # Validate input data
     def error_message(self, values):
         # Condition 1: All proposals (s1, s2, s3) are within 0 to 30 range 
@@ -461,6 +433,25 @@ class ProposerPage(Page):
         # Condition 2: Sum of all proposed values equal exactly 30
         if sum([values['s1'], values['s2'], values['s3']]) != 30:
             return "The total allocation must sum to exactly 30."
+
+
+class AreYouThere(Page):
+    timeout_seconds = 30
+    # template_name = "your_app_name/AreYouTherePage.html"
+
+    def is_displayed(self):
+        return self.participant.vars.get("timed_out", False)
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            # The player did NOT click "Yes, I'm here!"
+            self.participant.vars['timed_out'] = True
+            # Also set the GROUP-LEVEL dropout flag
+            self.group.drop_out_detected = True
+        else:
+            # Reset the flag for future rounds or pages
+            self.participant.vars["timed_out"] = False
+
 
 # Select random proposal once all players have submitted
 class SelectingPage(WaitPage):
@@ -484,19 +475,28 @@ class SelectingPage(WaitPage):
 
 # Display selected proposal
 class SelectedProposalPage(Page):
+    # Set autosubmit count
+    timeout_seconds = 10
+
     # Retrieve the stored proposer ID from group model and display
     def vars_for_template(self):
+
         # Ensure proposer ID exists before formatting output
         if not self.group.selected_proposal or self.group.selected_proposal == "{}":
-            return {"selected_proposer_id": "Unknown", "selected_proposal": {}, "relevant_proposal": {}}
+            return {
+                "player_id": self.player.id_in_group,
+                "selected_proposer_id": "Unknown", 
+                "selected_proposal": {}, 
+                "relevant_proposal": {},
+                "timeout_occurred": False,
+                "timeout_seconds": self.timeout_seconds
+            }
 
         # Retrieve the stored proposer ID from group model and display
-        proposer_id = self.group.selected_proposer_id
-        proposer_display = f"Participant {proposer_id}" if proposer_id else "Unknown"
+        proposer_display = self.group.selected_proposer_id
 
         # Ensure proposer ID exists before formatting output
         selected_proposal = json.loads(self.group.selected_proposal)
-        
         # Print selected proposal when the page loads
         print(f"\n[DEBUG] Displaying selected proposal: {selected_proposal}\n")
 
@@ -505,32 +505,59 @@ class SelectedProposalPage(Page):
         # Print selected proposal for debugging
         print(f"\n[DEBUG] Displaying selected proposal: {relevant_proposal}\n")
 
-        # Return variables that will be used in the page template
+        proposer_id = selected_proposal.get("proposer_id", None)
+
+        # Find out if that proposer timed out
+        timeout_flag = False
+        for p in self.group.get_players():
+            if p.id_in_group == proposer_id and p.participant.vars.get("timed_out", False):
+                timeout_flag = True
+                break
+
         return {
             'selected_proposer_id': proposer_display,
-            'selected_proposal': selected_proposal,      # Returns full proposal dict (for debugging)
-            'relevant_proposal': relevant_proposal      # Correct allocation dictionary
+            'selected_proposal': selected_proposal,
+            'relevant_proposal': relevant_proposal,
+            'player_id': self.player.id_in_group,
+            'timeout_occurred': timeout_flag,
+            'timeout_seconds': self.timeout_seconds
         }
+
 
 # Voting Page: Players vote on the selected proposal
 class VoterPage(Page):
     form_model = 'player'  
     form_fields = ['vote'] 
+    timeout_seconds = 15
 
     # Pass proposal data to the template
     def vars_for_template(self):
         selected_proposal = json.loads(self.group.selected_proposal)    # Convert JSON to dict
+        print(f"\n[DEBUG] Selected proposal on VoterPage: {selected_proposal}")
+        
         relevant_proposal = selected_proposal.get("proposal",{})        # Extract allocation
+        print("[DEBUG] relevant_proposal =", relevant_proposal)
         return {
             'id': self.player.id_in_group,
             'selected_proposer_id': self.group.selected_proposer_id,
-            'selected_allocation': relevant_proposal                    # Pass extracted allocation
+            'selected_allocation': relevant_proposal,                  # Pass extracted allocation
+            'timeout_seconds': self.timeout_seconds
         }
 
     def before_next_page(self):
-        # Log voting decisions of players
-        vote_decision = {"vote": self.player.vote}
-        store_decision(self.player, "VoterPage", "Voted", vote_decision)
+        # TIMEOUT: Handle case for when a timeout/dropout occurs    
+        if self.timeout_happened:
+            # Set default vote
+            vote_decision = {"vote": False}
+            self.player.vote = False         # Save it to the database too
+            # Set timeout flag
+            self.participant.vars["timed_out"] = True
+            # Store default vote in csv
+            store_decision(self.player, "VoterPage", "Timeout - Auto Vote", vote_decision)
+        else:
+            # Log voting decisions of players
+            vote_decision = {"vote": self.player.vote}
+            store_decision(self.player, "VoterPage", "Voted", vote_decision)
 
 # Select random proposal once all players have submitted
 class VoterWaitPage(WaitPage):
@@ -541,13 +568,11 @@ class VoterWaitPage(WaitPage):
         if len(votes) == 3:
             print("Confirmed \n")
 
-# Explain experiment instructions
-class DecisionPage(Page):
-    def is_displayed(self):
-        return self.round_number == 1
 
 class ResultsPage(Page):
-    
+
+    timeout_seconds = 5
+
     def vars_for_template(self):
        
         # Proposal Details ------------------------------------------------------------------
@@ -621,7 +646,9 @@ class ResultsPage(Page):
             # Shows how much the relevant player, personally earned for visibility
             'your_earnings': int(self.player.earnings),
             # Show current period played by player
-            'period': p_period 
+            'period': p_period,
+            'player_id': self.player.id_in_group, 
+            'timeout_seconds': self.timeout_seconds
         }
 
 # Ensures that all players complete their periods before stopping the game
@@ -724,8 +751,42 @@ class SurveyPage(Page):
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
 
+# ---------------------------------------------------------------------------------------------------
 
-# MODIFIED PAYMENT INFO PAGE -----------------------------------
+# DROPOUT NOTICE PAGES
+
+# Welcome Page to Survey
+class DropoutNotice(Page):
+    timeout_seconds = 15
+    # Show this page to all remaining players if a dropout is detected in the group
+    def is_displayed(self):
+        return self.group.drop_out_detected
+
+    def vars_for_template(self):
+        rounds_played = self.subsession.round_number  # Current round number
+
+        if rounds_played < 2:
+            payment_message = (
+                "Since fewer than 2 rounds were played, your final payment will be based on 1 randomly selected round."
+            )
+        else:
+            payment_message = (
+                "Since 2 or more rounds were played, your final payment will be based on 2 randomly selected rounds."
+            )
+
+        return {
+            "rounds_played": rounds_played,
+            "payment_message": payment_message,
+            "timeout_seconds": self.timeout_seconds
+        }
+
+
+    
+
+
+# ---------------------------------------------------------------------------------------------------
+
+# EARNINGS PAGE
 
 class PaymentInfo(Page):
 
@@ -746,60 +807,70 @@ class PaymentInfo(Page):
             "total_bonus":final_earnings_data["total_bonus"]
         }
 
-    def js_vars(player):
-        return dict(
-            completionlink=
-              player.subsession.session.config['completionlink']
-    )
-    pass
+    def before_next_page(self):
+        # Record Earnings
+        store_earnings(player, {
+            "selected_periods": final_earnings_data["selected_periods"],
+            "final_payment": final_earnings_data["final_payment"],
+            "total_bonus": final_earnings_data["total_bonus"]
+        })
+
+    # Completion Link for Prolific
+
+    # def js_vars(player):
+    #     return dict(
+    #         # completionlink=player.subsession.session.config['completionlink']
+    # )
+    # pass
 
 # 
 
-# PRIMING / BASELINE QUESTIONS ---------------------------------
+# ---------------------------------------------------------------------------------------------------
 
-class PrimingBaseline(Page):
+# PRIMING / BASELINE
+
+class Priming(Page):
     form_model = 'player'
-    form_fields = ['qp1', 'qp2', 'qp3']
+    form_fields = ['qp1', 'qp3']
 
     def is_displayed(self):
         # Display only if player selected for priming treatment
-        # return self.player.is_priming
         return self.participant.vars.get("is_priming", False) and self.round_number == 1
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
 
     def vars_for_template(self):
-        # Pass the player's gender selction to template
+        # Pass the player's gender selection to template
         return {
-            "selected_gender": self.participant.vars.get("selected_gender", "Not specified")
+            "selected_gender": self.participant.vars.get("selected_gender", "Not specified"),
+            "gender_expression": self.participant.vars.get("gender_expression", "Not specified"),
         }
     
     def before_next_page(self):
         # Record Response
-        store_survey_response(self.player, "PrimingBaseline", self.form_fields)
+        store_survey_response(self.player, "Priming", self.form_fields)
 
 
 class Baseline(Page):
     form_model = 'player'
-    form_fields = ['qp1', 'qp2', 'qp3']
+    form_fields = ['qp1', 'qp3']
 
     def is_displayed(self):
         # Display only if player selected for baseline treatment
-        # return not self.player.is_priming
         return not self.participant.vars.get("is_priming") and self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
 
     def vars_for_template(self):
-        # Pass the player's gender selction to template
+        # Pass the player's gender selection to template
         return {
-            "selected_gender": self.participant.vars.get("selected_gender", "Not specified")
+            "selected_gender": self.participant.vars.get("selected_gender", "Not specified"),
+            "gender_expression": self.participant.vars.get("gender_expression", "Not specified"),
         }
     
     def before_next_page(self):
         # Record Response
-        store_survey_response(self.player, "PrimingBaseline", self.form_fields)
+        store_survey_response(self.player, "Baseline", self.form_fields)
 
+# ---------------------------------------------------------------------------------------------------
 
-# SURVEY PAGES -------------------------------------------------
+# SURVEY PAGES
 
 class Part1a(Page):
     form_model = 'player'
@@ -824,6 +895,7 @@ class Part1a(Page):
         
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
+
 
 class Part1b(Page):
     form_model = 'player'
@@ -870,9 +942,9 @@ class Part1c(Page):
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
 
+
 class Part1d(Page):
     form_model = 'player'
-    # form_fields = ['age', 'sex', 'gen', 'other_gender', 'gen_cgi', 'risk']
     form_fields = ['age', 'risk']
 
     def is_displayed(self):
@@ -892,7 +964,8 @@ class Part1d(Page):
         # Increase progress bar
         self.participant.vars['surveyStep'] += 1
 
-class Part3b(Page):
+
+class Part1e(Page):
     form_model = 'player'
     form_fields = ['occ', 'volunt', 'volunt_hrs']
 
@@ -914,9 +987,10 @@ class Part3b(Page):
         if self.player.volunt != '1':
             self.player.volunt_hrs = ''
         # Store responses
-        store_survey_response(self.player, "Part3b", self.form_fields)
+        store_survey_response(self.player, "Part1e", self.form_fields)
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
+
 
 class Part2a(Page):
     form_model = 'player'
@@ -945,7 +1019,8 @@ class Part2a(Page):
         # Increase survey step when the player moves to the next page
         # If user didn't select "I use a different term"
 
-class Part4b(Page):
+
+class Part2b(Page):
     form_model = 'player'
     # form_fields = ['plop_unempl', 'plop_comp', 'plop_incdist']
     form_fields = ['plop_unempl', 'plop_comp', 'plop_incdist','plop_priv', 'plop_luckeffort']
@@ -964,33 +1039,12 @@ class Part4b(Page):
 
     def before_next_page(self):
         # Record response
-        store_survey_response(self.player, "Part4b", self.form_fields)
+        store_survey_response(self.player, "Part2b", self.form_fields)
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
 
-# class Part4c(Page):
-#     form_model = 'player'
-#     form_fields = ['plop_priv', 'plop_luckeffort']
 
-#     # @staticmethod
-#     def is_displayed(self):
-#         # Display only if offer was accepted
-#         # return True
-#         return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-#     def vars_for_template(self):
-#         return {
-#             "survey_step": self.participant.vars.get("surveyStep", 1),
-#             "total_steps": SURVEY_PAGES  # Adjust based on survey length
-#         }
-
-#     def before_next_page(self):
-#         # Record response
-#         store_survey_response(self.player, "Part4c", self.form_fields)
-#         # Increase survey step when the player moves to the next page
-#         self.participant.vars['surveyStep'] += 1
-
-class Part5(Page):
+class Part3(Page):
     form_model = 'player'
     form_fields = ['rel', 'rel_spec']
 
@@ -1011,9 +1065,10 @@ class Part5(Page):
         if self.player.rel != '1':
             self.player.rel_spec = ''
         # Record response
-        store_survey_response(self.player, "Part5", self.form_fields)
+        store_survey_response(self.player, "Part3", self.form_fields)
 
-class Part7(Page):
+
+class Part4(Page):
     form_model = 'player'
     form_fields = ['mth_spbrn', 'mth_cntbrn', 'fth_spbrn', 'fth_cntbrn']
 
@@ -1032,11 +1087,12 @@ class Part7(Page):
 
     def before_next_page(self):
         # Record response
-        store_survey_response(self.player, "Part7", self.form_fields)
+        store_survey_response(self.player, "Part4", self.form_fields)
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
 
-class Part9(Page):
+
+class Part5(Page):
     form_model = 'player'
     form_fields = ['mwc_bonus', 'mwc_bonus_others', 'enjoy']
 
@@ -1055,11 +1111,12 @@ class Part9(Page):
 
     def before_next_page(self):
         # Record response
-        store_survey_response(self.player, "Part9", self.form_fields)
+        store_survey_response(self.player, "Part5", self.form_fields)
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
 
-class Part10(Page):
+
+class Part6(Page):
     form_model = 'player'
     form_fields = ['bonus']
 
@@ -1077,9 +1134,10 @@ class Part10(Page):
 
     def before_next_page(self):
         # Record response
-        store_survey_response(self.player, "Part10", self.form_fields)
+        store_survey_response(self.player, "Part6", self.form_fields)
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
+
 
 class Fin(Page):
     form_model = 'player'
@@ -1097,19 +1155,20 @@ class Fin(Page):
         return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
 
 
-# SEQUENCE SECTION -------------------------------------
+# ---------------------------------------------------------------------------------------------------
 
-# Priming
+# PAGE SEQUENCE
+
 page_sequence = [
 
     WelcomePage,
 
     # Preliminary Questions
-    IntroQuestions, 
-    Nationality,    
-    Education,      
-    Gender,       
-    Income,         
+    # IntroQuestions, 
+    # Nationality,    
+    # Education,      
+    # Gender,       
+    # Income,         
 
     # Game Instructions
     ExperimentInstructions,
@@ -1118,83 +1177,47 @@ page_sequence = [
     FailedPage,
 
     # Priming Treatment
-    PrimingBaseline,
 
     # Main game loop - 5 times per player
-    SyncTop,
-    CalculatePage,
-    WaitingPage,
-    ProposerPage,
-    SelectingPage,
-    SelectedProposalPage,
-    VoterPage,
-    VoterWaitPage,
-    ResultsPage,
-    SyncBottom, # Redirect back to SyncTop until all periods compelted
+    SyncTop,              # Where groups of 9 are set
+    # Priming,            # Move this after synctop
+
+    CalculatePage,        # Grouping Page - Continue
+
+    WaitingPage,          # Wait Page 1    
+    ProposerPage,         
+    AreYouThere,          # Declare Dropout - If no response
+    DropoutNotice,
+
+    SelectingPage,        # Wait Page 2
+    SelectedProposalPage, 
+
+    VoterPage,            # Players vote accept / reject
+    AreYouThere,          # Declare Dropout - If no response
+    DropoutNotice,
+
+    VoterWaitPage,        # Wait Page 3 (Detect Dropout)
+    ResultsPage,          # Show if proposal is accepted / rejected
+    SyncBottom,           # Redirect back to SyncTop until all periods compelted
 
     # Baseline Treatment
+    SurveyPage,
     Baseline,       
 
     # Survey
-    SurveyPage,     
-    Part1a,         # Voting and Proposing Considerations
-    Part1b,         # Retaliation, mwc, mwc_others
-    Part1c,         # atq 1, 2, 3 (ie. math questions)
-    Part1d,         # Age, Risk
-    Part3b,         # Occupation, Volunteer, (Volunteer Hours)
-    Part2a,         # Econ Courses, Party Like, Party, Party Prox
-    Part4b,         # Plop_Unempl, Plop_Comp, Plop_Incdist, Plop_Priv, Plop_Luckeffort
-    Part5,          # Religion, (Specify Religion)
-    Part7,          # Parents' Place of Birth/Citizenship
-    Part9,          # mwc_bonus, mwc_bonus_others, enjoy
-    Part10,         # bonus question
+    Part1a,             # Voting and Proposing Considerations
+    Part1b,             # Retaliation, mwc, mwc_others
+    Part1c,             # atq 1, 2, 3 (ie. math questions)
+    Part1d,             # Age, Risk
+    Part1e,             # Occupation, Volunteer, (Volunteer Hours)
+    Part2a,             # Econ Courses, Party Like, Party, Party Prox
+    Part2b,             # Plop_Unempl, Plop_Comp, Plop_Incdist, Plop_Priv, Plop_Luckeffort
+    Part3,              # Religion, (Specify Religion)
+    Part4,              # Parents' Place of Birth/Citizenship
+    Part5,              # mwc_bonus, mwc_bonus_others, enjoy
+    Part6,              # bonus question
+    
     # Display Total Earnings 
-    PaymentInfo,        
-]
-
-
-# Regroup,
-# Add page for ExemptVoter
-# ExemptVoterPage,
-
-# Baseline
-page_sequence_baseline = [
-    # Introduction Phase
-    # SurveyPage,
-    WelcomePage,
-    ExperimentInstructions,
-    SampleInstructions,
-    QuizPage,
-    FailedPage,
-
-    # Main game loop - 5 times (periods) per player
-    SyncTop,
-    CalculatePage,
-    WaitingPage,
-    ProposerPage,
-    SelectingPage,
-    SelectedProposalPage,
-    VoterPage,
-    VoterWaitPage,
-    ResultsPage,
-    SyncBottom, # Redirect back to SyncTop until all periods compelted
-
-    # Baseline
-    PrimingBaseline,
-
-    # Survey
-    SurveyPage,
-    Part1a, 
-    Part1b, 
-    Part1c, 
-    Part1d, 
-    Part3b,
-    Part2a, 
-    Part4b,
-    Part5,
-    Part7,
-    Part9,
-    # Proceed to payment and final survey once player is done with 5 periods
-    PaymentInfo,        
+    PaymentInfo,      
 ]
 

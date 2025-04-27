@@ -1,0 +1,329 @@
+Timestamp,Session_Code,Participant_ID,Group_ID,Prolific_ID,Period,Player_ID,Treatment
+2025-04-02T06:59:20.104104,vj8885ir,1,1,,0,1,False
+2025-04-02T06:59:20.107051,vj8885ir,2,1,,0,2,False
+2025-04-02T06:59:20.108058,vj8885ir,3,1,,0,3,True
+2025-04-02T06:59:20.117586,vj8885ir,1,1,,0,1,False
+2025-04-02T06:59:20.118813,vj8885ir,2,1,,0,2,False
+2025-04-02T06:59:20.119529,vj8885ir,3,1,,0,3,True
+2025-04-02T06:59:20.145273,vj8885ir,1,1,,0,1,False
+2025-04-02T06:59:20.147969,vj8885ir,2,1,,0,2,False
+2025-04-02T06:59:20.148860,vj8885ir,3,1,,0,3,True
+2025-04-02T06:59:20.161110,vj8885ir,1,1,,0,1,False
+2025-04-02T06:59:20.162123,vj8885ir,2,1,,0,2,False
+2025-04-02T06:59:20.162681,vj8885ir,3,1,,0,3,True
+2025-04-02T06:59:20.171510,vj8885ir,1,1,,0,1,False
+2025-04-02T06:59:20.172484,vj8885ir,2,1,,0,2,False
+2025-04-02T06:59:20.173002,vj8885ir,3,1,,0,3,True
+2025-04-03T04:28:38.400441,syg3dp8f,1,1,,0,1,True
+2025-04-03T04:28:38.402495,syg3dp8f,2,1,,0,2,False
+2025-04-03T04:28:38.403039,syg3dp8f,3,1,,0,3,False
+2025-04-03T04:28:38.411214,syg3dp8f,1,1,,0,1,True
+2025-04-03T04:28:38.412409,syg3dp8f,2,1,,0,2,False
+2025-04-03T04:28:38.412971,syg3dp8f,3,1,,0,3,False
+2025-04-03T04:28:38.424650,syg3dp8f,1,1,,0,1,True
+2025-04-03T04:28:38.447782,syg3dp8f,2,1,,0,2,False
+2025-04-03T04:28:38.449557,syg3dp8f,3,1,,0,3,False
+2025-04-03T04:28:38.462160,syg3dp8f,1,1,,0,1,True
+2025-04-03T04:28:38.463140,syg3dp8f,2,1,,0,2,False
+2025-04-03T04:28:38.463625,syg3dp8f,3,1,,0,3,False
+2025-04-03T04:28:38.471157,syg3dp8f,1,1,,0,1,True
+2025-04-03T04:28:38.472024,syg3dp8f,2,1,,0,2,False
+2025-04-03T04:28:38.472511,syg3dp8f,3,1,,0,3,False
+2025-04-03T04:43:09.018736,syg3dp8f,2,1,asdfsda,0,2,False
+2025-04-03T04:44:24.658034,syg3dp8f,3,1,a,0,3,False
+2025-04-03T04:51:16.415301,vyzwm3kv,1,1,,0,1,<bound method Player.treatment of Player(id_in_group=1)>
+2025-04-03T04:51:16.418177,vyzwm3kv,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:51:16.418977,vyzwm3kv,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:51:16.427935,vyzwm3kv,1,1,,0,1,"<bound method Player.treatment of Player(id_in_group=1, is_priming=False)>"
+2025-04-03T04:51:16.430125,vyzwm3kv,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:51:16.430701,vyzwm3kv,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:51:16.447713,vyzwm3kv,1,1,,0,1,"<bound method Player.treatment of Player(id_in_group=1, is_priming=False)>"
+2025-04-03T04:51:16.448976,vyzwm3kv,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:51:16.450281,vyzwm3kv,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:51:16.459752,vyzwm3kv,1,1,,0,1,"<bound method Player.treatment of Player(id_in_group=1, is_priming=False)>"
+2025-04-03T04:51:16.460913,vyzwm3kv,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:51:16.461549,vyzwm3kv,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:51:16.469299,vyzwm3kv,1,1,,0,1,"<bound method Player.treatment of Player(id_in_group=1, is_priming=False)>"
+2025-04-03T04:51:16.471051,vyzwm3kv,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:51:16.471607,vyzwm3kv,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:51:22.184164,vyzwm3kv,1,1,as,0,1,"<bound method Player.treatment of Player(id_in_group=1, round_number=1, is_priming=False)>"
+2025-04-03T04:55:22.031893,f6fvrm2g,1,1,,0,1,<bound method Player.treatment of Player(id_in_group=1)>
+2025-04-03T04:55:22.033942,f6fvrm2g,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:55:22.034872,f6fvrm2g,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:55:22.046272,f6fvrm2g,1,1,,0,1,"<bound method Player.treatment of Player(id_in_group=1, is_priming=False)>"
+2025-04-03T04:55:22.048252,f6fvrm2g,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:55:22.054201,f6fvrm2g,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:55:22.090038,f6fvrm2g,1,1,,0,1,"<bound method Player.treatment of Player(id_in_group=1, is_priming=False)>"
+2025-04-03T04:55:22.092378,f6fvrm2g,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:55:22.092981,f6fvrm2g,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:55:22.101117,f6fvrm2g,1,1,,0,1,"<bound method Player.treatment of Player(id_in_group=1, is_priming=False)>"
+2025-04-03T04:55:22.102169,f6fvrm2g,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:55:22.102697,f6fvrm2g,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:55:22.110349,f6fvrm2g,1,1,,0,1,"<bound method Player.treatment of Player(id_in_group=1, is_priming=False)>"
+2025-04-03T04:55:22.111252,f6fvrm2g,2,1,,0,2,"<bound method Player.treatment of Player(id_in_group=2, is_priming=False)>"
+2025-04-03T04:55:22.112383,f6fvrm2g,3,1,,0,3,"<bound method Player.treatment of Player(id_in_group=3, is_priming=False)>"
+2025-04-03T04:55:27.313700,f6fvrm2g,1,1,asdf,0,1,"<bound method Player.treatment of Player(id_in_group=1, round_number=1, is_priming=False)>"
+2025-04-03T04:56:37.874545,ute9hzd1,1,1,,0,1,"<bound method Player.treatment of Player(other_cit=None, spcit=None, cntbrn=None, spbrn=None, is_priming=True)>"
+2025-04-03T04:56:37.876162,ute9hzd1,2,1,,0,2,"<bound method Player.treatment of Player(spcit=None, cntbrn=None, spbrn=None, round_number=1, primlang=None)>"
+2025-04-03T04:56:37.876714,ute9hzd1,3,1,,0,3,"<bound method Player.treatment of Player(cntbrn=None, spbrn=None, round_number=1, primlang=None, other_cit=None)>"
+2025-04-03T04:56:37.887186,ute9hzd1,1,1,,0,1,"<bound method Player.treatment of Player(spbrn=None, round_number=2, primlang=None, other_cit=None, spcit=None)>"
+2025-04-03T04:56:37.888305,ute9hzd1,2,1,,0,2,"<bound method Player.treatment of Player(round_number=2, primlang=None, other_cit=None, spcit=None, cntbrn=None)>"
+2025-04-03T04:56:37.888962,ute9hzd1,3,1,,0,3,"<bound method Player.treatment of Player(primlang=None, other_cit=None, spcit=None, cntbrn=None, spbrn=None)>"
+2025-04-03T04:56:37.929380,ute9hzd1,1,1,,0,1,"<bound method Player.treatment of Player(other_cit=None, spcit=None, cntbrn=None, spbrn=None, round_number=3)>"
+2025-04-03T04:56:37.932055,ute9hzd1,2,1,,0,2,"<bound method Player.treatment of Player(spcit=None, cntbrn=None, spbrn=None, round_number=3, primlang=None)>"
+2025-04-03T04:56:37.936858,ute9hzd1,3,1,,0,3,"<bound method Player.treatment of Player(cntbrn=None, spbrn=None, round_number=3, primlang=None, other_cit=None)>"
+2025-04-03T04:56:37.945428,ute9hzd1,1,1,,0,1,"<bound method Player.treatment of Player(spbrn=None, round_number=4, primlang=None, other_cit=None, spcit=None)>"
+2025-04-03T04:56:37.946339,ute9hzd1,2,1,,0,2,"<bound method Player.treatment of Player(round_number=4, primlang=None, other_cit=None, spcit=None, cntbrn=None)>"
+2025-04-03T04:56:37.946835,ute9hzd1,3,1,,0,3,"<bound method Player.treatment of Player(primlang=None, other_cit=None, spcit=None, cntbrn=None, spbrn=None)>"
+2025-04-03T04:56:37.954913,ute9hzd1,1,1,,0,1,"<bound method Player.treatment of Player(other_cit=None, spcit=None, cntbrn=None, spbrn=None, round_number=5)>"
+2025-04-03T04:56:37.956494,ute9hzd1,2,1,,0,2,"<bound method Player.treatment of Player(spcit=None, cntbrn=None, spbrn=None, round_number=5, primlang=None)>"
+2025-04-03T04:56:37.957074,ute9hzd1,3,1,,0,3,"<bound method Player.treatment of Player(cntbrn=None, spbrn=None, round_number=5, primlang=None, other_cit=None)>"
+2025-04-03T04:57:58.862918,6ohobz0o,1,1,,0,1,baseline
+2025-04-03T04:57:58.865167,6ohobz0o,2,1,,0,2,priming
+2025-04-03T04:57:58.865755,6ohobz0o,3,1,,0,3,baseline
+2025-04-03T04:57:58.874861,6ohobz0o,1,1,,0,1,baseline
+2025-04-03T04:57:58.876759,6ohobz0o,2,1,,0,2,priming
+2025-04-03T04:57:58.879446,6ohobz0o,3,1,,0,3,baseline
+2025-04-03T04:57:58.891757,6ohobz0o,1,1,,0,1,baseline
+2025-04-03T04:57:58.893453,6ohobz0o,2,1,,0,2,priming
+2025-04-03T04:57:58.894023,6ohobz0o,3,1,,0,3,baseline
+2025-04-03T04:57:58.903341,6ohobz0o,1,1,,0,1,baseline
+2025-04-03T04:57:58.904438,6ohobz0o,2,1,,0,2,priming
+2025-04-03T04:57:58.905009,6ohobz0o,3,1,,0,3,baseline
+2025-04-03T04:57:58.914059,6ohobz0o,1,1,,0,1,baseline
+2025-04-03T04:57:58.915114,6ohobz0o,2,1,,0,2,priming
+2025-04-03T04:57:58.915603,6ohobz0o,3,1,,0,3,baseline
+2025-04-03T05:01:08.733595,wu2ypj7o,1,1,,0,1,priming
+2025-04-03T05:01:08.735609,wu2ypj7o,2,1,,0,2,priming
+2025-04-03T05:01:08.736122,wu2ypj7o,3,1,,0,3,priming
+2025-04-03T05:01:08.744753,wu2ypj7o,1,1,,0,1,priming
+2025-04-03T05:01:08.745835,wu2ypj7o,2,1,,0,2,priming
+2025-04-03T05:01:08.746364,wu2ypj7o,3,1,,0,3,priming
+2025-04-03T05:01:08.758214,wu2ypj7o,1,1,,0,1,priming
+2025-04-03T05:01:08.759285,wu2ypj7o,2,1,,0,2,priming
+2025-04-03T05:01:08.765537,wu2ypj7o,3,1,,0,3,priming
+2025-04-03T05:01:08.777449,wu2ypj7o,1,1,,0,1,priming
+2025-04-03T05:01:08.778510,wu2ypj7o,2,1,,0,2,priming
+2025-04-03T05:01:08.779032,wu2ypj7o,3,1,,0,3,priming
+2025-04-03T05:01:08.786721,wu2ypj7o,1,1,,0,1,priming
+2025-04-03T05:01:08.788281,wu2ypj7o,2,1,,0,2,priming
+2025-04-03T05:01:08.788846,wu2ypj7o,3,1,,0,3,priming
+2025-04-03T05:02:22.693327,dlazqv6n,1,1,,0,1,priming
+2025-04-03T05:02:22.695674,dlazqv6n,2,1,,0,2,priming
+2025-04-03T05:02:22.696232,dlazqv6n,3,1,,0,3,priming
+2025-04-03T05:02:22.704954,dlazqv6n,1,1,,0,1,priming
+2025-04-03T05:02:22.706089,dlazqv6n,2,1,,0,2,priming
+2025-04-03T05:02:22.706665,dlazqv6n,3,1,,0,3,priming
+2025-04-03T05:02:22.723670,dlazqv6n,1,1,,0,1,priming
+2025-04-03T05:02:22.724871,dlazqv6n,2,1,,0,2,priming
+2025-04-03T05:02:22.725505,dlazqv6n,3,1,,0,3,priming
+2025-04-03T05:02:22.734556,dlazqv6n,1,1,,0,1,priming
+2025-04-03T05:02:22.735710,dlazqv6n,2,1,,0,2,priming
+2025-04-03T05:02:22.736247,dlazqv6n,3,1,,0,3,priming
+2025-04-03T05:02:22.744785,dlazqv6n,1,1,,0,1,priming
+2025-04-03T05:02:22.745671,dlazqv6n,2,1,,0,2,priming
+2025-04-03T05:02:22.746145,dlazqv6n,3,1,,0,3,priming
+2025-04-03T05:02:59.301448,h1u7pjgd,1,1,,0,1,priming
+2025-04-03T05:02:59.303909,h1u7pjgd,2,1,,0,2,priming
+2025-04-03T05:02:59.304536,h1u7pjgd,3,1,,0,3,baseline
+2025-04-03T05:02:59.316100,h1u7pjgd,1,1,,0,1,priming
+2025-04-03T05:02:59.318586,h1u7pjgd,2,1,,0,2,priming
+2025-04-03T05:02:59.319988,h1u7pjgd,3,1,,0,3,baseline
+2025-04-03T05:02:59.363962,h1u7pjgd,1,1,,0,1,priming
+2025-04-03T05:02:59.366104,h1u7pjgd,2,1,,0,2,priming
+2025-04-03T05:02:59.366773,h1u7pjgd,3,1,,0,3,baseline
+2025-04-03T05:02:59.376248,h1u7pjgd,1,1,,0,1,priming
+2025-04-03T05:02:59.377294,h1u7pjgd,2,1,,0,2,priming
+2025-04-03T05:02:59.377974,h1u7pjgd,3,1,,0,3,baseline
+2025-04-03T05:02:59.386102,h1u7pjgd,1,1,,0,1,priming
+2025-04-03T05:02:59.386962,h1u7pjgd,2,1,,0,2,priming
+2025-04-03T05:02:59.387434,h1u7pjgd,3,1,,0,3,baseline
+2025-04-03T05:25:05.189358,k3bgwx7j,3,1,a,0,3,priming
+2025-04-03T05:26:38.738370,lpsjcwu6,1,1,,0,1,baseline
+2025-04-03T05:26:38.740149,lpsjcwu6,2,1,,0,2,priming
+2025-04-03T05:26:38.740688,lpsjcwu6,3,1,,0,3,priming
+2025-04-03T05:26:38.749451,lpsjcwu6,1,1,,0,1,baseline
+2025-04-03T05:26:38.750600,lpsjcwu6,2,1,,0,2,priming
+2025-04-03T05:26:38.752142,lpsjcwu6,3,1,,0,3,priming
+2025-04-03T05:26:38.769009,lpsjcwu6,1,1,,0,1,baseline
+2025-04-03T05:26:38.770083,lpsjcwu6,2,1,,0,2,priming
+2025-04-03T05:26:38.770820,lpsjcwu6,3,1,,0,3,priming
+2025-04-03T05:26:38.798218,lpsjcwu6,1,1,,0,1,baseline
+2025-04-03T05:26:38.801768,lpsjcwu6,2,1,,0,2,priming
+2025-04-03T05:26:38.802663,lpsjcwu6,3,1,,0,3,priming
+2025-04-03T05:26:38.810203,lpsjcwu6,1,1,,0,1,baseline
+2025-04-03T05:26:38.811710,lpsjcwu6,2,1,,0,2,priming
+2025-04-03T05:26:38.812251,lpsjcwu6,3,1,,0,3,priming
+2025-04-03T05:26:51.742946,lpsjcwu6,1,1,a,0,1,baseline
+2025-04-03T05:28:02.549777,lpsjcwu6,2,1,a,0,2,priming
+2025-04-03T05:31:49.746039,lpsjcwu6,3,1,asdf,0,3,priming
+2025-04-03T05:34:18.863229,0bt3pbxu,1,1,,0,1,priming
+2025-04-03T05:34:18.868420,0bt3pbxu,2,1,,0,2,baseline
+2025-04-03T05:34:18.868985,0bt3pbxu,3,1,,0,3,priming
+2025-04-03T05:34:18.877671,0bt3pbxu,1,1,,0,1,priming
+2025-04-03T05:34:18.878702,0bt3pbxu,2,1,,0,2,baseline
+2025-04-03T05:34:18.879341,0bt3pbxu,3,1,,0,3,priming
+2025-04-03T05:34:18.891225,0bt3pbxu,1,1,,0,1,priming
+2025-04-03T05:34:18.893368,0bt3pbxu,2,1,,0,2,baseline
+2025-04-03T05:34:18.893992,0bt3pbxu,3,1,,0,3,priming
+2025-04-03T05:34:18.902003,0bt3pbxu,1,1,,0,1,priming
+2025-04-03T05:34:18.902988,0bt3pbxu,2,1,,0,2,baseline
+2025-04-03T05:34:18.903759,0bt3pbxu,3,1,,0,3,priming
+2025-04-03T05:34:18.913238,0bt3pbxu,1,1,,0,1,priming
+2025-04-03T05:34:18.914250,0bt3pbxu,2,1,,0,2,baseline
+2025-04-03T05:34:18.914915,0bt3pbxu,3,1,,0,3,priming
+2025-04-03T05:38:47.712266,q4ojhgak,1,1,,0,1,priming
+2025-04-03T05:38:47.715252,q4ojhgak,2,1,,0,2,priming
+2025-04-03T05:38:47.718476,q4ojhgak,3,1,,0,3,baseline
+2025-04-03T05:38:47.734509,q4ojhgak,1,1,,0,1,priming
+2025-04-03T05:38:47.735619,q4ojhgak,2,1,,0,2,priming
+2025-04-03T05:38:47.736137,q4ojhgak,3,1,,0,3,baseline
+2025-04-03T05:38:47.745074,q4ojhgak,1,1,,0,1,priming
+2025-04-03T05:38:47.746875,q4ojhgak,2,1,,0,2,priming
+2025-04-03T05:38:47.747510,q4ojhgak,3,1,,0,3,baseline
+2025-04-03T05:38:47.758024,q4ojhgak,1,1,,0,1,priming
+2025-04-03T05:38:47.759773,q4ojhgak,2,1,,0,2,priming
+2025-04-03T05:38:47.760506,q4ojhgak,3,1,,0,3,baseline
+2025-04-03T05:38:47.767594,q4ojhgak,1,1,,0,1,priming
+2025-04-03T05:38:47.768510,q4ojhgak,2,1,,0,2,priming
+2025-04-03T05:38:47.769036,q4ojhgak,3,1,,0,3,baseline
+2025-04-03T05:38:56.595722,q4ojhgak,1,1,a,0,1,priming
+2025-04-03T05:40:24.874838,q4ojhgak,2,1,a,0,2,priming
+2025-04-03T05:40:38.467190,cecr0dv5,1,1,,0,1,priming
+2025-04-03T05:40:38.469216,cecr0dv5,2,1,,0,2,baseline
+2025-04-03T05:40:38.469797,cecr0dv5,3,1,,0,3,baseline
+2025-04-03T05:40:38.483389,cecr0dv5,1,1,,0,1,priming
+2025-04-03T05:40:38.485111,cecr0dv5,2,1,,0,2,baseline
+2025-04-03T05:40:38.488010,cecr0dv5,3,1,,0,3,baseline
+2025-04-03T05:40:38.497286,cecr0dv5,1,1,,0,1,priming
+2025-04-03T05:40:38.498616,cecr0dv5,2,1,,0,2,baseline
+2025-04-03T05:40:38.499667,cecr0dv5,3,1,,0,3,baseline
+2025-04-03T05:40:38.517212,cecr0dv5,1,1,,0,1,priming
+2025-04-03T05:40:38.519364,cecr0dv5,2,1,,0,2,baseline
+2025-04-03T05:40:38.519893,cecr0dv5,3,1,,0,3,baseline
+2025-04-03T05:40:38.528448,cecr0dv5,1,1,,0,1,priming
+2025-04-03T05:40:38.529339,cecr0dv5,2,1,,0,2,baseline
+2025-04-03T05:40:38.529812,cecr0dv5,3,1,,0,3,baseline
+2025-04-03T05:40:45.227674,cecr0dv5,1,1,a,0,1,priming
+2025-04-03T05:41:42.179346,cecr0dv5,2,1,a,0,2,baseline
+2025-04-03T05:41:57.806006,i09p2eb7,1,1,,0,1,baseline
+2025-04-03T05:41:57.808218,i09p2eb7,2,1,,0,2,baseline
+2025-04-03T05:41:57.809619,i09p2eb7,3,1,,0,3,priming
+2025-04-03T05:41:57.819127,i09p2eb7,1,1,,0,1,baseline
+2025-04-03T05:41:57.822354,i09p2eb7,2,1,,0,2,baseline
+2025-04-03T05:41:57.823549,i09p2eb7,3,1,,0,3,priming
+2025-04-03T05:41:57.839325,i09p2eb7,1,1,,0,1,baseline
+2025-04-03T05:41:57.840648,i09p2eb7,2,1,,0,2,baseline
+2025-04-03T05:41:57.841242,i09p2eb7,3,1,,0,3,priming
+2025-04-03T05:41:57.869175,i09p2eb7,1,1,,0,1,baseline
+2025-04-03T05:41:57.870119,i09p2eb7,2,1,,0,2,baseline
+2025-04-03T05:41:57.870610,i09p2eb7,3,1,,0,3,priming
+2025-04-03T05:41:57.878821,i09p2eb7,1,1,,0,1,baseline
+2025-04-03T05:41:57.879720,i09p2eb7,2,1,,0,2,baseline
+2025-04-03T05:41:57.880209,i09p2eb7,3,1,,0,3,priming
+2025-04-03T05:42:12.695951,i09p2eb7,1,1,asdf,0,1,baseline
+2025-04-03T05:46:48.512468,0bt3pbxu,1,1,asdf,0,1,priming
+2025-04-03T05:46:54.418731,0bt3pbxu,2,1,asdf,0,2,baseline
+2025-04-03T06:01:25.981783,abofltb9,1,1,,0,1,priming
+2025-04-03T06:01:25.983866,abofltb9,2,1,,0,2,baseline
+2025-04-03T06:01:25.984385,abofltb9,3,1,,0,3,baseline
+2025-04-03T06:01:25.993043,abofltb9,1,1,,0,1,priming
+2025-04-03T06:01:25.994090,abofltb9,2,1,,0,2,baseline
+2025-04-03T06:01:25.994739,abofltb9,3,1,,0,3,baseline
+2025-04-03T06:01:26.012127,abofltb9,1,1,,0,1,priming
+2025-04-03T06:01:26.013352,abofltb9,2,1,,0,2,baseline
+2025-04-03T06:01:26.013931,abofltb9,3,1,,0,3,baseline
+2025-04-03T06:01:26.039486,abofltb9,1,1,,0,1,priming
+2025-04-03T06:01:26.046420,abofltb9,2,1,,0,2,baseline
+2025-04-03T06:01:26.047197,abofltb9,3,1,,0,3,baseline
+2025-04-03T06:01:26.057970,abofltb9,1,1,,0,1,priming
+2025-04-03T06:01:26.059362,abofltb9,2,1,,0,2,baseline
+2025-04-03T06:01:26.059855,abofltb9,3,1,,0,3,baseline
+2025-04-03T06:02:33.341352,abofltb9,1,1,asdfads,0,1,priming
+2025-04-03T06:03:33.289198,abofltb9,3,1,123,0,3,baseline
+2025-04-03T06:04:36.935385,abofltb9,2,1,asdf,0,2,baseline
+2025-04-03T06:36:41.136156,7h01uf0i,1,1,,0,1,priming
+2025-04-03T06:36:41.137840,7h01uf0i,2,1,,0,2,baseline
+2025-04-03T06:36:41.138802,7h01uf0i,3,1,,0,3,priming
+2025-04-03T06:36:41.148602,7h01uf0i,1,1,,0,1,priming
+2025-04-03T06:36:41.149717,7h01uf0i,2,1,,0,2,baseline
+2025-04-03T06:36:41.150225,7h01uf0i,3,1,,0,3,priming
+2025-04-03T06:36:41.160840,7h01uf0i,1,1,,0,1,priming
+2025-04-03T06:36:41.161962,7h01uf0i,2,1,,0,2,baseline
+2025-04-03T06:36:41.162594,7h01uf0i,3,1,,0,3,priming
+2025-04-03T06:36:41.177946,7h01uf0i,1,1,,0,1,priming
+2025-04-03T06:36:41.178852,7h01uf0i,2,1,,0,2,baseline
+2025-04-03T06:36:41.179319,7h01uf0i,3,1,,0,3,priming
+2025-04-03T06:36:41.187931,7h01uf0i,1,1,,0,1,priming
+2025-04-03T06:36:41.188931,7h01uf0i,2,1,,0,2,baseline
+2025-04-03T06:36:41.189407,7h01uf0i,3,1,,0,3,priming
+2025-04-03T06:38:07.145625,7h01uf0i,2,1,12,0,2,baseline
+2025-04-03T08:33:38.331333,b1xini2x,1,1,,0,1,priming
+2025-04-03T08:33:38.333305,b1xini2x,2,1,,0,2,priming
+2025-04-03T08:33:38.333822,b1xini2x,3,1,,0,3,baseline
+2025-04-03T08:33:38.342319,b1xini2x,1,1,,0,1,priming
+2025-04-03T08:33:38.343233,b1xini2x,2,1,,0,2,priming
+2025-04-03T08:33:38.343865,b1xini2x,3,1,,0,3,baseline
+2025-04-03T08:33:38.355686,b1xini2x,1,1,,0,1,priming
+2025-04-03T08:33:38.357617,b1xini2x,2,1,,0,2,priming
+2025-04-03T08:33:38.358224,b1xini2x,3,1,,0,3,baseline
+2025-04-03T08:33:38.370131,b1xini2x,1,1,,0,1,priming
+2025-04-03T08:33:38.371297,b1xini2x,2,1,,0,2,priming
+2025-04-03T08:33:38.372245,b1xini2x,3,1,,0,3,baseline
+2025-04-03T08:33:38.383521,b1xini2x,1,1,,0,1,priming
+2025-04-03T08:33:38.384734,b1xini2x,2,1,,0,2,priming
+2025-04-03T08:33:38.385333,b1xini2x,3,1,,0,3,baseline
+2025-04-03T08:33:44.856929,b1xini2x,1,1,asdf,0,1,priming
+2025-04-03T08:34:14.341744,b1xini2x,2,1,asdf,0,2,priming
+2025-04-04T02:20:18.084872,02lzlwe3,1,1,,0,1,priming
+2025-04-04T02:20:18.087268,02lzlwe3,2,1,,0,2,baseline
+2025-04-04T02:20:18.087799,02lzlwe3,3,1,,0,3,priming
+2025-04-04T02:20:18.095826,02lzlwe3,1,1,,0,1,priming
+2025-04-04T02:20:18.096864,02lzlwe3,2,1,,0,2,baseline
+2025-04-04T02:20:18.097403,02lzlwe3,3,1,,0,3,priming
+2025-04-04T02:20:18.111076,02lzlwe3,1,1,,0,1,priming
+2025-04-04T02:20:18.112308,02lzlwe3,2,1,,0,2,baseline
+2025-04-04T02:20:18.112925,02lzlwe3,3,1,,0,3,priming
+2025-04-04T02:20:18.124921,02lzlwe3,1,1,,0,1,priming
+2025-04-04T02:20:18.125892,02lzlwe3,2,1,,0,2,baseline
+2025-04-04T02:20:18.126441,02lzlwe3,3,1,,0,3,priming
+2025-04-04T02:20:18.134427,02lzlwe3,1,1,,0,1,priming
+2025-04-04T02:20:18.135300,02lzlwe3,2,1,,0,2,baseline
+2025-04-04T02:20:18.135775,02lzlwe3,3,1,,0,3,priming
+2025-04-04T02:20:34.015677,02lzlwe3,1,1,123,0,1,priming
+2025-04-04T02:26:39.115936,02lzlwe3,2,1,1,0,2,baseline
+2025-04-04T02:30:56.340953,02lzlwe3,3,1,as,0,3,priming
+2025-04-04T02:32:13.043297,u5ga503v,1,1,,0,1,priming
+2025-04-04T02:32:13.045246,u5ga503v,2,1,,0,2,priming
+2025-04-04T02:32:13.045736,u5ga503v,3,1,,0,3,baseline
+2025-04-04T02:32:13.054757,u5ga503v,1,1,,0,1,priming
+2025-04-04T02:32:13.055761,u5ga503v,2,1,,0,2,priming
+2025-04-04T02:32:13.056253,u5ga503v,3,1,,0,3,baseline
+2025-04-04T02:32:13.063514,u5ga503v,1,1,,0,1,priming
+2025-04-04T02:32:13.064559,u5ga503v,2,1,,0,2,priming
+2025-04-04T02:32:13.065042,u5ga503v,3,1,,0,3,baseline
+2025-04-04T02:32:13.082020,u5ga503v,1,1,,0,1,priming
+2025-04-04T02:32:13.083025,u5ga503v,2,1,,0,2,priming
+2025-04-04T02:32:13.083574,u5ga503v,3,1,,0,3,baseline
+2025-04-04T02:32:13.091859,u5ga503v,1,1,,0,1,priming
+2025-04-04T02:32:13.092678,u5ga503v,2,1,,0,2,priming
+2025-04-04T02:32:13.093128,u5ga503v,3,1,,0,3,baseline
+2025-04-04T02:32:22.673193,u5ga503v,1,1,1,0,1,priming
+2025-04-04T02:33:26.418080,u5ga503v,2,1,12,0,2,priming
+2025-04-04T02:36:15.913486,u5ga503v,3,1,sdfaaaaa,0,3,baseline
+2025-04-04T02:37:00.826250,5rqd241i,1,1,,0,1,baseline
+2025-04-04T02:37:00.827892,5rqd241i,2,1,,0,2,baseline
+2025-04-04T02:37:00.828522,5rqd241i,3,1,,0,3,baseline
+2025-04-04T02:37:00.837984,5rqd241i,1,1,,0,1,baseline
+2025-04-04T02:37:00.839275,5rqd241i,2,1,,0,2,baseline
+2025-04-04T02:37:00.839796,5rqd241i,3,1,,0,3,baseline
+2025-04-04T02:37:00.846829,5rqd241i,1,1,,0,1,baseline
+2025-04-04T02:37:00.847888,5rqd241i,2,1,,0,2,baseline
+2025-04-04T02:37:00.848374,5rqd241i,3,1,,0,3,baseline
+2025-04-04T02:37:00.855083,5rqd241i,1,1,,0,1,baseline
+2025-04-04T02:37:00.855869,5rqd241i,2,1,,0,2,baseline
+2025-04-04T02:37:00.856316,5rqd241i,3,1,,0,3,baseline
+2025-04-04T02:37:00.863045,5rqd241i,1,1,,0,1,baseline
+2025-04-04T02:37:00.864145,5rqd241i,2,1,,0,2,baseline
+2025-04-04T02:37:00.864729,5rqd241i,3,1,,0,3,baseline
+2025-04-04T02:37:17.728313,5rqd241i,1,1,112321231231231233123123123,0,1,baseline

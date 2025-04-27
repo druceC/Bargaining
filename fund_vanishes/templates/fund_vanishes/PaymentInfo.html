@@ -199,13 +199,13 @@
     </p> -->
     <table class="bonus-table">
         <tr>
-            <th>Periods Selected</th>
+            <th>Rounds Selected</th>
             <th>Your Share in Tokens</th>
             <th>Token to USD Conversion ($)</th>
         </tr>
         {% for entry in selected_periods %}
         <tr>
-            <td>Period {{ entry.period }}</td>
+            <td>Round {{ entry.period }}</td>
             <td>{{ entry.tokens }}</td>
             <td>{{ entry.usd_equivalent }}</td>
         </tr>
@@ -235,12 +235,12 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
     let completionlink = js_vars.completionlink;
 
     window.onload = function(){
         window.location.href=completionlink;
     }
-</script>
+</script> -->
 
 {% endblock %}

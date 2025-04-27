@@ -129,6 +129,11 @@
             .catch(error => console.error("Connection lost, retrying..."));
     }
     checkPageStatus();
+
+    // Refresh every 5 seconds
+    setInterval(function() {
+            location.reload();
+    }, 5000);
 </script>
 
 {% endblock %}

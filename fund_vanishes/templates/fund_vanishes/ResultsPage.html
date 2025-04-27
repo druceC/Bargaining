@@ -2,7 +2,7 @@
 
 {% block title %}
     Results 📊
-    <div class="section-title-dark">Period {{period}}</div>
+    <div class="section-title-dark">Round {{period}}</div>
 {% endblock %}
 
 {% block content %}
@@ -154,6 +154,10 @@
         box-shadow: 0px 6px 12px rgba(106, 13, 173, 0.2);
     }
 
+    .otree-timer { 
+        display: none !important;
+    }
+
 </style>
 
 <div class="container">
@@ -164,10 +168,21 @@
     <div class="proposal-box">
         {% for key, value in relevant_proposal.items %}
             <p><strong>
-                {% if key == "s1" %} Player 1:
-                {% elif key == "s2" %} Player 2:
-                {% elif key == "s3" %} Player 3:
-                {% else %} {{ key }} {% endif %}
+                {% if key == "s1" %}
+                    {% if player_id == 1 %} Player 1 (You):
+                    {% else %} Player 1:
+                    {% endif %}
+                {% elif key == "s2" %}
+                    {% if player_id == 2 %} Player 2 (You):
+                    {% else %} Player 2:
+                    {% endif %}
+                {% elif key == "s3" %}
+                    {% if player_id == 3 %} Player 3 (You):
+                    {% else %} Player 3:
+                    {% endif %}
+                {% else %}
+                    {{ key }}:
+                {% endif %}
             </strong> 
             <span class="fund-value">{{ value }} tokens</span></p>
         {% endfor %}
@@ -182,16 +197,8 @@
             ❌ Not Approved ({{ total_votes }} vote garnered)
         {% endif %}
     </div>
-
-    <!-- Earnings -->
-    <!-- <div class="section-title">Earnings</div>
-    <div class="earnings-box">
-        {% for player, amount in player_earnings.items %}
-            <p><strong>{{ player }}:</strong> {{ amount }} tokens</p>
-        {% endfor %}
-    </div> -->
     
-    <div class = "section-title-dark"><br>Your earnings for this period: </div>
+    <div class = "section-title-dark"><br>Your earnings for this round: </div>
     <div class="earnings-highlight {% if your_earnings == 0 %}earnings-zero{% else %}earnings-positive{% endif %}">
         <strong>{{ your_earnings }} tokens</strong>
     </div>
@@ -202,5 +209,21 @@
         </form>
     </div>
 </div>
+
+<script>
+    // Intialize timeout duration
+    let timeoutDuration = Number("{{ timeout_seconds }}");  // From oTree
+
+    // Wait for the page to fully load
+    window.addEventListener("load", () => {
+        // Set a timer to click the next button
+        setTimeout(() => {
+            const nextButton = document.querySelector("button[type='submit']") || document.querySelector("button.otree-btn-next");
+            if (nextButton) {
+                nextButton.click();  // Simulate user clicking the button
+            }
+        }, timeoutDuration * 1000);  // Ensure timeout is in seconds (by default setTimeout expects ms)
+    });
+</script>
 
 {% endblock %}

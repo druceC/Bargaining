@@ -112,13 +112,40 @@
         box-shadow: 0px 6px 14px rgba(106, 13, 173, 0.3);
     }
 
+    .otree-timer { 
+        display: none !important;
+    }
+
 </style>
 
 <div class="container">
     <!-- <h2>Selected Proposal 🎯</h2> -->
-    <p><strong> {{ selected_proposer_id }}</strong> has been randomly chosen as the proposer.</p>
-    
+    <p>
+        {% if selected_proposer_id == player_id %}
+            <strong>You</strong> have
+        {% else %}
+            <strong>Player {{ selected_proposer_id }}</strong> has
+        {% endif %}
+        been randomly chosen as the proposer.
+    </p>
+
     <p>The selected proposal is:</p>
+
+    {% if timeout_occurred %}
+        <div style="
+            background-color: #FFF3CD;
+            color: #856404;
+            border: 1px solid #FFEEBA;
+            padding: 12px;
+            margin: 15px auto;
+            border-radius: 8px;
+            font-weight: 500;
+            max-width: 500px;
+        ">
+            ⚠️ This proposal was auto-submitted because the proposer ran out of time.
+        </div>
+    {% endif %}
+
     
     <div class="proposal-box">
         <h4>Token Allocation:</h4>
@@ -126,10 +153,21 @@
             {% for key, value in relevant_proposal.items %}
                 <li> 
                     <strong>
-                        {% if key == "s1" %} Player 1:
-                        {% elif key == "s2" %} Player 2:
-                        {% elif key == "s3" %} Player 3:
-                        {% else %} {{ key }} {% endif %}
+                        {% if key == "s1" %}
+                            {% if player_id == 1 %} Player 1 (You):
+                            {% else %} Player 1:
+                            {% endif %}
+                        {% elif key == "s2" %}
+                            {% if player_id == 2 %} Player 2 (You):
+                            {% else %} Player 2:
+                            {% endif %}
+                        {% elif key == "s3" %}
+                            {% if player_id == 3 %} Player 3 (You):
+                            {% else %} Player 3:
+                            {% endif %}
+                        {% else %}
+                            {{ key }}:
+                        {% endif %}
                     </strong> <span class="fund-value">{{ value }} tokens</span>
                 </li>
             {% endfor %}
@@ -142,5 +180,21 @@
         <button class="next-button">Proceed to Voting</button>
     </div>
 </div>
+
+<script>
+    // Intialize timeout duration
+    let timeoutDuration = Number("{{ timeout_seconds }}");  // From oTree
+
+    // Wait for the page to fully load
+    window.addEventListener("load", () => {
+        // Set a timer to click the next button
+        setTimeout(() => {
+            const nextButton = document.querySelector("button[type='submit']") || document.querySelector("button.otree-btn-next");
+            if (nextButton) {
+                nextButton.click();  // Simulate user clicking the button
+            }
+        }, timeoutDuration * 1000);  // Ensure timeout is in seconds (by default setTimeout expects ms)
+    });
+</script>
 
 {% endblock %}

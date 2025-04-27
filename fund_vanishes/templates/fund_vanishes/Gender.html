@@ -220,39 +220,72 @@
     }
 
     function validateForm() {
-        let selectedOption = document.querySelector('input[name="gen"]:checked');
-        let otherTextInput = document.getElementById("otherText");
-        let errorMessage = document.getElementById("error-message");
+        // Gender assigned at birth
+        let selectedOption = document.querySelector('input[name="sex"]:checked');
+        // How would you describe your gender
+        let selectedOption_2 = document.querySelector('input[name="gen"]:checked');
+        // Masculinity-femininity scale
+        let selectedOption_3 = document.querySelector('input[name="gen_cgi"]:checked');
+
+        // Error messages
+        let errorMessageSex = document.getElementById("error-message-sex");
+        let errorMessageGender = document.getElementById("error-message-gen");
+        let errorMessageCGI = document.getElementById("error-message-cgi");
+
         let firstErrorField = null; // Track the first error field to scroll to
 
-        // Check if "I use a different term (please specify)" is selected but no input is given
-        if (selectedOption && selectedOption.value == "4") { 
-            if (!otherTextInput.value.trim()) { // If empty
-                errorMessage.style.display = "block"; 
-                if (!firstErrorField) {
-                    firstErrorField = otherTextInput; // Mark this as the first error field
-                }
-            } else {
-                errorMessage.style.display = "none"; // Hide error if corrected
-            }
+        // Input validation for sex
+        if (selectedOption.required && selectedOption.value.trim() === "") {
+            errorMessageSex.style.display = "block";
+            isValid = false;
+        } else {
+            errorMessageSex.style.display = "none";
         }
+        // Input validation for gen
+        if (selectedOption_2.required && selectedOption_2.value.trim() === "") {
+            errorMessageGender.style.display = "block";
+            isValid = false;
+        } else {
+            errorMessageGender.style.display = "none";
+        }
+        // Input validation for gen_cgi
+        if (selectedOption_3.required && selectedOption_3.value.trim() === "") {
+            errorMessageCGI.style.display = "block";
+            isValid = false;
+        } else {
+            errorMessageCGI.style.display = "none";
+        }
+        // // Check if "I use a different term (please specify)" is selected but no input is given
+        // if (selectedOption && selectedOption.value == "4") { 
+        //     if (!otherTextInput.value.trim()) { // If empty
+        //         errorMessage.style.display = "block"; 
+        //         if (!firstErrorField) {
+        //             firstErrorField = otherTextInput; // Mark this as the first error field
+        //         }
+        //     } else {
+        //         errorMessage.style.display = "none"; // Hide error if corrected
+        //     }
+        // }
 
-        // Scroll to the first error field if there is one
-        if (firstErrorField) {
-            firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-            firstErrorField.focus();
-            return false; // Prevent form submission
-        }
+        // // Scroll to the first error field if there is one
+        // if (firstErrorField) {
+        //     firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+        //     firstErrorField.focus();
+        //     return false; // Prevent form submission
+        // }
 
         return true; // Allow form submission if no errors
     }
 
-    function handleNextClick() {
+    function handleNextClick(event) {
         if (!validateForm()) {
-            return false; // Prevent form submission if validation fails
+            print("Invalid submission")
+            return false;           // Prevent form submission if validation fails
         }
-        updateProgress(); // Only runs if validateForm() passes
-        return true;
+        else{
+            updateProgress();       // Update progress bar
+            return true;
+        }
     }
 
 </script>

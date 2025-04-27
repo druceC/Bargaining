@@ -22,7 +22,7 @@
 
     h1 {
         font-size: 28px;
-        font-weight: 700;
+    font-weight: 700;
         color: #6A0DAD;
         margin-bottom: 15px;
     }
@@ -33,6 +33,7 @@
         line-height: 1.6;
         font-weight: 500;
         margin-bottom: 20px;
+        text-align: left;
     }
 
     .formfields {
@@ -82,7 +83,13 @@
 
 <div class="quiz-container">
     <h1>Quiz Time!</h1>
-    <p><strong>Test your understanding with these questions</strong></p>
+
+    <p>
+        <br>
+        <strong>You must pass this short quiz to join the experiment.</strong><br><br>
+        You have <strong>3 attempts</strong> to correctly answer the following questions. Failure to do so will result in no participation and no payment.
+    </p>
+
     <br>
     <div class="formfields">
         {{ formfields }}

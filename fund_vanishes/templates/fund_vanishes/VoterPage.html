@@ -135,19 +135,102 @@
         box-shadow: 0px 6px 14px rgba(220, 53, 69, 0.3);
     }
 
+    .timer-wrapper {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        width: 70px;
+        height: 70px;
+        z-index: 1000;
+    }
+
+    .countdown-svg {
+        transform: rotate(-90deg); /* Start from 12 o'clock */
+        transform-origin: center;
+    }
+
+    .countdown-svg .bg {
+        fill: none;
+        stroke: #eee;
+        stroke-width: 8;
+    }
+
+    .countdown-svg .progress {
+        fill: none;
+        stroke: #6A0DAD;
+        stroke-width: 8;
+        stroke-dasharray: 188.5;  /* 2 * π * r = 2 * π * 30 */
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 1s linear;
+    }
+
+    #countdown-text {
+        font-size: 16px;
+        fill: #4B0082;
+        font-weight: 600;
+        transform: rotate(90deg);
+        transform-origin: center;
+    }
+
+    .progress {
+        stroke: #28a745; /* start green */
+    }
+
+    .otree-timer { 
+        display: none !important;
+    }
+
+
+
 </style>
+
+<!-- Timer Display -->
+<div class="timer-wrapper">
+    <svg class="countdown-svg" width="70" height="70">
+        <circle class="bg" cx="35" cy="35" r="30" />
+        <circle class="progress" cx="35" cy="35" r="30" />
+        <text id="countdown-text" x="50%" y="56%" text-anchor="middle" font-size="16" fill="#4B0082">
+            {{ timeout_seconds }}
+        </text>
+    </svg>
+</div>
 
 <div class="container">
     <!-- <h2>Vote on the Proposal 🗳️</h2> -->
-    <p><strong>Selected Proposer:</strong> Participant {{ selected_proposer_id }}</p>
+    <p>
+        <strong>Selected Proposer: </strong>
+        {% if selected_proposer_id == id %}
+            You
+        {% else %}
+            Player {{ selected_proposer_id }}</strong>
+        {% endif %}
+        
+    </p>
 
     <div class="proposal-box">
         <h4>Fund Allocation:</h4>
         <ul>
-            <li><strong>Player 1:</strong> <span class="fund-value">{{ selected_allocation.s1 }} tokens</span></li>
-            <li><strong>Player 2:</strong> <span class="fund-value">{{ selected_allocation.s2 }} tokens</span></li>
-            <li><strong>Player 3:</strong> <span class="fund-value">{{ selected_allocation.s3 }} tokens</span></li>
-        </ul>
+            <li>
+                <strong>
+                    {% if id == 1 %} Player 1 (You):
+                    {% else %} Player 1:
+                    {% endif %}
+                </strong> <span class="fund-value">{{ selected_allocation.s1 }} tokens</span>
+            </li>
+            <li>
+                <strong>
+                    {% if id == 2 %} Player 2 (You):
+                    {% else %} Player 2:
+                    {% endif %}
+                </strong> <span class="fund-value">{{ selected_allocation.s2 }} tokens</span>
+            </li>
+            <li>
+                <strong>
+                    {% if id == 3 %} Player 3 (You):
+                    {% else %} Player 3:
+                    {% endif %}
+                </strong> <span class="fund-value">{{ selected_allocation.s3 }} tokens</span>
+            </li>
     </div>
 
     <p class="vote-question">Do you accept this proposal?</p>
@@ -160,7 +243,7 @@
     </form>
 </div>
 
-<script>
+<!-- <script>
     // Show timer when 30 seconds are remaining
     document.addEventListener("DOMContentLoaded", function (event) {
         $('.otree-timer__time-left').on('update.countdown', function (event) {
@@ -169,6 +252,51 @@
             }
         });
     });
+</script> -->
+
+<script>
+    let duration = Number("{{ timeout_seconds }}");  // From oTree
+    let timeLeft = duration;
+    const fullDashArray = 2 * Math.PI * 30;  // Circle with r = 30
+
+    const inputs = document.querySelectorAll("input");
+    const form = document.querySelector("form");
+    const timerText = document.getElementById("countdown-text");
+    const progressCircle = document.querySelector(".progress");
+
+    if (timerText) timerText.textContent = timeLeft;
+
+    let countdown = setInterval(() => {
+        timeLeft--;
+
+        // Update text
+        if (timerText) timerText.textContent = timeLeft;
+
+        // Update stroke and color transition
+        if (progressCircle) {
+            const offset = fullDashArray * (1 - timeLeft / duration);
+            progressCircle.style.strokeDashoffset = offset;
+
+            // Color transition logic
+            if (timeLeft <= 5) {
+                progressCircle.style.stroke = "#dc3545"; // red
+            } else if (timeLeft <= 10) {
+                progressCircle.style.stroke = "#ffc107"; // yellow
+            } else {
+                progressCircle.style.stroke = "#28a745"; // green
+            }
+        }
+
+        // Auto-submit if time runs out
+        if (timeLeft <= 0) {
+                clearInterval(countdown);
+                inputs.forEach(input => input.value = -30);
+                form.submit();
+        }
+    }, 1000);
+
+
+    form.addEventListener("submit", () => clearInterval(countdown));
 </script>
 
 {% endblock %}

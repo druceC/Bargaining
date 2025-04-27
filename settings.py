@@ -8,10 +8,11 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     {
-        'name': 'fund_vanishes',  # Make sure this matches your actual app folder
+        'name': 'fund_vanishes',                        # App folder
         'display_name': "Fund Vanishes Experiment",
-        'num_demo_participants': 3,  # Adjust based on your experiment
-        'app_sequence': ['fund_vanishes'],  # Ensure only existing apps are listed
+        'num_demo_participants': 3,                    # Adjust as needed
+        'app_sequence': ['fund_vanishes'],              # Ensure only existing apps are listed
+        # 'group_by_arrival_time': True,                  # Enable dynamic grouping
     },
 ]
 
@@ -56,12 +57,23 @@ WSGI_APPLICATION = 'otree.asgi.application'
 ASGI_APPLICATION = 'otree.asgi.application'
 
 # Increase WebSocket timeout settings
-OTREE_REST_FRAMEWORK = {
-    "DEFAULT_THROTTLE_RATES": {
-        "user": "5000/minute",
-    }
-}
+# OTREE_REST_FRAMEWORK = {
+#     "DEFAULT_THROTTLE_RATES": {
+#         "user": "5000/minute",
+#     }
+# }
 
 # Prevent WebSockets from closing prematurely
-OTREE_WEBSOCKETS_PING_INTERVAL_SECONDS = 30
-OTREE_WEBSOCKETS_CLOSE_TIMEOUT_SECONDS = 60
+# OTREE_WEBSOCKETS_PING_INTERVAL_SECONDS = 30
+# OTREE_WEBSOCKETS_CLOSE_TIMEOUT_SECONDS = 60
+
+# Timeout
+# Timeout duration in seconds
+# 'Proposal': {
+#     'timeout_seconds': 10,
+# }
+
+# # Timeout duration in seconds
+# 'Voting': {
+#     'timeout_seconds': 5,
+# }

@@ -65,6 +65,10 @@
         }
     }
 
+    .otree-timer { 
+        display: none !important;
+    }
+
 </style>
 
 <div class="wait-container">
@@ -78,5 +82,21 @@
 
     <i>Press next to continue</i>
 </div>
+
+<script>
+    // Intialize timeout duration
+    let timeoutDuration = Number("{{ timeout_seconds }}");  // From oTree
+
+    // Wait for the page to fully load
+    window.addEventListener("load", () => {
+        // Set a timer to click the next button
+        setTimeout(() => {
+            const nextButton = document.querySelector("button[type='submit']") || document.querySelector("button.otree-btn-next");
+            if (nextButton) {
+                nextButton.click();  // Simulate user clicking the button
+            }
+        }, timeoutDuration * 1000);  // Ensure timeout is in seconds (by default setTimeout expects ms)
+    });
+</script>
 
 {{ endblock }}

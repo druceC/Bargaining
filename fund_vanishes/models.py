@@ -1,24 +1,59 @@
 # Defines players, groups, session logic, and game state
 import json
+import csv
+import os
 import random
 from otree.api import *
+from .utils import store_intro
+from datetime import datetime
+import pycountry
+
+# ------------------------
+
+# Variables and helper functions for drop-down selection questions
+
+# Get list of all country names using pycountry
+COUNTRIES = sorted([country.name for country in pycountry.countries])
+COUNTRIES.insert(0, "Other (please specify)")  # Append to the beginning of the list
+
+def load_language_choices():
+    filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3.csv')
+    choices = []
+
+    with open(filepath, encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            code = row['Code'].strip()
+            name = row['Language'].strip()
+            if code and name:
+                choices.append((code, name))
+
+    # Add "other" option to the beginning of list
+    choices.insert(0, (000, "Other (please specify)")) 
+
+    return choices
+
+# -----------------------
 
 class Constants(BaseConstants):
     name_in_url = 'fund_vanishes'
+    # players_per_group = None                 # Commented out for dynamic group formation 
     players_per_group = 3
-    num_rounds = 5
-    no_periods = 5
+    num_rounds = 5                          # Overall round loop
+    no_periods = 5                          # Custom counter
     total_tokens = 30
-    token_value = 0.1  # 10 tokens = 1 USD
+    token_value = 0.4                       # 4 tokens = 1 USD
 
 def creating_session(subsession):
     session = subsession.session
 
     # Regroup players after every round 
-    subsession.group_randomly(fixed_id_in_group=True)
+    # subsession.group_randomly(fixed_id_in_group=True)
 
     session.list_players_waiting = '[]'
     #subsession.group_randomly()
+
+    #   PRIMING/BASELINE ASSIGNMENT =================================================
 
     # Ensure every participant has a period count
     for player in subsession.get_players():     
@@ -31,6 +66,7 @@ def creating_session(subsession):
         
         # Ensure this carries over to the player's instance for this round
         player.is_priming = participant.vars["is_priming"]
+        store_intro(player)
 
         print(f"Player {player.id_in_group} in group {player.group.id_in_subsession} → {'Priming' if player.is_priming else 'Baseline'}")
 
@@ -60,8 +96,21 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     
     # STATE TRACKING ---------------------------------------------------------
+    
     # Group Period
     current_period = models.IntegerField(initial=0)
+
+    # Dropout Detection
+    drop_out_detected = models.BooleanField(initial=False)
+
+    # Function to create subgroups
+    def set_subgroups(self):
+        players = self.get_players()
+        random.shuffle(players)
+        subgroups = [players[i:i+3] for i in range(0, len(players), 3)]
+        for i, subgroup in enumerate(subgroups):
+            for p in subgroup:
+                p.subgroup_id = i + 1  # Optional: tag each player with their subgroup ID
 
     # SUBMIT PROPOSAL PAGE ---------------------------------------------------------
     
@@ -207,7 +256,7 @@ class CalculateWaitpage(WaitPage):
                 proposer_player = group.get_player_by_id(group.id_proposer)
                 proposer_player.role_player = "Proposer"
 
-    # @staticmethod
+    @property
     def is_displayed(self):
         if self.player.participant.skip_this_oTree_round == False:
             return True
@@ -216,10 +265,24 @@ class CalculateWaitpage(WaitPage):
 
 
 class Player(BasePlayer):
-    # Assign prolific ID
-    prolific_id = models.StringField(default=str(" "))
+    # Participant set-up
+    # prolific_id = models.StringField(default=str(" "))
+    prolific_id = models.LongStringField(
+        # blank=False,
+        # min_length=24,
+        # max_length=24,
+        # error_messages={"min_length": "Must be exactly 24 characters."},
+        label="Please enter your prolific ID:",
+        # Add photo of sample prolific ID and where to find it
+    )
     
     is_priming = models.BooleanField()                  # Randomly assign each player to either receive priming or baseline treatment
+    subgroup_id = models.IntegerField()
+
+    def treatment(self):
+        return "priming" if self.is_priming else "baseline"
+
+    # Game set-up
     period_no = models.IntegerField(initial=0)
     player_role = models.StringField()  
     proposal = models.IntegerField(min=0, max=30)       # Proposal for token allocation
@@ -227,8 +290,11 @@ class Player(BasePlayer):
         choices=[[True, 'Approve'], [False, 'Reject']],
         label="Do you accept this proposal?",
         widget=widgets.RadioSelect,
-        blank = True                                    # Allows vote to be None initially                 
-    )                 
+        blank = True,                                     # Allows vote to be None initially         
+        initial = False                                     # Set default value to false termi    
+    )      
+
+    # Payment    
     earnings = models.CurrencyField(initial=0)          # Earnings for the period
     all_earnings = models.LongStringField(default="[]")
     final_payment = models.FloatField()
@@ -342,6 +408,10 @@ class Player(BasePlayer):
     def final_earnings(self):
         participant = self.participant
 
+        # If already computed, reuse it
+        if "final_earnings_data" in participant.vars:
+            return participant.vars["final_earnings_data"]
+
         # Load earnings from participant.vars instead of self.all_earnings
         all_earnings_list = participant.vars.get("all_earnings", [])
 
@@ -367,16 +437,30 @@ class Player(BasePlayer):
         for entry in selected_periods:
             entry["usd_equivalent"] = round(entry["tokens"] / 4, 2)
 
+        # Prepare earnings dict
+        earnings_data = {
+            "selected_periods": selected_periods,
+            "final_payment": final_payment,
+            "total_bonus": total_bonus
+        }
+
+        # Store once for consistency across reloads
+        participant.vars["final_earnings_data"] = earnings_data
+
         # Debugging output
         print(f"\n[DEBUG] Selected payment rounds: {selected_periods}")
         print(f"[DEBUG] Total final payment: {final_payment}")
 
+        # Log or store externally
+        # store_final_earnings(self, earnings_data)
+
         # return {"selected_periods": selected_periods, "final_payment": final_payment, ""}
-        return {"selected_periods": selected_periods, 
-                "final_payment": final_payment,
-                # "period_earnings": period_earnings,
-                "total_bonus": total_bonus
-            }
+        # return {"selected_periods": selected_periods, 
+        #         "final_payment": final_payment,
+        #         # "period_earnings": period_earnings,
+        #         "total_bonus": total_bonus
+        # }
+        return earnings_data
 
     #####################################################################################
     
@@ -486,11 +570,138 @@ class Player(BasePlayer):
     )
     #------------------------------------------------------------------------------------------------------------------------------------
     
-    # SURVEY QUESTIONS 
+    # DEMOGRAPHICS QUESTIONS
     
     combined_payoff = models.FloatField()
     random_payoff = models.FloatField()
+    
+    # Gender -------------------
 
+    sex = models.StringField(
+        choices=[[1, 'Male'], [2, 'Female'], [3, 'Intersex'], 
+                 [4, 'I prefer not to answer']],
+        label='What sex were you assigned at birth, or your original birth certificate?',
+        widget=widgets.RadioSelect,
+    )
+    gen = models.StringField(
+        choices=[
+            [1, 'Man or Male'], 
+            [2, 'Woman or Female'], 
+            [3, 'Non-binary or Genderqueer'], 
+            [4, 'I use a different term (please specify)'],
+            [5, 'I prefer not to answer']
+        ],
+        label='How do you describe your gender?',
+        widget=widgets.RadioSelect,  
+    )
+    # New field for custom input
+    other_gender = models.StringField(blank=True)
+
+    gen_cgi = models.StringField(
+        choices=[[0, '0 (Very masculine)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
+                 [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
+                 [10, '10 (Very feminine)']],
+        label='In general, how do you see yourself? Where would you put yourself on this scale (0-10) from "Very masculine" to "Very feminine"?',
+        widget=widgets.RadioSelect,
+    )
+
+    # Income ----------------------
+
+    inc = models.IntegerField(
+        label="What is your personal monthly income before taxes? <br>(Please enter full amount in dollars.)",
+        choices=[
+            (1, "Less than $10,000"),
+            (2, "$10,000 - $19,000"),
+            (3, "$20,000 - $29,999"),
+            (4, "$30,000 - $39,999"),
+            (5, "$40,000 - $49,999"),
+            (6, "$50,000 - $59,999"),
+            (7, "$60,000 - $69,999"),
+            (8, "$70,000 - $79,999"),
+            (9, "$80,000 - $99,999"),
+            (10, "$100,000 - $119,999"),
+            (11, "$120,000 - $149,999"),
+            (12, "$150,000 - $199,999"),
+            (13, "$200,000 - $249,999"),
+            (14, "$250,000 - $349,999"),
+            (15, "$350,000 - $499,000"),
+            (16, "$500,000 or more"),
+            (17, "Prefer not to say"),
+        ]
+    )
+    inc_hh = models.IntegerField(
+        label="What was your household’s total monthly income before taxes during your childhood?",
+        choices=[
+            (1, "Less than $10,000"),
+            (2, "$10,000 - $19,000"),
+            (3, "$20,000 - $29,999"),
+            (4, "$30,000 - $39,999"),
+            (5, "$40,000 - $49,999"),
+            (6, "$50,000 - $59,999"),
+            (7, "$60,000 - $69,999"),
+            (8, "$70,000 - $79,999"),
+            (9, "$80,000 - $99,999"),
+            (10, "$100,000 - $119,999"),
+            (11, "$120,000 - $149,999"),
+            (12, "$150,000 - $199,999"),
+            (13, "$200,000 - $249,999"),
+            (14, "$250,000 - $349,999"),
+            (15, "$350,000 - $499,000"),
+            (16, "$500,000 or more"),
+            (17, "Prefer not to say"),
+        ]
+    )
+
+     # Education ----------------------
+
+    degree = models.StringField(
+        choices=[
+            (1, "Did not graduate from high school"),
+            (2, "High school graduate"),
+            (3, "Some college, but no degree (yet)"),
+            (4, "2-year college degree"),
+            (5, "4-year college degree"),
+            (6, "Postgraduate degree (MA, MBA, MD, JD, PhD, etc.)"),
+        ],
+        label='What is your highest education attained?',
+    )
+
+    # Nationality ----------------------
+
+    # Country of birth
+    spbrn = models.StringField(
+        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
+        label="Were you born in the United States?",
+        widget=widgets.RadioSelect,
+    )
+    # Conditional on the question above (if not born in the US)
+    cntbrn = models.StringField(
+        label='Which country were you born in?',
+        choices=COUNTRIES,
+        blank=True      # Allows skipping
+    )
+    # Citizenship
+    spcit = models.StringField(
+        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
+        label="Are you an American citizen?",
+        widget=widgets.RadioSelect,
+    )
+    # Conditional on the question above (if not american citizen)
+    other_cit = models.StringField(
+        label="What citizenship do you hold?",
+        choices=COUNTRIES,
+        blank=True      # Allows skipping
+    )
+    primlang = models.StringField(
+        label="What was the primary language spoken in the household in which you were raised?",
+        choices=load_language_choices(),
+    )
+ 
+ 
+    #------------------------------------------------------------------------------------------------------------------------------------
+    
+    # FINAL SURVEY QUESTIONS
+    
     # Part 1a ----------------------
     cmt_propr = models.LongStringField(
         label="In the rounds where you were a proposer, what considerations did you take into account when proposing a distribution?",
@@ -509,7 +720,6 @@ class Player(BasePlayer):
               "extent do you agree with the previous statement, where 1 means strongly disagree and 7 strongly agree?",
         widget=widgets.RadioSelect,
     )
-
     retaliation_other = models.StringField(
         choices=[[1, "1 (Strongly Disagree)"],
                  [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
@@ -519,7 +729,6 @@ class Player(BasePlayer):
               "strongly disagree and 7 strongly agree? ",
         widget=widgets.RadioSelect,
     )
-
     mwc = models.StringField(
         choices=[[1, "1 (Completely Unacceptable)"],
                  [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
@@ -530,7 +739,6 @@ class Player(BasePlayer):
               "unacceptable and 7 is completely acceptable.",
         widget=widgets.RadioSelect,
     )
-
     mwc_others = models.StringField(
         choices=[[1, "1 (Extremely unlikely)"],
                  [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
@@ -564,7 +772,6 @@ class Player(BasePlayer):
     age = models.IntegerField(
         label="What is your age?", min=18, max=110
     )
-
     risk = models.StringField(
         choices=[[0, '0 (Extremely unlikely)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
                  [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
@@ -572,103 +779,11 @@ class Player(BasePlayer):
         label='In general, how willing are you to take risks??',
         widget=widgets.RadioSelect,
     )
-    
-    # Gender -------------------
 
-    sex = models.StringField(
-        choices=[[1, 'Male'], [2, 'Female'], [3, 'Intersex'], 
-                 [4, 'I prefer not to answer']],
-        label='What sex were you assigned at birth, or your original birth certificate?',
-        widget=widgets.RadioSelect,
-    )
-
-    gen = models.StringField(
-        choices=[
-            [1, 'Man or Male'], 
-            [2, 'Woman or Female'], 
-            [3, 'Non-binary or Genderqueer'], 
-            [4, 'I use a different term (please specify)'],
-            [5, 'I prefer not to answer']
-        ],
-        label='How do you describe your gender?',
-        widget=widgets.RadioSelect,  
-    )
-    # New field for custom input
-    other_gender = models.StringField(blank=True)
-
-    gen_cgi = models.StringField(
-        choices=[[0, '0 (Very masculine)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
-                 [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
-                 [10, '10 (Very feminine)']],
-        label='In general, how do you see yourself? Where would you put yourself on this scale (0-10) from "Very masculine" to "Very feminine"?',
-        widget=widgets.RadioSelect,
-    )
-
-    # Income ----------------------
-
-    inc = models.IntegerField(
-        label="What is your personal monthly income before taxes? <br>(Please enter full amount in dollars.)",
-        max=999999999,
-        min=0,
-    )
-    inc_hh = models.IntegerField(
-        label="What was your household’s total monthly income before taxes during your childhood? (Provide the full amount in dollars, considering the combined income of all those living in your primary childhood home.)",
-        max=999999999,
-        min=0,
-    )
-
-    # Part 3a ----------------------
-
-    # stud_degree = models.StringField(
-    #     choices=[[1, 'Bachelor'], [2, 'Master'],[3,'PhD']],
-    #     label="Are you a bachelor's, master's or PhD student?",
-    #     widget=widgets.RadioSelect,
-    # )
-    stud_job = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No']],
-        label="Do you currently have a student job?",
-        widget=widgets.RadioSelect,
-        initial=-9
-    )
-    # finc_supp = models.StringField(
-    #     choices=[[1, "I don't receive any financial support from my parents"],
-    #              [2, "Less than 20.000 KSH"], [3, "20.000-29.999 KSH"], [4, "30.000-49.999 KSH"],
-    #              [5, "50.000-59.999 KSH"], [6, "60.000-69.999 KSH"], [7, "70.000-79.999 KSH"],
-    #              [8, "80.000-99.999 KSH"], [9, "100.000-119.999 KSH"], [10, "120.000-149.999 KSH"],
-    #              [11, "More than 150.000 KSH"], [12, "I would prefer not to say"]],
-    #     label='How much monthly financial support do you currently receive from your parents?',
-    #     widget=widgets.RadioSelect,
-    # )
-
-    # Education ----------------------
-
-    degree = models.StringField(
-        choices=[[1, "None"], [2, "Pre-school"], [3, "Standard 1"], [4, "Standard 2"],
-                 [5, "Standard 3"], [6, "Standard 4"], [7, "Standard 5"], [8, "Standard 6"],
-                 [9, "Standard 7"], [10, "Standard 8"], [11, "Form 1"], [12, "Form 2"],
-                 [13, "Form 3"], [14, "Form 4"], [15, "Form 5"], [16, "Form 6"],
-                 [17, "College Year 1"], [18, "College Year 2"], [19, "College Year 3"],
-                 [20, "College Year 4"], [21, "University Year 1"], [22, "University Year 2"],
-                 [23, "University Year 3"], [24, "University Year 4"], [25, "Polytechnic"],
-                 [26, "Postgraduate"], ],
-        label='What is your highest education attained?',
-    )
-
-    # Part 3b ----------------------
+    # Part 1e ----------------------
 
     occ = models.StringField(
         label=' What is your occupation?'
-    )
-    degree = models.StringField(
-        choices=[[1, "None"], [2, "Pre-school"], [3, "Standard 1"], [4, "Standard 2"],
-                 [5, "Standard 3"], [6, "Standard 4"], [7, "Standard 5"], [8, "Standard 6"],
-                 [9, "Standard 7"], [10, "Standard 8"], [11, "Form 1"], [12, "Form 2"],
-                 [13, "Form 3"], [14, "Form 4"], [15, "Form 5"], [16, "Form 6"],
-                 [17, "College Year 1"], [18, "College Year 2"], [19, "College Year 3"],
-                 [20, "College Year 4"], [21, "University Year 1"], [22, "University Year 2"],
-                 [23, "University Year 3"], [24, "University Year 4"], [25, "Polytechnic"],
-                 [26, "Postgraduate"], ],
-        label='What is your highest education attained?',
     )
     volunt = models.StringField(
         choices=[[1, 'Yes'], [2, 'No']],
@@ -687,19 +802,7 @@ class Player(BasePlayer):
         blank = True
     )
 
-
-    # Part 4a ----------------------
-
-    # stud_job_hrs = models.StringField(
-    #     choices=[[1, "1 to 4 hours"], [2, "5 to 9 hours"], [3, "10 to 14 hours"], [4, "15 or more hours"],
-    #              [5, "Don't know"]],
-    #     label='Approximately how many hours a week do you spend working at your student job?',
-    #     widget=widgets.RadioSelect,
-    # )
-
     # Part 2a ----------------------
-
-    # Political Questions
 
     party_like = models.StringField(
         choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
@@ -719,9 +822,7 @@ class Player(BasePlayer):
         blank = True
     )
 
-    # Part 4b ----------------------
-
-     # Economics Questions
+    # Part 2b ----------------------
 
     econ = models.IntegerField(
         label="How many economics and/or finance courses have you taken at the university level?",
@@ -750,7 +851,6 @@ class Player(BasePlayer):
         label='Mark where on the scale that you would place your own political opinions.',
         widget=widgets.RadioSelect,
     )
-
     plop_priv = models.StringField(
         choices=[[1, "1 (More public companies ought to be privatized)"],
                  [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
@@ -769,13 +869,11 @@ class Player(BasePlayer):
     # Part 5 ----------------------
 
     # Religion questions
-
     rel = models.StringField(
         choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
         label="Do you consider yourself as belonging to any particular religion or denomination?",
         widget=widgets.RadioSelect,
     )
-
     # Contingent on question above
     rel_spec = models.StringField(
         choices=[[1, "Christianity - Protestantism"], [2, "Christianity - Catholicism"],
@@ -785,53 +883,17 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         blank = True
     )
-
-    # rel_spec = models.StringField(blank=True)
-
-    # Part a ----------------------
-
     # Conditional on selecting "other" on previous question
     rel_other = models.StringField(
         label="What other religion do you belong to?",
         blank = True
     )
 
-    # Part 6 ----------------------
-    # Part 6 ----------------------
-
-    # Personal birth and citizenships
-
-    spbrn = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label="Were you born in the United States?",
-        widget=widgets.RadioSelect,
-    )
-    # Conditional on the question above (if not born in the US)
-    cntbrn = models.StringField(
-        label='Which country were you born in?',
-        blank=True
-    )
-
-    spcit = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label="Are you an American citizen?",
-        widget=widgets.RadioSelect,
-    )
-    # Conditional on the question above (if not american citizen)
-    other_cit = models.StringField(
-        label="What citizenship do you hold?",
-        blank=True
-        # widget=widgets.RadioSelect,
-    )
-
-    primlang = models.StringField(
-        label="What was the primary language spoken in the household in which you were raised?",
-    )
-
-    # Part 7 ----------------------
+    # Part 4 ----------------------
 
     # Parent-related questions
 
+    # Mother country of birth
     mth_spbrn = models.StringField(
         choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
         label="Was your mother born in the United States?",
@@ -840,9 +902,10 @@ class Player(BasePlayer):
     # Conditional on question above
     mth_cntbrn = models.StringField(
         label="In which country was your mother born?",
+        choices=COUNTRIES,
         blank=True
     )
-
+    # Father country of birth
     fth_spbrn = models.StringField(
         choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
         label="Was your father born in the United States?",
@@ -851,20 +914,11 @@ class Player(BasePlayer):
     # Conditional on question above
     fth_cntbrn = models.StringField(
         label="In which country was your father born?",
+        choices=COUNTRIES,
         blank=True
     )
 
-    # Part 8 ----------------------
-
-    # mth_cit = models.StringField(
-    #     label="What citizenship does your mother hold?",
-    # )
-    # fth_cit = models.StringField(
-    #     label="What citizenship does your father hold?",
-    # )
-    
-
-    # Part 9 ----------------------
+    # Part 5 ----------------------
 
     mwc_bonus = models.StringField(
         choices=[[1, "1 (Completely Unacceptable)"],
@@ -888,12 +942,15 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
     )
 
-    # Part 10 -------------------------
+    # Part 6 -------------------------
 
     bonus = models.LongStringField(
         label="What do you think is the purpose of this experiment?",
     )
 
+# ------------------------------------------------------------------------------------------------------------------------------------
+    
+# PROLIFIC MISC 
 
 # For Prolific integration
 class Demographics(Page):

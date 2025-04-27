@@ -99,10 +99,12 @@
 
     input, select, textarea {
         width: 100%;
+        max-width: 100%;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 6px;
         margin-top: 5px;
+        box-sizing: border-box;
     }
 </style>
 
@@ -115,11 +117,11 @@
             <div class="progress"></div>
         </div>
     
-        <div class="form-container">
-            {{ formfields }}
-        </div>
+        <div class="form-container">{{ form.degree.label }}</label>
+            {{ form.degree }}<br>
+        </div><br><br>
     
-        <button class="next-button" onclick="updateProgress()">Next</button>
+        <button class="next-button" onclick="handleNextClick()">Next</button>
         <div class="note">Click next to proceed.</div>
     </div>
 </div>
@@ -165,9 +167,22 @@
         let progressWidth = (currentStep / totalSteps) * 100 + "%";
         console.log(`🔹 Survey Step (from oTree): ${currentStep}`);
         console.log(`🔹 Progress Width: ${progressWidth}`);
-
         progress.style.width = progressWidth;
     });
+
+    function validateForm() {
+        let educationInput = document.querySelector('input[name="degree"]');
+        let errorMessageEducation = document.getElementById("error-message-education");
+        let isValid = true;
+
+        if (educationInput.required && educationInput.value.trim() === "") {
+            errorMessageEducation.style.display = "block";
+            isValid = false;
+        } else {
+            errorMessageEducation.style.display = "none";
+        }
+        return isValid;
+    }
 
     function updateProgress() {
         let progress = document.querySelector(".progress");
@@ -180,6 +195,16 @@
             console.log(`🚀 Updated Progress to Step ${nextStep}: ${progressWidth}`);
         } else {
             console.error("❌ Could not update progress - Invalid values detected.");
+        }
+    }
+
+    function handleNextClick(event) {
+        if (!validateForm()) {
+            return false;           // Prevent form submission if validation fails
+        }
+        else{
+            updateProgress();       // Update progress bar
+            return true;
         }
     }
 </script>
