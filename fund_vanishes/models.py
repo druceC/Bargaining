@@ -90,7 +90,10 @@ def creating_session(subsession):
 
 class Subsession(BaseSubsession):
     creating_session = creating_session
+
     pass
+
+    
 
 # Group-level data
 class Group(BaseGroup):
@@ -102,6 +105,7 @@ class Group(BaseGroup):
 
     # Dropout Detection
     drop_out_detected = models.BooleanField(initial=False)
+    drop_out_finalized = models.BooleanField(initial=False)  # NEW FIELD
 
     # Function to create subgroups
     def set_subgroups(self):
@@ -111,6 +115,15 @@ class Group(BaseGroup):
         for i, subgroup in enumerate(subgroups):
             for p in subgroup:
                 p.subgroup_id = i + 1  # Optional: tag each player with their subgroup ID
+
+    def check_dropout_or_select(self):
+        if self.drop_out_detected:
+            for p in self.get_players():
+                p.participant.vars['go_to_dropout_notice'] = True
+        else:
+            proposals = json.loads(self.all_proposals_str)
+            if len(proposals) == 3:
+                self.select_random_proposal()
 
     # SUBMIT PROPOSAL PAGE ---------------------------------------------------------
     
@@ -407,6 +420,7 @@ class Player(BasePlayer):
     # MODIFIED FINAL EARNINGS FUNCTION
     def final_earnings(self):
         participant = self.participant
+        is_dropout = participant.vars.get("dropped_out", False)   # <-- ADD THIS
 
         # If already computed, reuse it
         if "final_earnings_data" in participant.vars:
@@ -415,25 +429,68 @@ class Player(BasePlayer):
         # Load earnings from participant.vars instead of self.all_earnings
         all_earnings_list = participant.vars.get("all_earnings", [])
 
+        # DROP-OUT PLAYER -----------------------------------
+
+        # Dropouts always get $0
+        if is_dropout:
+            earnings_data = {
+                "selected_periods": [],
+                "final_payment": 0,     
+                "survey_fee": 0,
+                "base_fee": 0,
+                "total_bonus": 0
+            }
+            participant.vars["final_earnings_data"] = earnings_data
+            return earnings_data
+    
+        # Filter out default proposal submission from random selection
+        valid_earnings = [
+            entry for entry in all_earnings_list
+            if entry.get("proposal") != [-10, -10, -10]
+        ]
+
+        # NON DROP-OUT PLAYER -----------------------------------
+
+        # Dropout Case 1: No Rounds Played 
         if len(all_earnings_list) == 0:
-            return {"selected_periods": [], "final_payment": 0}  # No earnings recorded
-        
-        # If only one round is available, pick that. Otherwise, select two unique rounds.
-        if len(all_earnings_list) == 1:
+            earnings_data = {
+                "selected_periods": [],
+                "final_payment": 2,
+                "survey_fee": 0,
+                "base_fee": 2,
+                "total_bonus": 0   
+            }
+            participant.vars["final_earnings_data"] = earnings_data
+            return earnings_data
+
+        # Dropout Case 2: Played 1 Round
+        elif len(all_earnings_list) == 1:
             selected_entries = [all_earnings_list[0]]
+            survey_fee = 0
+
+        # Regular Case and Dropout Case 3: 2 or More Rounds Played 
         else:
-            # Select two unique random periods from all_earnings_list, or fewer if there aren't enough roundes
+            # Select two unique random periods from all_earnings_list
             selected_entries = random.sample(all_earnings_list, min(2, len(all_earnings_list)))
+            # Only give survey fee if all rounds have been completed
+            if(len(all_earnings_list)>=5):
+                survey_fee = 1 
+            else:
+                survey_fee = 0
 
         # Extract period numbers and earnings
         selected_periods = [{"period": entry["round"], "tokens": entry["earnings"]} for entry in selected_entries]
 
-        # Compute total final payment (includes $2 fixed participation fee) | 10 tokens = 1 USD
-        final_payment = (sum(entry["earnings"] for entry in selected_entries)/4) + 2 + 1
+        # Fixed fee (always added if player didn't dropout) 
+        base_fee = 2 
 
         # Compute individual USD equivalent entry of each entry using (4 tokens = 1 USD Conversion)
         total_bonus = (sum(entry["earnings"] for entry in selected_entries)/4)
 
+        # Compute total final payment (includes $2 fixed participation fee) | 10 tokens = 1 USD
+        final_payment = base_fee + total_bonus + survey_fee
+
+        # Attach USD equivalent for each selected period
         for entry in selected_periods:
             entry["usd_equivalent"] = round(entry["tokens"] / 4, 2)
 
@@ -441,7 +498,9 @@ class Player(BasePlayer):
         earnings_data = {
             "selected_periods": selected_periods,
             "final_payment": final_payment,
-            "total_bonus": total_bonus
+            "total_bonus": total_bonus,
+            "survey_fee": survey_fee,
+            "base_fee": base_fee
         }
 
         # Store once for consistency across reloads
@@ -451,15 +510,6 @@ class Player(BasePlayer):
         print(f"\n[DEBUG] Selected payment rounds: {selected_periods}")
         print(f"[DEBUG] Total final payment: {final_payment}")
 
-        # Log or store externally
-        # store_final_earnings(self, earnings_data)
-
-        # return {"selected_periods": selected_periods, "final_payment": final_payment, ""}
-        # return {"selected_periods": selected_periods, 
-        #         "final_payment": final_payment,
-        #         # "period_earnings": period_earnings,
-        #         "total_bonus": total_bonus
-        # }
         return earnings_data
 
     #####################################################################################

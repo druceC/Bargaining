@@ -1,7 +1,7 @@
-{% extends "global/Page.html" %}
+{% extends "otree/WaitPage.html" %}
 
 {% block title %}
-    Selecting Proposal 🎲
+    Selecting Proposal 
 {% endblock %}
 
 {% block content %}
@@ -115,25 +115,53 @@
     <div class="progress-container">
         <div class="progress-bar"></div>
     </div>
+
+    <p class="loading-text" id="countdown-text">Continuing in 15 seconds...</p>
+
 </div>
 
 <script>
-    // Improved Auto-Refresh Logic to Prevent Infinite Refreshes
-    function checkPageStatus() {
-        fetch(window.location.href, { method: 'HEAD', cache: 'no-store' })
-            .then(response => {
-                if (response.ok) {
-                    setTimeout(checkPageStatus, 3000); // Continue checking
-                }
-            })
-            .catch(error => console.error("Connection lost, retrying..."));
-    }
-    checkPageStatus();
+    // Create a new WebSocket connection
+    const socket = new WebSocket(window.liveSocketUrl);
 
-    // Refresh every 5 seconds
-    setInterval(function() {
-            location.reload();
-    }, 5000);
+    // When the socket connection is established..
+    socket.onopen = () => {
+        // Ping the server every 3 seconds
+        setInterval(() => {
+            socket.send(JSON.stringify({}));
+        }, 3000);
+    };
+    // When a message is received from the server...
+    socket.onmessage = (event) => {
+        // Parse the incoming data
+        const response = JSON.parse(event.data);
+        // Print the dropout status to the browser console for debugging
+        console.log("Dropout status received from server:", response.dropout);
+        // If the server indicates that a dropout has occurred...
+        if (response.dropout) {
+            // Immediately redirect the user to the DropoutNotice page
+            window.location.href = '/page/fund_vanishes/DropoutNoticeOtherPlayers/';
+        }
+    };
+
+    // Countdown timer
+    document.addEventListener("DOMContentLoaded", () => {
+        const countdownText = document.getElementById("countdown-text");
+
+        if (countdownText) {
+            let countdown = 15;
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                if (countdown >= 0) {
+                    countdownText.textContent = `Continuing in ${countdown} second${countdown !== 1 ? 's' : ''}...`;
+                }
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+        }
+    });
+
 </script>
 
 {% endblock %}

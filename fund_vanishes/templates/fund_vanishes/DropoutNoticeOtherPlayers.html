@@ -1,8 +1,8 @@
-{% extends "global/Page.html" %}
+{% extends "otree/Page.html" %}
 
-{% block styles %}
+{% block content %}
 <style>
-    .disconnected-container {
+    .dropout-container {
         max-width: 700px;
         margin: auto;
         text-align: center;
@@ -12,14 +12,14 @@
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.08);
     }
 
-    .disconnected-title {
+    .dropout-title {
         font-size: 28px;
         font-weight: 600;
         color: #4B4B4B;
         margin-bottom: 20px;
     }
 
-    .disconnected-warning {
+    .dropout-warning {
         background-color: #fff3cd;
         padding: 15px;
         border-radius: 8px;
@@ -47,6 +47,12 @@
         color: #555;
     }
 
+    .thank-you-text {
+        margin-top: 30px;
+        font-size: 15px;
+        color: #999;
+    }
+
     .next-button {
         margin-top: 30px;
         background-color: #5A189A;
@@ -59,30 +65,26 @@
         cursor: pointer;
     }
 
-    .thank-you-text {
-        margin-top: 30px;
-        font-size: 15px;
-        color: #999;
-    }
     .otree-timer { 
         display: none !important;
     }
+
 </style>
-{% endblock %}
 
-{% block content %}
-<div class="disconnected-container">
+<div class="dropout-container">
 
-    <h1 class="disconnected-title">Disconnected ⚠️</h1>
+    <h1 class="dropout-title">One of the Players Has Been Disconnected ⚠️</h1>
 
-    <div class="disconnected-warning">
-        You have dropped out of the game.
+    <div class="dropout-warning">
+        A player has dropped out of the game. The game has to be ended for the rest of the participants. Apologies for the inconvenience.
     </div>
 
     <div class="payment-box">
         <h2 class="payment-title">Payment Information</h2>
         <p class="payment-message">{{ payment_message }}</p>
     </div>
+
+    <p class="thank-you-text">Thank you for your participation and understanding.</p>
 
     <form method="post">
         <button type="submit" class="next-button">Next</button>

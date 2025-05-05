@@ -31,9 +31,25 @@ SURVEY_PAGES = 11
 
 # INTRO QUESTIONS
 
+# Dropout detection for normal pages (all game pages inherit from this)
 class BasePage(Page):
     def is_displayed(self):
-        # Always
+        # Don't show page if dropout is detected
+        return not self.group.drop_out_detected
+    
+    # def app_after_this_page(self, upcoming_apps):
+    #     if self.group.drop_out_detected:
+    #         return 'fund_vanishes/DropoutNotice'
+
+# Dropout detection for WaitPages
+class BaseWaitPage(WaitPage):
+    def is_displayed(self):
+        # Don't show page if dropout is detected
+        return not self.group.drop_out_detected
+    
+    # def app_after_this_page(self, upcoming_apps):
+    #     if self.group.drop_out_detected:
+    #         return 'fund_vanishes/DropoutNotice'
 
 class WelcomePage(Page):
     def is_displayed(self):
@@ -230,7 +246,7 @@ class Income(Page):
 # GAME PAGES
 
 # Synchronization page that ensures all players are randomly regrouped each period
-class SyncTop(WaitPage):
+class SyncTop(BaseWaitPage):
 
     # Ensures that all groups wait before proceeding
     wait_for_all_groups = True  
@@ -280,7 +296,7 @@ class SyncTop(WaitPage):
             player.dropout = True           # Mark player as dropped out
 
 
-class CalculatePage(Page):
+class CalculatePage(BasePage):
     # Set autosubmit count
     timeout_seconds = 5
 
@@ -343,7 +359,8 @@ class CalculatePage(Page):
     #         return C.TIMELIMIT * 3
 
 # Page shown while waiting for other participants to join and complete mini assessment
-class WaitingPage(WaitPage):
+class WaitingPage(BaseWaitPage):
+    # template_name = 'fund_vanishes/WaitingPage.html'
     body_text = "Kindly wait to be randomly matched with other participants."
 
     # def after_all_players_arrive(self):
@@ -357,13 +374,13 @@ class WaitingPage(WaitPage):
     #             p.player_role = "Voter"  # The remaining players are voters
 
 # Submit Proposal Page: All players propose an allocation, then store
-class ProposerPage(Page):
+class ProposerPage(BasePage):
     # Store data collected in this page at the group level
     form_model = 'group'  
     # Collect allocation values from participants
     form_fields = ['s1', 's2', 's3']  
     # Set timeout count
-    timeout_seconds = 30
+    timeout_seconds = 10
 
     # Provide player ID for template rendering
     def vars_for_template(self):
@@ -389,6 +406,10 @@ class ProposerPage(Page):
                 "s2":self.group.s2,
                 "s3":self.group.s3
             }
+
+            # Dropout flag
+            self.drop_out_detected = True
+
             # Set timeout flag
             self.participant.vars["timed_out"] = True  
 
@@ -401,7 +422,7 @@ class ProposerPage(Page):
             # Debugging print
             proposals = json.loads(self.group.all_proposals_str)
             print(f"\n[DEBUG] Current stored proposals after Player {proposer_id} submission: {proposals}")
-        
+
         # Submit user's proposal
         else:
             # Set allocation dict
@@ -434,47 +455,117 @@ class ProposerPage(Page):
         if sum([values['s1'], values['s2'], values['s3']]) != 30:
             return "The total allocation must sum to exactly 30."
 
+# Timeout matching with AreYouThere
+class SelectingPage(WaitPage):
+    # template_name = 'fund_vanishes/SelectingPage.html'
+    wait_for_all_groups = False
+    timeout_seconds = 15 
 
-class AreYouThere(Page):
-    timeout_seconds = 30
-    # template_name = "your_app_name/AreYouTherePage.html"
+    # Override to proceed if either (1) Timeout has elapsed or (2) All players have arrived
+    
+    # Override is ready: Proceed from wait page when either (1) all players are ready or (2) dropout detected
+    def is_ready(self):
+        print(f"[SelectingPage] Dropout detected? {self.group.drop_out_detected}")
+        return self.group.all_players_ready() or self.group.drop_out_detected
 
-    def is_displayed(self):
-        return self.participant.vars.get("timed_out", False)
+    after_all_players_arrive = 'check_dropout_or_select'
+
+    @staticmethod
+    def check_dropout_or_select(group: Group):
+        # Don't select random proposal if dropout is detected
+        if group.drop_out_detected:
+            # If a dropout is detected, flag all players to be redirected
+            for p in group.get_players():
+                p.participant.vars['go_to_dropout_notice'] = True
+            return  # exit early — no selection
+        else:
+            # Load all submitted proposals from JSON string
+            proposals = json.loads(group.all_proposals_str)
+            # IF exactly 3 proposals were submitted, randomly select one
+            if len(proposals) == 3:
+                group.select_random_proposal()
 
     def before_next_page(self):
         if self.timeout_happened:
-            # The player did NOT click "Yes, I'm here!"
-            self.participant.vars['timed_out'] = True
-            # Also set the GROUP-LEVEL dropout flag
-            self.group.drop_out_detected = True
+            print(f"[WaitOrTimeoutPage] Timeout for participant {self.participant.code}")
         else:
-            # Reset the flag for future rounds or pages
-            self.participant.vars["timed_out"] = False
+            print(f"[WaitOrTimeoutPage] Proceeding after all arrived: {self.participant.code}")
+
+    def vars_for_template(self):
+        return{
+            "timeout_seconds": self.timeout_seconds
+        }
 
 
 # Select random proposal once all players have submitted
-class SelectingPage(WaitPage):
-    # template_name = 'fund_vanishes/templates/fund_vanishes/SelectingPage.html'  # Custom HTML for styling
-    # template_name = 'SelectingPage.html'  
-    
-    # Set the wait page to automatically advance when all players are ready
-    wait_for_all_groups = True  
-    
-    def before_next_page(self):
-        proposals = json.loads(self.group.all_proposals_str)
+# class SelectingPage(WaitPage):
+#     # Set the wait page to automatically advance when all players are ready
+#     # wait_for_all_groups = True
 
-        # Ensure a proposal has been selected
-        if len(proposals) == 3:
-            self.group.select_random_proposal()
+#     wait_for_all_groups = False
+#     after_all_players_arrive = 'check_dropout_or_select'
+#     # Timeout for waitpage (timeout would indicate dropout)
+
+
+#     # Check if a dropout happened or select a random proposal
+#     @staticmethod 
+#     def check_dropout_or_select(group: Group):
+#         if group.drop_out_detected:
+#             # If a dropout is detected, flag all players to be redirected
+#             for p in group.get_players():
+#                 p.participant.vars['go_to_dropout_notice'] = True
+#             return  # exit early — no selection
+#         else:
+#             # Load all submitted proposals from JSON string
+#             proposals = json.loads(group.all_proposals_str)
+#             # IF exactly 3 proposals were submitted, randomly select one
+#             if len(proposals) == 3:
+#                 group.select_random_proposal()
+    
+#     def is_displayed(self):
+#         # If we're already sending them to DropoutNotice, don't show this WaitPage
+#         return not self.participant.vars.get('go_to_dropout_notice', False)
+    
+#     # Decide which page to go to after this page
+#     def after_this_page(self):
+#         # If flagged for dropout, redirect to DropoutNotice
+#         if self.participant.vars.get('go_to_dropout_notice', False):
+#             return DropoutNoticeOtherPlayers
+    
+#     # Override is ready: Proceed from wait page when either (1) all players are ready or (2) dropout detected
+#     def is_ready(self):
+#         print(f"[SelectingPage] Dropout detected? {self.group.drop_out_detected}")
+#         return self.group.all_players_ready() or self.group.drop_out_detected
+    
+#     def live_method(self, data):
+#         # Respond to client pings with current dropout status
+#         return {
+#             "dropout": self.group.drop_out_detected
+#         }
+
+    # def before_next_page(self):
+    #     # DETECT DROPOUT: If a dropout was detected, set go_to_dropout_notice for everyone
+    #     if self.group.drop_out_detected:
+    #         for p in self.group.get_players():
+    #             p.participant.vars['go_to_dropout_notice'] = True
+    #         return  # Exit early, no need to select proposal
+
+    #     # REGULAR CASE: Normal proposal selection
+    #     proposals = json.loads(self.group.all_proposals_str)
+
+    #     # Ensure a proposal has been selected
+    #     if len(proposals) == 3:
+    #         self.group.select_random_proposal()
         
-        # Retrieve and store chosen proposal
-        selected_proposal = json.loads(self.group.selected_proposal)
-        store_decision(self.player, "SelectingPage", "Selected Proposal", selected_proposal)
+    #     # Retrieve and store chosen proposal
+    #     selected_proposal = json.loads(self.group.selected_proposal)
+    #     store_decision(self.player, "SelectingPage", "Selected Proposal", selected_proposal)
+
+
 
 
 # Display selected proposal
-class SelectedProposalPage(Page):
+class SelectedProposalPage(BasePage):
     # Set autosubmit count
     timeout_seconds = 10
 
@@ -525,7 +616,7 @@ class SelectedProposalPage(Page):
 
 
 # Voting Page: Players vote on the selected proposal
-class VoterPage(Page):
+class VoterPage(BasePage):
     form_model = 'player'  
     form_fields = ['vote'] 
     timeout_seconds = 15
@@ -550,6 +641,8 @@ class VoterPage(Page):
             # Set default vote
             vote_decision = {"vote": False}
             self.player.vote = False         # Save it to the database too
+            # Set dropout flag
+            self.drop_out_detected = True
             # Set timeout flag
             self.participant.vars["timed_out"] = True
             # Store default vote in csv
@@ -560,7 +653,7 @@ class VoterPage(Page):
             store_decision(self.player, "VoterPage", "Voted", vote_decision)
 
 # Select random proposal once all players have submitted
-class VoterWaitPage(WaitPage):
+class VoterWaitPage(BaseWaitPage):
     def before_next_page(self):
         votes = json.loads(self.group.all_votes_str)
         # Ensure all 3 players have voted
@@ -569,12 +662,12 @@ class VoterWaitPage(WaitPage):
             print("Confirmed \n")
 
 
-class ResultsPage(Page):
+class ResultsPage(BasePage):
 
     timeout_seconds = 5
 
     def vars_for_template(self):
-       
+
         # Proposal Details ------------------------------------------------------------------
         
         proposer_id = self.group.selected_proposer_id
@@ -652,7 +745,7 @@ class ResultsPage(Page):
         }
 
 # Ensures that all players complete their periods before stopping the game
-class SyncBottom(WaitPage):
+class SyncBottom(BaseWaitPage):
 
     wait_for_all_groups = True
     body_text = 'Please wait for the other groups to finish voting...'
@@ -755,17 +848,85 @@ class SurveyPage(Page):
 
 # DROPOUT NOTICE PAGES
 
+class AreYouThere(BasePage):
+    timeout_seconds = 15
+    # timeout_seconds = 10
+    # template_name = "your_app_name/AreYouTherePage.html"
+
+    def is_displayed(self):
+        return (
+            self.participant.vars.get("timed_out", False)
+            and not self.group.drop_out_finalized
+        )
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            # The player did NOT click "Yes, I'm here!"
+            self.participant.vars['timed_out'] = True
+            # Also set the GROUP-LEVEL dropout flag
+            self.group.drop_out_detected = True
+            self.participant.vars["dropout"] = True
+            self.group.drop_out_finalized = True
+        else:
+            # Reset the flag for future rounds or pages
+            self.participant.vars["timed_out"] = False
+
 # Welcome Page to Survey
 class DropoutNotice(Page):
     timeout_seconds = 15
+    
     # Show this page to all remaining players if a dropout is detected in the group
     def is_displayed(self):
-        return self.group.drop_out_detected
+        # Show ONLY if dropout detected AND not yet finalized
+        # return self.group.drop_out_detected and not self.group.drop_out_finalized
+        return self.participant.vars.get("dropout", False)
+
+    # def before_next_page(self):
+    #     # Mark that dropout has been handled
+    #     self.group.drop_out_finalized = True
 
     def vars_for_template(self):
         rounds_played = self.subsession.round_number  # Current round number
 
-        if rounds_played < 2:
+        # if rounds_played < 2:
+        #     payment_message = (
+        #         "Since fewer than 2 rounds were played, your final payment will be based on 1 randomly selected round."
+        #     )
+        # else:
+        #     payment_message = (
+        #         "Since 2 or more rounds were played, your final payment will be based on 2 randomly selected rounds."
+        #     )
+        payment_message = (
+            "Since you have dropped out of the game, no payment shall be issued."
+        )
+
+        return {
+            "rounds_played": rounds_played,
+            "payment_message": payment_message,
+            "timeout_seconds": self.timeout_seconds
+        }
+
+class DropoutNoticeOtherPlayers(Page):
+    timeout_seconds = 15
+    
+    # Show this page to all remaining players if a dropout is detected in the group
+    def is_displayed(self):
+        # Show ONLY if dropout detected AND not yet finalized
+        return self.group.drop_out_detected and not self.participant.vars.get("dropout", False)
+
+    def before_next_page(self):
+        # Mark that dropout has been handled
+        self.group.drop_out_finalized = True
+
+    def vars_for_template(self):
+        rounds_played = self.subsession.round_number  # Current round number
+
+        if rounds_played == 0:
+            payment_message = (
+                "No rounds were completed for this session. You will receive the fixed participation fee."
+            )
+
+        elif rounds_played < 2:
             payment_message = (
                 "Since fewer than 2 rounds were played, your final payment will be based on 1 randomly selected round."
             )
@@ -780,31 +941,39 @@ class DropoutNotice(Page):
             "timeout_seconds": self.timeout_seconds
         }
 
-
-    
-
-
 # ---------------------------------------------------------------------------------------------------
 
 # EARNINGS PAGE
 
 class PaymentInfo(Page):
 
+    # Adjust payment
+
     def is_displayed(self):
-        """Ensure PaymentInfo is only displayed when the player has finished all 5 periods."""
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
+        # Payment info is only displayed when (1) All periods have been played or (2) Dropout is detected
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods or self.group.drop_out_detected
         # True
 
     def vars_for_template(self):
         final_earnings_data = self.player.final_earnings()
-        # Extract token for each round
-        # Calculate payment for each round
+        
+        # Make final adjustments to final payment if necessary (ie. dropouts)
+        if self.participant.vars.get("dropout", False):
+            # Update base fee to 0 for dropoutee
+            final_earnings_data["base_fee"] = 0
+            # Update final payment to 0 for dropoutee
+            final_earnings_data["final_payment"] = 0
+
+    
 
         return {
+            "is_dropout": self.participant.vars.get("dropout", False),
             "selected_periods": final_earnings_data["selected_periods"],
             "final_payment": final_earnings_data["final_payment"],
             # "period_earnings": final_earnings_data["period_earnings"],
-            "total_bonus":final_earnings_data["total_bonus"]
+            "total_bonus": final_earnings_data["total_bonus"],
+            "survey_fee": final_earnings_data["survey_fee"],
+            "base_fee": final_earnings_data["base_fee"]
         }
 
     def before_next_page(self):
@@ -812,7 +981,9 @@ class PaymentInfo(Page):
         store_earnings(player, {
             "selected_periods": final_earnings_data["selected_periods"],
             "final_payment": final_earnings_data["final_payment"],
-            "total_bonus": final_earnings_data["total_bonus"]
+            "total_bonus": final_earnings_data["total_bonus"],
+            "survey_fee": final_earnings_data["survey_fee"],
+            "base_fee": final_earnings_data["base_fee"]
         })
 
     # Completion Link for Prolific
@@ -1186,38 +1357,42 @@ page_sequence = [
 
     WaitingPage,          # Wait Page 1    
     ProposerPage,         
-    AreYouThere,          # Declare Dropout - If no response
-    DropoutNotice,
+    AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds
+    # DropoutNotice,        
 
-    SelectingPage,        # Wait Page 2
+    SelectingPage,        # Wait Page 2                         # Timeout = 15 seconds
+    # DropoutNoticeOtherPlayers,  
     SelectedProposalPage, 
 
     VoterPage,            # Players vote accept / reject
     AreYouThere,          # Declare Dropout - If no response
-    DropoutNotice,
+    # DropoutNotice,
 
     VoterWaitPage,        # Wait Page 3 (Detect Dropout)
+    # DropoutNoticeOtherPlayers, 
     ResultsPage,          # Show if proposal is accepted / rejected
     SyncBottom,           # Redirect back to SyncTop until all periods compelted
 
     # Baseline Treatment
-    SurveyPage,
-    Baseline,       
+    # SurveyPage,
+    # Baseline,       
 
     # Survey
-    Part1a,             # Voting and Proposing Considerations
-    Part1b,             # Retaliation, mwc, mwc_others
-    Part1c,             # atq 1, 2, 3 (ie. math questions)
-    Part1d,             # Age, Risk
-    Part1e,             # Occupation, Volunteer, (Volunteer Hours)
-    Part2a,             # Econ Courses, Party Like, Party, Party Prox
-    Part2b,             # Plop_Unempl, Plop_Comp, Plop_Incdist, Plop_Priv, Plop_Luckeffort
-    Part3,              # Religion, (Specify Religion)
-    Part4,              # Parents' Place of Birth/Citizenship
-    Part5,              # mwc_bonus, mwc_bonus_others, enjoy
-    Part6,              # bonus question
+    # Part1a,             # Voting and Proposing Considerations
+    # Part1b,             # Retaliation, mwc, mwc_others
+    # Part1c,             # atq 1, 2, 3 (ie. math questions)
+    # Part1d,             # Age, Risk
+    # Part1e,             # Occupation, Volunteer, (Volunteer Hours)
+    # Part2a,             # Econ Courses, Party Like, Party, Party Prox
+    # Part2b,             # Plop_Unempl, Plop_Comp, Plop_Incdist, Plop_Priv, Plop_Luckeffort
+    # Part3,              # Religion, (Specify Religion)
+    # Part4,              # Parents' Place of Birth/Citizenship
+    # Part5,              # mwc_bonus, mwc_bonus_others, enjoy
+    # Part6,              # bonus question
     
     # Display Total Earnings 
+    DropoutNotice,                      # Display to dropout player
+    DropoutNoticeOtherPlayers,          # Display to all other players
     PaymentInfo,      
 ]
 

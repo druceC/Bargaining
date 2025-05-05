@@ -155,62 +155,24 @@
 <div class="container">
     <p class="thank-you">Thank you for joining!</p>
     <hr>
-    <!-- Payment Breakdown Section -->
-    <!-- <div class="breakdown-section"> -->
-        <!-- <h3 class="payment-summary">Payment Breakdown</h3>
-        <table class="breakdown-table">
-            <tr>
-                <th>Participation Fee</th>
-                <td>$2</td>
-            </tr>
-            <tr>
-                <th>Survey Fee</th>
-                <td>$1</td>
-            </tr>
-            <tr>
-                <th>Bonus Earnings</th>
-                <td>${{ total_bonus }}</td>
-            </tr>
-        </table> -->
-        <!-- {% if selected_periods %}
-        <p class="bonus-section">Bonus Earnings</p>
+    <!-- Bonus Earnings Table -->
+    <!-- No need to show to the person who drops out -->
+    {% if selected_periods and not is_dropout %}        
+        <p class="bonus-section"><br>Bonus Earnings</p>
         <table class="bonus-table">
             <tr>
-                <th>Periods Selected</th>
+                <th>Rounds Selected</th>
                 <th>Your Share in Tokens</th>
-                <th>Token to USD Conversion</th>
+                <th>Token to USD Conversion ($)</th>
             </tr>
             {% for entry in selected_periods %}
             <tr>
-                <td>Period {{ entry.period }}</td>
+                <td>Round {{ entry.period }}</td>
                 <td>{{ entry.tokens }}</td>
-                <td>${{ entry.usd_equivalent }}</td>
+                <td>{{ entry.usd_equivalent }}</td>
             </tr>
             {% endfor %}
         </table>
-        {% endif %}
-    </div> -->
-
-    <!-- Bonus Earnings Table -->
-    {% if selected_periods %}
-    <p class="bonus-section"><br>Bonus Earnings</p>
-    <!-- <p class="final-message">
-        (4 Tokens = $1)
-    </p> -->
-    <table class="bonus-table">
-        <tr>
-            <th>Rounds Selected</th>
-            <th>Your Share in Tokens</th>
-            <th>Token to USD Conversion ($)</th>
-        </tr>
-        {% for entry in selected_periods %}
-        <tr>
-            <td>Round {{ entry.period }}</td>
-            <td>{{ entry.tokens }}</td>
-            <td>{{ entry.usd_equivalent }}</td>
-        </tr>
-        {% endfor %}
-    </table>
     {% endif %}
 
     <!-- Total Final Payment -->
@@ -219,7 +181,7 @@
         ${{ final_payment }}
     </div>
     <p class="final-message">
-        Participation Fee ($2) + Survey Fee ($1) <br> + Bonus Earnings (${{ total_bonus }})<br><br>
+        Participation Fee (${{base_fee}}) + Survey Fee (${{survey_fee}}) <br> + Bonus Earnings (${{ total_bonus }})<br><br>
     </p>
 
     <hr>

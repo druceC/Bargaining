@@ -731,3 +731,714 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Page,Action,Value
 2025-04-27T07:16:18.100967,6a5bwlo1,2,1,baseline,3,VoterPage,Timeout - Auto Vote,False
 2025-04-27T07:16:18.111392,6a5bwlo1,1,1,priming,3,VoterPage,Timeout - Auto Vote,False
 2025-04-27T07:16:18.116087,6a5bwlo1,3,1,baseline,3,VoterPage,Timeout - Auto Vote,False
+2025-04-27T08:32:33.079864,d2jhmptc,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-27T08:32:33.081541,d2jhmptc,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-27T08:32:33.081560,d2jhmptc,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-27T08:32:35.195833,d2jhmptc,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-27T08:32:35.196709,d2jhmptc,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-27T08:32:35.196736,d2jhmptc,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-27T08:32:43.754608,d2jhmptc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:32:43.755846,d2jhmptc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:32:43.755873,d2jhmptc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:33:54.051948,d2jhmptc,1,1,priming,1,VoterPage,Timeout - Auto Vote,False
+2025-04-27T08:33:54.080467,d2jhmptc,2,1,priming,1,VoterPage,Voted,False
+2025-04-27T08:33:54.153855,d2jhmptc,3,1,priming,1,VoterPage,Timeout - Auto Vote,False
+2025-04-27T08:35:39.976152,d2jhmptc,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:35:39.978937,d2jhmptc,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:35:39.978954,d2jhmptc,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:35:39.988834,d2jhmptc,3,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:35:39.989410,d2jhmptc,3,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:35:39.989423,d2jhmptc,3,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:35:39.995143,d2jhmptc,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:35:39.995763,d2jhmptc,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T08:35:39.995778,d2jhmptc,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.868606,d2jhmptc,1,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.870364,d2jhmptc,1,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.870382,d2jhmptc,1,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.880804,d2jhmptc,3,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.881425,d2jhmptc,3,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.881437,d2jhmptc,3,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.887098,d2jhmptc,2,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.887552,d2jhmptc,2,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:03:36.887564,d2jhmptc,2,1,priming,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.634160,d2jhmptc,3,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.635627,d2jhmptc,3,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.635642,d2jhmptc,3,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.643063,d2jhmptc,2,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.643535,d2jhmptc,2,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.643546,d2jhmptc,2,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.650373,d2jhmptc,1,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.650770,d2jhmptc,1,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:05:42.650780,d2jhmptc,1,1,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:31:49.646080,e1g0muhl,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T09:31:49.648601,e1g0muhl,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T09:31:49.648645,e1g0muhl,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T09:31:50.343344,e1g0muhl,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T09:31:50.344811,e1g0muhl,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T09:31:50.344867,e1g0muhl,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T09:32:12.970168,e1g0muhl,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:32:12.971921,e1g0muhl,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T09:32:12.971951,e1g0muhl,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T10:06:23.836015,u7e86fb8,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T10:06:23.837776,u7e86fb8,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T10:06:23.837800,u7e86fb8,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-27T10:06:24.582855,u7e86fb8,3,1,baseline,1,ProposerPage,Submitted Proposal,15
+2025-04-27T10:06:24.583683,u7e86fb8,3,1,baseline,1,ProposerPage,Submitted Proposal,15
+2025-04-27T10:06:24.583720,u7e86fb8,3,1,baseline,1,ProposerPage,Submitted Proposal,0
+2025-04-27T10:06:45.303346,u7e86fb8,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T10:06:45.304104,u7e86fb8,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-27T10:06:45.304126,u7e86fb8,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T08:07:49.756820,liaxm0vh,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T08:07:49.758610,liaxm0vh,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T08:07:49.758633,liaxm0vh,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T08:07:52.726100,liaxm0vh,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T08:07:52.727652,liaxm0vh,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T08:07:52.727676,liaxm0vh,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T08:08:15.776220,liaxm0vh,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T08:08:15.777639,liaxm0vh,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T08:08:15.777670,liaxm0vh,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T09:14:07.708849,9wizis48,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:07.710952,9wizis48,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:07.710974,9wizis48,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:08.175246,9wizis48,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:08.176637,9wizis48,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:08.176672,9wizis48,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:08.910093,9wizis48,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:08.910843,9wizis48,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:08.910864,9wizis48,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:13.011663,9wizis48,1,1,priming,1,VoterPage,Voted,True
+2025-04-28T09:14:13.680075,9wizis48,2,1,baseline,1,VoterPage,Voted,False
+2025-04-28T09:14:14.330411,9wizis48,3,1,baseline,1,VoterPage,Voted,True
+2025-04-28T09:14:25.390855,9wizis48,1,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:25.391996,9wizis48,1,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:25.392023,9wizis48,1,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:26.076044,9wizis48,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:26.077152,9wizis48,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:26.077184,9wizis48,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:26.812500,9wizis48,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:26.813997,9wizis48,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:26.814035,9wizis48,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:30.147779,9wizis48,1,1,priming,2,VoterPage,Voted,False
+2025-04-28T09:14:31.062986,9wizis48,2,1,baseline,2,VoterPage,Voted,True
+2025-04-28T09:14:32.030709,9wizis48,3,1,baseline,2,VoterPage,Voted,False
+2025-04-28T09:14:43.409285,9wizis48,1,1,priming,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:43.409981,9wizis48,1,1,priming,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:43.410001,9wizis48,1,1,priming,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:44.151745,9wizis48,2,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:44.153176,9wizis48,2,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:44.153214,9wizis48,2,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:44.945872,9wizis48,3,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:44.946725,9wizis48,3,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:44.946751,9wizis48,3,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:46.885167,9wizis48,1,1,priming,3,VoterPage,Voted,True
+2025-04-28T09:14:48.069271,9wizis48,2,1,baseline,3,VoterPage,Voted,True
+2025-04-28T09:14:49.532335,9wizis48,3,1,baseline,3,VoterPage,Voted,False
+2025-04-28T09:14:58.307563,9wizis48,1,1,priming,4,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:58.308444,9wizis48,1,1,priming,4,ProposerPage,Submitted Proposal,10
+2025-04-28T09:14:58.308492,9wizis48,1,1,priming,4,ProposerPage,Submitted Proposal,10
+2025-04-28T09:15:01.142446,9wizis48,2,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-04-28T09:15:01.143599,9wizis48,2,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-04-28T09:15:01.143637,9wizis48,2,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-04-28T09:15:04.813522,9wizis48,3,1,baseline,4,ProposerPage,Submitted Proposal,15
+2025-04-28T09:15:04.814661,9wizis48,3,1,baseline,4,ProposerPage,Submitted Proposal,0
+2025-04-28T09:15:04.814684,9wizis48,3,1,baseline,4,ProposerPage,Submitted Proposal,15
+2025-04-28T09:15:08.279711,9wizis48,1,1,priming,4,VoterPage,Voted,True
+2025-04-28T09:15:08.878827,9wizis48,2,1,baseline,4,VoterPage,Voted,True
+2025-04-28T09:15:09.550441,9wizis48,3,1,baseline,4,VoterPage,Voted,True
+2025-04-28T09:15:25.505075,9wizis48,3,1,baseline,5,ProposerPage,Submitted Proposal,0
+2025-04-28T09:15:25.505975,9wizis48,3,1,baseline,5,ProposerPage,Submitted Proposal,0
+2025-04-28T09:15:25.506001,9wizis48,3,1,baseline,5,ProposerPage,Submitted Proposal,30
+2025-04-28T09:15:26.110762,9wizis48,2,1,baseline,5,ProposerPage,Submitted Proposal,0
+2025-04-28T09:15:26.112128,9wizis48,2,1,baseline,5,ProposerPage,Submitted Proposal,30
+2025-04-28T09:15:26.112155,9wizis48,2,1,baseline,5,ProposerPage,Submitted Proposal,0
+2025-04-28T09:15:26.679450,9wizis48,1,1,priming,5,ProposerPage,Submitted Proposal,30
+2025-04-28T09:15:26.681409,9wizis48,1,1,priming,5,ProposerPage,Submitted Proposal,0
+2025-04-28T09:15:26.681447,9wizis48,1,1,priming,5,ProposerPage,Submitted Proposal,0
+2025-04-28T09:15:28.070495,9wizis48,1,1,priming,5,VoterPage,Voted,True
+2025-04-28T09:15:29.114846,9wizis48,2,1,baseline,5,VoterPage,Voted,True
+2025-04-28T09:15:30.194627,9wizis48,3,1,baseline,5,VoterPage,Voted,True
+2025-04-28T09:59:26.804781,1omip1f9,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:59:26.806667,1omip1f9,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:59:26.806691,1omip1f9,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:59:27.793420,1omip1f9,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:59:27.794561,1omip1f9,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:59:27.794583,1omip1f9,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T09:59:48.903094,1omip1f9,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T09:59:48.905943,1omip1f9,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T09:59:48.906037,1omip1f9,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:12:55.311406,yaw2migi,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:12:55.313532,yaw2migi,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:12:55.313565,yaw2migi,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:12:57.207238,yaw2migi,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:12:57.208408,yaw2migi,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:12:57.208438,yaw2migi,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:13:21.853576,yaw2migi,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:13:21.854957,yaw2migi,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:13:21.854983,yaw2migi,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:28:26.105114,9t0ohcth,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:28:26.107136,9t0ohcth,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:28:26.107169,9t0ohcth,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:28:26.867454,9t0ohcth,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:28:26.869672,9t0ohcth,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:28:26.869702,9t0ohcth,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:28:50.822729,9t0ohcth,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:28:50.823449,9t0ohcth,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:28:50.823465,9t0ohcth,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:30:42.158086,dqqnhlsv,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:30:42.159087,dqqnhlsv,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:30:42.159118,dqqnhlsv,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:30:42.717515,dqqnhlsv,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:30:42.718776,dqqnhlsv,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:30:42.718826,dqqnhlsv,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-28T10:31:06.652212,dqqnhlsv,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:31:06.653269,dqqnhlsv,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-28T10:31:06.653291,dqqnhlsv,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:08:11.455758,zsqayauf,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:08:11.457353,zsqayauf,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:08:11.457376,zsqayauf,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:08:14.151355,zsqayauf,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:08:14.152893,zsqayauf,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:08:14.152943,zsqayauf,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:08:37.311935,zsqayauf,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:08:37.312895,zsqayauf,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:08:37.312917,zsqayauf,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:16:35.538739,kds0bt2p,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:16:35.541913,kds0bt2p,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:16:35.541936,kds0bt2p,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:16:36.027625,kds0bt2p,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:16:36.028902,kds0bt2p,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:16:36.028924,kds0bt2p,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:17:00.354436,kds0bt2p,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:17:00.355604,kds0bt2p,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:17:00.355626,kds0bt2p,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:34:47.032966,hddrdn4f,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:34:47.034638,hddrdn4f,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:34:47.034668,hddrdn4f,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:34:50.450531,hddrdn4f,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:34:50.451652,hddrdn4f,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:34:50.451681,hddrdn4f,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:35:13.621803,hddrdn4f,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:35:13.623383,hddrdn4f,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:35:13.623402,hddrdn4f,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:57:11.587686,uvbc8b0w,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:57:11.589812,uvbc8b0w,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:57:11.589851,uvbc8b0w,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:57:14.458723,uvbc8b0w,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:57:14.460097,uvbc8b0w,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:57:14.460123,uvbc8b0w,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T10:57:37.019774,uvbc8b0w,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:57:37.020762,uvbc8b0w,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T10:57:37.020786,uvbc8b0w,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T11:06:35.294028,se756gth,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T11:06:35.296079,se756gth,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T11:06:35.296110,se756gth,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-29T11:06:37.356566,se756gth,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T11:06:37.358103,se756gth,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T11:06:37.358125,se756gth,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-29T11:07:02.058587,se756gth,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T11:07:02.060005,se756gth,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-29T11:07:02.060030,se756gth,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:16:33.850192,qzewqvol,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:16:33.852543,qzewqvol,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:16:33.852573,qzewqvol,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:16:35.899818,qzewqvol,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:16:35.901235,qzewqvol,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:16:35.901272,qzewqvol,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:17:01.127614,qzewqvol,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:17:01.129161,qzewqvol,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:17:01.129189,qzewqvol,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:22:26.416636,jisxn0ro,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:22:26.418911,jisxn0ro,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:22:26.418936,jisxn0ro,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:22:26.956244,jisxn0ro,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:22:26.957792,jisxn0ro,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:22:26.957824,jisxn0ro,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:22:51.478339,jisxn0ro,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:22:51.480108,jisxn0ro,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:22:51.480148,jisxn0ro,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:29:52.573557,7wkplgwa,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:29:52.575668,7wkplgwa,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:29:52.575712,7wkplgwa,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:29:53.174972,7wkplgwa,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:29:53.176030,7wkplgwa,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:29:53.176053,7wkplgwa,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-04-30T11:30:17.749281,7wkplgwa,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:30:17.750276,7wkplgwa,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-04-30T11:30:17.750294,7wkplgwa,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T03:42:19.179375,5v3361j1,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:42:19.181395,5v3361j1,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:42:19.181424,5v3361j1,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:42:19.840203,5v3361j1,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:42:19.841751,5v3361j1,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:42:19.841776,5v3361j1,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:42:43.174702,5v3361j1,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T03:42:43.175284,5v3361j1,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T03:42:43.175299,5v3361j1,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T03:46:40.668300,pwzgr6og,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:46:40.670374,pwzgr6og,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:46:40.670408,pwzgr6og,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:46:42.508651,pwzgr6og,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:46:42.509637,pwzgr6og,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:46:42.509663,pwzgr6og,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T03:47:07.495727,pwzgr6og,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T03:47:07.496706,pwzgr6og,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T03:47:07.496721,pwzgr6og,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T04:43:52.640554,h11fssln,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:43:52.642736,h11fssln,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:43:52.642760,h11fssln,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:43:53.285089,h11fssln,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:43:53.286847,h11fssln,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:43:53.286876,h11fssln,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:44:17.543821,h11fssln,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T04:44:17.545025,h11fssln,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T04:44:17.545051,h11fssln,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T04:58:50.194194,dk71ytyy,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:58:50.196241,dk71ytyy,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:58:50.196264,dk71ytyy,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:58:50.788604,dk71ytyy,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:58:50.789956,dk71ytyy,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:58:50.789980,dk71ytyy,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T04:59:15.552001,dk71ytyy,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T04:59:15.552706,dk71ytyy,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T04:59:15.552721,dk71ytyy,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:09:05.619482,kw0yc70s,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:09:05.622215,kw0yc70s,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:09:05.622244,kw0yc70s,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:09:06.264071,kw0yc70s,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:09:06.264984,kw0yc70s,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:09:06.265007,kw0yc70s,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:09:29.069588,kw0yc70s,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:09:29.071090,kw0yc70s,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:09:29.071115,kw0yc70s,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:18:57.332891,dbg3qjv9,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:18:57.335439,dbg3qjv9,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:18:57.335463,dbg3qjv9,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:18:57.947875,dbg3qjv9,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:18:57.948856,dbg3qjv9,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:18:57.948878,dbg3qjv9,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:19:13.405243,dbg3qjv9,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:19:13.406664,dbg3qjv9,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:19:13.406686,dbg3qjv9,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:21:26.684168,myuzzbjh,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:21:26.686052,myuzzbjh,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:21:26.686074,myuzzbjh,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:21:27.198389,myuzzbjh,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:21:27.199747,myuzzbjh,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:21:27.199785,myuzzbjh,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:21:50.288702,myuzzbjh,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:21:50.290566,myuzzbjh,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:21:50.290596,myuzzbjh,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:27:54.696296,z4juz7eq,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:27:54.697181,z4juz7eq,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:27:54.697214,z4juz7eq,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:27:56.415706,z4juz7eq,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:27:56.416482,z4juz7eq,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:27:56.416517,z4juz7eq,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:27:58.085787,z4juz7eq,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:27:58.086588,z4juz7eq,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:27:58.086611,z4juz7eq,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:28:02.843141,z4juz7eq,1,1,priming,1,VoterPage,Voted,True
+2025-05-03T05:28:03.399239,z4juz7eq,2,1,baseline,1,VoterPage,Voted,False
+2025-05-03T05:28:04.105788,z4juz7eq,3,1,baseline,1,VoterPage,Voted,True
+2025-05-03T05:28:19.352763,z4juz7eq,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-03T05:28:19.353483,z4juz7eq,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-03T05:28:19.353504,z4juz7eq,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-03T05:28:20.051308,z4juz7eq,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-03T05:28:20.052059,z4juz7eq,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-03T05:28:20.052080,z4juz7eq,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-03T05:28:44.130010,z4juz7eq,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:28:44.130689,z4juz7eq,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:28:44.130701,z4juz7eq,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:35:01.584782,5xg26jsl,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:35:01.585795,5xg26jsl,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:35:01.585817,5xg26jsl,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:35:10.218579,5xg26jsl,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:35:10.220395,5xg26jsl,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:35:10.220433,5xg26jsl,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:35:27.655180,5xg26jsl,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:35:27.658252,5xg26jsl,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:35:27.658287,5xg26jsl,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:38:34.638070,a4tznd7w,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:38:34.640031,a4tznd7w,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:38:34.640063,a4tznd7w,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:38:35.363025,a4tznd7w,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:38:35.364540,a4tznd7w,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:38:35.364579,a4tznd7w,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:38:59.716876,a4tznd7w,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:38:59.718886,a4tznd7w,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:38:59.718906,a4tznd7w,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:41:00.410311,ekleo9i0,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:41:00.412609,ekleo9i0,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:41:00.412636,ekleo9i0,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:41:24.164940,ekleo9i0,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:41:24.165644,ekleo9i0,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:41:24.165656,ekleo9i0,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:41:24.173411,ekleo9i0,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:41:24.174500,ekleo9i0,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:41:24.174512,ekleo9i0,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:43:27.000930,lxwmnqqo,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:43:27.001837,lxwmnqqo,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:43:27.001865,lxwmnqqo,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:43:27.637079,lxwmnqqo,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:43:27.637998,lxwmnqqo,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:43:27.638026,lxwmnqqo,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:43:52.659125,lxwmnqqo,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:43:52.660232,lxwmnqqo,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:43:52.660257,lxwmnqqo,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:49:44.555598,39xbgvnx,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:49:44.557547,39xbgvnx,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:49:44.557568,39xbgvnx,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:49:44.906111,39xbgvnx,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:49:44.907192,39xbgvnx,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:49:44.907212,39xbgvnx,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T05:49:49.202484,39xbgvnx,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:49:49.203090,39xbgvnx,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T05:49:49.203101,39xbgvnx,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T06:34:16.987549,l3ai7mpb,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T06:34:16.989802,l3ai7mpb,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T06:34:16.989828,l3ai7mpb,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-03T06:34:23.396336,l3ai7mpb,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T06:34:23.398445,l3ai7mpb,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T06:34:23.398474,l3ai7mpb,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T06:34:23.408893,l3ai7mpb,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T06:34:23.409614,l3ai7mpb,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-03T06:34:23.409631,l3ai7mpb,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:03:02.018386,29er3ogm,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:03:02.020219,29er3ogm,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:03:02.020242,29er3ogm,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:03:02.711435,29er3ogm,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:03:02.712977,29er3ogm,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:03:02.713005,29er3ogm,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:03:07.369419,29er3ogm,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:03:07.370398,29er3ogm,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:03:07.370426,29er3ogm,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:05:54.970027,m0on40lc,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:05:54.972525,m0on40lc,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:05:54.972559,m0on40lc,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:05:56.836252,m0on40lc,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:05:56.837214,m0on40lc,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:05:56.837236,m0on40lc,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:06:02.131710,m0on40lc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:06:02.132715,m0on40lc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:06:02.132738,m0on40lc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:30.353512,39p6m5ir,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:30.356033,39p6m5ir,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:30.356058,39p6m5ir,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:30.366645,39p6m5ir,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:30.367256,39p6m5ir,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:30.367269,39p6m5ir,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:47.590113,39p6m5ir,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:47.593226,39p6m5ir,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:10:47.593258,39p6m5ir,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:11:48.850758,n5s1zca2,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:11:48.852298,n5s1zca2,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:11:48.852316,n5s1zca2,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:11:48.861837,n5s1zca2,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:11:48.862857,n5s1zca2,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:11:48.862916,n5s1zca2,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:12:37.618997,xls79vr0,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:12:37.621220,xls79vr0,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:12:37.621247,xls79vr0,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:12:37.630942,xls79vr0,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:12:37.631642,xls79vr0,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:12:37.631656,xls79vr0,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:17:18.688852,9pqtbi3y,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:17:18.690784,9pqtbi3y,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:17:18.690810,9pqtbi3y,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:17:18.703300,9pqtbi3y,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:17:18.704007,9pqtbi3y,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:17:18.704021,9pqtbi3y,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:29:12.529698,h7tz663u,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:29:12.531104,h7tz663u,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:29:12.531131,h7tz663u,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:29:12.547111,h7tz663u,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:29:12.547830,h7tz663u,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:29:12.547848,h7tz663u,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.260485,redxqzc2,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.261649,redxqzc2,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.261672,redxqzc2,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.277093,redxqzc2,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.277756,redxqzc2,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.277772,redxqzc2,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.286739,redxqzc2,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.287325,redxqzc2,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:31:27.287338,redxqzc2,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:47:08.987134,femuvrny,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:47:08.988277,femuvrny,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:47:08.988289,femuvrny,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:47:08.994465,femuvrny,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:47:08.995019,femuvrny,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:47:08.995030,femuvrny,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.246124,6btn9pcc,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.247209,6btn9pcc,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.247236,6btn9pcc,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.263873,6btn9pcc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.264629,6btn9pcc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.264643,6btn9pcc,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.286324,6btn9pcc,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.287101,6btn9pcc,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:49:48.287116,6btn9pcc,2,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:52:36.920909,84ctfja3,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:52:36.922840,84ctfja3,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:52:36.922870,84ctfja3,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T04:52:43.246356,84ctfja3,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:52:43.247577,84ctfja3,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:52:43.247603,84ctfja3,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:52:43.277763,84ctfja3,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:52:43.292201,84ctfja3,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T04:52:43.292232,84ctfja3,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:01:55.177116,jatibvp8,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:01:55.179729,jatibvp8,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:01:55.179751,jatibvp8,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:01:58.097800,jatibvp8,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:01:58.099376,jatibvp8,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:01:58.099406,jatibvp8,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:02:01.852054,jatibvp8,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:02:01.853037,jatibvp8,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:02:01.853054,jatibvp8,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:05:45.443198,7npgpk9k,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:05:45.445155,7npgpk9k,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:05:45.445179,7npgpk9k,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:05:47.790427,7npgpk9k,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:05:47.791805,7npgpk9k,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:05:47.791841,7npgpk9k,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:05:51.415877,7npgpk9k,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:05:51.416728,7npgpk9k,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:05:51.416749,7npgpk9k,3,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:35:58.337060,s8xqqgds,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:35:58.339323,s8xqqgds,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:35:58.339352,s8xqqgds,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:35:58.990784,s8xqqgds,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:35:58.991971,s8xqqgds,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:35:58.991992,s8xqqgds,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:36:03.597953,s8xqqgds,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:36:03.598749,s8xqqgds,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:36:03.598764,s8xqqgds,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:46:10.196231,hjtcf14q,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:46:10.198664,hjtcf14q,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:46:10.198698,hjtcf14q,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:46:12.987061,hjtcf14q,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:46:12.988174,hjtcf14q,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:46:12.988201,hjtcf14q,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:46:16.282051,hjtcf14q,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:46:16.282866,hjtcf14q,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:46:16.282881,hjtcf14q,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:55:25.852021,dcddrgsf,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:55:25.854310,dcddrgsf,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:55:25.854337,dcddrgsf,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:55:26.505048,dcddrgsf,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:55:26.506568,dcddrgsf,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:55:26.506601,dcddrgsf,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T05:55:30.662138,dcddrgsf,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:55:30.663646,dcddrgsf,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T05:55:30.663680,dcddrgsf,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T06:02:59.887086,vka5d2ey,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:02:59.888789,vka5d2ey,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:02:59.888812,vka5d2ey,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:03:00.599341,vka5d2ey,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:03:00.600647,vka5d2ey,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:03:00.600673,vka5d2ey,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:03:01.305097,vka5d2ey,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:03:01.306113,vka5d2ey,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:03:01.306138,vka5d2ey,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:02.975783,vka5d2ey,1,1,baseline,1,VoterPage,Voted,True
+2025-05-04T06:08:03.772768,vka5d2ey,2,1,baseline,1,VoterPage,Voted,True
+2025-05-04T06:08:04.436431,vka5d2ey,3,1,priming,1,VoterPage,Voted,True
+2025-05-04T06:08:17.467970,vka5d2ey,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:17.469200,vka5d2ey,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:17.469224,vka5d2ey,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:18.032715,vka5d2ey,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:18.034598,vka5d2ey,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:18.034637,vka5d2ey,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:22.320771,vka5d2ey,1,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T06:08:22.321704,vka5d2ey,1,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T06:08:22.321728,vka5d2ey,1,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T06:08:36.356103,vka5d2ey,1,1,baseline,2,VoterPage,Voted,False
+2025-05-04T06:08:37.691175,vka5d2ey,2,1,baseline,2,VoterPage,Voted,True
+2025-05-04T06:08:38.994826,vka5d2ey,3,1,priming,2,VoterPage,Voted,True
+2025-05-04T06:08:52.800145,vka5d2ey,2,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:52.801283,vka5d2ey,2,1,baseline,3,ProposerPage,Submitted Proposal,15
+2025-05-04T06:08:52.801320,vka5d2ey,2,1,baseline,3,ProposerPage,Submitted Proposal,5
+2025-05-04T06:08:53.354281,vka5d2ey,3,1,priming,3,ProposerPage,Submitted Proposal,20
+2025-05-04T06:08:53.355070,vka5d2ey,3,1,priming,3,ProposerPage,Submitted Proposal,10
+2025-05-04T06:08:53.355089,vka5d2ey,3,1,priming,3,ProposerPage,Submitted Proposal,0
+2025-05-04T06:08:55.342676,vka5d2ey,1,1,baseline,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T06:08:55.343661,vka5d2ey,1,1,baseline,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T06:08:55.343685,vka5d2ey,1,1,baseline,3,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.280030,gj81jo2e,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.281147,gj81jo2e,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.281158,gj81jo2e,3,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.288694,gj81jo2e,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.289139,gj81jo2e,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.289148,gj81jo2e,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.294783,gj81jo2e,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.295145,gj81jo2e,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:34:59.295154,gj81jo2e,2,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:35:18.935389,gj81jo2e,2,1,priming,1,VoterPage,Voted,True
+2025-05-04T07:35:19.734530,gj81jo2e,3,1,baseline,1,VoterPage,Voted,True
+2025-05-04T07:35:28.123613,gj81jo2e,1,1,priming,1,VoterPage,Voted,False
+2025-05-04T07:35:43.277957,gj81jo2e,2,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:35:43.278871,gj81jo2e,2,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:35:43.278891,gj81jo2e,2,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:35:43.913653,gj81jo2e,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:35:43.914826,gj81jo2e,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:35:43.914863,gj81jo2e,3,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:35:48.525116,gj81jo2e,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:35:48.526380,gj81jo2e,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:35:48.526406,gj81jo2e,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:43:43.560291,g30vwbld,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:43:43.562028,g30vwbld,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:43:43.562086,g30vwbld,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:43:44.192517,g30vwbld,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:43:44.193792,g30vwbld,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:43:44.193831,g30vwbld,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:43:48.952801,g30vwbld,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:43:48.954230,g30vwbld,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:43:48.954259,g30vwbld,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-04T07:43:58.619845,g30vwbld,2,1,baseline,1,VoterPage,Voted,False
+2025-05-04T07:43:59.517649,g30vwbld,3,1,priming,1,VoterPage,Voted,True
+2025-05-04T07:44:08.779789,g30vwbld,1,1,priming,1,VoterPage,Timeout - Auto Vote,False
+2025-05-04T07:48:16.672092,bewcahmy,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:16.673692,bewcahmy,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:16.673726,bewcahmy,2,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:17.140481,bewcahmy,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:17.141804,bewcahmy,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:17.141827,bewcahmy,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:21.175281,bewcahmy,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:21.176073,bewcahmy,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:21.176099,bewcahmy,1,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:24.958077,bewcahmy,1,1,baseline,1,VoterPage,Voted,True
+2025-05-04T07:48:25.457501,bewcahmy,2,1,baseline,1,VoterPage,Voted,True
+2025-05-04T07:48:26.274753,bewcahmy,3,1,priming,1,VoterPage,Voted,False
+2025-05-04T07:48:33.070735,bewcahmy,1,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:33.071430,bewcahmy,1,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:33.071454,bewcahmy,1,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:35.411713,bewcahmy,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:35.413289,bewcahmy,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:35.413326,bewcahmy,2,1,baseline,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:37.321473,bewcahmy,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:37.322143,bewcahmy,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:37.322162,bewcahmy,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:40.291974,bewcahmy,1,1,baseline,2,VoterPage,Voted,True
+2025-05-04T07:48:40.894398,bewcahmy,2,1,baseline,2,VoterPage,Voted,False
+2025-05-04T07:48:41.560864,bewcahmy,3,1,priming,2,VoterPage,Voted,False
+2025-05-04T07:48:54.570506,bewcahmy,3,1,priming,3,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:54.572013,bewcahmy,3,1,priming,3,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:54.572061,bewcahmy,3,1,priming,3,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:55.158009,bewcahmy,2,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:55.158922,bewcahmy,2,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:55.158946,bewcahmy,2,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:55.725572,bewcahmy,1,1,baseline,3,ProposerPage,Submitted Proposal,20
+2025-05-04T07:48:55.727105,bewcahmy,1,1,baseline,3,ProposerPage,Submitted Proposal,10
+2025-05-04T07:48:55.727135,bewcahmy,1,1,baseline,3,ProposerPage,Submitted Proposal,0
+2025-05-04T07:48:58.496746,bewcahmy,1,1,baseline,3,VoterPage,Voted,True
+2025-05-04T07:48:59.025492,bewcahmy,2,1,baseline,3,VoterPage,Voted,True
+2025-05-04T07:48:59.561372,bewcahmy,3,1,priming,3,VoterPage,Voted,True
+2025-05-04T07:49:07.405379,bewcahmy,1,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:07.406458,bewcahmy,1,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:07.406479,bewcahmy,1,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:09.219652,bewcahmy,2,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:09.220491,bewcahmy,2,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:09.220532,bewcahmy,2,1,baseline,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:11.171776,bewcahmy,3,1,priming,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:11.172834,bewcahmy,3,1,priming,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:11.172855,bewcahmy,3,1,priming,4,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:14.692994,bewcahmy,1,1,baseline,4,VoterPage,Voted,True
+2025-05-04T07:49:15.207756,bewcahmy,2,1,baseline,4,VoterPage,Voted,False
+2025-05-04T07:49:15.845220,bewcahmy,3,1,priming,4,VoterPage,Voted,True
+2025-05-04T07:49:23.337669,bewcahmy,1,1,baseline,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:23.338773,bewcahmy,1,1,baseline,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:23.338808,bewcahmy,1,1,baseline,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:27.475277,bewcahmy,3,1,priming,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:27.476224,bewcahmy,3,1,priming,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:27.476251,bewcahmy,3,1,priming,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:28.091883,bewcahmy,2,1,baseline,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:28.093270,bewcahmy,2,1,baseline,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:28.093309,bewcahmy,2,1,baseline,5,ProposerPage,Submitted Proposal,10
+2025-05-04T07:49:30.260379,bewcahmy,1,1,baseline,5,VoterPage,Voted,True
+2025-05-04T07:49:31.242921,bewcahmy,2,1,baseline,5,VoterPage,Voted,True
+2025-05-04T07:49:32.509149,bewcahmy,3,1,priming,5,VoterPage,Voted,True
+2025-05-05T05:29:55.376406,ekz24rq9,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:55.378313,ekz24rq9,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:55.378343,ekz24rq9,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:56.174339,ekz24rq9,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:56.175466,ekz24rq9,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:56.175490,ekz24rq9,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:56.913573,ekz24rq9,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:56.914531,ekz24rq9,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:56.914552,ekz24rq9,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:29:59.281781,ekz24rq9,1,1,priming,1,VoterPage,Voted,True
+2025-05-05T05:30:01.114792,ekz24rq9,2,1,priming,1,VoterPage,Voted,False
+2025-05-05T05:30:02.332886,ekz24rq9,3,1,priming,1,VoterPage,Voted,True
+2025-05-05T05:30:13.226668,ekz24rq9,2,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-05T05:30:13.227805,ekz24rq9,2,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-05T05:30:13.227840,ekz24rq9,2,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-05T05:30:13.811203,ekz24rq9,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-05T05:30:13.812376,ekz24rq9,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-05T05:30:13.812411,ekz24rq9,3,1,priming,2,ProposerPage,Submitted Proposal,10
+2025-05-05T05:30:18.277381,ekz24rq9,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:30:18.278468,ekz24rq9,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:30:18.278494,ekz24rq9,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:32:15.390014,qqsc7y0w,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:32:15.391504,qqsc7y0w,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:32:15.391555,qqsc7y0w,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:32:17.291239,qqsc7y0w,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:32:17.292476,qqsc7y0w,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:32:17.292531,qqsc7y0w,3,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:32:20.441590,qqsc7y0w,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:32:20.442544,qqsc7y0w,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:32:20.442562,qqsc7y0w,1,1,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:03.042590,8q62fwav,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:03.043565,8q62fwav,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:03.043588,8q62fwav,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:05.038806,8q62fwav,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:05.039597,8q62fwav,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:05.039618,8q62fwav,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:07.320778,8q62fwav,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:07.322385,8q62fwav,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:07.322437,8q62fwav,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:34:15.050731,8q62fwav,2,1,priming,1,VoterPage,Voted,True
+2025-05-05T05:34:18.261240,8q62fwav,3,1,baseline,1,VoterPage,Voted,False
+2025-05-05T05:34:26.796981,8q62fwav,1,1,priming,1,VoterPage,Voted,False
+2025-05-05T05:34:47.203893,8q62fwav,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:47.205416,8q62fwav,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:47.205433,8q62fwav,1,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:47.213400,8q62fwav,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:47.214037,8q62fwav,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:47.214050,8q62fwav,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:47.221385,8q62fwav,3,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:47.221822,8q62fwav,3,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:34:47.221833,8q62fwav,3,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:01.503718,5w3ycyva,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:37:01.504595,5w3ycyva,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:37:01.504629,5w3ycyva,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:37:02.124852,5w3ycyva,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:37:02.125840,5w3ycyva,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:37:02.125869,5w3ycyva,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:37:06.799390,5w3ycyva,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:06.800576,5w3ycyva,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:06.800604,5w3ycyva,1,1,baseline,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:18.227753,5w3ycyva,1,1,baseline,1,VoterPage,Voted,True
+2025-05-05T05:37:20.157417,5w3ycyva,2,1,priming,1,VoterPage,Voted,True
+2025-05-05T05:37:22.056155,5w3ycyva,3,1,baseline,1,VoterPage,Voted,True
+2025-05-05T05:37:40.589042,5w3ycyva,3,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:40.590119,5w3ycyva,3,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:40.590164,5w3ycyva,3,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:40.598085,5w3ycyva,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:40.598503,5w3ycyva,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:40.598513,5w3ycyva,2,1,priming,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:40.637029,5w3ycyva,1,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:40.637538,5w3ycyva,1,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:37:40.637549,5w3ycyva,1,1,baseline,2,ProposerPage,Timeout - Auto Proposal,-10
+2025-05-05T05:46:05.894864,op4h1b8j,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:05.896843,op4h1b8j,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:05.896866,op4h1b8j,1,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:07.731584,op4h1b8j,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:07.732698,op4h1b8j,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:07.732729,op4h1b8j,2,1,priming,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:09.817028,op4h1b8j,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:09.817785,op4h1b8j,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:09.817805,op4h1b8j,3,1,baseline,1,ProposerPage,Submitted Proposal,10
+2025-05-05T05:46:15.883754,op4h1b8j,2,1,priming,1,VoterPage,Voted,True
+2025-05-05T05:46:17.118866,op4h1b8j,3,1,baseline,1,VoterPage,Voted,False
+2025-05-05T05:46:26.728244,op4h1b8j,1,1,priming,1,VoterPage,Timeout - Auto Vote,False
