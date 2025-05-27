@@ -59,15 +59,14 @@ def creating_session(subsession):
         player.prolific_id = participant.label or participant.vars.get('prolific_id', 'NA')
 
         # Randomly assign player for either priming or baseline treatment
-        # if "is_priming" not in participant.vars:            
-        #     participant.vars["is_priming"] = random.choice([True, False])
-        player.is_priming = player.participant.vars.get('is_priming', False)
+        if "is_priming" not in participant.vars:            
+            participant.vars["is_priming"] = random.choice([True, False])
         
         # Ensure this carries over to the player's instance for this round
-        # player.is_priming = participant.vars["is_priming"]
+        player.is_priming = participant.vars["is_priming"]
         store_intro(player)
 
-        # print(f"Player {player.id_in_group} in group {player.group.id_in_subsession} → {'Priming' if player.is_priming else 'Baseline'}")
+        print(f"Player {player.id_in_group} in group {player.group.id_in_subsession} → {'Priming' if player.is_priming else 'Baseline'}")
 
         player.participant.is_dropout = False               # No dropouts initially
         player.participant.seed = random.randint(1,100)     # Random seed for experiments
@@ -87,55 +86,39 @@ def creating_session(subsession):
         if 'next_period' not in player.participant.vars:
             player.participant.vars['next_period'] = False
 
-
 class Subsession(BaseSubsession):
     creating_session = creating_session
 
     @staticmethod
     def group_by_arrival_time_method(subsession, waiting_players):
-        
-        eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
-        group_size = 3
+        # Exclude any participants already flagged as drop‑outs
+        eligible = [p for p in waiting_players
+                    if not p.participant.vars.get("dropout", False)]
 
-        # Create group
-        if (len(eligible)) >= group_size:
-            # Randomly pick 9 from the list of available players
+        group_size = 3
+    
+        # Proceed only when nine eligible players are present
+        if len(eligible) >= group_size:
+            # Randomly pick nine (shuffle gives unbiased order)
             selected = random.sample(eligible, group_size)
 
-            # Determine group index by checking how many groups have been created so far
-            existing_groups = subsession.get_groups()
-            group_index = len(existing_groups)  # 1-based index
-
-            # Assign priming/baseline treatment
-            is_priming = group_index % 2 == 1  # Odd = priming, even = baseline
-
-             # Create a shared identifier for this 9‑player “super‑group”
+            # Create a shared identifier for this 9‑player “super‑group”
             group_id_9 = f"g9_{selected[0].id_in_subsession}"
+
             # Write group metadata into each participant’s vars for later rounds
             for p in selected:
                 p.participant.vars["group_id_9"] = group_id_9
                 p.participant.vars["group_members"] = [q.id_in_subsession for q in selected]
-                p.participant.vars["has_synced"] = True
-                p.participant.vars["is_priming"] = is_priming 
-                p.participant.vars["group_index"] = group_index 
-                # Also assign on player object for easy access
-                p.is_priming = is_priming
 
             # Server‑side debug log
             print(f"[DEBUG] round 1 – formed 9‑block {group_id_9}")
 
-            # Initialize period counter for the group
-            for p in selected:
-                if 'periods_played' not in p.participant.vars:
-                    p.participant.vars['periods_played'] = 0    # Initialize period count
-
-            print(f"[DEBUG] formed 9‑block {group_id_9} → {'Priming' if is_priming else 'Baseline'}")
-
             # Returning the list lets oTree create this group and move on
             return selected
-        
+
         # Fewer than nine → keep waiting
         return None
+
     pass
 
     # @staticmethod
@@ -174,7 +157,6 @@ class Group(BaseGroup):
     current_period = models.IntegerField(initial=0)
     group_id_9 = models.IntegerField()      # Store the ID of the group of 9
     subgroup_id = models.IntegerField()     # Store the subgroup ID (1, 2, or 3)
-    session_finish = models.BooleanField(initial=False)
 
     # Dropout Detection
     drop_out_detected = models.BooleanField(initial=False)

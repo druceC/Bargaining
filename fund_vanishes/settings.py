@@ -10,7 +10,7 @@ SESSION_CONFIGS = [
     {
         'name': 'fund_vanishes',  # Make sure this matches your actual app folder
         'display_name': "Fund Vanishes Experiment",
-        'num_demo_participants': 3,  # Adjust based on your experiment
+        # 'num_demo_participants': 3,  # Adjust based on your experiment
         'app_sequence': ['fund_vanishes'],  # Ensure only existing apps are listed
         # Re-direct participant back to the Prolific website for completion code
         'completionlink':'https://app.prolific.co/submissions/complete?cc=11111111'

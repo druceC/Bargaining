@@ -30,30 +30,26 @@ def store_intro(player):
     with default_storage.open(INTRO_CSV, mode='a') as file:
         writer = csv.writer(file)
 
-        # treatment = "baseline"
+        treatment = "baseline"
         # if player.is_priming == 1:
         #     treatment = "priming"
-
-        # Handle case where prolific_id not set
-        # prolific_id = player.prolific_id if player.prolific_id is not None else "NA"
 
         writer.writerow([
             datetime.datetime.now().isoformat(),                # Timestamp
             player.session.code,                                # Session Code
             player.participant.id_in_session,                   # Participant ID
-            # player.group.id_in_subsession,                    # Group ID
-            player.participant.vars.get("group_index", "N/A"),   # Group Index                                                    # Group Index
-            # prolific_id,
+            player.group.id_in_subsession,                      # Group ID
+            player.prolific_id,
             # player.round_number,                              # Round Number
             player.participant.vars.get('periods_played', 0),   # Period/Game
             player.id_in_group,                                 # Player ID
-            # Store dropout
+            # treatment                                           # Treatment
         ])
 
 # GAME DATA ------------------------------------------------------------------------------
 
 def ensure_csv_headers():
-    # Creates the CS=V file with headers if it does not exist
+    # Creates the CSV file with headers if it does not exist
     if not default_storage.exists(GAME_CSV):
         with default_storage.open(GAME_CSV, mode='w') as file:
             writer = csv.writer(file)
@@ -70,7 +66,6 @@ def store_decision(player, page_name, action, data_dict):
     with default_storage.open(GAME_CSV, mode='a') as file:
         writer = csv.writer(file)
 
-        player.is_priming = player.participant.vars.get('is_priming', False)
         treatment = "baseline"
         if player.is_priming == 1:
             treatment = "priming"
@@ -83,11 +78,10 @@ def store_decision(player, page_name, action, data_dict):
                 player.group.id_in_subsession,                      # Group ID
                 treatment,                                          # Treatment
                 player.round_number,                                # Round number
-                # player.participant.vars.get('periods_played', 0), # Period/Game of play
+                # player.participant.vars.get('periods_played', 0),   # Period/Game of play
                 page_name,                                          # Page name
                 action,                                             # Action (e.g., "Submitted Proposal", "Voted")
                 value                                               # Vote on Proposal
-                # Store dropout
             ])
 
 # SURVEY DATA  ------------------------------------------------------------------------------
@@ -105,10 +99,6 @@ def store_survey_response(player, page_name, form_fields):
 
     with default_storage.open(SURVEY_CSV, mode='a') as file:  # Use 'a' to append responses
         writer = csv.writer(file)
-    
-        treatment = "baseline"
-        if player.is_priming == 1:
-            treatment = "priming"
 
         for field in form_fields:
             response = getattr(player, field, None)  # Get survey response
@@ -122,12 +112,10 @@ def store_survey_response(player, page_name, form_fields):
                 player.session.code,                  # Session Code
                 player.participant.id_in_session,     # Participant ID
                 player.group.id_in_subsession,        # Group ID
-                treatment,                            # Treatment
                 player.round_number,                  # Round number
                 page_name,                            # Survey page name
                 field,                                # Question (form field)
                 response                              # Response value
-                # Store dropout
             ])
 
 # EARNINGS DATA  ------------------------------------------------------------------------------
@@ -156,7 +144,6 @@ def store_earnings(player, earnings_data):
             datetime.datetime.now().isoformat(),                                # Timestamp
             player.session.code,                                                # Session Code
             player.participant.id_in_session,                                   # Participant ID
-            player.participant.vars.get("group_index", "N/A"),                  # Group Index
             ",".join(map(str, earnings_data.get("selected_periods", []))),      # Selected Periods (comma-separated)
             earnings_data.get("final_payment", 0),                              # Final Payment
             earnings_data.get("total_bonus", 0)                                 # Total Bonus

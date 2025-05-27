@@ -64,6 +64,7 @@
         font-size: 15px;
         color: #999;
     }
+
     .otree-timer { 
         display: none !important;
     }
@@ -73,14 +74,14 @@
 {% block content %}
 <div class="disconnected-container">
 
-    <h1 class="disconnected-title">Disconnected ⚠️</h1>
+    <h1 class="disconnected-title">Session Disconnected</h1>
 
     <div class="disconnected-warning">
-        You have dropped out of the game.
+        It appears you have exited or timed out of the game session.
     </div>
 
     <div class="payment-box">
-        <h2 class="payment-title">Payment Information</h2>
+        <h2 class="payment-title">Payment Summary</h2>
         <p class="payment-message">{{ payment_message }}</p>
     </div>
 

@@ -162,7 +162,8 @@
 
 <div class="container">
     <!-- Display Current Period -->
-    <div class="period-box">Round {{ group.current_period }}</div>
+    <!-- <div class="period-box">Round {{ group.current_period }}</div> -->
+    <div class="period-box">Round {{ period }}</div>
 
     <!-- Instruction Section -->
     <h1>Submit Your Proposal</h1>
@@ -172,15 +173,15 @@
     <!-- Form -->
     <form method="post">
         <div class="form-container">
-            {% if player.id_in_group == 1 %}
+            {% if id_in_subgroup == 1 %}
                 {{ formfield group.s1 label="Participant 1 (YOU)" }}
                 {{ formfield group.s2 label="Participant 2" }}
                 {{ formfield group.s3 label="Participant 3" }}
-            {% elif player.id_in_group == 2 %}
+            {% elif id_in_subgroup == 2 %}
                 {{ formfield group.s1 label="Participant 1" }}
                 {{ formfield group.s2 label="Participant 2 (YOU)" }}
                 {{ formfield group.s3 label="Participant 3" }}
-            {% elif player.id_in_group == 3 %}
+            {% elif id_in_subgroup == 3 %}
                 {{ formfield group.s1 label="Participant 1" }}
                 {{ formfield group.s2 label="Participant 2" }}
                 {{ formfield group.s3 label="Participant 3 (YOU)" }}

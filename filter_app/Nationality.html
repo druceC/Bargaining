@@ -121,13 +121,16 @@
         font-weight: 600;
         color: #E09F3E; /* Warm orange */
         margin-bottom: 12px;
+        text-align: center;
     }
+    
 
     .survey-subtext {
         font-size: 16px;
         color: #868686;
         font-weight: 400;
         margin-bottom: 24px;
+        text-align: center;
     }
 
 </style>
@@ -145,13 +148,14 @@
         <!-- Survey Form -->
         <form method="post">
             <div class="form-container">
-
-                <div class="survey-header">Player Onboarding</div>
-                <div class="survey-subtext">A few demographic questions before you begin..</div>
-                
+                <br>
+                <div class="survey-header">Participant Onboarding</div>
+                <div class="survey-subtext">Please answer a few demographic questions before proceeding.</div>
+                <hr>
+                <br>
                 <!-- Were you born in the US? -->
                 <label class="question">{{ form.spbrn.label }}</label>
-                {{ form.spbrn }} <br>
+                {{ form.spbrn }}<br>
 
                 <!-- Country of Birth (Conditional) -->
                 <div id="countryBirthContainer" style="display: none;">

@@ -169,15 +169,15 @@
         {% for key, value in relevant_proposal.items %}
             <p><strong>
                 {% if key == "s1" %}
-                    {% if player_id == 1 %} Player 1 (You):
+                    {% if id_in_subgroup == 1 %} Player 1 (You):
                     {% else %} Player 1:
                     {% endif %}
                 {% elif key == "s2" %}
-                    {% if player_id == 2 %} Player 2 (You):
+                    {% if id_in_subgroup == 2 %} Player 2 (You):
                     {% else %} Player 2:
                     {% endif %}
                 {% elif key == "s3" %}
-                    {% if player_id == 3 %} Player 3 (You):
+                    {% if id_in_subgroup == 3 %} Player 3 (You):
                     {% else %} Player 3:
                     {% endif %}
                 {% else %}

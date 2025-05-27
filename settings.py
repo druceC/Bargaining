@@ -8,10 +8,11 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     {
-        'name': 'fund_vanishes',                        # App folder
+        'name': 'experiment',                        # App folder
         'display_name': "Fund Vanishes Experiment",
-        'num_demo_participants': 3,                    # Adjust as needed
-        'app_sequence': ['fund_vanishes'],              # Ensure only existing apps are listed
+        'num_demo_participants': 18,                    
+        'app_sequence': ['filter_app','fund_vanishes'],              # Ensure only existing apps are listed
+        # 'app_sequence':['fund_vanishes'],
         # 'group_by_arrival_time': True,                  # Enable dynamic grouping
     },
 ]

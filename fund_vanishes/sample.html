@@ -1,0 +1,94 @@
+{% extends "global/Page.html" %}
+
+{% block title %}
+    Get Ready
+{% endblock %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6A0DAD, #B084F9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .countdown-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .countdown-container {
+        background: white;
+        padding: 60px 40px;
+        border-radius: 14px;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        animation: fadeIn 0.8s ease-in-out;
+    }
+
+    h2 {
+        font-size: 30px;
+        color: #4B0082;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 28px;
+    }
+
+    .countdown {
+        font-size: 72px;
+        color: #4B0082;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="countdown-wrapper">
+    <div class="countdown-container">
+        <h2>Get Ready</h2>
+        <p>The game will begin shortly</p>
+        <div id="countdown" class="countdown">3</div>
+    </div>
+</div>
+
+<script>
+    let countdownValue = 3;
+    const countdownEl = document.getElementById("countdown");
+
+    const countdownInterval = setInterval(() => {
+        countdownValue -= 1;
+        if (countdownValue > 0) {
+            countdownEl.textContent = countdownValue;
+        } else {
+            clearInterval(countdownInterval);
+            countdownEl.textContent = "Start";
+            setTimeout(() => {
+                document.querySelector("form").submit();
+            }, 800);
+        }
+    }, 1000);
+</script>
+
+<form method="post" style="display: none;"></form>
+
+{% endblock %}

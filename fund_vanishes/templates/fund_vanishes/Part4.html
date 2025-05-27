@@ -113,23 +113,31 @@
 
             <!-- Conditional on question above -->
             <div id="otherBirthContainer" style="display: none;">
+                <label class="question">{{ form.mth_cntbrn.label }}</label>
+                {{ form.mth_cntbrn }}<br>
+            </div>
+            <!-- <div id="otherBirthContainer" style="display: none;">
                 <p>{{ form.mth_cntbrn.label }}</p>
-                <!-- <label for="otherText">Please specify:</label> -->
                 <input type="text" id="otherBirthText" name="mth_cntbrn">
                 <p id="error-message" style="color: red; display: none;">This field is required.</p>
                 <br><br><br><br>
-            </div>
+            </div> -->
 
             {{ form.fth_spbrn.label }}
             {{ form.fth_spbrn }}<br>
 
             <!-- Show if answer to question above is "2" -->
             <div id="otherCitContainer" style="display: none;">
+                <label class="question">{{ form.fth_cntbrn.label }}</label>
+                {{ form.fth_cntbrn }}<br>
+            </div>
+
+            <!-- <div id="otherCitContainer" style="display: none;">
                 <p>{{ form.fth_cntbrn.label }}</p>
                 <input type="text" id="otherCitText" name="fth_cntbrn">
                 <p id="error-message" style="color: red; display: none;">This field is required.</p>
                 <br><br><br><br>
-            </div>
+            </div> -->
 
         </div>
     

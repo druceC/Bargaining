@@ -3,35 +3,25 @@
 {# Enhanced Survey Page UI #}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-    
+    /* Full-page centering */
     body {
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #0044cc, #00aaff); /* Modern blue gradient */
-        color: #333;
+        background: linear-gradient(135deg, #f9f7e5, #FFE085); /* Soft pastel yellow gradient */
+        color: #444;
         display: flex;
         justify-content: center;
         align-items: center;
-        /* height: 100vh; */
         margin: 0;
-    }
-
-    .survey-container {
-        width: 90%;
-        max-width: 700px;
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        animation: fadeIn 0.5s ease-in-out;
+        /* height: 100vh; */
+        animation: fadeIn 0.8s ease-in-out;
     }
 
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; transform: scale(0.98); }
+        to { opacity: 1; transform: scale(1); }
     }
 
-    /* Outer wrapper to ensure perfect centering */
+    /* Centering container */
     .wrapper {
         display: flex;
         flex-direction: column;
@@ -40,22 +30,25 @@
         width: 100%;
     }
 
-    .survey-header {
-        font-size: 24px;
-        font-weight: bold;
-        color: #0044cc;
-        margin-bottom: 10px;
+    .survey-container {
+        background: #f9f7ee; /* Soft pastel background */
+        width: 90%;
+        max-width: 600px;
+        padding: 32px;
+        border-radius: 12px;
+        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: slideUp 0.6s ease-in-out;
     }
 
-    .survey-subtext {
-        font-size: 16px;
-        color: #555;
-        margin-bottom: 20px;
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .progress-bar {
         width: 100%;
-        height: 8px;
+        height: 6px;
         background: #ddd;
         border-radius: 5px;
         margin-bottom: 20px;
@@ -65,8 +58,8 @@
 
     .progress {
         height: 100%;
-        width: 0%; /* Dynamically adjusted */
-        background: #0044cc;
+        width: 0%;
+        background: #FFB627; /* Warm accent color */
         transition: width 0.5s ease-in-out;
     }
 
@@ -74,8 +67,15 @@
         text-align: left;
     }
 
+    .question {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #555;
+    }
+
     .next-button {
-        background: #0044cc;
+        background: linear-gradient(135deg, #FFB627, #FF8A00);
         color: white;
         padding: 12px 24px;
         border: none;
@@ -83,48 +83,40 @@
         font-size: 16px;
         font-weight: bold;
         cursor: pointer;
-        transition: background 0.3s, transform 0.2s;
+        transition: all 0.3s ease-in-out;
     }
 
     .next-button:hover {
-        background: #002a80;
-        transform: scale(1.05);
+        transform: translateY(-2px);
+        box-shadow: 0px 5px 15px rgba(255, 138, 0, 0.3);
     }
 
     .note {
         font-size: 14px;
         color: #777;
-        margin-top: 15px;
+        margin-top: 12px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-top: 5px;
     }
 </style>
-
 <div class = "wrapper">
     <div class="survey-container">
-        <!-- <div class="survey-header">Almost There! 🎯</div>
-        <div class="survey-subtext">Keep going! Your input matters.</div> -->
-        
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
     
         <div class="form-container">
-            <!-- Age Question -->
-            {{ form.age.label }}<br>
-            <select name="age" id="age" class="scrollable-dropdown">
-                <!-- <option value="">-</option> -->
-                {% for i in range(18, 100) %}
-                    <option value="{{ i }}">{{ i }}</option>
-                {% endfor %}
-            </select><br><br><br>
+            {{ formfields }}
+        </div><br>
     
-            <!-- Risk Level Question -->
-            {{ form.risk.label }}<br>
-            {{ form.risk }}<br><br>
-    
-        </div>
-    
-        <button class="next-button" onclick="updateProgress()">Next</button>
-        <div class="note">Click next to proceed.</div>
+        <button class="next-button" onclick="updateProgress()">Continue to Game</button>
+        <div class="note">Questionnaire complete. You’re now ready to begin the game.</div>
     </div>
 </div>
 
@@ -147,7 +139,7 @@
 
         if (isNaN(totalSteps)) {
             console.error("❌ total_steps is NaN. Setting default value: 16");
-            totalSteps = 12;
+            totalSteps = 16;
         }
 
         let progressWidth = (currentStep / totalSteps) * 100 + "%";
@@ -171,5 +163,9 @@
         }
     }
 </script>
+
+
+
+
 
 {{ endblock }}

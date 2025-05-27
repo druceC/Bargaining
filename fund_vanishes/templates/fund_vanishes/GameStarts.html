@@ -1,0 +1,83 @@
+{% extends "global/Page.html" %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6A0DAD, #B084F9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .countdown-container {
+        background: white;
+        padding: 60px 40px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        max-width: 600px;
+        width: 90%;
+        margin: auto;
+        animation: fadeIn 0.8s ease-in-out;
+        align-items: center;
+    }
+
+    h2 {
+        font-size: 32px;
+        color: #6A0DAD;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #4a4a4a;
+        margin-bottom: 30px;
+    }
+
+    .countdown {
+        font-size: 80px;
+        color: #6A0DAD;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="countdown-container">
+    <h2>Get Ready!</h2>
+    <p>The game is about to begin in...</p>
+    <div id="countdown" class="countdown">3</div>
+</div>
+
+<script>
+    let countdownValue = 3;
+    const countdownEl = document.getElementById("countdown");
+
+    const countdownInterval = setInterval(() => {
+        countdownValue -= 1;
+        if (countdownValue > 0) {
+            countdownEl.textContent = countdownValue;
+        } else {
+            clearInterval(countdownInterval);
+            countdownEl.textContent = "go!";
+            setTimeout(() => {
+                document.querySelector("form").submit();
+            }, 800);  // brief pause before redirect
+        }
+    }, 1000);
+</script>
+
+<form method="post" style="display:none;"></form>
+
+{% endblock %}

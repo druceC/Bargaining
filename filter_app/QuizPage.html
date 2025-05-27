@@ -1,0 +1,100 @@
+{% extends "global/Page.html" %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #F9F5FF; /* Light lavender background */
+    }
+
+    .quiz-container {
+        max-width: 700px;
+        margin: auto;
+        padding: 35px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.08);
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 28px;
+    font-weight: 700;
+        color: #6A0DAD;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 17px;
+        color: #444;
+        line-height: 1.6;
+        font-weight: 500;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .formfields {
+        text-align: left;
+        font-size: 16px;
+    }
+
+    label {
+        display: block;
+        padding: 10px;
+        /* background: #F4E1FF; */
+        border-radius: 8px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    label:hover {
+        background: #E8C8FF;
+    }
+
+    input[type="radio"] {
+        margin-right: 10px;
+        transform: scale(1.2);
+    }
+
+    .next-button {
+        background-color: #6A0DAD;
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+        display: block;
+        margin: 25px auto 10px auto;
+        text-align: center;
+    }
+
+    .next-button:hover {
+        background-color: #3A0066;
+        transform: translateY(-2px);
+        box-shadow: 0px 6px 12px rgba(58, 0, 102, 0.3);
+    }
+</style>
+
+<div class="quiz-container">
+    <h1>Quiz Time!</h1>
+
+    <p>
+        <br>
+        <strong>You must pass this short quiz to join the experiment.</strong><br><br>
+        You have <strong>3 attempts</strong> to correctly answer the following questions. Failure to do so will result in no participation and no payment.
+    </p>
+
+    <br>
+    <div class="formfields">
+        {{ formfields }}
+    </div>
+
+    <button class="next-button">Submit</button>
+</div>
+{% endblock %}

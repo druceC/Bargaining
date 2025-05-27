@@ -36,7 +36,6 @@ class BasePage(Page):
     def is_displayed(self):
         # Don't show page if dropout is detected
         return not self.group.drop_out_detected
-        # return not self.participant.vars.get("dropout", False)
     
     # def app_after_this_page(self, upcoming_apps):
     #     if self.group.drop_out_detected:
@@ -46,8 +45,7 @@ class BasePage(Page):
 class BaseWaitPage(WaitPage):
     def is_displayed(self):
         # Don't show page if dropout is detected
-        # return not self.group.drop_out_detected
-        return not self.participant.vars.get("dropout", False)
+        return not self.group.drop_out_detected
     
     # def app_after_this_page(self, upcoming_apps):
     #     if self.group.drop_out_detected:
@@ -259,51 +257,36 @@ class SyncTop(BaseWaitPage):
     def is_displayed(self):
         return not self.participant.vars.get("has_synced", False)
 
-    # @staticmethod
-    # def group_by_arrival_time_method(subsession, waiting_players):
+    @staticmethod
+    def group_by_arrival_time_method(subsession, waiting_players):
         
-    #     eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
-    #     group_size = 3
+        eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
         
-    #     # Create group
-    #     if (len(eligible)) >= group_size:
-    #         # Randomly pick 9 from the list of available players
-    #         selected = random.sample(eligible, group_size)
+        group_size = 9
 
-    #         # Determine group index by checking how many groups have been created so far
-    #         existing_groups = subsession.get_groups()
-    #         group_index = len(existing_groups)
+        # Create group
+        if (len(eligible)) >= group_size:
+            # Randomly pick 9 from the list of available players
+            selected = random.sample(eligible, group_size)
+             # Create a shared identifier for this 9‑player “super‑group”
+            group_id_9 = f"g9_{selected[0].id_in_subsession}"
+            # Write group metadata into each participant’s vars for later rounds
+            for p in selected:
+                p.participant.vars["group_id_9"] = group_id_9
+                p.participant.vars["group_members"] = [q.id_in_subsession for q in selected]
+            # Server‑side debug log
+            print(f"[DEBUG] round 1 – formed 9‑block {group_id_9}")
 
-    #         # Assign priming/baseline treatment
-    #         is_priming = group_index % 2 == 1  # Odd = priming, even = baseline
+            # Initialize period counter for the group
+            for p in selected:
+                if 'periods_played' not in p.participant.vars:
+                    p.participant.vars['periods_played'] = 0    # Initialize period count
 
-    #          # Create a shared identifier for this 9‑player “super‑group”
-    #         group_id_9 = f"g9_{selected[0].id_in_subsession}"
-    #         # Write group metadata into each participant’s vars for later rounds
-    #         for p in selected:
-    #             p.participant.vars["group_index"] = group_index
-    #             p.participant.vars["group_id_9"] = group_id_9
-    #             p.participant.vars["group_members"] = [q.id_in_subsession for q in selected]
-    #             p.participant.vars["has_synced"] = True
-    #             p.participant.vars["is_priming"] = is_priming 
-    #             # Also assign on player object for easy access
-    #             p.is_priming = is_priming
-
-    #         # Server‑side debug log
-    #         print(f"[DEBUG] round 1 – formed 9‑block {group_id_9}")
-
-    #         # Initialize period counter for the group
-    #         for p in selected:
-    #             if 'periods_played' not in p.participant.vars:
-    #                 p.participant.vars['periods_played'] = 0    # Initialize period count
-
-    #         print(f"[DEBUG] formed 9‑block {group_id_9} → {'Priming' if is_priming else 'Baseline'}")
-
-    #         # Returning the list lets oTree create this group and move on
-    #         return selected
+            # Returning the list lets oTree create this group and move on
+            return selected
         
-    #     # Fewer than nine → keep waiting
-    #     return None
+        # Fewer than nine → keep waiting
+        return None
 
     # Handles actions before moving to the next page, including timeout handling. 
     @staticmethod
@@ -322,22 +305,6 @@ class SyncTop(BaseWaitPage):
         # Mark the participant as synced
         participant.vars["has_synced"] = True
 
-        # ----- added part -----------
-
-        # Reference to the player's group
-        group = self.player.group
-
-        # Increment period for the next round
-        self.player.participant.vars['periods_played'] += 1
-
-        # Reference to the participant object
-        participant = self.player.participant
-
-    def vars_for_template(self):
-        return{
-            "group_index": self.participant.vars.get("group_index", "N/A"),
-            "is_priming": self.participant.vars.get("is_priming", None),
-        }
 
 
 class CalculatePage(BasePage):
@@ -346,12 +313,22 @@ class CalculatePage(BasePage):
 
     # Determine whether this page is displayed for a participant
     def is_displayed(self):
-        return True
+        True
 
     def vars_for_template(self):
         return {
             'timeout_seconds': self.timeout_seconds
         }
+
+    # def after_all_players_arrive(group: Group):
+    #     players = group.get_players()        
+    #     random.shuffle(players)       
+    #      # Create subgroups
+    #     for idx, p in enumerate(players):
+    #         # Three players per subgroup
+    #         p.participant.vars["subgroup_id"] = (idx // 3) + 1       
+    #     # Debug print
+    #     print(f"[DEBUG] Player {p.id_in_group} assigned to subgroup {subgroup_id}")
 
     # Handles logic before transitioning to the next page
     def before_next_page(self):
@@ -368,27 +345,38 @@ class CalculatePage(BasePage):
 # Page shown while waiting for other participants to join and complete mini assessment
 class WaitingPage(BaseWaitPage):
     # template_name = 'fund_vanishes/WaitingPage.html'
-    body_text = "Waiting for other participants..."
+    body_text = "Kindly wait to be randomly matched with other participants."
 
     @staticmethod
     def after_all_players_arrive(group: Group):
+        # Get the 6 players in this group
         players = group.get_players()
         random.shuffle(players)
-        for idx, p in enumerate(players):
-            subgroup_id = (idx // 3) + 1
-            id_in_subgroup = (idx % 3) + 1
-            p.participant.vars["subgroup_id"] = subgroup_id
-            p.participant.vars["id_in_subgroup"] = id_in_subgroup
-            print(f"[DEBUG] Assigned Player {p.id_in_group} to Subgroup {subgroup_id} as {p.participant.vars['id_in_subgroup']}")
 
-    def vars_for_template(self):
-        return{
-            "group_index": self.participant.vars.get("group_index", "N/A")
-        }
+        # Create two 3-player subgroups
+        subgroups = [players[i:i+3] for i in range(0, len(players), 3)]
 
-class GameStarts(Page):
-    def is_displayed(self):
-        return self.round_number == 1
+        # Assign each player a subgroup ID and id_in_subgroup
+        for subgroup_index, subgroup in enumerate(subgroups, start=1):
+            for idx, p in enumerate(subgroup):
+                p.participant.vars["subgroup_id"] = subgroup_index
+                p.participant.vars["id_in_subgroup"] = idx + 1
+                print(f"[DEBUG] Player {p.id_in_subsession} → Subgroup {subgroup_index}, Position {idx + 1}")
+
+        # Reassign this group into 2 oTree groups of 3
+        group.subsession.set_group_matrix(subgroups)
+
+        
+    # @staticmethod
+    # def after_all_players_arrive(group: Group):
+    #     players = group.get_players()
+    #     random.shuffle(players)
+    #     for idx, p in enumerate(players):
+    #         subgroup_id = (idx // 3) + 1
+    #         id_in_subgroup = (idx % 3) + 1
+    #         p.participant.vars["subgroup_id"] = subgroup_id
+    #         p.participant.vars["id_in_subgroup"] = id_in_subgroup
+    #         print(f"[DEBUG] Assigned Player {p.id_in_group} to Subgroup {subgroup_id} as {p.participant.vars['id_in_subgroup']}")
 
 # Submit Proposal Page: All players propose an allocation, then store
 class ProposerPage(BasePage):
@@ -397,7 +385,7 @@ class ProposerPage(BasePage):
     # Collect allocation values from participants
     form_fields = ['s1', 's2', 's3']  
     # Set timeout count
-    timeout_seconds = 60
+    timeout_seconds = 100
     # Allow for subroup independence
     group_by_arrival_time = False
 
@@ -416,30 +404,20 @@ class ProposerPage(BasePage):
             'subgroup_id': subgroup_id,
             'id_in_subgroup': id_in_subgroup,
             'timeout_seconds': self.timeout_seconds,
-            'period': p_period,
-            "group_index": self.participant.vars.get("group_index", "N/A")
+            'period': p_period
         }
 
     # Store the proposer's id and submitted allocation before proceeding
     def before_next_page(self, timeout_happened = False):
-        # proposer_id = id_in_subgroup
+        subgroup_id = self.player.participant.vars.get('subgroup_id')
+        proposer_id = self.player.id_in_group  
 
         # Determine the proposal based on timeout or real input
-        if self.timeout_happened:
+        if timeout_happened:
             allocation = {"s1": -10, "s2": -10, "s3": -10}
-            self.drop_out_detected = True
             self.participant.vars["timed_out"] = True
+            self.drop_out_detected = True
             store_decision(self.player, "ProposerPage", "Timeout - Auto Proposal", allocation)
-
-            # Declare dropout
-            self.participant.vars["dropout"] = True
-            self.group.drop_out_detected = True
-            self.group.drop_out_finalized = True
-
-            # Notify other players
-            for p in self.group.get_players():
-                if p.participant.id != self.participant.id:  # exclude dropout
-                    p.participant.vars["go_to_notice"] = True
         else:
             allocation = {
                 "s1": self.player.s1,
@@ -447,10 +425,6 @@ class ProposerPage(BasePage):
                 "s3": self.player.s3,
             }
             store_decision(self.player, "ProposerPage", "Submitted Proposal", allocation)
-
-        subgroup_id = self.player.participant.vars.get('subgroup_id')
-        id_in_subgroup = self.player.participant.vars.get('id_in_subgroup')
-        proposer_id = self.player.participant.vars.get('id_in_subgroup')
 
         # Load existing subgroup proposals from JSON field
         subgroup_proposals = json.loads(self.group.subgroup_proposals_str)
@@ -461,13 +435,26 @@ class ProposerPage(BasePage):
             subgroup_proposals[subgroup_key] = []
 
         subgroup_proposals[subgroup_key].append({           # Add proposal
-            "proposer_id": id_in_subgroup,
+            "proposer_id": proposer_id,
             "proposal": allocation
         })
 
-        # # Save updated proposals JSON string
+        # Save updated proposals JSON string
         self.group.subgroup_proposals_str = json.dumps(subgroup_proposals)
         print(f"[DEBUG] Subgroup {subgroup_id} proposals so far: {subgroup_proposals[subgroup_key]}")
+
+        # If 3 proposals collected for the subgroup, select one randomly
+        if len(subgroup_proposals[subgroup_key]) == 3:
+            # Load existing selected proposals (for all subgroups)
+            selected_proposals = json.loads(self.group.selected_proposals_str)
+            # Pick a random proposal from the current subgroup
+            selected = random.choice(subgroup_proposals[subgroup_key])
+            # Store it under the current subgroup ID
+            selected_proposals[subgroup_key] = selected
+            # Save updated selection back to the group field
+            self.group.selected_proposals_str = json.dumps(selected_proposals)
+
+            print(f"[DEBUG] Selected proposal for Subgroup {subgroup_id}: {selected}")
             
     # Validate input data
     def error_message(self, values):
@@ -478,50 +465,46 @@ class ProposerPage(BasePage):
         if sum([values['s1'], values['s2'], values['s3']]) != 30:
             return "The total allocation must sum to exactly 30."
 
+# Timeout matching with AreYouThere
 class SelectingPage(WaitPage):
+    # template_name = 'fund_vanishes/SelectingPage.html'
     wait_for_all_groups = False
-    timeout_seconds = 15
-
-    def is_displayed(self):
-        return not self.participant.vars.get("dropout", False)
+    timeout_seconds = 15 
 
     def get_players_for_group(self):
         # Only wait for players in the same subgroup
         subgroup_id = self.player.participant.vars.get("subgroup_id")
         return [p for p in self.group.get_players() if p.participant.vars.get("subgroup_id") == subgroup_id]
 
+    # Override to proceed if either (1) Timeout has elapsed or (2) All players in the subgroup have arrived
     def is_ready(self):
-        # Get subgroup ID
+        # Get subroup ID
         subgroup_id = self.player.participant.vars.get("subgroup_id")
+        # Filter players in the same group to only include those in the same subgroup
         players_in_subgroup = [
             p for p in self.group.get_players()
             if p.participant.vars.get("subgroup_id") == subgroup_id
         ]
+        # Return True if either (1) all subgroup members have arrived, or (2) a dropout was detected
         all_arrived = all(p._waiting_for_page() == self.__class__.__name__ for p in players_in_subgroup)
         return all_arrived or self.group.drop_out_detected
 
+    # after_all_players_arrive = 'check_dropout_or_select'
+
     @staticmethod
     def after_all_players_arrive(group: Group):
-        # Load existing proposals
-        subgroup_proposals = json.loads(group.subgroup_proposals_str)
-        selected_proposals = json.loads(group.selected_proposals_str or '{}')
-
-        # Identify all unique subgroup IDs in the group
-        subgroup_ids = set(p.participant.vars.get("subgroup_id") for p in group.get_players())
+        players = group.get_players()
+        subgroup_ids = set(p.participant.vars.get("subgroup_id") for p in players)
 
         for subgroup_id in subgroup_ids:
-            subgroup_key = str(subgroup_id)
-            proposals = subgroup_proposals.get(subgroup_key, [])
+            subgroup_players = [p for p in players if p.participant.vars.get("subgroup_id") == subgroup_id]
 
-            # Only select if not already selected and all 3 proposals were collected
-            if subgroup_key not in selected_proposals and len(proposals) == 3:
-                selected = random.choice(proposals)
-                selected_proposals[subgroup_key] = selected
-                print(f"[DEBUG] ✅ Subgroup {subgroup_id} selected proposal: {selected}")
-
-        # Save updated selections
-        group.selected_proposals_str = json.dumps(selected_proposals)
-
+            if group.drop_out_detected:
+                for p in subgroup_players:
+                    p.participant.vars['go_to_dropout_notice'] = True
+                print(f"[SelectingPage] Dropout detected in subgroup {subgroup_id}")
+            else:
+                print(f"[SelectingPage] Subgroup {subgroup_id} all arrived.")
 
     # @staticmethod
     # def check_dropout_or_select(group: Group):
@@ -555,7 +538,6 @@ class SelectedProposalPage(BasePage):
     # Retrieve the stored proposer ID from group model and display
     def vars_for_template(self):
         subgroup_id = self.player.participant.vars.get("subgroup_id")
-        id_in_subgroup = self.player.participant.vars.get("id_in_subgroup")
         subgroup_key = str(subgroup_id)
 
         # Load selected proposals dictionary
@@ -565,8 +547,6 @@ class SelectedProposalPage(BasePage):
         if subgroup_key not in selected_proposals:
             return {
                 "player_id": self.player.id_in_group,
-                'subgroup_id': subgroup_id,
-                'id_in_subgroup': id_in_subgroup,
                 "selected_proposer_id": "Unknown", 
                 "selected_proposal": {}, 
                 "relevant_proposal": {},
@@ -586,8 +566,6 @@ class SelectedProposalPage(BasePage):
                 break
 
         return {
-            'subgroup_id': subgroup_id,
-            'id_in_subgroup': id_in_subgroup,
             'selected_proposer_id': f"Participant {proposer_id}" if proposer_id else "Unknown",
             'selected_proposal': selected_proposal,
             'relevant_proposal': relevant_proposal,
@@ -600,15 +578,11 @@ class SelectedProposalPage(BasePage):
 class VoterPage(BasePage):
     form_model = 'player'  
     form_fields = ['vote'] 
-    timeout_seconds = 60
-
-    def is_displayed(self):
-        return not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
+    timeout_seconds = 15
 
     # Pass proposal data to the template
     def vars_for_template(self):
         subgroup_id = self.player.participant.vars.get("subgroup_id")
-        id_in_subgroup = self.player.participant.vars.get("id_in_subgroup")
         subgroup_key = str(subgroup_id)
 
         # Load selected proposals per subgroup
@@ -624,15 +598,11 @@ class VoterPage(BasePage):
             relevant_proposal = selected_proposal.get("proposal", {})
             proposer_id = selected_proposal.get("proposer_id")
             proposer_display = f"Participant {proposer_id}" if proposer_id else "Unknown"
-            proposer_num = int(proposer_display.split()[-1])            # Extract the number
             print(f"\n[DEBUG] VoterPage - Subgroup {subgroup_key} selected proposal: {selected_proposal}")
 
         return {
             'id': self.player.id_in_group,
-            'subgroup_id': subgroup_id,
-            'id_in_subgroup': id_in_subgroup,
             'selected_proposer_id': proposer_display,
-            'selected_proposer_num': proposer_num,
             'selected_allocation': relevant_proposal,
             'timeout_seconds': self.timeout_seconds
         }
@@ -643,26 +613,12 @@ class VoterPage(BasePage):
             self.player.vote = False
             self.drop_out_detected = True
             self.participant.vars["timed_out"] = True
-            
-            # Declare dropout
-            self.participant.vars["dropout"] = True
-            self.group.drop_out_detected = True
-            self.group.drop_out_finalized = True
-
-            # Notify other players
-            for p in self.group.get_players():
-                if p.participant.id != self.participant.id:  # exclude dropout
-                    p.participant.vars["go_to_notice"] = True
-
             store_decision(self.player, "VoterPage", "Timeout - Auto Vote", {"vote": False})
         else:
             store_decision(self.player, "VoterPage", "Voted", {"vote": self.player.vote})
 
 # Select random proposal once all players have submitted
-class VoterWaitPage(WaitPage):
-    def is_displayed(self):
-        return not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
-
+class VoterWaitPage(BaseWaitPage):
     def before_next_page(self):
         subgroup_id = self.player.participant.vars.get("subgroup_id")
         subgroup_key = str(subgroup_id)
@@ -685,26 +641,18 @@ class VoterWaitPage(WaitPage):
 
 class ResultsPage(BasePage):
 
-    form_model = 'player'  
-    timeout_seconds = 30
-
-    def is_displayed(self):
-        return not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
+    timeout_seconds = 5
 
     def vars_for_template(self):
-        # Get subgroup info for player
-        subgroup_id = self.participant.vars.get("subgroup_id")          # Retrieve ID of the subgroup within the group
-        id_in_subgroup = self.participant.vars.get("id_in_subgroup")    # Retrieve player's ID within their subgroup
-        subgroup_key = str(subgroup_id)                                 # Convert subgroup_id to string to use as dict key§
+        subgroup_id = self.player.participant.vars.get("subgroup_id")
+        subgroup_key = str(subgroup_id)
 
         # Load selected proposals
         selected_proposals = json.loads(self.group.selected_proposals_str)
 
-        # Case 1: Fallback if no proposal found ---------------------------------------------
+        # Fallback if no proposal found
         if subgroup_key not in selected_proposals:
             return {
-                'subgroup_id': subgroup_id,
-                'id_in_subgroup': id_in_subgroup,
                 'selected_proposer_id': "Unknown",
                 'relevant_proposal': {},
                 'total_votes': 0,
@@ -716,37 +664,30 @@ class ResultsPage(BasePage):
                 'timeout_seconds': self.timeout_seconds
             }
 
-        # Case 2: Regular Case  ---------------------------------------------
-
-        # Retrieve proposal and proposer for the subgroup
         selected_proposal = selected_proposals[subgroup_key]
         relevant_proposal = selected_proposal.get("proposal", {})
         proposer_id = selected_proposal.get("proposer_id")
         proposer_display = f"Participant {proposer_id}" if proposer_id else "Unknown"
 
-        # Get players in the same subgroup
+        # Voting Results: only from players in the same subgroup
         subgroup_players = [p for p in self.group.get_players()
                             if p.participant.vars.get("subgroup_id") == subgroup_id]
-
-        # Count votes and check if proposal is approved
         total_votes = sum(p.vote for p in subgroup_players)
         proposal_approved = total_votes >= 2
-        self.group.approved = proposal_approved    # Store approval status
+        self.group.approved = proposal_approved  # Optional if needed later
 
         # Earnings Results
-        player_earnings = {}                       # Track subgroup earnings
-
-
+        player_earnings = {}
         for p in subgroup_players:
             current_period = p.participant.vars.get("periods_played", 0)
-            player_key = f's{id_in_subgroup}'
+            player_key = f's{p.id_in_group}'
             earnings = cu(relevant_proposal.get(player_key, 0)) if proposal_approved else cu(0)
             p.earnings = earnings
-            player_earnings[f'Participant {id_in_subgroup}'] = earnings
+            player_earnings[f'Participant {p.id_in_group}'] = earnings
 
-            print(f"\n[DEBUG] Before storing earnings, all_earnings for Player {id_in_subgroup}: {p.all_earnings}")
-            p.store_earnings(id_in_subgroup, current_period, earnings)
-            print(f"\n[DEBUG] After storing earnings, all_earnings for Player {id_in_subgroup}: {p.all_earnings}")
+            print(f"\n[DEBUG] Before storing earnings, all_earnings for Player {p.id_in_group}: {p.all_earnings}")
+            p.store_earnings(p.id_in_group, current_period, earnings)
+            print(f"\n[DEBUG] After storing earnings, all_earnings for Player {p.id_in_group}: {p.all_earnings}")
 
         # Handle final earnings only if in last round (optional)
         if self.group.current_period == 5:
@@ -757,8 +698,6 @@ class ResultsPage(BasePage):
         p_period = self.participant.vars.get('periods_played', 0)
 
         return {
-            'subgroup_id': subgroup_id,
-            'id_in_subgroup': id_in_subgroup,
             'selected_proposer_id': proposer_display,
             'relevant_proposal': relevant_proposal,
             'total_votes': total_votes,
@@ -766,48 +705,43 @@ class ResultsPage(BasePage):
             'player_earnings': player_earnings,
             'your_earnings': int(self.player.earnings),
             'period': p_period,
+            'player_id': self.player.id_in_group,
             'timeout_seconds': self.timeout_seconds
         }
 
 # Ensures that all players complete their periods before stopping the game
 class SyncBottom(BaseWaitPage):
 
-    wait_for_all_groups = False
+    wait_for_all_groups = True
     body_text = 'Please wait for the other groups to finish voting...'
 
     # Ensure players return to SyncTop if they haven't completed 5 periods
     def is_displayed(self):
-        return self.participant.vars.get('periods_played', 0) < Constants.no_periods and not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
+        return self.participant.vars.get('periods_played', 0) < Constants.no_periods  
 
     @staticmethod
-    def after_all_players_arrive(group: Group):
+    def after_all_players_arrive(subsession: Subsession):
 
         # Access session data
-        session = group.subsession.session  
-
-        # Get the group_index of the current group (assumes everyone in group shares the same one)
-        group_index = group.get_players()[0].participant.vars.get('group_index')
-
-        # Filter players who belong to the same 9-block group
-        same_group_players = [
-            p for p in group.subsession.get_players()
-            if p.participant.vars.get('group_index') == group_index
-        ]
+        session = subsession.session  
 
         # Check if all players have  completed 5 periods
-        all_finished = all(p.participant.vars.get('periods_played', 0) >= Constants.no_periods for p in same_group_players)
-        print(f"\n[DEBUG] 9-block group {group_index} completed? → {all_finished}")
+        all_finished = all(p.participant.vars.get('periods_played', 0) >= Constants.no_periods for p in subsession.get_players())
+
+        print(f"\n[DEBUG] Checking if all players have completed 5 rounds: {all_finished}")
+
+        # If everyone has finished, mark session as finished
+        session.finish = all_finished
 
         if not all_finished:
-            print(f"[DEBUG] → Not all players in group {group_index} finished. Sending them back to SyncTop.\n")
-            for p in same_group_players:
-                if p.participant.vars.get('periods_played', 0) < Constants.no_periods:
-                    p.participant.vars['next_period'] = True
-        else:
-            print(f"[DEBUG] ✅ All players in group {group_index} have finished.\n")
+            print("\n[DEBUG] Not all players finished, REPEATING GAME LOOP.\n")
 
-        # Set group-level flag
-        group.session_finish = all_finished  # only this group's status
+            # If not all have finished, ensure they go back to SyncTop
+            for p in subsession.get_players():
+                if p.participant.vars.get('periods_played', 0) < Constants.no_periods:
+                    p.participant.vars['next_period'] = True  # Ensure game continues
+
+        session.finish = all_finished  # Only stop when everyone is done
         # # If ALL players are ready to proceed
         # if not_all == False:
         #     for p in subsession.get_players():
@@ -869,7 +803,7 @@ class SurveyPage(Page):
         if 'surveyStep' not in self.participant.vars:
             self.participant.vars['surveyStep'] = 0
         # return True  # Keep the page displayed
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
 
     def before_next_page(self):
         # Increase survey step when the player moves to the next page
@@ -886,7 +820,8 @@ class AreYouThere(BasePage):
 
     def is_displayed(self):
         return (
-            self.participant.vars.get("timed_out", False) and not self.group.drop_out_finalized
+            self.participant.vars.get("timed_out", False)
+            and not self.group.drop_out_finalized
         )
 
     def before_next_page(self):
@@ -903,15 +838,29 @@ class AreYouThere(BasePage):
 
 # Welcome Page to Survey
 class DropoutNotice(Page):
-    timeout_seconds = 30
+    timeout_seconds = 15
     
-    # Show this page to 
+    # Show this page to all remaining players if a dropout is detected in the group
     def is_displayed(self):
+        # Show ONLY if dropout detected AND not yet finalized
+        # return self.group.drop_out_detected and not self.group.drop_out_finalized
         return self.participant.vars.get("dropout", False)
+
+    # def before_next_page(self):
+    #     # Mark that dropout has been handled
+    #     self.group.drop_out_finalized = True
 
     def vars_for_template(self):
         rounds_played = self.subsession.round_number  # Current round number
 
+        # if rounds_played < 2:
+        #     payment_message = (
+        #         "Since fewer than 2 rounds were played, your final payment will be based on 1 randomly selected round."
+        #     )
+        # else:
+        #     payment_message = (
+        #         "Since 2 or more rounds were played, your final payment will be based on 2 randomly selected rounds."
+        #     )
         payment_message = (
             "Since you have dropped out of the game, no payment shall be issued."
         )
@@ -923,10 +872,11 @@ class DropoutNotice(Page):
         }
 
 class DropoutNoticeOtherPlayers(Page):
-    timeout_seconds = 30
+    timeout_seconds = 15
     
     # Show this page to all remaining players if a dropout is detected in the group
     def is_displayed(self):
+        # Show ONLY if dropout detected AND not yet finalized
         return self.group.drop_out_detected and not self.participant.vars.get("dropout", False)
 
     def before_next_page(self):
@@ -936,14 +886,14 @@ class DropoutNoticeOtherPlayers(Page):
     def vars_for_template(self):
         rounds_played = self.subsession.round_number  # Current round number
 
-        if rounds_played == 1:
+        if rounds_played == 0:
             payment_message = (
                 "No rounds were completed for this session. You will receive the fixed participation fee."
             )
 
-        elif rounds_played < 3:
+        elif rounds_played < 2:
             payment_message = (
-                "Since fewer than 2 rounds were completed, your final payment will be based on the 1 round completed."
+                "Since fewer than 2 rounds were played, your final payment will be based on 1 randomly selected round."
             )
         else:
             payment_message = (
@@ -1017,7 +967,6 @@ class PaymentInfo(Page):
 class Priming(Page):
     form_model = 'player'
     form_fields = ['qp1', 'qp3']
-    timeout_seconds = 120
 
     def is_displayed(self):
         # Display only if player selected for priming treatment
@@ -1028,8 +977,6 @@ class Priming(Page):
         return {
             "selected_gender": self.participant.vars.get("selected_gender", "Not specified"),
             "gender_expression": self.participant.vars.get("gender_expression", "Not specified"),
-            "group_index": self.participant.vars.get("group_index", "N/A"),
-            'timeout_seconds': self.timeout_seconds
         }
     
     def before_next_page(self):
@@ -1040,7 +987,6 @@ class Priming(Page):
 class Baseline(Page):
     form_model = 'player'
     form_fields = ['qp1', 'qp3']
-    timeout_seconds = 120
 
     def is_displayed(self):
         # Display only if player selected for baseline treatment
@@ -1051,8 +997,6 @@ class Baseline(Page):
         return {
             "selected_gender": self.participant.vars.get("selected_gender", "Not specified"),
             "gender_expression": self.participant.vars.get("gender_expression", "Not specified"),
-            "group_index": self.participant.vars.get("group_index", "N/A"),
-            'timeout_seconds': self.timeout_seconds
         }
     
     def before_next_page(self):
@@ -1072,7 +1016,7 @@ class Part1a(Page):
         # Display only if offer was accepted
         self.participant.vars["surveyStep"] = self.participant.vars.get("surveyStep", 1)
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
     
     def vars_for_template(self):
         return {
@@ -1096,7 +1040,7 @@ class Part1b(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
 
     def vars_for_template(self):
         return {
@@ -1119,7 +1063,7 @@ class Part1c(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods
 
     def vars_for_template(self):
         return {
@@ -1141,7 +1085,7 @@ class Part1d(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
     
     def vars_for_template(self):
         return {
@@ -1164,7 +1108,7 @@ class Part1e(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
 
     def vars_for_template(self):
         return {
@@ -1191,7 +1135,7 @@ class Part2a(Page):
     def is_displayed(self):
         # Display page only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
 
     def vars_for_template(self):
         return {
@@ -1220,7 +1164,7 @@ class Part2b(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
 
     def vars_for_template(self):
         return {
@@ -1243,7 +1187,7 @@ class Part3(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
 
     def vars_for_template(self):
         return {
@@ -1267,7 +1211,7 @@ class Part4(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
 
     def vars_for_template(self):
         return {
@@ -1291,7 +1235,7 @@ class Part5(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
 
     def vars_for_template(self):
         return {
@@ -1314,7 +1258,7 @@ class Part6(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
 
     def vars_for_template(self):
         return {
@@ -1352,30 +1296,37 @@ class Fin(Page):
 
 page_sequence = [
 
+    # Priming Treatment
+
     # Main game loop - 5 times per player
     SyncTop,              # Where groups of 9 are set
-    Priming,              # Only show for priming treatment groups
+    # Priming,            # Move this after synctop
 
-    # CalculatePage,      # Grouping Page - Continue
+    CalculatePage,        # Grouping Page - Continue
 
-    WaitingPage,          # Wait Page 1  
-    GameStarts,  
+    WaitingPage,          # Wait Page 1    
     ProposerPage,         
-    # AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds   
+    AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds
+    # DropoutNotice,        
 
     SelectingPage,        # Wait Page 2                         # Timeout = 15 seconds
+    # DropoutNoticeOtherPlayers,  
+    SelectedProposalPage, 
 
     VoterPage,            # Players vote accept / reject
-    # AreYouThere,          # Declare Dropout - If no response
+    AreYouThere,          # Declare Dropout - If no response
+    # DropoutNotice,
 
-    VoterWaitPage,        # Wait Page 3 (Detect Dropout) 
+    VoterWaitPage,        # Wait Page 3 (Detect Dropout)
+    # DropoutNoticeOtherPlayers, 
     ResultsPage,          # Show if proposal is accepted / rejected
     SyncBottom,           # Redirect back to SyncTop until all periods compelted
 
-    SurveyPage,
-    Baseline,             # Only show for baseline treatment groups
+    # Baseline Treatment
+    # SurveyPage,
+    # Baseline,       
 
-    # Final Survey
+    # Survey
     # Part1a,             # Voting and Proposing Considerations
     # Part1b,             # Retaliation, mwc, mwc_others
     # Part1c,             # atq 1, 2, 3 (ie. math questions)

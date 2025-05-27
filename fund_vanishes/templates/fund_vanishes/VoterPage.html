@@ -199,10 +199,10 @@
     <!-- <h2>Vote on the Proposal 🗳️</h2> -->
     <p>
         <strong>Selected Proposer: </strong>
-        {% if selected_proposer_id == id %}
+        {% if selected_proposer_num == id_in_subgroup %}
             You
         {% else %}
-            Player {{ selected_proposer_id }}</strong>
+            Player  {{ selected_proposer_num }}</strong>
         {% endif %}
         
     </p>
@@ -212,21 +212,21 @@
         <ul>
             <li>
                 <strong>
-                    {% if id == 1 %} Player 1 (You):
+                    {% if id_in_subgroup == 1 %} Player 1 (You):
                     {% else %} Player 1:
                     {% endif %}
                 </strong> <span class="fund-value">{{ selected_allocation.s1 }} tokens</span>
             </li>
             <li>
                 <strong>
-                    {% if id == 2 %} Player 2 (You):
+                    {% if id_in_subgroup == 2 %} Player 2 (You):
                     {% else %} Player 2:
                     {% endif %}
                 </strong> <span class="fund-value">{{ selected_allocation.s2 }} tokens</span>
             </li>
             <li>
                 <strong>
-                    {% if id == 3 %} Player 3 (You):
+                    {% if id_in_subgroup == 3 %} Player 3 (You):
                     {% else %} Player 3:
                     {% endif %}
                 </strong> <span class="fund-value">{{ selected_allocation.s3 }} tokens</span>
