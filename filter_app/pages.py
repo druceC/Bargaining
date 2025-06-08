@@ -26,6 +26,30 @@ INTRO_QUESTIONS = 3
 
 # INTRO QUESTIONS
 
+# Dropout detection for normal pages (all game pages inherit from this)
+class BasePage(Page):
+    def is_displayed(self):
+        # Don't show page if dropout is detected
+        return not self.group.drop_out_detected
+
+
+# Dropout detection for WaitPages
+class BaseWaitPage(WaitPage):
+    def is_displayed(self):
+        # Don't show page if dropout is detected
+        return not self.group.drop_out_detected
+
+
+class WelcomePage(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
+class ExperimentInstructions(Page):
+    def is_displayed(self):
+        return self.round_number == 1
+
+
 class SampleInstructions(Page):
     def is_displayed(self):
         return self.round_number == 1
