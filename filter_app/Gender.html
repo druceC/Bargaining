@@ -164,8 +164,10 @@
             radio.addEventListener("change", function() {
                 if (this.value == "4") { // If user selects "I use a different term"
                     otherTextContainer.style.display = "block";
+                    otherTextInput.setAttribute("required","true")
                 } else {
                     otherTextContainer.style.display = "none";
+                    otherTextInput.removeAttribute("required","true")
                     otherTextInput.value = "";  // Clear input when hidden
                 }
             });
