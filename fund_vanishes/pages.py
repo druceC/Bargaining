@@ -658,7 +658,7 @@ class VoterPage2(BasePage):
         # Ensure timeout is absolute
         if "expiry_timestamp_voter2" not in self.participant.vars:
             self.participant.vars["expiry_timestamp_voter2"] = time.time() + self.timeout_seconds
-        remaining = max(0, int(self.participant.vars["expiry_timestam_voter2"] - time.time()))
+        remaining = max(0, int(self.participant.vars["expiry_timestamp_voter2"] - time.time()))
 
         subgroup_id = self.player.participant.vars.get("subgroup_id")
         id_in_subgroup = self.player.participant.vars.get("id_in_subgroup")
