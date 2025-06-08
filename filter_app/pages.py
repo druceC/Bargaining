@@ -22,6 +22,13 @@ from django.core.files.storage import default_storage
 # Variables for Progress Bar 
 INTRO_QUESTIONS = 3
 
+# Timeout
+PROPOSAL_TIMEOUT = 60                  # Proposer Page 
+VOTE_TIMEOUT = 60                      # Voter Page
+PROPOSAL_TIMEOUT_2 = 30                # 2nd Chance Proposer Page
+VOTE_TIMEOUT_2 = 30                    # 2nd Chance Voter Page
+RESULTS_TIMEOUT = 30                   # Results Page timeout
+
 # ---------------------------------------------------------------------------------------------------
 
 # INTRO QUESTIONS
@@ -32,23 +39,25 @@ class BasePage(Page):
         # Don't show page if dropout is detected
         return not self.group.drop_out_detected
 
-
 # Dropout detection for WaitPages
 class BaseWaitPage(WaitPage):
     def is_displayed(self):
         # Don't show page if dropout is detected
         return not self.group.drop_out_detected
 
-
 class WelcomePage(Page):
     def is_displayed(self):
         return self.round_number == 1
 
-
 class ExperimentInstructions(Page):
     def is_displayed(self):
         return self.round_number == 1
-
+    
+    def vars_for_template(self):
+        return {
+            'proposal_timeout': PROPOSAL_TIMEOUT,
+            'vote_timeout': VOTE_TIMEOUT
+        }
 
 class SampleInstructions(Page):
     def is_displayed(self):
