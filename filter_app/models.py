@@ -30,7 +30,7 @@ def load_language_choices():
 
     length = len(choices)
     # Add "other" option to the beginning of list
-    choices.insert(length, (000, "Other (please specify)"))
+    # choices.insert(length, (000, "Other (please specify)"))
 
     return choices
 
