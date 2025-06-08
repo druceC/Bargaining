@@ -1553,8 +1553,6 @@ page_sequence = [
     SyncTop,              # Where groups of 9 are set
     Priming,              # Only show for priming treatment groups
 
-    CalculatePage,        # Grouping Page - Continue
-
     WaitingPage,          # Wait Page 1  
     GameStarts,  
     ProposerPage,         
