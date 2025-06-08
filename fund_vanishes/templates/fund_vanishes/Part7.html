@@ -1,0 +1,411 @@
+{{ block content }}
+
+{# Enhanced Survey Page UI #}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0044cc, #00aaff); /* Modern blue gradient */
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* height: 100vh; */
+        margin: 0;
+    }
+
+    body {
+        background: linear-gradient(135deg, #e3f2fd, #90caf9); 
+        background-size: 200% 200%;
+        transition: background 1s ease-in-out;
+    }
+
+    /* Gradient mapping from soft blue to deep purple */
+    .bg-step-1  { background: linear-gradient(135deg, #e3f2fd, #90caf9); } 
+    .bg-step-2  { background: linear-gradient(135deg, #d0f0fd, #7ec9f1); }
+    .bg-step-3  { background: linear-gradient(135deg, #c1e0fc, #5bb9f5); }
+    .bg-step-4  { background: linear-gradient(135deg, #b3d1fc, #40aaf5); }
+    .bg-step-5  { background: linear-gradient(135deg, #a0c4fc, #4891e0); }
+    .bg-step-6  { background: linear-gradient(135deg, #8da6ef, #5f79d7); }
+    .bg-step-7  { background: linear-gradient(135deg, #7c8be4, #6a6bd1); }
+    .bg-step-8  { background: linear-gradient(135deg, #6f75d4, #6c5fd2); }
+    .bg-step-9  { background: linear-gradient(135deg, #675ecd, #684ecf); }
+    .bg-step-10 { background: linear-gradient(135deg, #5e4ac3, #623ed1); }
+    .bg-step-11 { background: linear-gradient(135deg, #5037b6, #572ed1); }
+    .bg-step-12 { background: linear-gradient(135deg, #472aa7, #4c25c6); }
+    .bg-step-13 { background: linear-gradient(135deg, #3a1c91, #3f1b74); } 
+
+    .survey-container {
+        width: 90%;
+        max-width: 700px;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Outer wrapper to ensure perfect centering */
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .survey-header {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0044cc;
+        margin-bottom: 10px;
+    }
+
+    .survey-subtext {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress {
+        height: 100%;
+        width: 0%; /* Dynamically adjusted */
+        background: #0044cc;
+        transition: width 0.5s ease-in-out;
+    }
+
+    .form-container {
+        text-align: left;
+    }
+
+    .question-group {
+        margin-bottom: 20px;
+    }
+
+    .radio-scale label:hover {
+        color: #0044cc;
+    }
+    .radio-scale input[type="radio"] {
+        accent-color: #0044cc;
+        margin-right: 10px;
+        cursor: pointer;
+        appearance: none;
+        border: 2px solid #bbb;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        position: relative;
+        top: 3px;
+    }
+
+    .radio-scale input[type="radio"]:hover {
+        border-color: #0044cc;
+    }
+
+    .radio-scale input[type="radio"]:checked {
+        background-color: #0044cc;
+        border-color: #0044cc;
+    }
+
+    .next-button {
+        background: #0044cc;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .next-button:hover {
+        background: #002a80;
+        transform: scale(1.05);
+    }
+
+    .note {
+        font-size: 14px;
+        color: #777;
+        margin-top: 15px;
+    }
+    .survey-header {
+        font-size: 24px;
+        font-weight: 600;
+        color: #39039d;
+        margin-bottom: 20px;
+    }
+
+    .question-block {
+        font-size: 16px;
+        margin-bottom: 60px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        font-size: 16px;
+        margin: 8px 0;
+        text-align: left;
+        cursor: pointer;
+    }
+
+</style>
+
+<div class = "wrapper">
+    <div class="survey-container">
+        <!-- <div class="survey-header">Almost There! 🎯</div>
+        <div class="survey-subtext">Keep going! Your input matters.</div> -->
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+
+        <div class="survey-header">Religious Affiliation</div>
+    
+        <form id="surveyForm" method="post">
+            <div class="form-container">
+
+                <div class="question-block">
+                    {{ form.rel.label }}
+                    <div class="radio-scale">
+                        {{ form.rel }}
+                    </div>
+                </div>
+    
+                <!-- Select religion -->
+                <div class="question-block">
+                    <div id="otherTextContainer" style="display: none;">
+                        <p>{{ form.rel_spec.label }}
+                        <div class="radio-scale">
+                            {{ form.rel_spec }}
+                        </div>
+                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
+                    </div>
+                </div>
+
+                <!-- Container for other religion option (hidden initially) -->
+                <div class="question-block">
+                    <div id="otherReligionContainer" style="display: none;">
+                        <p>{{ form.rel_other.label }}</p>
+                        <div class="radio-scale">
+                            {{ form.rel_other }}
+                        </div>
+                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    
+        <button class="next-button" onclick="handleNextClick()">Next</button>
+        <div class="note">Click next to proceed.</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let progress = document.querySelector(".progress");
+        if (!progress) {
+            console.warn("🚨 Progress bar element not found!");
+            return;
+        }
+
+        let radioButtons = document.querySelectorAll('input[name="rel"]'); // Select the radio buttons
+        let religionInputs = document.querySelectorAll("input[name='rel_spec']");
+
+        // Hidden Specify Religion Question
+        let otherTextContainer = document.getElementById("otherTextContainer");
+        let otherTextInput = document.getElementById('input[name="rel_spec"]');
+        // Hidden Other Religion Question
+        let otherReligionContainer = document.getElementById("otherReligionContainer");
+        let religionTextInput = document.querySelectorAll('input[name="rel_other"]');
+
+        let form = document.querySelector("form");
+
+        if (!radioButtons.length) {
+            console.error("❌ No radio buttons found for 'rel_spec'. Check your formfields configuration.");
+            return;
+        }
+
+        radioButtons.forEach(radio => {
+            radio.addEventListener("change", function() {
+                if (this.value == "1") { // If user selects "Yes"
+                    otherTextContainer.style.display = "block";
+                } else {
+                    otherTextContainer.style.display = "none";
+                    // otherTextInput.value = "";  // Clear input when hidden
+                }
+            });
+        });
+
+        function toggleReligionField() {
+            let selectedMain = document.querySelector("input[name='rel']:checked");
+            let selectedSub = document.querySelector("input[name='rel_spec']:checked");
+
+            if (selectedMain && selectedMain.value === "1") {
+                otherTextContainer.style.display = "block";
+
+                if (selectedSub && selectedSub.value === "7") {
+                    otherReligionContainer.style.display = "block";
+                    religionTextInput.forEach(input => input.setAttribute("required", "true"));
+                } else {
+                    otherReligionContainer.style.display = "none";
+                    religionTextInput.forEach(input => {
+                        input.removeAttribute("required");
+                        input.value = "";
+                    });
+                }
+            } else {
+                otherTextContainer.style.display = "none";
+                otherReligionContainer.style.display = "none";
+                religionTextInput.forEach(input => {
+                    input.removeAttribute("required");
+                    input.value = "";
+                });
+            }
+        }
+
+        // Retrieve values from the template safely
+        let currentStep = parseInt("{{ survey_step }}", 10);  
+        let totalSteps = parseInt("{{ total_steps }}", 10);  
+
+        if (isNaN(currentStep)) {
+            console.error("❌ survey_step is NaN. Setting default value: 1");
+            currentStep = 1;
+        }
+
+        if (isNaN(totalSteps)) {
+            console.error("❌ total_steps is NaN. Setting default value: 16");
+            totalSteps = 12;
+        }
+
+        let progressWidth = (currentStep / totalSteps) * 100 + "%";
+        console.log(`🔹 Survey Step (from oTree): ${currentStep}`);
+        console.log(`🔹 Progress Width: ${progressWidth}`);
+
+        progress.style.width = progressWidth;
+
+        // Attach event listener to input
+        religionInputs.forEach(input => {
+            input.addEventListener("change", toggleReligionField);
+        });
+
+        // Ensure correct visibility on page load
+        setTimeout(() => {
+            console.log("🚀 Running visibility toggles on load");
+            toggleReligionField();
+        }, 500);
+
+        // Change background based on survey step
+        const body = document.querySelector("body");
+        const step = parseInt("{{ survey_step }}");
+
+        if (!isNaN(step)) {
+            body.classList.add(`bg-step-${step}`);
+        } else {
+            body.classList.add("bg-step-1");
+        }
+
+    });
+
+    function validateProgress() {
+        const form = document.getElementById("surveyForm");
+        const requiredGroups = new Set();
+
+        // Collect all question names (e.g., from radio buttons)
+        form.querySelectorAll("input, select, textarea").forEach(input => {
+            if (input.name) requiredGroups.add(input.name);
+        });
+
+        let allAnswered = true;
+
+        requiredGroups.forEach(name => {
+            const answered =
+                form.querySelector(`input[name="${name}"]:checked`) ||
+                (form.querySelector(`select[name="${name}"]`)?.value?.trim() !== "") ||
+                (form.querySelector(`textarea[name="${name}"]`)?.value?.trim() !== "");
+            if (!answered) {
+                allAnswered = false;
+            }
+        });
+
+        if (allAnswered) {
+            updateProgress();
+            form.submit();
+        } else {
+            alert("Please answer all the required questions before proceeding.");
+        }
+    }
+
+    function toggleTextBox() {
+        let otherOption = document.getElementById("rel_spec");
+        let textBoxContainer = document.getElementById("otherTextContainer");
+        let textBox = document.getElementById("otherText");
+
+        if (otherGenderOption.checked) {
+            textBoxContainer.style.display = "block";  // Show text input
+        } else {
+            textBoxContainer.style.display = "none";   // Hide text input
+            textBox.value = "";  // Clear input when hidden
+        }
+    }
+
+    // Prevent form submission if volunt_hrs is required but not answered
+    function validateForm() {
+        let selectedVolunteer = document.querySelector('input[name="rel"]:checked');
+        let selectedHours = document.querySelector('input[name="rel_spec"]:checked');
+        let errorMessage = document.getElementById("error-message");
+        let firstErrorField = null; // Track the first error field to scroll to
+
+        // If the person claims to have done volunteer work, require volunteer hours question
+        if (selectedVolunteer && selectedVolunteer.value == "1") { 
+            if (!selectedHours || selectedHours.value.trim() === "") {
+                errorMessage.style.display = "block"; // Show error message
+                firstErrorField = selectedHours;
+                return false;
+            } else {
+                errorMessage.style.display = "none"; // Hide error message if fixed
+            }
+        }
+        // Scroll to the first error field if there is one
+        if (firstErrorField) {
+            firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+            firstErrorField.focus();
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission if no errors
+    }
+
+    function handleNextClick() {
+        if (!validateForm()) {
+            event.preventDefault();
+            return false; // Prevent form submission if validation fails
+        }
+        else{
+            validateProgress(); // Only runs if validateForm() passes
+            return true;
+        }
+    }
+
+</script>
+
+{{ endblock }}

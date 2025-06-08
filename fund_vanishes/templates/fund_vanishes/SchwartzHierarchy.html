@@ -1,0 +1,539 @@
+{{ block content }}
+
+{# Enhanced Survey Page UI #}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0044cc, #00aaff);
+        color: #333;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    body {
+        background: linear-gradient(135deg, #e3f2fd, #90caf9); 
+        background-size: 200% 200%;
+        transition: background 1s ease-in-out;
+    }
+
+    /* Gradient mapping from soft blue to deep purple */
+    .bg-step-1  { background: linear-gradient(135deg, #e3f2fd, #90caf9); } 
+    .bg-step-2  { background: linear-gradient(135deg, #d0f0fd, #7ec9f1); }
+    .bg-step-3  { background: linear-gradient(135deg, #c1e0fc, #5bb9f5); }
+    .bg-step-4  { background: linear-gradient(135deg, #b3d1fc, #40aaf5); }
+    .bg-step-5  { background: linear-gradient(135deg, #a0c4fc, #4891e0); }
+    .bg-step-6  { background: linear-gradient(135deg, #8da6ef, #5f79d7); }
+    .bg-step-7  { background: linear-gradient(135deg, #7c8be4, #6a6bd1); }
+    .bg-step-8  { background: linear-gradient(135deg, #6f75d4, #6c5fd2); }
+    .bg-step-9  { background: linear-gradient(135deg, #675ecd, #684ecf); }
+    .bg-step-10 { background: linear-gradient(135deg, #5e4ac3, #623ed1); }
+    .bg-step-11 { background: linear-gradient(135deg, #5037b6, #572ed1); }
+    .bg-step-12 { background: linear-gradient(135deg, #472aa7, #4c25c6); }
+    .bg-step-13 { background: linear-gradient(135deg, #3a1c91, #3f1b74); } 
+
+    .wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .survey-container {
+        width: 90%;
+        max-width: 950px;
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #ddd;
+        border-radius: 5px;
+        margin-bottom: 25px;
+        overflow: hidden;
+    }
+
+    .progress {
+        height: 100%;
+        background: #0044cc;
+        width: 0%;
+        transition: width 0.5s ease-in-out;
+    }
+
+    .question-block {
+        margin-bottom: 60px;
+    }
+
+    .question-label {
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    .question-description {
+        font-style: italic;
+        font-weight: 400;
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 12px;
+    }
+
+    .number-line-table {
+        width: 100%;
+        table-layout: fixed;
+        text-align: center;
+        border-collapse: collapse;
+        margin-top: 5px;
+    }
+
+    .number-line-table td {
+        position: relative;
+        padding: 6px 0;
+    }
+
+    .number-line-descriptions td {
+        font-size: 11px;
+        font-weight: 400;
+        color: #555;
+        padding-bottom: 10px;
+    }
+
+    .number-line-labels td {
+        font-size: 12px;
+        font-weight: 500;
+        color: #444;
+        padding-top: 10px;
+    }
+
+    .number-line-inputs td::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: #5e35b1;
+        z-index: 0;
+    }
+
+    .number-line-inputs input[type="radio"] {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid #5e35b1;
+        background-color: white;
+        z-index: 1;
+        position: relative;
+        transition: all 0.2s ease;
+    }
+
+    .number-line-inputs input[type="radio"]:checked {
+        background-color: #5e35b1;
+        box-shadow: 0 0 0 4px rgba(94, 53, 177, 0.25);
+    }
+
+    .number-line-inputs input[type="radio"]:hover {
+        transform: scale(1.25);
+        cursor: pointer;
+    }
+
+    .next-button {
+        background: #0044cc;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        margin-top: 30px;
+    }
+
+    .next-button:hover {
+        background: #002a80;
+        transform: scale(1.05);
+    }
+
+    .note {
+        font-size: 14px;
+        color: #777;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .error-message {
+        color: red;
+        font-size: 13px;
+        margin-top: 8px;
+        display: none;
+    }
+    .next-button{
+        align-items: center;
+        /* align: center; */
+        text-align: center; 
+        margin-top: 25px;
+    }
+    .slider-group {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .slider-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #333;
+    }
+
+    .slider-subtitle {
+        font-size: 14px;
+        font-style: italic;
+        color: #666;
+        margin-bottom: 12px;
+    }
+    .survey-header {
+        font-size: 22px;
+        font-weight: 600;
+        color: #0044cc;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #555;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    input[type="radio"]:checked + label {
+        background-color: #0044cc;
+        color: #fff;
+        border-radius: 4px;
+        padding: 2px 6px;
+    }
+
+    label.selected {
+        background-color: #0044cc;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+
+    /* Fade-in animation */
+    .question-block {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+    }
+
+    .question-block.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Highlight selected cell */
+    .number-line-inputs td.selected input {
+        outline: 2px solid #0044cc;
+        border-radius: 50%;
+    }
+
+    /* Optional tooltip styling (native tooltips used here) */
+    .number-line-labels td {
+        position: relative;
+        cursor: help;
+    }
+
+    /* body {
+        font-family: 'Poppins', sans-serif;
+        background: #f4f6fa;
+        color: #1a1a1a;
+        margin: 0;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+    } */
+
+    .survey-container {
+        background: #ffffff;
+        width: 100%;
+        max-width: 850px;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    .survey-header {
+        font-size: 24px;
+        font-weight: 700;
+        color: #5e60ce;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #4a4a4a;
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .slider-group {
+        margin-bottom: 45px;
+        border-bottom: 1px solid #e6eaf1;
+        padding-bottom: 24px;
+    }
+
+    .question-label {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #1a1a1a;
+    }
+
+    .slider-group em {
+        font-size: 16px;
+        color: #6a6a6a;
+        font-weight: 500px;
+    }
+
+    .number-line-table {
+        width: 100%;
+        margin-top: 15px;
+        border-spacing: 0;
+        text-align: center;
+        color: #444;
+    }
+
+    .number-line-inputs td input[type="radio"] {
+        accent-color: #5e60ce;
+        cursor: pointer;
+    }
+
+    .number-line-inputs td.selected input {
+        outline: 2px solid #5e60ce;
+        border-radius: 50%;
+        background-color: #5e60ce;
+    }
+
+    .number-line-labels td {
+        font-size: 13px;
+        color: #666;
+        cursor: help;
+    }
+
+    .number-line-descriptions td {
+        font-size: 12px;
+        color: #888;
+        padding-bottom: 6px;
+    }
+
+
+
+
+</style>
+
+<div class = "wrapper">
+    <div class="survey-container">
+        <!-- <div class="survey-header">Almost There! 🎯</div>
+        <div class="survey-subtext">Keep going! Your input matters.</div> -->
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+
+        <div class="survey-header">Personal Values & Life Priorities</div>
+        <div class="survey-subtext">
+            Please rate the importance of each value as a guiding principle in your life. <br> Use the scale from -1 (opposed to your values) to 7 (of supreme importance).
+        </div>
+        <!-- <p>Below, we will ask you about the role of different values as a guiding principle in your life. Please tell us how important each value is for you on the scale provided.</p> -->
+        <br>
+        {% for field in form %}
+            <div class="question-block">
+                <div class="question-label"><strong>{{ field.label }}</strong></div>
+                <div class="question-description">
+                    <div class="slider-group">
+                        {% if field.name == "social_power" %}control over others, dominance{% endif %}
+                        {% if field.name == "wealth" %}material possessions, money{% endif %}
+                        {% if field.name == "authority" %}the right to lead or command{% endif %}
+                        {% if field.name == "humble" %}modest, self-effacing{% endif %}
+                        {% if field.name == "influential" %}having an impact on people and events{% endif %}
+                    </div>
+                </div>
+                <table class="number-line-table">
+                    <tr class="number-line-descriptions">
+                        <td>Opposed<br>to my values</td>
+                        <td>Not<br>important</td>
+                        <td></td><td></td>
+                        <td>Important</td>
+                        <td></td><td></td>
+                        <td>Very<br>important</td>
+                        <td>Of supreme<br>importance</td>
+                    </tr>
+                    <tr class="number-line-inputs">
+                        {% for subwidget in field %}
+                            <td>{{ subwidget }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr class="number-line-labels">
+                        <td>-1</td><td>0</td><td>1</td><td>2</td>
+                        <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td>
+                    </tr>
+                </table>
+                <!-- <p id="error-message" style="color: red; display: none;">This field is required.</p> -->
+                <!-- <p class="error-message" id="error-{{ field.name }}" style="color: red; display: none;">This field is required.</p> -->
+            </div>
+        {% endfor %}
+    
+        <!-- <div style="text-align: center; margin-top: 25px;">
+            <button class="next-button" type ="button" onclick="updateProgress()">Next</button>
+        </div> -->
+        <div style="text-align: center; margin-top: 25px;">
+            <button class="next-button" type="submit">Next</button>
+        </div>
+        <!-- <button class="next-button" onclick="validateProgress()">Next</button> -->
+        <div class="note">Click next to proceed.</div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let progress = document.querySelector(".progress");
+        if (!progress) {
+            console.warn("🚨 Progress bar element not found!");
+            return;
+        }
+
+        // Retrieve values from the template safely
+        let currentStep = parseInt("{{ survey_step }}", 10);  
+        let totalSteps = parseInt("{{ total_steps }}", 10);  
+
+        if (isNaN(currentStep)) {
+            console.error("❌ survey_step is NaN. Setting default value: 1");
+            currentStep = 1;
+        }
+
+        if (isNaN(totalSteps)) {
+            console.error("❌ total_steps is NaN. Setting default value: 16");
+            totalSteps = 12;
+        }
+
+        let progressWidth = (currentStep / totalSteps) * 100 + "%";
+        console.log(`🔹 Survey Step (from oTree): ${currentStep}`);
+        console.log(`🔹 Progress Width: ${progressWidth}`);
+
+        progress.style.width = progressWidth;
+
+
+        // ToolTipMap
+        const tooltipMap = {
+            "-1": "Opposed to my values",
+            "0": "Not important",
+            "1": "Slightly important",
+            "2": "Somewhat important",
+            "3": "Moderately important",
+            "4": "Important",
+            "5": "Very important",
+            "6": "Extremely important",
+            "7": "Of supreme importance"
+        };
+
+        // Add tooltips
+        document.querySelectorAll("label").forEach(label => {
+            const text = label.textContent.trim();
+            if (tooltipMap[text]) {
+                label.setAttribute("title", tooltipMap[text]);
+            }
+        });
+
+        // Highlight selected input
+        document.querySelectorAll(".number-line-inputs td input[type='radio']").forEach(input => {
+            input.addEventListener("change", function () {
+                const row = input.closest("tr");
+                row.querySelectorAll("td").forEach(td => td.classList.remove("selected"));
+                input.parentElement.classList.add("selected");
+            });
+        });
+
+        // Animate in each question block
+        document.querySelectorAll(".question-block").forEach((el, index) => {
+            setTimeout(() => {
+                el.classList.add("visible");
+            }, index * 120);
+        });
+
+
+        // Change background based on survey step
+        const body = document.querySelector("body");
+        const step = parseInt("{{ survey_step }}");
+
+        if (!isNaN(step)) {
+            body.classList.add(`bg-step-${step}`);
+        } else {
+            body.classList.add("bg-step-1");
+        }
+    });
+
+    function updateProgress() {
+        let progress = document.querySelector(".progress");
+        let totalSteps = parseInt("{{ total_steps }}", 10);  
+        let nextStep = parseInt("{{ survey_step }}", 10) + 1;  
+
+        if (!isNaN(nextStep) && progress) {
+            let progressWidth = (nextStep / totalSteps) * 100 + "%";
+            progress.style.width = progressWidth;
+            console.log(`🚀 Updated Progress to Step ${nextStep}: ${progressWidth}`);
+        } else {
+            console.error("❌ Could not update progress - Invalid values detected.");
+        }
+    }
+
+    function validateProgress() {
+        const form = document.getElementById("surveyForm");
+        const requiredGroups = new Set();
+
+        // Collect all question names (e.g., from radio buttons)
+        form.querySelectorAll("input, select, textarea").forEach(input => {
+            if (input.name) requiredGroups.add(input.name);
+        });
+
+        let allAnswered = true;
+
+        requiredGroups.forEach(name => {
+            const answered =
+                form.querySelector(`input[name="${name}"]:checked`) ||
+                (form.querySelector(`select[name="${name}"]`)?.value?.trim() !== "") ||
+                (form.querySelector(`textarea[name="${name}"]`)?.value?.trim() !== "");
+            if (!answered) {
+                allAnswered = false;
+            }
+        });
+
+        if (allAnswered) {
+            updateProgress();
+            form.submit();
+        } else {
+            alert("Please answer all the required questions before proceeding.");
+        }
+    }
+    
+</script>
+
+
+
+
+{{ endblock }}

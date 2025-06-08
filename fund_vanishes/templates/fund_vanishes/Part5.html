@@ -15,6 +15,27 @@
         margin: 0;
     }
 
+    body {
+        background: linear-gradient(135deg, #e3f2fd, #90caf9); 
+        background-size: 200% 200%;
+        transition: background 1s ease-in-out;
+    }
+
+    /* Gradient mapping from soft blue to deep purple */
+    .bg-step-1  { background: linear-gradient(135deg, #e3f2fd, #90caf9); } 
+    .bg-step-2  { background: linear-gradient(135deg, #d0f0fd, #7ec9f1); }
+    .bg-step-3  { background: linear-gradient(135deg, #c1e0fc, #5bb9f5); }
+    .bg-step-4  { background: linear-gradient(135deg, #b3d1fc, #40aaf5); }
+    .bg-step-5  { background: linear-gradient(135deg, #a0c4fc, #4891e0); }
+    .bg-step-6  { background: linear-gradient(135deg, #8da6ef, #5f79d7); }
+    .bg-step-7  { background: linear-gradient(135deg, #7c8be4, #6a6bd1); }
+    .bg-step-8  { background: linear-gradient(135deg, #6f75d4, #6c5fd2); }
+    .bg-step-9  { background: linear-gradient(135deg, #675ecd, #684ecf); }
+    .bg-step-10 { background: linear-gradient(135deg, #5e4ac3, #623ed1); }
+    .bg-step-11 { background: linear-gradient(135deg, #5037b6, #572ed1); }
+    .bg-step-12 { background: linear-gradient(135deg, #472aa7, #4c25c6); }
+    .bg-step-13 { background: linear-gradient(135deg, #3a1c91, #3f1b74); } 
+
     .survey-container {
         width: 90%;
         max-width: 700px;
@@ -91,6 +112,80 @@
         transform: scale(1.05);
     }
 
+    .radio-scale label {
+        display: block;
+        margin: 6px 0;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .radio-scale label:hover {
+        color: #0044cc;
+        font-weight: 500;
+        background-color: rgba(0, 68, 204, 0.05);
+        border-radius: 4px;
+        padding: 4px 6px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input[type="text"]:hover,
+    select:hover {
+        border-color: #0044cc;
+        box-shadow: 0 0 0 2px rgba(0, 68, 204, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    .survey-header {
+        font-size: 22px;
+        font-weight: 600;
+        color: #0044cc;
+        margin-bottom: 8px;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    .question-block {
+        margin-bottom: 30px;
+    }
+
+    .question-block p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .sub {
+        font-size: 12px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #777;
+    }
+
+    .question-block label {
+        display: block;
+        font-size: 16px;
+        margin: 6px 0;
+        cursor: pointer;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        border-color: #0044cc;
+        outline: none;
+    }
+
     .note {
         font-size: 14px;
         color: #777;
@@ -100,28 +195,201 @@
 
 <div class = "wrapper">
     <div class="survey-container">
-        <!-- <div class="survey-header">Almost There! 🎯</div>
-        <div class="survey-subtext">Keep going! Your input matters.</div> -->
-        
+    
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
+
+        <div class="survey-header">Academic & Political Background</div>
+        <br>
+        <form id="surveyForm" method="post">
+            <div class="form-container">
+                
+                <!-- Number of Economics Courses Taken -->
+                <div class="question-block">
+                    {{ form.econ.label }}
+                    <div class = "sub">Please only use numbers to answer.</div>
+                    {{ form.econ }}
+                </div>
     
-        <div class="form-container">
-            {{ formfields }}
-        </div>
+                <!-- Whether there is a political party they like -->
+                <div class="question-block">
+                    {{ form.party_like.label }}
+                    <div class="radio-scale">
+                        {{ form.party_like }}
+                    </div>
+                </div>
     
-        <button class="next-button" onclick="updateProgress()">Next</button>
+                <!-- Conditionally displayed field for party -->
+                <div class="question-block">
+                    <div id="otherBirthContainer" style="display: none;">
+                        <p>{{ form.party.label }}</p>
+                        <div class="radio-scale">
+                            {{ form.party }}
+                        </div>
+                        <!-- <input type="text" id="otherBirthText" name="party"> -->
+                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
+                    </div>
+                </div>
+    
+                <!-- Show if answer to question above is "2" -->
+                <div class="question-block">
+                    <div id="otherPartyContainer" style="display: none;">
+                        <!-- {{ form.other_party.label }}</p> -->
+                        {{ form.other_party }}
+                        <!-- <input type="text" id="otherCitText" name="fth_cntbrn"> -->
+                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
+                    </div>
+                </div>
+    
+                <!-- Show if answer to question above is "2" -->
+                <div class="question-block">
+                    <div id="otherCitContainer" style="display: none;">
+                        {{ form.party_prox.label }}</p>
+                        <div class="radio-scale">
+                            {{ form.party_prox }}
+                        </div>
+                        <!-- <input type="text" id="otherCitText" name="fth_cntbrn"> -->
+                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
+                    </div>
+                </div>
+    
+            </div>
+        </form>
+    
+        <button class="next-button" onclick="handleNextClick()">Next</button>
         <div class="note">Click next to proceed.</div>
     </div>
 </div>
 
 <script>
+
+    function validateProgress() {
+        const form = document.getElementById("surveyForm");
+        const requiredGroups = new Set();
+
+        // Collect all question names (e.g., from radio buttons)
+        form.querySelectorAll("input, select, textarea").forEach(input => {
+            if (input.name) requiredGroups.add(input.name);
+        });
+
+        let allAnswered = true;
+
+        requiredGroups.forEach(name => {
+            const answered =
+                form.querySelector(`input[name="${name}"]:checked`) ||
+                (form.querySelector(`select[name="${name}"]`)?.value?.trim() !== "") ||
+                (form.querySelector(`textarea[name="${name}"]`)?.value?.trim() !== "");
+            if (!answered) {
+                allAnswered = false;
+            }
+        });
+
+        if (allAnswered) {
+            updateProgress();
+            form.submit();
+        } else {
+            alert("Please answer all the required questions before proceeding.");
+        }
+    }
+
+    // Prevent form submission if volunt_hrs is required but not answered
+    function validateForm() {
+        let selectedVolunteer = document.querySelector('input[name="party_like"]:checked');
+        let selectedHours = document.querySelector('input[name="party"]:checked');
+        let errorMessage = document.getElementById("error-message");
+        let firstErrorField = null; // Track the first error field to scroll to
+
+        // If the person claims to have done volunteer work, require volunteer hours question
+        if (selectedVolunteer && selectedVolunteer.value == "1") { 
+            if (!selectedHours || selectedHours.value.trim() === "") {
+                errorMessage.style.display = "block"; // Show error message
+                firstErrorField = selectedHours;
+                return false;
+            } else {
+                errorMessage.style.display = "none"; // Hide error message if fixed
+            }
+        }
+        // Scroll to the first error field if there is one
+        if (firstErrorField) {
+            firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+            firstErrorField.focus();
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission if no errors
+    }
+
+    function handleNextClick() {
+        if (!validateForm()) {
+            event.preventDefault();
+            return false; // Prevent form submission if validation fails
+        }
+        else{
+            validateProgress(); // Only runs if validateForm() passes
+            return true;
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         let progress = document.querySelector(".progress");
         if (!progress) {
-            console.warn("🚨 Progress bar element not found!");
+            console.warn("Progress bar element not found!");
             return;
+        }
+
+        let spbrnInputs = document.querySelectorAll("input[name='party_like']");
+        let spcitInputs = document.querySelectorAll("input[name='party_like']");
+        let partyInputs = document.querySelectorAll("input[name='party']");
+
+        let otherBirthContainer = document.getElementById("otherBirthContainer");
+        let otherCitContainer = document.getElementById("otherCitContainer");
+        let otherPartyContainer = document.getElementById("otherPartyContainer");
+
+        let birthTextInput = document.getElementById("otherBirthText");
+        let citTextInput = document.querySelectorAll("input[name='party_prox']");
+        let partyTextInput = document.querySelectorAll("input[name='other_party']");
+
+        let form = document.querySelector("form");
+
+        function toggleBirthField() {
+            let selectedOption = document.querySelector("input[name='party_like']:checked");
+            if (selectedOption && selectedOption.value === "1") {
+                otherBirthContainer.style.display = "block";
+                birthTextInput.setAttribute("required", "true");
+            } else {
+                otherBirthContainer.style.display = "none";
+                birthTextInput.removeAttribute("required");
+                birthTextInput.value = "";  // Clear input when hidden
+            }
+        }
+
+        function toggleCitField() {
+            let selectedOption = document.querySelector("input[name='party_like']:checked");
+            if (selectedOption && selectedOption.value === "1") {
+                otherCitContainer.style.display = "block";
+                // citTextInput.setAttribute("required", "true");
+                citTextInput.forEach(input => input.setAttribute("required","true"));
+            } else {
+                otherCitContainer.style.display = "none";
+                citTextInput.forEach(input => input.removeAttribute("required"));
+                citTextInput.forEach(input => input.value = "");
+                // citTextInput.removeAttribute("required");
+                // citTextInput.value = "";  // Clear input when hidden
+            }
+        }
+
+        function togglePartyField() {
+            let selectedOption = document.querySelector("input[name='party']:checked");
+            let selectedOption_main = document.querySelector("input[name='party_like']:checked");
+            if (selectedOption && selectedOption.value === "4" && selectedOption_main && selectedOption_main.value === "1") {
+                otherPartyContainer.style.display = "block";
+                partyTextInput.forEach(input => input.setAttribute("required","true"));
+            } else {
+                otherPartyContainer.style.display = "none";
+                partyTextInput.forEach(input => input.removeAttribute("required"));
+                partyTextInput.forEach(input => input.value = "");
+            }
         }
 
         // Retrieve values from the template safely
@@ -129,12 +397,12 @@
         let totalSteps = parseInt("{{ total_steps }}", 10);  
 
         if (isNaN(currentStep)) {
-            console.error("❌ survey_step is NaN. Setting default value: 1");
+            console.error("survey_step is NaN. Setting default value: 1");
             currentStep = 1;
         }
 
         if (isNaN(totalSteps)) {
-            console.error("❌ total_steps is NaN. Setting default value: 16");
+            console.error("total_steps is NaN. Setting default value: 16");
             totalSteps = 12;
         }
 
@@ -143,24 +411,52 @@
         console.log(`🔹 Progress Width: ${progressWidth}`);
 
         progress.style.width = progressWidth;
-    });
 
-    function updateProgress() {
-        let progress = document.querySelector(".progress");
-        let totalSteps = parseInt("{{ total_steps }}", 10);  
-        let nextStep = parseInt("{{ survey_step }}", 10) + 1;  
+        // Attach event listeners to radio buttons
+        spbrnInputs.forEach(input => {
+            input.addEventListener("change", toggleBirthField);
+        });
 
-        if (!isNaN(nextStep) && progress) {
-            let progressWidth = (nextStep / totalSteps) * 100 + "%";
-            progress.style.width = progressWidth;
-            console.log(`🚀 Updated Progress to Step ${nextStep}: ${progressWidth}`);
-        } else {
-            console.error("❌ Could not update progress - Invalid values detected.");
+        spcitInputs.forEach(input => {
+            input.addEventListener("change", toggleCitField);
+        });
+
+        partyInputs.forEach(input => {
+            input.addEventListener("change", togglePartyField);
+        });
+
+        // Ensure correct visibility on page load
+        setTimeout(() => {
+            console.log("🚀 Running visibility toggles on load");
+            toggleBirthField();
+            toggleCitField();
+            togglePartyField();
+        }, 500);
+
+        function validateForm() {
+            return true;
         }
-    }
+
+        // Form validation before submission
+        function handleNextClick() {
+
+            if (!validateForm()) {
+                return false; // Prevent form submission if validation fails
+            }
+            updateProgress(); // Only runs if validateForm() passes
+            return true;
+        }
+
+        // Change background based on survey step
+        const body = document.querySelector("body");
+        const step = parseInt("{{ survey_step }}");
+
+        if (!isNaN(step)) {
+            body.classList.add(`bg-step-${step}`);
+        } else {
+            body.classList.add("bg-step-1");
+        }
+    });
 </script>
-
-
-
 
 {{ endblock }}

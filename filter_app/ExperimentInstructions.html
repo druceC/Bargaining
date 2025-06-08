@@ -141,7 +141,7 @@
     
     <h3>1. Proposal</h3>
     <p>
-        Each participant submits a division of 30 tokens. You will have <strong>30 seconds</strong> to submit your proposal. The total must be <strong>exactly 30</strong>, and shares must be whole numbers (0-30). 
+        Each participant submits a division of 30 tokens. You will have <strong>{{ proposal_timeout }} seconds</strong> to submit your proposal. The total must be <strong>exactly 30</strong>, and shares must be whole numbers (0-30). 
         The system will randomly select <strong>one proposal</strong> for voting.
     </p>
 
@@ -149,7 +149,7 @@
     <p>
         You will see the selected proposal and the shares assigned to each member. 
         You can vote <strong class="highlight-blue">“Accept”</strong> or <strong class="highlight-red">“Reject.”</strong>  
-        You will have <strong>20 seconds</strong> to cast your vote.
+        You will have <strong>{{ vote_timeout }} seconds</strong> to cast your vote.
         The proposal needs a <strong>simple majority</strong> (at least 2 votes) to pass. 
         The proposer is automatically counted as voting in favor.
     </p>

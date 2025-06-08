@@ -92,13 +92,40 @@
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-5px); }
     }
+
+    .start-button {
+        background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 14px 28px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .start-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px 6px rgba(255, 255, 0, 0.3);
+    }
+
+    .glow-purple {
+        box-shadow: 0 0 16px 4px rgba(255, 255, 0, 0.4);
+    }
+
 </style>
 
 <div class="wrapper">
     <div class="survey-container">
         <div class="survey-header">Almost There!</div>
-        <div class="survey-subtext">You're almost there! Let's wrap this up. <span class="emoji"></span></div>
-        
+        <!-- <div class="survey-subtext">You're almost there! Let's wrap this up. <span class="emoji"></span></div> -->
+        <br>
+        <p class="survey-subtext">
+            <strong>You've completed the game</strong> — now we’d love to hear your thoughts. This short final survey helps us understand your experience and decisions better.
+        </p>
+            
+        <br>
         <button class="btn-start" onclick="startSurvey()">Start Survey</button>
     </div>
 </div>

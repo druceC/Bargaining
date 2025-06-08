@@ -15,6 +15,27 @@
         margin: 0;
     }
 
+    body {
+        background: linear-gradient(135deg, #e3f2fd, #90caf9); 
+        background-size: 200% 200%;
+        transition: background 1s ease-in-out;
+    }
+
+    /* Gradient mapping from soft blue to deep purple */
+    .bg-step-1  { background: linear-gradient(135deg, #e3f2fd, #90caf9); } 
+    .bg-step-2  { background: linear-gradient(135deg, #d0f0fd, #7ec9f1); }
+    .bg-step-3  { background: linear-gradient(135deg, #c1e0fc, #5bb9f5); }
+    .bg-step-4  { background: linear-gradient(135deg, #b3d1fc, #40aaf5); }
+    .bg-step-5  { background: linear-gradient(135deg, #a0c4fc, #4891e0); }
+    .bg-step-6  { background: linear-gradient(135deg, #8da6ef, #5f79d7); }
+    .bg-step-7  { background: linear-gradient(135deg, #7c8be4, #6a6bd1); }
+    .bg-step-8  { background: linear-gradient(135deg, #6f75d4, #6c5fd2); }
+    .bg-step-9  { background: linear-gradient(135deg, #675ecd, #684ecf); }
+    .bg-step-10 { background: linear-gradient(135deg, #5e4ac3, #623ed1); }
+    .bg-step-11 { background: linear-gradient(135deg, #5037b6, #572ed1); }
+    .bg-step-12 { background: linear-gradient(135deg, #472aa7, #4c25c6); }
+    .bg-step-13 { background: linear-gradient(135deg, #3a1c91, #3f1b74); } 
+
     .survey-container {
         width: 90%;
         max-width: 700px;
@@ -41,10 +62,11 @@
     }
 
     .survey-header {
-        font-size: 24px;
+        font-size: 25px;
         font-weight: bold;
         color: #0044cc;
         margin-bottom: 10px;
+        text-align: center;
     }
 
     .survey-subtext {
@@ -74,10 +96,6 @@
         text-align: left;
     }
 
-    .question-group {
-        margin-bottom: 20px;
-    }
-
     .next-button {
         background: #0044cc;
         color: white;
@@ -100,6 +118,163 @@
         color: #777;
         margin-top: 15px;
     }
+
+    .survey-header {
+        font-size: 24px;
+        font-weight: 600;
+        color: #0044cc;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .question-block {
+        margin-bottom: 28px;
+    }
+
+    .question-block p {
+        font-size: 15px;
+        margin-bottom: 6px;
+        line-height: 1.5;
+    }
+
+    .question-block label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        margin-bottom: 6px;
+        cursor: pointer;
+    }
+
+    .scale-hint {
+        font-size: 13.5px;
+        color: #666;
+        margin: 6px 0 10px;
+    }
+
+    blockquote {
+        font-size: 15px;
+        font-style: italic;
+        border-left: 3px solid #ccc;
+        padding-left: 12px;
+        margin: 10px 0;
+        color: #444;
+    }
+
+    .question-block {
+        margin-bottom: 30px;
+    }
+
+    .question-label {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #1a1a1a;
+    }
+
+    .radio-scale label {
+        display: block;
+        margin: 6px 0;
+        font-size: 14px;
+        transition: color 0.2s ease;
+        cursor: pointer;
+    }
+
+    .radio-scale label:hover {
+        color: #0044cc;
+        background-color: rgba(0, 68, 204, 0.05);
+        padding: 4px 6px;
+        border-radius: 4px;
+    }
+
+    blockquote.quote {
+        font-style: italic;
+        color: #444;
+        border-left: 3px solid #ccd5e0;
+        padding-left: 12px;
+        margin-top: 4px;
+        margin-bottom: 16px;
+    }
+
+    .question-block {
+        margin-bottom: 36px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .question-label {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #1a1a1a;
+        margin-bottom: 12px;
+        display: block;
+    }
+
+    .radio-scale label {
+        display: block;
+        font-size: 15px;
+        margin: 6px 0;
+        cursor: pointer;
+    }
+
+    .radio-scale label:hover {
+        background-color: rgba(0, 68, 204, 0.05);
+        padding: 4px 6px;
+        border-radius: 6px;
+        transition: 0.2s;
+    }
+
+    blockquote {
+        font-style: italic;
+        color: #444;
+        border-left: 4px solid #c0c0c0;
+        padding: 8px 14px;
+        background: #f9f9f9;
+        border-radius: 6px;
+        margin: 12px 0;
+    }
+    .section-title {
+        font-size: 17px;
+        font-weight: 600;
+        color: #0044cc;
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+    hr {
+        border: none;
+        border-top: 1px dashed #d1d9e6;
+        margin: 30px 0;
+    }
+    .radio-scale label {
+        margin: 8px 0;
+    }
+
+    .section-title {
+        font-size: 16px;
+        color: #0044cc;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    details {
+        margin-bottom: 24px;
+        padding: 12px 0;
+        border-bottom: 1px solid #e5eaf1;
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+
 </style>
 
 <div class = "wrapper">
@@ -110,20 +285,60 @@
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
-    
-        <div class="form-container">
-            {{ form.rel.label }}<br>
-            {{ form.rel }}<br><br>
-
-            <!-- Container for volunteer hours radio buttons (hidden initially) -->
-            <div id="otherTextContainer" style="display: none;">
-                <p>{{ form.rel_spec.label }}</p>
-                {{form.rel_spec}}
-                <p id="error-message" style="color: red; display: none;">This field is required.</p>
-            </div>
+        <br>
+        <!-- <div class="survey-header">Work Preferences & Organizational Attitudes</div> -->
+        <div class="survey-subtext">
+            The following questions explore what matters to you most in your relationships with leaders and decision-making structures.
         </div>
-    
-        <button class="next-button" onclick="handleNextClick()">Next</button>
+        <!-- <p class="survey-subtext">
+        The following questions explore what matters to you in an ideal job or work environment.
+        </p> -->
+        <form id="surveyForm" method="post">
+            <div class="form-container">
+                <div class="question-block">
+                    <h4 class="section-title">Your Ideal Job</h4>
+                    <p class="question-label">
+                        When thinking about your ideal job (disregarding your current one, if you have one), how important is it for you to have a boss you can respect?
+                    </p>
+                    <div class="radio-scale">
+                        {{ form.power_q1a }}
+                    </div>
+                </div>
+                
+                <div class="question-block">
+                    <p class="question-label">
+                        How important would it be to you to be consulted by your boss in decisions involving your work?
+                    </p>
+                    <div class="radio-scale">
+                        {{ form.power_q1b }}
+                    </div>
+                </div>
+                <h4 class="section-title">Workplace Dynamics</h4>
+                <div class="question-block">
+                    <p class="question-label">
+                        Based on your experience, how often are subordinates afraid to contradict their boss (or students their teacher)?
+                    </p>
+                    <div class="radio-scale">
+                        {{ form.power_q2 }}
+                    </div>
+                </div>
+                <h4 class="section-title">Organizational Structures</h4>
+                <div class="question-block">
+                    <p class="question-label">
+                        To what extent do you agree or disagree with the following statement:
+                    </p>
+                    <blockquote class="quote">
+                        “An organization structure in which certain subordinates have two bosses should be avoided at all costs.”
+                    </blockquote>
+                    <div class="radio-scale">
+                        {{ form.power_q3 }}
+                    </div>
+                </div>
+                
+            </div>
+        </form>
+
+        <button class="next-button" onclick="validateProgress()">Next</button>
         <div class="note">Click next to proceed.</div>
     </div>
 </div>
@@ -135,26 +350,6 @@
             console.warn("🚨 Progress bar element not found!");
             return;
         }
-
-        let radioButtons = document.querySelectorAll('input[name="rel"]'); // Select the radio buttons
-        let otherTextContainer = document.getElementById("otherTextContainer");
-        let otherTextInput = document.getElementById('input[name="rel_spec"]');
-
-        if (!radioButtons.length) {
-            console.error("❌ No radio buttons found for 'rel_spec'. Check your formfields configuration.");
-            return;
-        }
-
-        radioButtons.forEach(radio => {
-            radio.addEventListener("change", function() {
-                if (this.value == "1") { // If user selects "Yes"
-                    otherTextContainer.style.display = "block";
-                } else {
-                    otherTextContainer.style.display = "none";
-                    // otherTextInput.value = "";  // Clear input when hidden
-                }
-            });
-        });
 
         // Retrieve values from the template safely
         let currentStep = parseInt("{{ survey_step }}", 10);  
@@ -175,6 +370,16 @@
         console.log(`🔹 Progress Width: ${progressWidth}`);
 
         progress.style.width = progressWidth;
+
+        // Change background based on survey step
+        const body = document.querySelector("body");
+        const step = parseInt("{{ survey_step }}");
+
+        if (!isNaN(step)) {
+            body.classList.add(`bg-step-${step}`);
+        } else {
+            body.classList.add("bg-step-1");
+        }
     });
 
     function updateProgress() {
@@ -191,55 +396,38 @@
         }
     }
 
-    function toggleTextBox() {
-        let otherOption = document.getElementById("rel_spec");
-        let textBoxContainer = document.getElementById("otherTextContainer");
-        let textBox = document.getElementById("otherText");
+    function validateProgress() {
+        const form = document.getElementById("surveyForm");
+        const requiredGroups = new Set();
 
-        if (otherGenderOption.checked) {
-            textBoxContainer.style.display = "block";  // Show text input
-        } else {
-            textBoxContainer.style.display = "none";   // Hide text input
-            textBox.value = "";  // Clear input when hidden
-        }
-    }
+        // Collect all question names (e.g., from radio buttons)
+        form.querySelectorAll("input, select, textarea").forEach(input => {
+            if (input.name) requiredGroups.add(input.name);
+        });
 
-    // Prevent form submission if volunt_hrs is required but not answered
-    function validateForm() {
-        let selectedVolunteer = document.querySelector('input[name="rel"]:checked');
-        let selectedHours = document.querySelector('input[name="rel_spec"]:checked');
-        let errorMessage = document.getElementById("error-message");
-        let firstErrorField = null; // Track the first error field to scroll to
+        let allAnswered = true;
 
-        // If the person claims to have done volunteer work, require volunteer hours question
-        if (selectedVolunteer && selectedVolunteer.value == "1") { 
-            if (!selectedHours || selectedHours.value.trim() === "") {
-                errorMessage.style.display = "block"; // Show error message
-                firstErrorField = selectedHours;
-                return false;
-            } else {
-                errorMessage.style.display = "none"; // Hide error message if fixed
+        requiredGroups.forEach(name => {
+            const answered =
+                form.querySelector(`input[name="${name}"]:checked`) ||
+                (form.querySelector(`select[name="${name}"]`)?.value?.trim() !== "") ||
+                (form.querySelector(`textarea[name="${name}"]`)?.value?.trim() !== "");
+            if (!answered) {
+                allAnswered = false;
             }
-        }
-        // Scroll to the first error field if there is one
-        if (firstErrorField) {
-            firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-            firstErrorField.focus();
-            return false; // Prevent form submission
-        }
+        });
 
-        return true; // Allow form submission if no errors
+        if (allAnswered) {
+            updateProgress();
+            form.submit();
+        } else {
+            alert("Please answer all the required questions before proceeding.");
+        }
     }
-
-    function handleNextClick() {
-        if (!validateForm()) {
-            event.preventDefault();
-            return false; // Prevent form submission if validation fails
-        }
-        updateProgress(); // Only runs if validateForm() passes
-        return true;
-    }
-
+    
 </script>
+
+
+
 
 {{ endblock }}

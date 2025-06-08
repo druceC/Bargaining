@@ -17,7 +17,7 @@ COUNTRIES = sorted([country.name for country in pycountry.countries])
 COUNTRIES.insert(0, "Other (please specify)")  # Append to the beginning of the list
 
 def load_language_choices():
-    filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3.csv')
+    filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3_new.csv')
     choices = []
 
     with open(filepath, encoding='utf-8') as f:
@@ -29,7 +29,7 @@ def load_language_choices():
                 choices.append((code, name))
 
     # Add "other" option to the beginning of list
-    choices.insert(0, (000, "Other (please specify)")) 
+    choices.insert(000, "Other (please specify)")
 
     return choices
 

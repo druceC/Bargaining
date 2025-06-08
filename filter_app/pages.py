@@ -19,13 +19,8 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fund_vanishes.settings")
 from django.core.files.storage import default_storage
 
-# Set-up Questions
-NUM_ROUNDS = 5
-TIME_LIMIT = 60                  # Time limit per round in seconds
-
 # Variables for Progress Bar 
 INTRO_QUESTIONS = 3
-SURVEY_PAGES = 11
 
 # ---------------------------------------------------------------------------------------------------
 
@@ -50,6 +45,12 @@ class WelcomePage(Page):
 class ExperimentInstructions(Page):
     def is_displayed(self):
         return self.round_number == 1
+    
+    def vars_for_template(self):
+        return {
+            'proposal_timeout': PROPOSAL_TIMEOUT,
+            'vote_timeout': VOTE_TIMEOUT
+        }
 
 class SampleInstructions(Page):
     def is_displayed(self):
@@ -124,7 +125,8 @@ class IntroQuestions(Page):             # Page for Prolific ID Input
 
 class Nationality(Page):
     form_model = 'player'
-    form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit', 'primlang']
+    # form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit', 'primlang']
+    form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit']
 
     # @staticmethod
     def is_displayed(self):
@@ -222,113 +224,7 @@ class Income(Page):
         # Record response
         store_survey_response(self.player, "Income", self.form_fields)
 
-
-# ---------------------------------------------------------------------------------------------------  
-
-# Welcome Page to Survey
-class SurveyPage(Page):
-    form_model = 'player'
-    form_fields = ['feedback']
-
-    def is_displayed(self):
-        # Initialize surveyStep in participant.vars if it does not exist
-        if 'surveyStep' not in self.participant.vars:
-            self.participant.vars['surveyStep'] = 0
-        # return True  # Keep the page displayed
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
-
-    def before_next_page(self):
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
 # ---------------------------------------------------------------------------------------------------
-
-# DROPOUT NOTICE PAGES
-
-class AreYouThere(BasePage):
-    timeout_seconds = 15
-    # timeout_seconds = 10
-    # template_name = "your_app_name/AreYouTherePage.html"
-
-    def is_displayed(self):
-        return (
-            self.participant.vars.get("timed_out", False)
-            and not self.group.drop_out_finalized
-        )
-
-    def before_next_page(self):
-        if self.timeout_happened:
-            # The player did NOT click "Yes, I'm here!"
-            self.participant.vars['timed_out'] = True
-            # Also set the GROUP-LEVEL dropout flag
-            self.group.drop_out_detected = True
-            self.participant.vars["dropout"] = True
-            self.group.drop_out_finalized = True
-        else:
-            # Reset the flag for future rounds or pages
-            self.participant.vars["timed_out"] = False
-
-# Welcome Page to Survey
-class DropoutNotice(Page):
-    timeout_seconds = 15
-    
-    # Show this page to all remaining players if a dropout is detected in the group
-    def is_displayed(self):
-        # Show ONLY if dropout detected AND not yet finalized
-        # return self.group.drop_out_detected and not self.group.drop_out_finalized
-        return self.participant.vars.get("dropout", False)
-
-    def vars_for_template(self):
-        rounds_played = self.subsession.round_number  # Current round number
-
-        payment_message = (
-            "Since you have dropped out of the game, no payment shall be issued."
-        )
-
-        return {
-            "rounds_played": rounds_played,
-            "payment_message": payment_message,
-            "timeout_seconds": self.timeout_seconds
-        }
-
-class DropoutNoticeOtherPlayers(Page):
-    timeout_seconds = 15
-    
-    # Show this page to all remaining players if a dropout is detected in the group
-    def is_displayed(self):
-        # Show ONLY if dropout detected AND not yet finalized
-        return self.group.drop_out_detected and not self.participant.vars.get("dropout", False)
-
-    def before_next_page(self):
-        # Mark that dropout has been handled
-        self.group.drop_out_finalized = True
-
-    def vars_for_template(self):
-        rounds_played = self.subsession.round_number  # Current round number
-
-        if rounds_played == 0:
-            payment_message = (
-                "No rounds were completed for this session. You will receive the fixed participation fee."
-            )
-
-        elif rounds_played < 2:
-            payment_message = (
-                "Since fewer than 2 rounds were played, your final payment will be based on 1 randomly selected round."
-            )
-        else:
-            payment_message = (
-                "Since 2 or more rounds were played, your final payment will be based on 2 randomly selected rounds."
-            )
-
-        return {
-            "rounds_played": rounds_played,
-            "payment_message": payment_message,
-            "timeout_seconds": self.timeout_seconds
-        }
-
-# ---------------------------------------------------------------------------------------------------
-
-
     # Completion Link for Prolific
 
     # def js_vars(player):
@@ -339,293 +235,6 @@ class DropoutNoticeOtherPlayers(Page):
 
 # ---------------------------------------------------------------------------------------------------
 
-# SURVEY PAGES
-
-class Part1a(Page):
-    form_model = 'player'
-    form_fields = ['cmt_propr', 'cmt_vtr']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        self.participant.vars["surveyStep"] = self.participant.vars.get("surveyStep", 1)
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
-    
-    def vars_for_template(self):
-        return {
-            "survey_step": 1,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-    
-    def before_next_page(self):
-        # Save participant data to CSV when they submit responses
-        store_survey_response(self.player, "Part1a", self.form_fields)
-        
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part1b(Page):
-    form_model = 'player'
-    form_fields = ['retaliation', 'retaliation_other', 'mwc', 'mwc_others']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
-
-    def vars_for_template(self):
-        return {
-            "survey_step": 2,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        } 
-    
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part1b", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part1c(Page):
-    form_model = 'player'
-    form_fields = ['atq_1', 'atq_2', 'atq_3']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods
-
-    def vars_for_template(self):
-        return {
-            "survey_step": 3,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part1c", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part1d(Page):
-    form_model = 'player'
-    form_fields = ['age', 'risk']
-
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-    
-    def vars_for_template(self):
-        return {
-            "survey_step": 4,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-    
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part1d", self.form_fields)
-        # Increase progress bar
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part1e(Page):
-    form_model = 'player'
-    form_fields = ['occ', 'volunt', 'volunt_hrs']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 5,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # If doesn't do volunteer, set volunteer hours as 0
-        if self.player.volunt != '1':
-            self.player.volunt_hrs = ''
-        # Store responses
-        store_survey_response(self.player, "Part1e", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part2a(Page):
-    form_model = 'player'
-    form_fields = ['econ', 'party_like', 'party', 'party_prox']
-    # form_fields = ['econ', 'party_like', 'party', 'party_prox']
-
-    def is_displayed(self):
-        # Display page only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 6,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-    
-    def before_next_page(self):
-        if self.player.party_like != '1':
-            self.player.party = ''
-            self.player.party_prox = ''
-
-        # Record response
-        store_survey_response(self.player, "Part2a", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        # If user didn't select "I use a different term"
-
-
-class Part2b(Page):
-    form_model = 'player'
-    # form_fields = ['plop_unempl', 'plop_comp', 'plop_incdist']
-    form_fields = ['plop_unempl', 'plop_comp', 'plop_incdist','plop_priv', 'plop_luckeffort']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-    def vars_for_template(self):
-        return {
-            "survey_step": 7,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part2b", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part3(Page):
-    form_model = 'player'
-    form_fields = ['rel', 'rel_spec']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 8,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        if self.player.rel != '1':
-            self.player.rel_spec = ''
-        # Record response
-        store_survey_response(self.player, "Part3", self.form_fields)
-
-
-class Part4(Page):
-    form_model = 'player'
-    form_fields = ['mth_spbrn', 'mth_cntbrn', 'fth_spbrn', 'fth_cntbrn']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 9,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part4", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part5(Page):
-    form_model = 'player'
-    form_fields = ['mwc_bonus', 'mwc_bonus_others', 'enjoy']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 10,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part5", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part6(Page):
-    form_model = 'player'
-    form_fields = ['bonus']
-
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 11,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part6", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Fin(Page):
-    form_model = 'player'
-
-    # @staticmethod
-    def vars_for_template(player):
-        return dict(
-            pay=int(player.participant.payoff)
-        )
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods  
-
-
-# ---------------------------------------------------------------------------------------------------
-
 # PAGE SEQUENCE
 
 page_sequence = [
@@ -633,15 +242,15 @@ page_sequence = [
     WelcomePage,
 
     # Preliminary Questions
-    # # IntroQuestions, 
-    # Nationality,    
-    # Education,      
-    # Gender,       
-    # Income,         
+    # IntroQuestions,                       # Inquire Prolific ID
+    Nationality,    
+    Education,      
+    Gender,       
+    Income,         
 
-    # # Game Instructions
-    # ExperimentInstructions,
-    # SampleInstructions,
+    # Game Instruction Pages
+    ExperimentInstructions,
+    SampleInstructions,
     QuizPage,
     FailedPage,
 ]

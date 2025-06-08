@@ -17,19 +17,20 @@ COUNTRIES = sorted([country.name for country in pycountry.countries])
 COUNTRIES.insert(0, "Other (please specify)")  # Append to the beginning of the list
 
 def load_language_choices():
-    filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3.csv')
+    filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3_new.csv')
     choices = []
 
     with open(filepath, encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            code = row['Code'].strip()
             name = row['Language'].strip()
+            code = row['Code'].strip()
             if code and name:
                 choices.append((code, name))
 
+    length = len(choices)
     # Add "other" option to the beginning of list
-    choices.insert(0, (000, "Other (please specify)")) 
+    choices.insert(length, (000, "Other (please specify)"))
 
     return choices
 
@@ -422,9 +423,15 @@ class Player(BasePlayer):
     )
     # Only show party and party_prox if party_like == 1 
     party = models.StringField(
+        choices=[[1, 'Republican Party'], [2, 'Democratic Party'], [3, 'Libertarian Party'], ['Other (please specify)']],
         label='Which political party do you feel closest to?',
+        widget=widgets.RadioSelect,
         blank = True
     )
+
+    # New field for custom input
+    other_party = models.StringField(blank=True)
+
     party_prox = models.StringField(
         choices=[[1, 'Very close'], [2, 'Somewhat close'], [3, 'Not close'], [4, 'Not at all close'],
                  [5, "Don't know"]],

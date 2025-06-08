@@ -1,0 +1,231 @@
+{% extends "global/Page.html" %}
+
+{% block timeout_time_left %}{% endblock %}
+{% block timeout_warning %}{% endblock %}
+{% block timer %}{% endblock %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    .container {
+        max-width: 700px;
+        position: relative;
+        margin: auto;
+        padding: 40px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
+        text-align: center;
+    }
+
+    .period-box {
+        padding: 8px 15px;
+        background: #D1C4E9;
+        color: #4B0082;
+        font-weight: bold;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #4B0082;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #333;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #D1C4E9;
+        border-radius: 6px;
+        font-size: 16px;
+        text-align: center;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input:focus {
+        border-color: #4B0082;
+        box-shadow: 0px 0px 8px rgba(75, 0, 130, 0.3);
+        outline: none;
+    }
+
+    .submit-button {
+        background-color: #6A0DAD;
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease-in-out;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+    .submit-button:hover {
+        background-color: #4B0082;
+        transform: scale(1.05);
+        box-shadow: 0px 6px 12px rgba(75, 0, 130, 0.2);
+    }
+
+    .timer-wrapper {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        width: 70px;
+        height: 70px;
+        z-index: 1000;
+    }
+
+    .countdown-svg {
+        transform: rotate(-90deg);
+        transform-origin: center;
+    }
+
+    .countdown-svg .bg {
+        fill: none;
+        stroke: #eee;
+        stroke-width: 8;
+    }
+
+    .countdown-svg .progress {
+        fill: none;
+        stroke: #6A0DAD;
+        stroke-width: 8;
+        stroke-dasharray: 188.5;
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 1s linear;
+    }
+
+    #countdown-text {
+        font-size: 16px;
+        fill: #4B0082;
+        font-weight: 600;
+        transform: rotate(90deg);
+        transform-origin: center;
+    }
+
+    .progress {
+        stroke: #28a745;
+    }
+
+    .otree-timer {
+        display: none !important;
+    }
+
+    body.timeout .error-text,
+    body.timeout .help-block,
+    body.timeout .errorlist {
+        display: none !important;
+    }
+</style>
+
+<!-- Timer Display -->
+<div class="timer-wrapper">
+    <svg class="countdown-svg" width="70" height="70">
+        <circle class="bg" cx="35" cy="35" r="30" />
+        <circle class="progress" cx="35" cy="35" r="30" />
+        <text id="countdown-text" x="50%" y="56%" text-anchor="middle">
+            {{ remaining_seconds }}
+        </text>
+    </svg>
+</div>
+
+<div class="container">
+    <div class="period-box">Round {{ period }}</div>
+
+    <h1>Submit Your Proposal</h1>
+    <p>Please enter a division of shares for each participant.</p>
+    <p><strong>The total fund to share is 30 tokens.</strong></p>
+
+    <form method="post">
+        <input type="hidden" name="timeout_autosubmit" id="timeout_autosubmit" value="false">
+
+        <div class="form-container">
+            {% if id_in_subgroup == 1 %}
+                {{ formfield group.s1 label="Participant 1 (YOU)" }}
+                {{ formfield group.s2 label="Participant 2" }}
+                {{ formfield group.s3 label="Participant 3" }}
+            {% elif id_in_subgroup == 2 %}
+                {{ formfield group.s1 label="Participant 1" }}
+                {{ formfield group.s2 label="Participant 2 (YOU)" }}
+                {{ formfield group.s3 label="Participant 3" }}
+            {% elif id_in_subgroup == 3 %}
+                {{ formfield group.s1 label="Participant 1" }}
+                {{ formfield group.s2 label="Participant 2" }}
+                {{ formfield group.s3 label="Participant 3 (YOU)" }}
+            {% endif %}
+        </div>
+
+        <button class="submit-button">Submit Proposal</button>
+    </form>
+</div>
+
+<script>
+    let duration = Number("{{ remaining_seconds }}");
+    let timeLeft = duration;
+    const fullDashArray = 2 * Math.PI * 30;
+
+    const inputs = document.querySelectorAll("input");
+    const form = document.querySelector("form");
+    const timerText = document.getElementById("countdown-text");
+    const progressCircle = document.querySelector(".progress");
+
+    if (timerText) timerText.textContent = timeLeft;
+
+    let countdown = setInterval(() => {
+        timeLeft--;
+
+        if (timerText) timerText.textContent = timeLeft;
+
+        if (progressCircle) {
+            const offset = fullDashArray * (1 - timeLeft / duration);
+            progressCircle.style.strokeDashoffset = offset;
+
+            if (timeLeft <= 5) {
+                progressCircle.style.stroke = "#dc3545";
+            } else if (timeLeft <= 10) {
+                progressCircle.style.stroke = "#ffc107";
+            } else {
+                progressCircle.style.stroke = "#28a745";
+            }
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            inputs.forEach(input => {
+                if (input.type === 'number') input.value = None;
+            });
+            document.getElementById("timeout_autosubmit").value = "true";
+            document.body.classList.add("timeout");
+            form.submit();
+        }
+    }, 1000);
+
+    form.addEventListener("submit", () => clearInterval(countdown));
+</script>
+
+{% endblock %}

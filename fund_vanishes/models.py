@@ -6,6 +6,7 @@ import random
 from otree.api import *
 from .utils import store_intro
 from datetime import datetime
+from django import forms
 import pycountry
 
 # ------------------------
@@ -17,7 +18,7 @@ COUNTRIES = sorted([country.name for country in pycountry.countries])
 COUNTRIES.insert(0, "Other (please specify)")  # Append to the beginning of the list
 
 def load_language_choices():
-    filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3.csv')
+    filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3_new.csv')
     choices = []
 
     with open(filepath, encoding='utf-8') as f:
@@ -39,7 +40,7 @@ class Constants(BaseConstants):
     name_in_url = 'fund_vanishes'
     players_per_group = None                # Commented out for dynamic group formation 
     num_rounds = 5                          # Overall round loop
-    no_periods = 5                          # Custom counter
+    no_periods = 6                          # Custom counter
     total_tokens = 30
     token_value = 0.4                       # 4 tokens = 1 USD
 
@@ -95,7 +96,7 @@ class Subsession(BaseSubsession):
     def group_by_arrival_time_method(subsession, waiting_players):
         
         eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
-        group_size = 3
+        group_size = 9
 
         # Create group
         if (len(eligible)) >= group_size:
@@ -868,7 +869,7 @@ class Player(BasePlayer):
                  [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
                  [7, "7 (Completely Acceptable)"]],
         label="Consider the following situation: \"A group of three people are negotiating how to split a sum of "
-              "money. At least two of them must agree on the split.\" a.) In your view, how acceptable is it to split "
+              "money. At least two of them must agree on the split.\" In your view, how acceptable is it to split "
               "the money only between two people, with the third person getting nothing? Where 1 is completely "
               "unacceptable and 7 is completely acceptable.",
         widget=widgets.RadioSelect,
@@ -910,30 +911,12 @@ class Player(BasePlayer):
         choices=[[0, '0 (Extremely unlikely)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
                  [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
                  [10, '10 (Extremely likely)']],
-        label='In general, how willing are you to take risks??',
+        label='In general, how willing are you to take risks?',
         widget=widgets.RadioSelect,
     )
-
-    # Part 1e ----------------------
-
     occ = models.StringField(
-        label=' What is your occupation?'
-    )
-    volunt = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No']],
-        label="Have you done any volunteer work in the last 6 months?",
-        widget=widgets.RadioSelect,
-    )
-    # Contingent on selecting volunt == 1
-    volunt_hrs = models.StringField(
-        choices=[[1, "1 to 4 hours"], 
-                [2, "5 to 9 hours"], 
-                [3, "10 to 14 hours"], 
-                [4, "15 or more hours"],
-                [5, "Don't know"]],
-        label = "Approximately how many hours a week do you spend doing volunteer work?",
-        widget = widgets.RadioSelect,
-        blank = True
+        label=' What is your occupation?',
+        # widget=widgets.TextInput(attrs={'placeholder': 'e.g. Student, Engineer, Freelancer'})
     )
 
     # Part 2a ----------------------
@@ -945,9 +928,15 @@ class Player(BasePlayer):
     )
     # Only show party and party_prox if party_like == 1 
     party = models.StringField(
+        choices=[[1, 'Republican Party'], [2, 'Democratic Party'], [3, 'Libertarian Party'], [4, 'Other (please specify)']],
         label='Which political party do you feel closest to?',
+        widget=widgets.RadioSelect,
         blank = True
     )
+
+    # New field for custom input
+    other_party = models.StringField(blank=True)
+
     party_prox = models.StringField(
         choices=[[1, 'Very close'], [2, 'Somewhat close'], [3, 'Not close'], [4, 'Not at all close'],
                  [5, "Don't know"]],
@@ -1060,6 +1049,7 @@ class Player(BasePlayer):
                  [7, "7 (Completely Acceptable)"]],
         label="Consider the following situation: \"A group of three members of a company's board are tasked with negotiating how to split a sum of \"bonus\" money. At least two of them must agree on the split.\". In your view, how acceptable is it to split the money only between two people, with the third person getting nothing? Where 1 is completely unacceptable and 7 is completely acceptable.",
         widget=widgets.RadioSelect,
+        blank = False,
     )
     mwc_bonus_others = models.StringField(
         choices=[[1, "1 (Extremely unlikely)"],
@@ -1067,6 +1057,7 @@ class Player(BasePlayer):
                  [7, "7 (Extremely likely)"]],
         label="If three people in this country were to find themselves in the situation described in the previous question, how likely is it that the money will be split only between two of them, with the third person getting nothing? Where 1 is extremely unlikely and 7 is extremely likely.",
         widget=widgets.RadioSelect,
+        blank = False,
     )
     enjoy = models.StringField(
         choices=[[0, "0 (Not at all)"], [1, "1"],
@@ -1074,7 +1065,251 @@ class Player(BasePlayer):
                  [10, "10 (Enjoyed a lot)"]],
         label='How much did you enjoy this experiment? 0 means "not at all" and 10 means "enjoyed a lot".',
         widget=widgets.RadioSelect,
+        blank = False,
     )
+
+    # Power Index -------------------------
+
+    # class Player(BasePlayer):
+
+    # Q1a. Importance of having a boss you can respect
+    power_q1a = models.IntegerField(
+        label="Please think of an ideal job, disregarding your present job, if you have one. In choosing an ideal job, how important would it be to you to have a boss (direct superior) you can respect?",
+        choices=[
+            [1, '1 (Of utmost importance)'],
+            [2, '2'],
+            [3, '3'],
+            [4, '4'],
+            [5, '5 (Very little or no importance)'],
+        ],
+        widget=widgets.RadioSelect,
+        blank = False,
+    )
+
+    # Q1b. Importance of being consulted by your boss
+    power_q1b = models.IntegerField(
+        label="In choosing an ideal job, how important would it be to you to be consulted by your boss in decisions involving your work?",
+        choices=[
+            [1, '1 (Of utmost importance)'],
+            [2, '2'],
+            [3, '3'],
+            [4, '4'],
+            [5, '5 (Very little or no importance)'],
+        ],
+        widget=widgets.RadioSelect,
+        blank = False,
+    )
+
+    # Q2. How often are subordinates afraid to contradict
+    power_q2 = models.IntegerField(
+        label="How often, in your experience, are subordinates afraid to contradict their boss (or students their teacher)?",
+        choices=[
+            [1, '1 (Never)'],
+            [2, '2'],
+            [3, '3'],
+            [4, '4'],
+            [5, '5 (Always)'],
+        ],
+        widget=widgets.RadioSelect,
+        blank = False,
+    )
+
+    # Q3. Agreement with hierarchical structure statement
+    power_q3 = models.IntegerField(
+        label='To what extent do you agree or disagree with the following statement: '
+              '"An organization structure in which certain subordinates have two bosses should be avoided at all costs."',
+        choices=[
+            [1, '1 (Strongly agree)'],
+            [2, '2'],
+            [3, '3'],
+            [4, '4'],
+            [5, '5 (Strongly disagree)'],
+        ],
+        widget=widgets.RadioSelect,
+        blank = False,
+    )
+
+    # Q4. Obedience to rulers as a characteristic of democracy
+    democracy_obedience = models.IntegerField(
+        label='Many things are desirable, but not all of them are essential characteristics of democracy. '
+            'How essential is it that people obey their rulers?',
+        help_text='1 = Not at all essential, 10 = Definitely essential',
+        choices=[
+            [1, '1 (Not at all essential)'],
+            [2, '2'],
+            [3, '3'],
+            [4, '4'],
+            [5, '5'],
+            [6, '6'],
+            [7, '7'],
+            [8, '8'],
+            [9, '9'],
+            [10, '10 (Definitely essential)'],
+        ],
+        widget=widgets.RadioSelect,
+        blank = False,
+    )
+
+    # Gender Attitudes ---------------
+    # Q5. Working mother can establish warm relationship
+    gender_q1 = models.IntegerField(
+        label='A working mother can establish just as warm and secure a relationship with her children as a mother who does not work.',
+        choices=[
+            [1, '1 – Strongly agree'],
+            [2, '2 – Agree'],
+            [3, '3 – Disagree'],
+            [4, '4 – Strongly disagree'],
+        ],
+        widget=widgets.RadioSelect,
+    )
+
+    # Q6. Man should be achiever, woman cares for home
+    gender_q2 = models.IntegerField(
+        label='It is much better for everyone involved if the man is the achiever outside the home and the woman takes care of the home and family.',
+        choices=[
+            [1, '1 – Strongly agree'],
+            [2, '2 – Agree'],
+            [3, '3 – Disagree'],
+            [4, '4 – Strongly disagree'],
+        ],
+        widget=widgets.RadioSelect,
+    )
+
+    # Q7. Man earns, woman looks after home
+    gender_q3 = models.IntegerField(
+        label='A man\'s job is to earn money; a woman’s job is to look after the home and family.',
+        choices=[
+            [1, '1 – Strongly agree'],
+            [2, '2 – Agree'],
+            [3, '3 – Disagree'],
+            [4, '4 – Strongly disagree'],
+        ],
+        widget=widgets.RadioSelect,
+    )
+
+    # Q8. Family suffers when woman works full-time
+    gender_q4 = models.IntegerField(
+        label='All in all, family life suffers when the woman has a full-time job.',
+        choices=[
+            [1, '1 – Strongly agree'],
+            [2, '2 – Agree'],
+            [3, '3 – Disagree'],
+            [4, '4 – Strongly disagree'],
+        ],
+        widget=widgets.RadioSelect,
+    )
+
+    # Schwartz Hierarchy -----------------------------
+
+    social_power = models.StringField(
+        choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'],
+                ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+        label='Social Power',
+        label_desc='(control over others, dominance)',
+        widget=widgets.RadioSelectHorizontal,
+        blank=False
+    )
+
+    wealth = models.StringField(
+        choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'],
+                ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+        label='Wealth',
+        label_desc='(material possessions, money)',
+        widget=widgets.RadioSelectHorizontal,
+        blank=False
+    )
+
+    authority = models.StringField(
+        choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'],
+                ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+        label='Authority',
+        label_desc='(the right to lead or command)',
+        widget=widgets.RadioSelectHorizontal,
+        blank=False
+    )
+
+    humble = models.StringField(
+        choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'],
+                ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+        label='Humble',
+        label_desc='(modest, self-effacing)',
+        widget=widgets.RadioSelectHorizontal,
+        blank=False
+    )
+
+    influential = models.StringField(
+        choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'],
+                ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+        label='Influential',
+        label_desc='(having an impact on people and events)',
+        widget=widgets.RadioSelectHorizontal,
+        blank=False
+    )
+
+
+    # social_power = models.StringField(
+    #     choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'], ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+    #     label='Social Power',
+    #     label_desc='(control over others, dominance)'
+    #     widget=widgets.RadioSelectHorizontal,
+    #     blank=True
+    # )
+
+    # wealth = models.StringField(
+    #     choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'], ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+    #     label='Wealth (material possessions, money)',
+    #     widget=widgets.RadioSelectHorizontal,
+    #     blank=True
+    # )
+
+    # authority = models.StringField(
+    #     choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'], ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+    #     label='Authority (the right to lead or command)',
+    #     widget=widgets.RadioSelectHorizontal,
+    #     blank=True
+    # )
+
+    # humble = models.StringField(
+    #     choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'], ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+    #     label='Humble (modest, self-effacing)',
+    #     widget=widgets.RadioSelectHorizontal,
+    #     blank=True
+    # )
+
+    # influential = models.StringField(
+    #     choices=[['-1', '-1 Opposed to my values'], ['0', '0 Not important'], ['1', '1'], ['2', '2'], ['3', '3 Important'], ['4', '4'], ['5', '5'], ['6', '6 Very important'], ['7', '7 Of supreme importance']],
+    #     label='Influential (having an impact on people and events)',
+    #     widget=widgets.RadioSelectHorizontal,
+    #     blank=True
+    # )
+
+    # social_power = models.IntegerField(
+    #     label='SOCIAL POWER (control over others, dominance)',
+    #     min=-1, max=7, blank=True,
+    # )
+    # wealth = models.IntegerField(
+    #     label='SOCIAL POWER (control over others, dominance)',
+    #     min=-1, max=7, blank=True,
+    # )
+    # authority = models.IntegerField(
+    #     label='SOCIAL POWER (control over others, dominance)',
+    #     min=-1, max=7, blank=True,
+    # )
+    # humble = models.IntegerField(
+    #     label='SOCIAL POWER (control over others, dominance)',
+    #     min=-1, max=7, blank=True,
+    # )
+    # influential = models.IntegerField(
+    #     label='SOCIAL POWER (control over others, dominance)',
+    #     min=-1, max=7, blank=True,
+    # )
+    # Repeat for the rest:
+    # wealth = models.IntegerField(min=-1, max=7, blank=True, label='WEALTH (material possessions, money)')
+    # authority = models.IntegerField(min=-1, max=7, blank=True, label='AUTHORITY (the right to lead or command)')
+    # humble = models.IntegerField(min=-1, max=7, blank=True, label='HUMBLE (modest, self-effacing)')
+    # influential = models.IntegerField(min=-1, max=7, blank=True, label='INFLUENTIAL (having an impact on people and events)')
+
+
 
     # Part 6 -------------------------
 

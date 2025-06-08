@@ -70,7 +70,7 @@
             countdownEl.textContent = countdownValue;
         } else {
             clearInterval(countdownInterval);
-            countdownEl.textContent = "go!";
+            countdownEl.textContent = "GO";
             setTimeout(() => {
                 document.querySelector("form").submit();
             }, 800);  // brief pause before redirect

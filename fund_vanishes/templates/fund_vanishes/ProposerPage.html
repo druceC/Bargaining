@@ -4,11 +4,8 @@
 {% block timeout_warning %}{% endblock %}
 {% block timer %}{% endblock %}
 
-
 {% block content %}
-
 <style>
-    /* General Styling */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
     body {
@@ -18,6 +15,7 @@
 
     .container {
         max-width: 700px;
+        position: relative;
         margin: auto;
         padding: 40px;
         background: white;
@@ -26,10 +24,9 @@
         text-align: center;
     }
 
-    /* Period Display */
     .period-box {
         padding: 8px 15px;
-        background: #D1C4E9; /* Soft Lavender */
+        background: #D1C4E9;
         color: #4B0082;
         font-weight: bold;
         border-radius: 20px;
@@ -37,7 +34,6 @@
         margin-bottom: 20px;
     }
 
-    /* Title */
     h1 {
         font-size: 24px;
         font-weight: 700;
@@ -45,7 +41,6 @@
         margin-bottom: 10px;
     }
 
-    /* Instructions */
     p {
         font-size: 16px;
         color: #333;
@@ -53,7 +48,6 @@
         margin-bottom: 20px;
     }
 
-    /* Form Grid */
     .form-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -62,7 +56,6 @@
         margin-bottom: 20px;
     }
 
-    /* Input Styling */
     input {
         width: 100%;
         padding: 10px;
@@ -79,7 +72,6 @@
         outline: none;
     }
 
-    /* Submit Button */
     .submit-button {
         background-color: #6A0DAD;
         color: white;
@@ -109,7 +101,7 @@
     }
 
     .countdown-svg {
-        transform: rotate(-90deg); /* Start from 12 o'clock */
+        transform: rotate(-90deg);
         transform-origin: center;
     }
 
@@ -123,7 +115,7 @@
         fill: none;
         stroke: #6A0DAD;
         stroke-width: 8;
-        stroke-dasharray: 188.5;  /* 2 * π * r = 2 * π * 30 */
+        stroke-dasharray: 188.5;
         stroke-dashoffset: 0;
         transition: stroke-dashoffset 1s linear;
     }
@@ -137,14 +129,18 @@
     }
 
     .progress {
-        stroke: #28a745; /* start green */
+        stroke: #28a745;
     }
 
-    .otree-timer { 
+    .otree-timer {
         display: none !important;
     }
 
-
+    body.timeout .error-text,
+    body.timeout .help-block,
+    body.timeout .errorlist {
+        display: none !important;
+    }
 </style>
 
 <!-- Timer Display -->
@@ -152,26 +148,22 @@
     <svg class="countdown-svg" width="70" height="70">
         <circle class="bg" cx="35" cy="35" r="30" />
         <circle class="progress" cx="35" cy="35" r="30" />
-        <text id="countdown-text" x="50%" y="56%" text-anchor="middle" font-size="16" fill="#4B0082">
-            {{ timeout_seconds }}
+        <text id="countdown-text" x="50%" y="56%" text-anchor="middle">
+            {{ remaining_seconds }}
         </text>
     </svg>
 </div>
 
-
-
 <div class="container">
-    <!-- Display Current Period -->
-    <!-- <div class="period-box">Round {{ group.current_period }}</div> -->
     <div class="period-box">Round {{ period }}</div>
 
-    <!-- Instruction Section -->
     <h1>Submit Your Proposal</h1>
     <p>Please enter a division of shares for each participant.</p>
     <p><strong>The total fund to share is 30 tokens.</strong></p>
 
-    <!-- Form -->
     <form method="post">
+        <input type="hidden" name="timeout_autosubmit" id="timeout_autosubmit" value="false">
+
         <div class="form-container">
             {% if id_in_subgroup == 1 %}
                 {{ formfield group.s1 label="Participant 1 (YOU)" }}
@@ -188,15 +180,14 @@
             {% endif %}
         </div>
 
-        <!-- Submit Button -->
         <button class="submit-button">Submit Proposal</button>
     </form>
 </div>
 
 <script>
-    let duration = Number("{{ timeout_seconds }}");  // From oTree
+    let duration = Number("{{ remaining_seconds }}");
     let timeLeft = duration;
-    const fullDashArray = 2 * Math.PI * 20;  // Circle with r = 30
+    const fullDashArray = 2 * Math.PI * 30;
 
     const inputs = document.querySelectorAll("input");
     const form = document.querySelector("form");
@@ -208,36 +199,33 @@
     let countdown = setInterval(() => {
         timeLeft--;
 
-        // Update text
         if (timerText) timerText.textContent = timeLeft;
 
-        // Update stroke and color transition
         if (progressCircle) {
             const offset = fullDashArray * (1 - timeLeft / duration);
             progressCircle.style.strokeDashoffset = offset;
 
-            // Color transition logic
             if (timeLeft <= 5) {
-                progressCircle.style.stroke = "#dc3545"; // red
+                progressCircle.style.stroke = "#dc3545";
             } else if (timeLeft <= 10) {
-                progressCircle.style.stroke = "#ffc107"; // yellow
+                progressCircle.style.stroke = "#ffc107";
             } else {
-                progressCircle.style.stroke = "#28a745"; // green
+                progressCircle.style.stroke = "#28a745";
             }
         }
 
-        // Auto-submit if time runs out
         if (timeLeft <= 0) {
-                clearInterval(countdown);
-                inputs.forEach(input => input.value = -30);
-                form.submit();
+            clearInterval(countdown);
+            inputs.forEach(input => {
+                if (input.type === 'number') input.value = None;
+            });
+            document.getElementById("timeout_autosubmit").value = "true";
+            document.body.classList.add("timeout");
+            form.submit();
         }
     }, 1000);
-
 
     form.addEventListener("submit", () => clearInterval(countdown));
 </script>
 
-
 {% endblock %}
-

@@ -16,16 +16,23 @@ import datetime
 import json
 import csv
 import os
+import time
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fund_vanishes.settings")
 from django.core.files.storage import default_storage
 
-# Set-up Questions
+# Set-up questions
 NUM_ROUNDS = 5
-TIME_LIMIT = 60                  # Time limit per round in seconds
 
-# Variables for Progress Bar 
+# Timeout variables
+PROPOSAL_TIMEOUT = 60                  # Proposer Page 
+VOTE_TIMEOUT = 60                      # Voter Page
+PROPOSAL_TIMEOUT_2 = 30                # 2nd Chance Proposer Page
+VOTE_TIMEOUT_2 = 30                    # 2nd Chance Voter Page
+RESULTS_TIMEOUT = 30                   # Results Page timeout
+
+# Variables for progress bar 
 INTRO_QUESTIONS = 4
-SURVEY_PAGES = 11
+SURVEY_PAGES = 12
 
 # ---------------------------------------------------------------------------------------------------
 
@@ -37,10 +44,6 @@ class BasePage(Page):
         # Don't show page if dropout is detected
         return not self.group.drop_out_detected
         # return not self.participant.vars.get("dropout", False)
-    
-    # def app_after_this_page(self, upcoming_apps):
-    #     if self.group.drop_out_detected:
-    #         return 'fund_vanishes/DropoutNotice'
 
 # Dropout detection for WaitPages
 class BaseWaitPage(WaitPage):
@@ -48,22 +51,6 @@ class BaseWaitPage(WaitPage):
         # Don't show page if dropout is detected
         # return not self.group.drop_out_detected
         return not self.participant.vars.get("dropout", False)
-    
-    # def app_after_this_page(self, upcoming_apps):
-    #     if self.group.drop_out_detected:
-    #         return 'fund_vanishes/DropoutNotice'
-
-class WelcomePage(Page):
-    def is_displayed(self):
-        return self.round_number == 1
-
-class ExperimentInstructions(Page):
-    def is_displayed(self):
-        return self.round_number == 1
-
-class SampleInstructions(Page):
-    def is_displayed(self):
-        return self.round_number == 1
 
 # Mini quiz to ensure understanding of game instructions
 class QuizPage(Page):
@@ -101,147 +88,12 @@ class QuizPage(Page):
                 self.participant.vars['redirect_to_failed'] = True 
                 return 
             return errors  # Returns error messages to be displayed to the participant
-    
-    
-    # def before_next_page(self):
-    #     if self.player.total_num_failed_attempts >= 3:
-    #         self.participant.vars['redirect_to_failed'] = True  
-    
-    # Redirect to failed.html
-    # def app_after_this_page(self, upcoming_apps):
-    #     if self.participant.vars.get('redirect_to_failed', False):
-    #         return 'fund_vanishes/FailedPage'  # Replace with your actual app/page path
 
 # Show this page if player fails the quiz
 # Displays failure message if the player fails the quiz after 3 attempts
 class FailedPage(Page):
     def is_displayed(self):
         return self.participant.vars.get('redirect_to_failed', False) 
-    
-
-# ---------------------------------------------------------------------------------------------------
-
-# PRELIMINARY QUESTIONS
-
-class IntroQuestions(Page):             # Page for Prolific ID Input
-    form_model = 'player'
-    form_fields = ['prolific_id']
-
-    def is_displayed(self):
-        # Initialize surveyStep
-        if 'surveyStep' not in self.participant.vars:
-            self.participant.vars['surveyStep'] = 1
-        return self.round_number == 1
-
-    def before_next_page(self):
-        # Progress bar for next page
-        self.participant.vars['surveyStep'] += 1
-        # To prevent duplicates
-        if not self.participant.vars.get("intro_saved", False):
-            store_intro(self.player)
-            self.participant.vars["intro_saved"] = True
-
-
-class Nationality(Page):
-    form_model = 'player'
-    form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit', 'primlang']
-
-    # @staticmethod
-    def is_displayed(self):
-        return self.round_number == 1
-
-    def vars_for_template(self):
-        return {
-            "survey_step": 1,
-            "total_steps": INTRO_QUESTIONS
-        }
-
-    def before_next_page(self):
-        # Record responses
-        store_survey_response(self.player, "Nationality", self.form_fields)
-
-        if self.player.spbrn != '2':        # If not 'No'
-            self.player.cntbrn = ''         # Clear the field
-        
-        if self.player.spcit != '2':        # If not 'No'
-            self.player.other_cit = ''      # Clear the field
-        
-
-class Education(Page):
-    form_model = 'player'
-    form_fields = ['degree']
-     
-    def is_displayed(self):
-        return self.round_number == 1
-
-    def vars_for_template(self):
-        return {
-            "survey_step": 2,
-            "total_steps": INTRO_QUESTIONS  
-        }
-
-    def before_next_page(self):
-        # Store responses
-        store_survey_response(self.player, "Education", self.form_fields)
-
-
-class Gender(Page):
-    form_model = 'player'
-    form_fields = ['sex', 'gen', 'other_gender', 'gen_cgi',]
-
-    # Gender choices mapping
-    GENDER_CHOICES = {
-        "1": "man or male",
-        "2": "woman or female",
-        "3": "non-binary or genderqueer",
-        "4": "I use a different term",
-        "5": "I prefer not to answer"
-    }
-
-    def is_displayed(self):
-        return self.round_number == 1
-    
-    def vars_for_template(self):
-        return {
-            "survey_step": 3,
-            "total_steps": INTRO_QUESTIONS 
-        }
-    
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Gender", self.form_fields)
-        
-        # If user didn't select "I use a different term"
-        if self.player.gen != '4':
-            self.player.other_gender = ''
-        
-        # Assign the provided gender label into "selected_gender" variable or a custom one if 'gen' == '4'
-        if str(self.player.gen).strip() == "4":
-            self.participant.vars["selected_gender"] = self.player.other_gender  # Custom term
-        else:
-            self.participant.vars["selected_gender"] = self.GENDER_CHOICES.get(str(self.player.gen), "Not specified")
-
-        # Save gender_cgi for templating in priming/baselin
-        self.participant.vars["gender_expression"] = self.player.gen_cgi
-
-
-class Income(Page):
-    form_model = 'player'
-    form_fields = ['inc','inc_hh']
-    
-    def is_displayed(self):
-        return self.round_number == 1
-    
-    def vars_for_template(self):
-        return {
-            "survey_step": 4,
-            "total_steps": INTRO_QUESTIONS  # Adjust based on survey length
-        }
-    
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Income", self.form_fields)
-
 
 # ---------------------------------------------------------------------------------------------------
 
@@ -258,52 +110,6 @@ class SyncTop(BaseWaitPage):
     #  Ensure page is only displayed for players who still need to play 5 rounds
     def is_displayed(self):
         return not self.participant.vars.get("has_synced", False)
-
-    # @staticmethod
-    # def group_by_arrival_time_method(subsession, waiting_players):
-        
-    #     eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
-    #     group_size = 3
-        
-    #     # Create group
-    #     if (len(eligible)) >= group_size:
-    #         # Randomly pick 9 from the list of available players
-    #         selected = random.sample(eligible, group_size)
-
-    #         # Determine group index by checking how many groups have been created so far
-    #         existing_groups = subsession.get_groups()
-    #         group_index = len(existing_groups)
-
-    #         # Assign priming/baseline treatment
-    #         is_priming = group_index % 2 == 1  # Odd = priming, even = baseline
-
-    #          # Create a shared identifier for this 9‑player “super‑group”
-    #         group_id_9 = f"g9_{selected[0].id_in_subsession}"
-    #         # Write group metadata into each participant’s vars for later rounds
-    #         for p in selected:
-    #             p.participant.vars["group_index"] = group_index
-    #             p.participant.vars["group_id_9"] = group_id_9
-    #             p.participant.vars["group_members"] = [q.id_in_subsession for q in selected]
-    #             p.participant.vars["has_synced"] = True
-    #             p.participant.vars["is_priming"] = is_priming 
-    #             # Also assign on player object for easy access
-    #             p.is_priming = is_priming
-
-    #         # Server‑side debug log
-    #         print(f"[DEBUG] round 1 – formed 9‑block {group_id_9}")
-
-    #         # Initialize period counter for the group
-    #         for p in selected:
-    #             if 'periods_played' not in p.participant.vars:
-    #                 p.participant.vars['periods_played'] = 0    # Initialize period count
-
-    #         print(f"[DEBUG] formed 9‑block {group_id_9} → {'Priming' if is_priming else 'Baseline'}")
-
-    #         # Returning the list lets oTree create this group and move on
-    #         return selected
-        
-    #     # Fewer than nine → keep waiting
-    #     return None
 
     # Handles actions before moving to the next page, including timeout handling. 
     @staticmethod
@@ -328,7 +134,7 @@ class SyncTop(BaseWaitPage):
         group = self.player.group
 
         # Increment period for the next round
-        self.player.participant.vars['periods_played'] += 1
+        self.player.participant.vars['periods_played'] += 2
 
         # Reference to the participant object
         participant = self.player.participant
@@ -365,6 +171,7 @@ class CalculatePage(BasePage):
         # Reference to the participant object
         participant = self.player.participant
 
+
 # Page shown while waiting for other participants to join and complete mini assessment
 class WaitingPage(BaseWaitPage):
     # template_name = 'fund_vanishes/WaitingPage.html'
@@ -386,9 +193,11 @@ class WaitingPage(BaseWaitPage):
             "group_index": self.participant.vars.get("group_index", "N/A")
         }
 
+
 class GameStarts(Page):
     def is_displayed(self):
         return self.round_number == 1
+
 
 # Submit Proposal Page: All players propose an allocation, then store
 class ProposerPage(BasePage):
@@ -397,17 +206,25 @@ class ProposerPage(BasePage):
     # Collect allocation values from participants
     form_fields = ['s1', 's2', 's3']  
     # Set timeout count
-    timeout_seconds = 60
+    timeout_seconds = PROPOSAL_TIMEOUT
     # Allow for subroup independence
     group_by_arrival_time = False
 
     # Provide player ID for template rendering
     def vars_for_template(self):
+        # Ensure that timeout is absolute
+        if "expiry_timestamp_proposer" not in self.participant.vars:
+            self.participant.vars["expiry_timestamp_proposer"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["expiry_timestamp_proposer"] - time.time()))
+
+        # Subgroup ID
         subgroup_id = self.participant.vars.get("subgroup_id")
+        # ID of player within subgroup
         id_in_subgroup = self.participant.vars.get("id_in_subgroup")
 
         # Get current player's period for templating
-        self.player.participant.vars['periods_played'] += 1
+        if self.player.participant.vars['periods_played'] == 0:
+            self.player.participant.vars['periods_played']+=1
         p_period = self.player.participant.vars['periods_played']
         # print(f"Round {self.round_number} | Group {self.group.id_in_subsession} | Subgroup {self.player.participant.vars['subgroup_id']}")
         
@@ -417,29 +234,35 @@ class ProposerPage(BasePage):
             'id_in_subgroup': id_in_subgroup,
             'timeout_seconds': self.timeout_seconds,
             'period': p_period,
-            "group_index": self.participant.vars.get("group_index", "N/A")
+            "group_index": self.participant.vars.get("group_index", "N/A"),
+            "remaining_seconds": remaining
         }
 
     # Store the proposer's id and submitted allocation before proceeding
     def before_next_page(self, timeout_happened = False):
         # proposer_id = id_in_subgroup
 
+        # Clean up timeout
+        self.participant.vars.pop("expiry_timestamp_proposer", None)
+        
         # Determine the proposal based on timeout or real input
         if self.timeout_happened:
             allocation = {"s1": -10, "s2": -10, "s3": -10}
+            # allocation = {"s1": None, "s2": None, "s3": None}
             self.drop_out_detected = True
             self.participant.vars["timed_out"] = True
             store_decision(self.player, "ProposerPage", "Timeout - Auto Proposal", allocation)
+            # self.player.participant.vars['periods_played'] -=1
 
             # Declare dropout
-            self.participant.vars["dropout"] = True
-            self.group.drop_out_detected = True
-            self.group.drop_out_finalized = True
+            # self.participant.vars["dropout"] = True
+            # self.group.drop_out_detected = True
+            # self.group.drop_out_finalized = True
 
             # Notify other players
-            for p in self.group.get_players():
-                if p.participant.id != self.participant.id:  # exclude dropout
-                    p.participant.vars["go_to_notice"] = True
+            # for p in self.group.get_players():
+            #     if p.participant.id != self.participant.id:  # exclude dropout
+            #         p.participant.vars["go_to_notice"] = True
         else:
             allocation = {
                 "s1": self.player.s1,
@@ -478,6 +301,126 @@ class ProposerPage(BasePage):
         if sum([values['s1'], values['s2'], values['s3']]) != 30:
             return "The total allocation must sum to exactly 30."
 
+
+# Submit Proposal Page: All players propose an allocation, then store
+class ProposerPage2(BasePage):
+    # Store data collected in this page at the group level
+    form_model = 'player'  
+    # Collect allocation values from participants
+    form_fields = ['s1', 's2', 's3']  
+    # Set timeout count
+    timeout_seconds = PROPOSAL_TIMEOUT_2
+    # Allow for subroup independence
+    group_by_arrival_time = False
+
+    def is_displayed(self):
+        return (
+            self.participant.vars.get("timed_out", False) and not self.group.drop_out_finalized
+        )
+
+    # Provide player ID for template rendering
+    def vars_for_template(self):
+        # Ensure timeout is absolute
+        if "expiry_timestamp_proposer2" not in self.participant.vars:
+            self.participant.vars["expiry_timestamp_proposer2"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["expiry_timestamp_proposer2"] - time.time()))
+
+        subgroup_id = self.participant.vars.get("subgroup_id")
+        id_in_subgroup = self.participant.vars.get("id_in_subgroup")
+
+        # Get current player's period for templating
+        # self.player.participant.vars['periods_played'] -=2
+        p_period = self.player.participant.vars['periods_played']
+        # print(f"Round {self.round_number} | Group {self.group.id_in_subsession} | Subgroup {self.player.participant.vars['subgroup_id']}")
+        
+        return {
+            'id': self.player.id_in_group,
+            'subgroup_id': subgroup_id,
+            'id_in_subgroup': id_in_subgroup,
+            'timeout_seconds': self.timeout_seconds,
+            'period': p_period,
+            "group_index": self.participant.vars.get("group_index", "N/A"),
+            "remaining_seconds": remaining
+        }
+
+    # Store the proposer's id and submitted allocation before proceeding
+    def before_next_page(self, timeout_happened = False):
+        # proposer_id = id_in_subgroup
+
+        # Clean up timeout
+        self.participant.vars.pop("expiry_timestamp_proposer2", None)
+
+        # Determine the proposal based on timeout or real input
+        if self.timeout_happened:
+            allocation = {"s1": -10, "s2": -10, "s3": -10}
+            # allocation = {"s1": None, "s2": None, "s3": None}
+            self.drop_out_detected = True
+            self.participant.vars["timed_out"] = True
+            store_decision(self.player, "ProposerPage2", "Timeout - Auto Proposal", allocation)
+
+            # Declare dropout
+            self.participant.vars["dropout"] = True
+            self.group.drop_out_detected = True
+            self.group.drop_out_finalized = True
+
+            # Notify other players
+            for p in self.group.get_players():
+                if p.participant.id != self.participant.id:  # exclude dropout
+                    p.participant.vars["go_to_notice"] = True
+        else:
+            # self.player.participant.vars['periods_played'] += 1
+            # Undeclare dropout
+            self.drop_out_detected = False
+            self.participant.vars["timed_out"] = False
+            self.participant.vars["dropout"] = False
+            self.group.drop_out_detected = False
+            self.group.drop_out_finalized = False
+
+            allocation = {
+                "s1": self.player.s1,
+                "s2": self.player.s2,
+                "s3": self.player.s3,
+            }
+            store_decision(self.player, "ProposerPage2", "Submitted Proposal", allocation)
+
+
+        subgroup_id = self.player.participant.vars.get('subgroup_id')
+        id_in_subgroup = self.player.participant.vars.get('id_in_subgroup')
+        proposer_id = self.player.participant.vars.get('id_in_subgroup')
+
+        # Load existing subgroup proposals from JSON field
+        subgroup_proposals = json.loads(self.group.subgroup_proposals_str)
+
+        # Overwrite any existing proposal from this proposer
+        subgroup_key = str(subgroup_id)                     # Retrieve subgroup_id
+        if subgroup_key not in subgroup_proposals:
+            subgroup_proposals[subgroup_key] = []
+
+        # Overwrite logic: Remove any existing proposal from this proposer
+        subgroup_proposals[subgroup_key] = [
+           p for p in subgroup_proposals[subgroup_key] if p["proposer_id"] != id_in_subgroup 
+        ]
+
+        # Append the new proposal
+        subgroup_proposals[subgroup_key].append({           # Add proposal
+            "proposer_id": id_in_subgroup,
+            "proposal": allocation
+        })
+
+        # # Save updated proposals as JSON
+        self.group.subgroup_proposals_str = json.dumps(subgroup_proposals)
+        print(f"[DEBUG] Subgroup {subgroup_id} proposals so far: {subgroup_proposals[subgroup_key]}")
+            
+    # Validate input data
+    def error_message(self, values):
+        # Condition 1: All proposals (s1, s2, s3) are within 0 to 30 range 
+        if any(values[key] < 0 or values[key] > 30 for key in ['s1', 's2', 's3']):
+            return "Each proposal must be between 0 and 30."
+        # Condition 2: Sum of all proposed values equal exactly 30
+        if sum([values['s1'], values['s2'], values['s3']]) != 30:
+            return "The total allocation must sum to exactly 30."
+
+
 class SelectingPage(WaitPage):
     wait_for_all_groups = False
     timeout_seconds = 15
@@ -502,22 +445,32 @@ class SelectingPage(WaitPage):
 
     @staticmethod
     def after_all_players_arrive(group: Group):
+        # Define the timeout proposal to check against
+        TIMEOUT_PROPOSAL = {"s1": -10, "s2": -10, "s3": -10}
+
         # Load existing proposals
         subgroup_proposals = json.loads(group.subgroup_proposals_str)
         selected_proposals = json.loads(group.selected_proposals_str or '{}')
 
-        # Identify all unique subgroup IDs in the group
+        # Get unique subgroup IDs in the group
         subgroup_ids = set(p.participant.vars.get("subgroup_id") for p in group.get_players())
 
         for subgroup_id in subgroup_ids:
             subgroup_key = str(subgroup_id)
             proposals = subgroup_proposals.get(subgroup_key, [])
 
-            # Only select if not already selected and all 3 proposals were collected
-            if subgroup_key not in selected_proposals and len(proposals) == 3:
-                selected = random.choice(proposals)
+            # Filter out timeout proposals
+            valid_proposals = [
+                p for p in proposals if p["proposal"] != TIMEOUT_PROPOSAL
+            ]
+
+            # Only select if 3 proposals were collected (none of which are timeouts)
+            if subgroup_key not in selected_proposals and len(valid_proposals) == 3:
+                selected = random.choice(valid_proposals)
                 selected_proposals[subgroup_key] = selected
                 print(f"[DEBUG] ✅ Subgroup {subgroup_id} selected proposal: {selected}")
+            else:
+                print(f"[DEBUG] ⚠️ Skipping subgroup {subgroup_id}. Collected: {len(proposals)} | Valid: {len(valid_proposals)}")
 
         # Save updated selections
         group.selected_proposals_str = json.dumps(selected_proposals)
@@ -533,17 +486,26 @@ class SelectingPage(WaitPage):
     #         print("[SelectingPage] Dropout detected — participants flagged for redirect.")
     #         return  # exit early — no selection
 
+    def vars_for_template(self):
+        if "expiry_timestamp_selecting" not in self.participant.vars:
+            self.participant.vars["expiry_timestamp_selecting"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["expiry_timestamp_selecting"] - time.time()))
+
+        return{
+            "timeout_seconds": self.timeout_seconds,
+            "subgroup_id": self.participant.vars.get("subgroup_id"),
+            "remaining_seconds": remaining
+        }
+
     def before_next_page(self):
+        # Clean up timeout
+        self.participant.vars.pop("expiry_timestamp_selecting", None)
+
         if self.timeout_happened:
             print(f"[WaitOrTimeoutPage] Timeout for participant {self.participant.code}")
         else:
             print(f"[WaitOrTimeoutPage] Proceeding after all arrived: {self.participant.code}")
 
-    def vars_for_template(self):
-        return{
-            "timeout_seconds": self.timeout_seconds,
-            "subgroup_id": self.participant.vars.get("subgroup_id")
-        }
 
 
 
@@ -554,6 +516,11 @@ class SelectedProposalPage(BasePage):
 
     # Retrieve the stored proposer ID from group model and display
     def vars_for_template(self):
+        # Ensure timeout is absolute
+        if "expiry_timestamp_selected" not in self.participant.vars:
+            self.participant.vars["expiry_timestamp_selected"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["expiry_timestamp_selected"] - time.time()))
+        
         subgroup_id = self.player.participant.vars.get("subgroup_id")
         id_in_subgroup = self.player.participant.vars.get("id_in_subgroup")
         subgroup_key = str(subgroup_id)
@@ -571,7 +538,8 @@ class SelectedProposalPage(BasePage):
                 "selected_proposal": {}, 
                 "relevant_proposal": {},
                 "timeout_occurred": False,
-                "timeout_seconds": self.timeout_seconds
+                "timeout_seconds": self.timeout_seconds,
+                "remaining_seconds": remaining
             }
 
         selected_proposal = selected_proposals[subgroup_key]
@@ -593,20 +561,30 @@ class SelectedProposalPage(BasePage):
             'relevant_proposal': relevant_proposal,
             'player_id': self.player.id_in_group,
             'timeout_occurred': timeout_flag,
-            'timeout_seconds': self.timeout_seconds
+            'timeout_seconds': self.timeout_seconds,
+            "remaining_seconds": remaining
         }
+    
+    def before_next_page(self):
+        # Clean up timeout
+        self.participant.vars.pop("expiry_timestamp_selected", None)
 
 # Voting Page: Players vote on the selected proposal
 class VoterPage(BasePage):
     form_model = 'player'  
     form_fields = ['vote'] 
-    timeout_seconds = 60
+    timeout_seconds = VOTE_TIMEOUT
 
     def is_displayed(self):
         return not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
 
     # Pass proposal data to the template
     def vars_for_template(self):
+        # Ensure timeout is absolute
+        if "voter_expiry_timestamp" not in self.participant.vars:
+            self.participant.vars["voter_expiry_timestamp"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["voter_expiry_timestamp"] - time.time()))
+
         subgroup_id = self.player.participant.vars.get("subgroup_id")
         id_in_subgroup = self.player.participant.vars.get("id_in_subgroup")
         subgroup_key = str(subgroup_id)
@@ -634,10 +612,89 @@ class VoterPage(BasePage):
             'selected_proposer_id': proposer_display,
             'selected_proposer_num': proposer_num,
             'selected_allocation': relevant_proposal,
-            'timeout_seconds': self.timeout_seconds
+            'timeout_seconds': self.timeout_seconds,
+            'remaining_seconds': remaining
         }
 
     def before_next_page(self):
+        # Clean up timeout
+        self.participant.vars.pop("voter_expiry_timestamp", None)
+
+        # TIMEOUT: Handle case for when a timeout/dropout occurs    
+        if self.timeout_happened:
+            self.player.vote = False
+            self.drop_out_detected = True
+            self.participant.vars["timed_out"] = True
+            
+            # Declare dropout
+            # self.participant.vars["dropout"] = True
+            # self.group.drop_out_detected = True
+            # self.group.drop_out_finalized = True
+
+            # Notify other players
+            # for p in self.group.get_players():
+            #     if p.participant.id != self.participant.id:  # exclude dropout
+            #         p.participant.vars["go_to_notice"] = True
+
+            store_decision(self.player, "VoterPage", "Timeout - Auto Vote", {"vote": False})
+        else:
+            store_decision(self.player, "VoterPage", "Voted", {"vote": self.player.vote})
+
+
+# Voting Page: Players vote on the selected proposal
+class VoterPage2(BasePage):
+    form_model = 'player'  
+    form_fields = ['vote'] 
+    timeout_seconds = VOTE_TIMEOUT_2
+
+    # Only display if timeout is detected
+    def is_displayed(self):
+        return (
+            self.participant.vars.get("timed_out", False) and not self.group.drop_out_finalized
+        )
+
+    # Pass proposal data to the template
+    def vars_for_template(self):
+        # Ensure timeout is absolute
+        if "expiry_timestamp_voter2" not in self.participant.vars:
+            self.participant.vars["expiry_timestamp_voter2"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["expiry_timestam_voter2"] - time.time()))
+
+        subgroup_id = self.player.participant.vars.get("subgroup_id")
+        id_in_subgroup = self.player.participant.vars.get("id_in_subgroup")
+        subgroup_key = str(subgroup_id)
+
+        # Load selected proposals per subgroup
+        selected_proposals = json.loads(self.group.selected_proposals_str)
+
+        if subgroup_key not in selected_proposals:
+            print(f"[DEBUG] No selected proposal found for subgroup {subgroup_key}")
+            selected_proposal = {}
+            relevant_proposal = {}
+            proposer_display = "Unknown"
+        else:
+            selected_proposal = selected_proposals[subgroup_key]
+            relevant_proposal = selected_proposal.get("proposal", {})
+            proposer_id = selected_proposal.get("proposer_id")
+            proposer_display = f"Participant {proposer_id}" if proposer_id else "Unknown"
+            proposer_num = int(proposer_display.split()[-1])            # Extract the number
+            print(f"\n[DEBUG] VoterPage - Subgroup {subgroup_key} selected proposal: {selected_proposal}")
+
+        return {
+            'id': self.player.id_in_group,
+            'subgroup_id': subgroup_id,
+            'id_in_subgroup': id_in_subgroup,
+            'selected_proposer_id': proposer_display,
+            'selected_proposer_num': proposer_num,
+            'selected_allocation': relevant_proposal,
+            'timeout_seconds': self.timeout_seconds,
+            'remaining_seconds': remaining
+        }
+
+    def before_next_page(self):
+        # Clean up timeout
+        self.participant.vars.pop("expiry_timestamp_voter2", None)
+
         # TIMEOUT: Handle case for when a timeout/dropout occurs    
         if self.timeout_happened:
             self.player.vote = False
@@ -654,9 +711,19 @@ class VoterPage(BasePage):
                 if p.participant.id != self.participant.id:  # exclude dropout
                     p.participant.vars["go_to_notice"] = True
 
-            store_decision(self.player, "VoterPage", "Timeout - Auto Vote", {"vote": False})
+            store_decision(self.player, "VoterPage2", "Timeout - Auto Vote", {"vote": False})
         else:
-            store_decision(self.player, "VoterPage", "Voted", {"vote": self.player.vote})
+            # Undeclare dropout and reset timeout flag
+            self.drop_out_detected = False
+            self.participant.vars["timed_out"] = False
+            self.participant.vars["dropout"] = False
+            self.group.drop_out_detected = False
+            self.group.drop_out_finalized = False
+
+            # Store decision
+            store_decision(self.player, "VoterPage2", "Voted", {"vote": self.player.vote})
+
+
 
 # Select random proposal once all players have submitted
 class VoterWaitPage(WaitPage):
@@ -686,12 +753,17 @@ class VoterWaitPage(WaitPage):
 class ResultsPage(BasePage):
 
     form_model = 'player'  
-    timeout_seconds = 30
+    timeout_seconds = RESULTS_TIMEOUT
 
     def is_displayed(self):
         return not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
 
     def vars_for_template(self):
+        # Ensure timeout is absolute
+        if "expiry_timestamp_results" not in self.participant.vars:
+            self.participant.vars["expiry_timestamp_results"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["expiry_timestamp_results"] - time.time()))
+
         # Get subgroup info for player
         subgroup_id = self.participant.vars.get("subgroup_id")          # Retrieve ID of the subgroup within the group
         id_in_subgroup = self.participant.vars.get("id_in_subgroup")    # Retrieve player's ID within their subgroup
@@ -711,9 +783,10 @@ class ResultsPage(BasePage):
                 'approved': False,
                 'player_earnings': {},
                 'your_earnings': 0,
-                'period': self.participant.vars.get('periods_played', 0),
+                'period': period,
                 'player_id': self.player.id_in_group,
-                'timeout_seconds': self.timeout_seconds
+                'timeout_seconds': self.timeout_seconds,
+                'remaining_seconds': remaining
             }
 
         # Case 2: Regular Case  ---------------------------------------------
@@ -736,16 +809,36 @@ class ResultsPage(BasePage):
         # Earnings Results
         player_earnings = {}                       # Track subgroup earnings
 
+        # Collect vote info for each player in subgroup
+        player_votes = []
+        for p in subgroup_players:
+            vote_text = "Yes" if p.vote else "No"
+            player_label = f"Player {p.participant.vars.get('id_in_subgroup', '?')}"
+            player_votes.append({
+                'label': player_label,
+                'vote': vote_text,
+                'is_yes': p.vote == 1  # Used to determine color
+            })
 
         for p in subgroup_players:
+            # Get number of periods this player has already played
             current_period = p.participant.vars.get("periods_played", 0)
-            player_key = f's{id_in_subgroup}'
+            # Construct a key based on their ID within the subgroup
+            player_id_subgroup = p.participant.vars.get("id_in_subgroup")
+            player_key = f's{player_id_subgroup}'
+            # player_key = f's{id_in_subgroup}'
+            # If the proposal was approved, fetch that player's earnings from the proposal dict
             earnings = cu(relevant_proposal.get(player_key, 0)) if proposal_approved else cu(0)
+            # Set the player's current round earnings to the computed amount
             p.earnings = earnings
-            player_earnings[f'Participant {id_in_subgroup}'] = earnings
+            # Store this player's earnings in a summary dictionary for debugging/logging
+            player_earnings[f'Participant {p.id_in_group}'] = earnings
 
             print(f"\n[DEBUG] Before storing earnings, all_earnings for Player {id_in_subgroup}: {p.all_earnings}")
-            p.store_earnings(id_in_subgroup, current_period, earnings)
+            
+            # Store the player's earnings
+            p.store_earnings(self.player.id_in_group, current_period, earnings)
+            
             print(f"\n[DEBUG] After storing earnings, all_earnings for Player {id_in_subgroup}: {p.all_earnings}")
 
         # Handle final earnings only if in last round (optional)
@@ -753,8 +846,30 @@ class ResultsPage(BasePage):
             for p in self.group.get_players():
                 p.final_earnings()
 
-        # Period for display
+        # # Period for display
         p_period = self.participant.vars.get('periods_played', 0)
+
+        player_rows = []
+        for p in subgroup_players:
+            sid = p.participant.vars.get("id_in_subgroup")
+            label = f"Player {sid}" + (" (You)" if sid == id_in_subgroup else "")
+            token_amount = relevant_proposal.get(f"s{sid}", 0)
+            vote = "Yes" if p.vote else "No"
+            vote_color = "red" if p.vote else "green"
+
+            player_rows.append({
+                'label': label,
+                'tokens': token_amount,
+                'vote': vote,
+                'vote_color': vote_color,
+            })
+
+        #     # Store earnings for the player
+        #     current_period = p.participant.vars.get("periods_played", 0)
+        #     p.earnings = cu(token_amount if proposal_approved else 0)
+        #     # Make sure to store using ID in group
+        #     p.store_earnings(p.id_in_group, current_period, p.earnings)
+
 
         return {
             'subgroup_id': subgroup_id,
@@ -763,11 +878,21 @@ class ResultsPage(BasePage):
             'relevant_proposal': relevant_proposal,
             'total_votes': total_votes,
             'approved': proposal_approved,
-            'player_earnings': player_earnings,
+            # 'player_earnings': player_earnings,
             'your_earnings': int(self.player.earnings),
             'period': p_period,
-            'timeout_seconds': self.timeout_seconds
+            'timeout_seconds': self.timeout_seconds,
+            'remaining_seconds': remaining,
+            'player_votes': player_votes,
+            # 'player_rows': player_rows,
+            'player_rows': sorted(player_rows, key=lambda row: int(row['label'].split()[1])),
         }
+    
+    def before_next_page(self):
+        # Clean up timeout
+        self.participant.vars.pop("expiry_timestamp_results", None)
+        # Increment Period
+        self.player.participant.vars['periods_played'] += 1
 
 # Ensures that all players complete their periods before stopping the game
 class SyncBottom(BaseWaitPage):
@@ -868,8 +993,8 @@ class SurveyPage(Page):
         # Initialize surveyStep in participant.vars if it does not exist
         if 'surveyStep' not in self.participant.vars:
             self.participant.vars['surveyStep'] = 0
-        # return True  # Keep the page displayed
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
+        return True  # Keep the page displayed
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
 
     def before_next_page(self):
         # Increase survey step when the player moves to the next page
@@ -881,13 +1006,21 @@ class SurveyPage(Page):
 
 class AreYouThere(BasePage):
     timeout_seconds = 15
-    # timeout_seconds = 10
-    # template_name = "your_app_name/AreYouTherePage.html"
 
     def is_displayed(self):
         return (
             self.participant.vars.get("timed_out", False) and not self.group.drop_out_finalized
         )
+
+    def vars_for_template(self):
+        # Ensure that timeout is absolute
+        if "expiry_timestamp" not in self.participant.vars:
+            self.participant.vars["expiry_timestamp"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["expiry_timestamp"] - time.time()))
+
+        return {
+            'remaining_seconds': remaining
+        }
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -898,8 +1031,12 @@ class AreYouThere(BasePage):
             self.participant.vars["dropout"] = True
             self.group.drop_out_finalized = True
         else:
-            # Reset the flag for future rounds or pages
-            self.participant.vars["timed_out"] = False
+            # Clean up timeout
+            self.participant.vars.pop("expiry_timestamp", None)
+            pass
+            # # Reset the flag for future rounds or pages
+            # self.participant.vars["timed_out"] = False
+
 
 # Welcome Page to Survey
 class DropoutNotice(Page):
@@ -921,6 +1058,7 @@ class DropoutNotice(Page):
             "payment_message": payment_message,
             "timeout_seconds": self.timeout_seconds
         }
+
 
 class DropoutNoticeOtherPlayers(Page):
     timeout_seconds = 30
@@ -978,6 +1116,8 @@ class PaymentInfo(Page):
             final_earnings_data["base_fee"] = 0
             # Update final payment to 0 for dropoutee
             final_earnings_data["final_payment"] = 0
+            # Update total_bonus to 0 for dropoutee
+            final_earnings_data["total_bonus"] = 0
     
 
         return {
@@ -992,7 +1132,7 @@ class PaymentInfo(Page):
 
     def before_next_page(self):
         # Record Earnings
-        store_earnings(player, {
+        store_earnings(self.player, {
             "selected_periods": final_earnings_data["selected_periods"],
             "final_payment": final_earnings_data["final_payment"],
             "total_bonus": final_earnings_data["total_bonus"],
@@ -1063,7 +1203,7 @@ class Baseline(Page):
 
 # SURVEY PAGES
 
-class Part1a(Page):
+class Part1(Page):
     form_model = 'player'
     form_fields = ['cmt_propr', 'cmt_vtr']
 
@@ -1082,15 +1222,37 @@ class Part1a(Page):
     
     def before_next_page(self):
         # Save participant data to CSV when they submit responses
-        store_survey_response(self.player, "Part1a", self.form_fields)
+        store_survey_response(self.player, "Part1", self.form_fields)
         
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
 
 
-class Part1b(Page):
+class Part2(Page):
     form_model = 'player'
-    form_fields = ['retaliation', 'retaliation_other', 'mwc', 'mwc_others']
+    form_fields = ['age', 'risk','occ']
+
+    def is_displayed(self):
+        # Display only if offer was accepted
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
+    
+    def vars_for_template(self):
+        return {
+            "survey_step": 2,
+            "total_steps": SURVEY_PAGES  # Adjust based on survey length
+        }
+    
+    def before_next_page(self):
+        # Record response
+        store_survey_response(self.player, "Part2", self.form_fields)
+        # Increase progress bar
+        self.participant.vars['surveyStep'] += 1
+
+
+class Part3(Page):
+    form_model = 'player'
+    form_fields = ['power_q1a', 'power_q1b', 'power_q2', 'power_q3']
 
     # @staticmethod
     def is_displayed(self):
@@ -1100,18 +1262,19 @@ class Part1b(Page):
 
     def vars_for_template(self):
         return {
-            "survey_step": 2,
+            # "survey_step": self.participant.vars.get("surveyStep", 1),
+            "survey_step": 3,
             "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        } 
-    
+        }
+
     def before_next_page(self):
         # Record response
-        store_survey_response(self.player, "Part1b", self.form_fields)
+        store_survey_response(self.player, "Part3", self.form_fields)
         # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
+        # self.participant.vars['surveyStep'] += 1
 
 
-class Part1c(Page):
+class Part4(Page):
     form_model = 'player'
     form_fields = ['atq_1', 'atq_2', 'atq_3']
 
@@ -1123,156 +1286,7 @@ class Part1c(Page):
 
     def vars_for_template(self):
         return {
-            "survey_step": 3,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part1c", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part1d(Page):
-    form_model = 'player'
-    form_fields = ['age', 'risk']
-
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
-    
-    def vars_for_template(self):
-        return {
             "survey_step": 4,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-    
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part1d", self.form_fields)
-        # Increase progress bar
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part1e(Page):
-    form_model = 'player'
-    form_fields = ['occ', 'volunt', 'volunt_hrs']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 5,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # If doesn't do volunteer, set volunteer hours as 0
-        if self.player.volunt != '1':
-            self.player.volunt_hrs = ''
-        # Store responses
-        store_survey_response(self.player, "Part1e", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part2a(Page):
-    form_model = 'player'
-    form_fields = ['econ', 'party_like', 'party', 'party_prox']
-    # form_fields = ['econ', 'party_like', 'party', 'party_prox']
-
-    def is_displayed(self):
-        # Display page only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 6,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-    
-    def before_next_page(self):
-        if self.player.party_like != '1':
-            self.player.party = ''
-            self.player.party_prox = ''
-
-        # Record response
-        store_survey_response(self.player, "Part2a", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        # If user didn't select "I use a different term"
-
-
-class Part2b(Page):
-    form_model = 'player'
-    # form_fields = ['plop_unempl', 'plop_comp', 'plop_incdist']
-    form_fields = ['plop_unempl', 'plop_comp', 'plop_incdist','plop_priv', 'plop_luckeffort']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
-
-    def vars_for_template(self):
-        return {
-            "survey_step": 7,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        # Record response
-        store_survey_response(self.player, "Part2b", self.form_fields)
-        # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
-
-
-class Part3(Page):
-    form_model = 'player'
-    form_fields = ['rel', 'rel_spec']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 8,
-            "total_steps": SURVEY_PAGES  # Adjust based on survey length
-        }
-
-    def before_next_page(self):
-        if self.player.rel != '1':
-            self.player.rel_spec = ''
-        # Record response
-        store_survey_response(self.player, "Part3", self.form_fields)
-
-
-class Part4(Page):
-    form_model = 'player'
-    form_fields = ['mth_spbrn', 'mth_cntbrn', 'fth_spbrn', 'fth_cntbrn']
-
-    # @staticmethod
-    def is_displayed(self):
-        # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
-
-    def vars_for_template(self):
-        return {
-            # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 9,
             "total_steps": SURVEY_PAGES  # Adjust based on survey length
         }
 
@@ -1285,7 +1299,62 @@ class Part4(Page):
 
 class Part5(Page):
     form_model = 'player'
-    form_fields = ['mwc_bonus', 'mwc_bonus_others', 'enjoy']
+    form_fields = ['econ', 'party_like', 'party', 'other_party','party_prox']
+    # form_fields = ['econ', 'party_like', 'party', 'party_prox']
+
+    def is_displayed(self):
+        # Display page only if offer was accepted
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+
+    def vars_for_template(self):
+        return {
+            # "survey_step": self.participant.vars.get("surveyStep", 1),
+            "survey_step": 5,
+            "total_steps": SURVEY_PAGES  # Adjust based on survey length
+        }
+    
+    def before_next_page(self):
+        if self.player.party_like != '1':
+            self.player.party = ''
+            self.player.party_prox = ''
+
+        if self.player.party != '4':
+            self.player.other_party = ''
+
+        # Record response
+        store_survey_response(self.player, "Part5", self.form_fields)
+        # Increase survey step when the player moves to the next page
+        # If user didn't select "I use a different term"
+
+
+class Part6(Page):
+    form_model = 'player'
+    # form_fields = ['plop_unempl', 'plop_comp', 'plop_incdist']
+    form_fields = ['plop_unempl', 'plop_comp', 'plop_incdist','plop_priv', 'plop_luckeffort', 'democracy_obedience']
+
+    # @staticmethod
+    def is_displayed(self):
+        # Display only if offer was accepted
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+
+    def vars_for_template(self):
+        return {
+            "survey_step": 6,
+            "total_steps": SURVEY_PAGES  # Adjust based on survey length
+        }
+
+    def before_next_page(self):
+        # Record response
+        store_survey_response(self.player, "Part6", self.form_fields)
+        # Increase survey step when the player moves to the next page
+        self.participant.vars['surveyStep'] += 1
+
+
+class Part7(Page):
+    form_model = 'player'
+    form_fields = ['rel', 'rel_spec','rel_other']
 
     # @staticmethod
     def is_displayed(self):
@@ -1296,20 +1365,148 @@ class Part5(Page):
     def vars_for_template(self):
         return {
             # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 10,
+            "survey_step": 7,
+            "total_steps": SURVEY_PAGES  # Adjust based on survey length
+        }
+
+    def before_next_page(self):
+        if self.player.rel != '1':
+            self.player.rel_spec = ''
+        
+        if self.player.rel_spec != '7':
+            self.player.rel_other = ''
+        # Record response
+        store_survey_response(self.player, "Part7", self.form_fields)
+
+
+class GenderAttitudes(Page):
+    form_model = 'player'
+    form_fields = ['gender_q1', 'gender_q2', 'gender_q3', 'gender_q4']
+
+    # @staticmethod
+    def is_displayed(self):
+        # Display only if offer was accepted
+        # return True 
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+
+    def vars_for_template(self):
+        return {
+            # "survey_step": self.participant.vars.get("surveyStep", 1),
+            "survey_step": 8,
             "total_steps": SURVEY_PAGES  # Adjust based on survey length
         }
 
     def before_next_page(self):
         # Record response
-        store_survey_response(self.player, "Part5", self.form_fields)
+        store_survey_response(self.player, "GenderAttitudes", self.form_fields)
         # Increase survey step when the player moves to the next page
         self.participant.vars['surveyStep'] += 1
 
 
-class Part6(Page):
+class MWC(Page):
     form_model = 'player'
-    form_fields = ['bonus']
+    form_fields = ['mwc', 'mwc_others']
+
+    # @staticmethod
+    def is_displayed(self):
+        # Display only if offer was accepted
+        # return True and self.player.id_in_group % 2 == 1  # odd-numbered players
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 1  # odd-numbered players
+
+    def vars_for_template(self):
+        return {
+            "survey_step": 9,
+            "total_steps": SURVEY_PAGES  # Adjust based on survey length
+        } 
+    
+    def before_next_page(self):
+        # Record response
+        store_survey_response(self.player, "MWC", self.form_fields)
+        # Increase survey step when the player moves to the next page
+        self.participant.vars['surveyStep'] += 1
+
+
+class MWC_BONUS(Page):
+    form_model = 'player'
+    form_fields = ['mwc_bonus', 'mwc_bonus_others']
+
+    # @staticmethod
+    def is_displayed(self):
+        # Display only if offer was accepted
+        # return True and self.player.id_in_group % 2 == 0
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 0
+
+    def vars_for_template(self):
+        return {
+            # "survey_step": self.participant.vars.get("surveyStep", 1),
+            "survey_step": 9,
+            "total_steps": SURVEY_PAGES  # Adjust based on survey length
+        }
+
+    def before_next_page(self):
+        # Record response
+        store_survey_response(self.player, "MWC_BONUS", self.form_fields)
+        # Increase survey step when the player moves to the next page
+        self.participant.vars['surveyStep'] += 1
+
+
+class SchwartzHierarchy(Page):
+    form_model = 'player'
+    form_fields = ['social_power', 'wealth', 'authority', 'humble', 'influential']
+
+    # @staticmethod
+    def is_displayed(self):
+        # Display only if offer was accepted
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+
+    def vars_for_template(self):
+        field_descriptions = {
+            "social_power": "control over others, dominance",
+            "wealth": "material possessions, money",
+            "authority": "the right to lead or command",
+            "humble": "modest, self-effacing",
+            "influential": "having an impact on people and events"
+        }
+        return {
+            # "survey_step": self.participant.vars.get("surveyStep", 1),
+            "survey_step": 10,
+            "total_steps": SURVEY_PAGES,  # Adjust based on survey length
+        }
+
+    def before_next_page(self):
+        # Record response
+        store_survey_response(self.player, "SchwartzHierarchy", self.form_fields)
+        # Increase survey step when the player moves to the next page
+        # self.participant.vars['surveyStep'] += 1
+
+
+class Part8(Page):
+    form_model = 'player'
+    form_fields = ['retaliation', 'retaliation_other']
+
+    # @staticmethod
+    def is_displayed(self):
+        # Display only if offer was accepted
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+
+    def vars_for_template(self):
+        return {
+            "survey_step": 11,
+            "total_steps": SURVEY_PAGES  # Adjust based on survey length
+        } 
+    
+    def before_next_page(self):
+        # Record response
+        store_survey_response(self.player, "Part8", self.form_fields)
+        # Increase survey step when the player moves to the next page
+        self.participant.vars['surveyStep'] += 1
+
+
+class Bonus(Page):
+    form_model = 'player'
+    form_fields = ['bonus','enjoy']
 
     def is_displayed(self):
         # Display only if offer was accepted
@@ -1319,15 +1516,15 @@ class Part6(Page):
     def vars_for_template(self):
         return {
             # "survey_step": self.participant.vars.get("surveyStep", 1),
-            "survey_step": 11,
+            "survey_step": 12,
             "total_steps": SURVEY_PAGES  # Adjust based on survey length
         }
 
     def before_next_page(self):
         # Record response
-        store_survey_response(self.player, "Part6", self.form_fields)
+        store_survey_response(self.player, "Bonus", self.form_fields)
         # Increase survey step when the player moves to the next page
-        self.participant.vars['surveyStep'] += 1
+        # self.participant.vars['surveyStep'] += 1
 
 
 class Fin(Page):
@@ -1356,17 +1553,19 @@ page_sequence = [
     SyncTop,              # Where groups of 9 are set
     Priming,              # Only show for priming treatment groups
 
-    # CalculatePage,      # Grouping Page - Continue
+    CalculatePage,        # Grouping Page - Continue
 
     WaitingPage,          # Wait Page 1  
     GameStarts,  
     ProposerPage,         
-    # AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds   
+    AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds   
+    ProposerPage2,  
 
     SelectingPage,        # Wait Page 2                         # Timeout = 15 seconds
 
     VoterPage,            # Players vote accept / reject
-    # AreYouThere,          # Declare Dropout - If no response
+    AreYouThere,          # Declare Dropout - If no response
+    VoterPage2,  
 
     VoterWaitPage,        # Wait Page 3 (Detect Dropout) 
     ResultsPage,          # Show if proposal is accepted / rejected
@@ -1376,17 +1575,19 @@ page_sequence = [
     Baseline,             # Only show for baseline treatment groups
 
     # Final Survey
-    # Part1a,             # Voting and Proposing Considerations
-    # Part1b,             # Retaliation, mwc, mwc_others
-    # Part1c,             # atq 1, 2, 3 (ie. math questions)
-    # Part1d,             # Age, Risk
-    # Part1e,             # Occupation, Volunteer, (Volunteer Hours)
-    # Part2a,             # Econ Courses, Party Like, Party, Party Prox
-    # Part2b,             # Plop_Unempl, Plop_Comp, Plop_Incdist, Plop_Priv, Plop_Luckeffort
-    # Part3,              # Religion, (Specify Religion)
-    # Part4,              # Parents' Place of Birth/Citizenship
-    # Part5,              # mwc_bonus, mwc_bonus_others, enjoy
-    # Part6,              # bonus question
+    Part1,                  # Voting and Proposing Considerations
+    Part2,                  # Age, Risk, Occupation
+    Part3,                  # Power index
+    Part4,                  # atq 1, 2, 3 (ie. math questions)
+    Part5,                  # Econ Courses, Party Like, Party, Party Prox
+    Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
+    Part7,                  # Religion, (Specify Religion)
+    GenderAttitudes,        # Gender attitudes
+    MWC,                    # Assign to even ID players
+    MWC_BONUS,              # Assign to odd ID players
+    SchwartzHierarchy,      # Schwartz hierarchy
+    Part8,                  # Retaliation, Retaliation_Other
+    Bonus,                  # bonus + enjoy question
     
     # Display Total Earnings 
     DropoutNotice,                      # Display to dropout player

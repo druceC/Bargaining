@@ -1346,3 +1346,5 @@ page_sequence = [
     DropoutNoticeOtherPlayers,          # Display to all other players
     PaymentInfo,      
 ]
+
+

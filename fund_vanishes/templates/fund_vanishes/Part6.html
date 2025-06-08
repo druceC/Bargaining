@@ -12,13 +12,32 @@
         justify-content: center;
         align-items: center;
         /* height: 100vh; */
-        text-align: center;
         margin: 0;
     }
 
+    body {
+        background: linear-gradient(135deg, #e3f2fd, #90caf9); 
+        background-size: 200% 200%;
+        transition: background 1s ease-in-out;
+    }
+
+    /* Gradient mapping from soft blue to deep purple */
+    .bg-step-1  { background: linear-gradient(135deg, #e3f2fd, #90caf9); } 
+    .bg-step-2  { background: linear-gradient(135deg, #d0f0fd, #7ec9f1); }
+    .bg-step-3  { background: linear-gradient(135deg, #c1e0fc, #5bb9f5); }
+    .bg-step-4  { background: linear-gradient(135deg, #b3d1fc, #40aaf5); }
+    .bg-step-5  { background: linear-gradient(135deg, #a0c4fc, #4891e0); }
+    .bg-step-6  { background: linear-gradient(135deg, #8da6ef, #5f79d7); }
+    .bg-step-7  { background: linear-gradient(135deg, #7c8be4, #6a6bd1); }
+    .bg-step-8  { background: linear-gradient(135deg, #6f75d4, #6c5fd2); }
+    .bg-step-9  { background: linear-gradient(135deg, #675ecd, #684ecf); }
+    .bg-step-10 { background: linear-gradient(135deg, #5e4ac3, #623ed1); }
+    .bg-step-11 { background: linear-gradient(135deg, #5037b6, #572ed1); }
+    .bg-step-12 { background: linear-gradient(135deg, #472aa7, #4c25c6); }
+    .bg-step-13 { background: linear-gradient(135deg, #3a1c91, #3f1b74); } 
+
     .survey-container {
         width: 90%;
-        /* width: 700px; */
         max-width: 700px;
         background: white;
         padding: 30px;
@@ -98,40 +117,136 @@
         color: #777;
         margin-top: 15px;
     }
+    .survey-header {
+        font-size: 22px;
+        font-weight: 600;
+        color: #160ea7;
+        margin-bottom: 8px;
+    }
+
+    .survey-subtext {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    .question-block {
+        margin-bottom: 35px;
+    }
+
+    .question-block p {
+        font-size: 17px;
+        margin-bottom: 8px;
+        font-weight: 800;
+    }
+
+    .scale-labels {
+        font-size: 17px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .radio-scale label:hover {
+        color: #0044cc;
+    }
+    .radio-scale input[type="radio"] {
+        accent-color: #0044cc;
+        margin-right: 10px;
+        cursor: pointer;
+        appearance: none;
+        border: 2px solid #bbb;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        position: relative;
+        top: 3px;
+    }
+
+    .radio-scale input[type="radio"]:hover {
+        border-color: #0044cc;
+    }
+
+    .radio-scale input[type="radio"]:checked {
+        background-color: #0044cc;
+        border-color: #0044cc;
+    }
 </style>
+
 <div class = "wrapper">
     <div class="survey-container">
-        <!-- <div class="survey-header">Final Survey</div>
+        <!-- <div class="survey-header">Almost There! 🎯</div>
         <div class="survey-subtext">Keep going! Your input matters.</div> -->
         
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
+        <br>
+        <div class="survey-header">Views on Work, Welfare, and Economy</div>
+        <div class="survey-subtext">Please indicate where you place your political opinions on the following topics. <br>Use the 0–10 scale provided for each item.</div>
+        <br>
+        <form id="surveyForm" method="post">
+            <div class="form-container">
+                <div class="question-block">
+                    <p>Welfare & Work Expectations</p>
+                    <!-- <div class="scale-labels">0 = People who are unemployed ought to take any offered job to keep welfare support<br>10 = People who are unemployed ought to be able to refuse any job they do not want</div> -->
+                    <div class="radio-scale">
+                        {{ form.plop_unempl }}
+                    </div>
+                </div>
+        
+                <div class="question-block">
+                    <p>Competition in the Economy</p>
+                    <!-- <div class="scale-labels">0 = Competition is good<br>10 = Competition is harmful</div> -->
+                    <div class="radio-scale">
+                        {{ form.plop_comp }}
+                    </div>
+                </div>
+        
+                <div class="question-block">
+                    <p>Income Distribution</p>
+                    <!-- <div class="scale-labels">0 = The income distribution ought to be more equal<br>10 = There ought to be more incentive for individuals to work harder</div> -->
+                    <div class="radio-scale">
+                        {{ form.plop_incdist }}
+                    </div>
+                </div>
+        
+                <div class="question-block">
+                    <p>Ownership of Public Companies</p>
+                    <!-- <div class="scale-labels">0 = Government should prioritize public ownership<br>10 = More companies ought to be privately owned</div> -->
+                    <div class="radio-scale">
+                        {{ form.plop_priv }}
+                    </div>
+                </div>
+        
+                <div class="question-block">
+                    <p>Beliefs About Success</p>
+                    <!-- <div class="scale-labels">0 = In the long run, hard work usually brings a better life<br>10 = Success is more a matter of luck and connections</div> -->
+                    <div class="radio-scale">
+                        {{ form.plop_luckeffort }}
+                    </div>
+                </div>
+        
+                <div class="question-block">
+                    <p>Value of Obedience</p>
+                    {{ form.democracy_obedience.label }}
+                    <!-- <div class="scale-labels">0 = It’s essential that people obey<br>10 = Obedience is not essential</div> -->
+                    <div class="radio-scale">
+                        {{ form.democracy_obedience }}
+                    </div>
+                </div>
+            </div>
+        </form>
     
-        <div class="form-container">
-            {{ formfields }}
-        </div>
-    
-        <button class="next-button" onclick="updateProgress()">Next</button>
+        <button class="next-button" onclick="validateProgress()">Next</button>
         <div class="note">Click next to proceed.</div>
     </div>
 </div>
-
-
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let progress = document.querySelector(".progress");
-        let currentStep = parseInt(localStorage.getItem("surveyStep")) || 1;
-        let totalSteps = 16; // Adjust based on total questions
-        let progressWidth = (currentStep / totalSteps) * 100 + "%";
-        progress.style.width = progressWidth;
-    });
-
-    function updateProgress() {
-        let currentStep = parseInt(localStorage.getItem("surveyStep")) || 1;
-        localStorage.setItem("surveyStep", currentStep + 1);
-    }
-</script> -->
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -152,7 +267,7 @@
 
         if (isNaN(totalSteps)) {
             console.error("❌ total_steps is NaN. Setting default value: 16");
-            totalSteps = 16;
+            totalSteps = 12;
         }
 
         let progressWidth = (currentStep / totalSteps) * 100 + "%";
@@ -160,25 +275,46 @@
         console.log(`🔹 Progress Width: ${progressWidth}`);
 
         progress.style.width = progressWidth;
+
+        // Change background based on survey step
+        const body = document.querySelector("body");
+        const step = parseInt("{{ survey_step }}");
+
+        if (!isNaN(step)) {
+            body.classList.add(`bg-step-${step}`);
+        } else {
+            body.classList.add("bg-step-1");
+        }
     });
 
-    function updateProgress() {
-        let progress = document.querySelector(".progress");
-        let totalSteps = parseInt("{{ total_steps }}", 10);  
-        let nextStep = parseInt("{{ survey_step }}", 10) + 1;  
+    function validateProgress() {
+        const form = document.getElementById("surveyForm");
+        const requiredGroups = new Set();
 
-        if (!isNaN(nextStep) && progress) {
-            let progressWidth = (nextStep / totalSteps) * 100 + "%";
-            progress.style.width = progressWidth;
-            console.log(`🚀 Updated Progress to Step ${nextStep}: ${progressWidth}`);
+        // Collect all question names (e.g., from radio buttons)
+        form.querySelectorAll("input, select, textarea").forEach(input => {
+            if (input.name) requiredGroups.add(input.name);
+        });
+
+        let allAnswered = true;
+
+        requiredGroups.forEach(name => {
+            const answered =
+                form.querySelector(`input[name="${name}"]:checked`) ||
+                (form.querySelector(`select[name="${name}"]`)?.value?.trim() !== "") ||
+                (form.querySelector(`textarea[name="${name}"]`)?.value?.trim() !== "");
+            if (!answered) {
+                allAnswered = false;
+            }
+        });
+
+        if (allAnswered) {
+            updateProgress();
+            form.submit();
         } else {
-            console.error("❌ Could not update progress - Invalid values detected.");
+            alert("Please answer all the required questions before proceeding.");
         }
     }
 </script>
-
-
-
-
 
 {{ endblock }}
