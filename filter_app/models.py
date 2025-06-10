@@ -14,7 +14,7 @@ import pycountry
 
 # Get list of all country names using pycountry
 COUNTRIES = sorted([country.name for country in pycountry.countries])
-COUNTRIES.insert(0, "Other (please specify)")  # Append to the beginning of the list
+# COUNTRIES.insert(0, "Other (please specify)")  # Append to the beginning of the list
 
 def load_language_choices():
     filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3_new.csv')
