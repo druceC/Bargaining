@@ -993,8 +993,8 @@ class SurveyPage(Page):
         # Initialize surveyStep in participant.vars if it does not exist
         if 'surveyStep' not in self.participant.vars:
             self.participant.vars['surveyStep'] = 0
-        return True  # Keep the page displayed
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
+        # return True  # Keep the page displayed
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and not self.group.drop_out_detected
 
     def before_next_page(self):
         # Increase survey step when the player moves to the next page
