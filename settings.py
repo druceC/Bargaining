@@ -11,13 +11,15 @@ SESSION_CONFIGS = [
         'name': 'experiment',                        # App folder
         'display_name': "Fund Vanishes Experiment",
         'num_demo_participants': 27,                    
-        # 'app_sequence': ['filter_app','fund_vanishes'],              # Ensure only existing apps are listed
-        'app_sequence':['fund_vanishes'],
+        'app_sequence': ['filter_app','fund_vanishes'],              # Ensure only existing apps are listed
+        # 'app_sequence':['fund_vanishes'],
         # 'group_by_arrival_time': True,                  # Enable dynamic grouping
     },
 ]
 
 LANGUAGE_CODE = 'en'
+
+DEBUG = False
 
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = False  # Set to True if using points-based rewards

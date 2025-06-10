@@ -1217,3 +1217,7 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Survey Page,Quest
 2025-06-10T01:20:58.036266,9if1chx5,3,1,1,Income,inc_hh,7
 2025-06-10T01:21:13.314940,9if1chx5,1,1,1,Income,inc,6
 2025-06-10T01:21:13.316003,9if1chx5,1,1,1,Income,inc_hh,7
+2025-06-10T09:26:45.075466,5pyp0z3d,1,1,1,Nationality,spbrn,1
+2025-06-10T09:26:45.078692,5pyp0z3d,1,1,1,Nationality,cntbrn,
+2025-06-10T09:26:45.078722,5pyp0z3d,1,1,1,Nationality,spcit,1
+2025-06-10T09:26:45.078739,5pyp0z3d,1,1,1,Nationality,other_cit,

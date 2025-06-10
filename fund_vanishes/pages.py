@@ -34,6 +34,11 @@ RESULTS_TIMEOUT = 30                   # Results Page timeout
 INTRO_QUESTIONS = 4
 SURVEY_PAGES = 12
 
+# Fixed completion codes
+ONLY_PFEE_CODE = "PFEE-7291A"
+PFEE_BONUS_CODE = "PFB-841ZC"
+PFEE_BONUS_SURVEY_CODE = "PFBS-993JD"
+
 # ---------------------------------------------------------------------------------------------------
 
 # INTRO QUESTIONS
@@ -105,7 +110,8 @@ class SyncTop(BaseWaitPage):
     # Ensures that all groups wait before proceeding
     wait_for_all_groups = False
     group_by_arrival_time = True
-    body_text = "Kindly wait to be randomly matched with other participants."
+    body_text = "Please wait to be matched with other participants. <br><br> Pairing can take some time, if you are on this page for more than 5 minutes, please refresh the page occasionally..."
+    timeout_seconds = 10 
 
     #  Ensure page is only displayed for players who still need to play 5 rounds
     def is_displayed(self):
@@ -121,14 +127,19 @@ class SyncTop(BaseWaitPage):
         participant = player.participant
 
         # If a player times out, mark them as a dropout
-        if self.timeout_happened:
-            participant.is_dropout = True   # Mark participant as dropped out
-            player.dropout = True           # Mark player as dropped out
+        if timeout_happened:
+            # participant.is_dropout = True   # Mark participant as dropped out
+            # player.dropout = True           # Mark player as dropped out
+
+            # Player failed to get matched in time
+            participant.vars["not_grouped"] = True
+            participant.vars["dropout"] = True
+            participant.vars["has_synced"] = True
+            # Set periods_played to the max to skip game
+            participant.vars['periods_played'] = Constants.no_periods
 
         # Mark the participant as synced
         participant.vars["has_synced"] = True
-
-        # ----- added part -----------
 
         # Reference to the player's group
         group = self.player.group
@@ -1104,7 +1115,7 @@ class PaymentInfo(Page):
 
     def is_displayed(self):
         # Payment info is only displayed when (1) All periods have been played or (2) Dropout is detected
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods or self.group.drop_out_detected
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods or self.group.drop_out_detected or self.participant.vars.get("not_grouped", False) 
         # True
 
     def vars_for_template(self):
@@ -1118,7 +1129,20 @@ class PaymentInfo(Page):
             final_earnings_data["final_payment"] = 0
             # Update total_bonus to 0 for dropoutee
             final_earnings_data["total_bonus"] = 0
-    
+
+        # Assign completion code
+        if self.participant.vars.get("not_grouped", False):
+            completion_code = ONLY_PFEE_CODE
+        elif final_earnings_data["base_fee"] > 0:
+            if final_earnings_data["total_bonus"] > 0:
+                if final_earnings_data["survey_fee"] > 0:
+                    completion_code = PFEE_BONUS_SURVEY_CODE
+                else:
+                    completion_code = PFEE_BONUS_CODE
+            else:
+                completion_code = ONLY_PFEE_CODE
+        else:
+            completion_code = "N/A"
 
         return {
             "is_dropout": self.participant.vars.get("dropout", False),
@@ -1127,7 +1151,8 @@ class PaymentInfo(Page):
             # "period_earnings": final_earnings_data["period_earnings"],
             "total_bonus": final_earnings_data["total_bonus"],
             "survey_fee": final_earnings_data["survey_fee"],
-            "base_fee": final_earnings_data["base_fee"]
+            "base_fee": final_earnings_data["base_fee"],
+            "completion_code": completion_code
         }
 
     def before_next_page(self):
@@ -1137,7 +1162,8 @@ class PaymentInfo(Page):
             "final_payment": final_earnings_data["final_payment"],
             "total_bonus": final_earnings_data["total_bonus"],
             "survey_fee": final_earnings_data["survey_fee"],
-            "base_fee": final_earnings_data["base_fee"]
+            "base_fee": final_earnings_data["base_fee"],
+            "completion_code": completion_code
         })
 
     # Completion Link for Prolific
@@ -1177,8 +1203,8 @@ class Priming(Page):
         # Timeout Handling Logic
         if self.timeout_happened:
             # Submit default 
-            self.player.qp1 = 0
-            self.player.qp3 = 0
+            self.player.qp1 = "0"
+            self.player.qp3 = "0"
             self.participant.vars["timed_out"] = True
             store_survey_response(self.player, "Priming", self.form_fields, tag="timeout")
         else:
@@ -1205,7 +1231,7 @@ class Baseline(Page):
         }
     
     def before_next_page(self):
-        # Record Response
+        # # Record Response
         store_survey_response(self.player, "Baseline", self.form_fields)
 
 # ---------------------------------------------------------------------------------------------------
@@ -1561,7 +1587,6 @@ page_sequence = [
     # Main game loop - 5 times per player
     SyncTop,              # Where groups of 9 are set
     Priming,              # Only show for priming treatment groups
-    AreYouThere,          # Declare Dropout - If no response
 
     WaitingPage,          # Wait Page 1  
     GameStarts,  

@@ -7,17 +7,23 @@
 {% block content %}
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
     body {
         font-family: 'Poppins', sans-serif;
         background: linear-gradient(135deg, #f4f0ff, #f9f9f9);
         color: #333;
+        display: flex; /* Added for centering */
+        justify-content: center; /* Added for centering */
+        align-items: center; /* Added for centering */
+        min-height: 100vh; /* Ensures full viewport height */
+        margin: 0; /* Remove default body margin */
     }
 
     .container {
         max-width: 650px;
-        margin: auto;
+        width: 90%; /* Responsive width */
+        margin: auto; /* Keeps it centered if max-width isn't hit */
         padding: 35px;
         background: white;
         border-radius: 12px;
@@ -123,26 +129,72 @@
         margin-top: 20px;
     }
 
-    .button-container {
-        margin-top: 25px;
+    /* --- Completion Code Specific Styling --- */
+    .completion-section {
+        background: #fdf5e6; /* Lighter, contrasting background */
+        border: 2px solid #979199; /* Yellow/orange border for attention */
+        padding: 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        box-shadow: 0px 5px 15px rgba(255, 204, 0, 0.2);
+        animation: pulseBorder 1.5s infinite alternate; /* Gentle pulsing animation */
     }
 
-    .continue-button {
+    .completion-instruction {
+        font-size: 18px;
+        font-weight: 600;
+        color: #251d34;
+        margin-bottom: 15px;
+    }
+
+    .completion-code-box {
+        background: #ffe066; /* Bright yellow background for the code */
+        padding: 15px 25px;
+        border-radius: 8px;
+        font-size: 32px; /* Larger font size */
+        font-weight: 700; /* Extra bold */
+        color: #b05700; /* Even darker orange for strong contrast */
+        letter-spacing: 1.5px; /* Spacing for readability */
+        display: inline-block;
+        margin-bottom: 20px;
+        cursor: copy; /* Indicate it's copyable */
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .completion-code-box:hover {
+        transform: translateY(-2px);
+        background: #ffd700; /* Slightly darker yellow on hover */
+    }
+
+    .copy-button {
         background-color: #6A0DAD;
         color: white;
         font-size: 16px;
-        padding: 12px 24px;
+        padding: 10px 20px;
         border: none;
         border-radius: 6px;
         cursor: pointer;
         transition: background 0.3s ease, transform 0.2s ease;
-        display: inline-block;
+        margin-top: 10px;
     }
 
-    .continue-button:hover {
+    .copy-button:hover {
         background-color: #4e0c86;
         transform: translateY(-2px);
-        box-shadow: 0px 6px 12px rgba(106, 13, 173, 0.2);
+    }
+
+    .copy-message {
+        font-size: 14px;
+        color: #28a745; /* Green for success */
+        margin-top: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .copy-message.show {
+        opacity: 1;
     }
 
     @keyframes fadeIn {
@@ -150,13 +202,38 @@
         to { opacity: 1; transform: scale(1); }
     }
 
+    @keyframes pulseBorder {
+        0% { border-color: #ffcc00; box-shadow: 0px 5px 15px rgba(255, 204, 0, 0.2); }
+        50% { border-color: #ffd700; box-shadow: 0px 5px 20px rgba(255, 204, 0, 0.4); }
+        100% { border-color: #ffcc00; box-shadow: 0px 5px 15px rgba(255, 204, 0, 0.2); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .container {
+            padding: 25px;
+        }
+        .thank-you {
+            font-size: 20px;
+        }
+        .total-payment-box {
+            font-size: 24px;
+            padding: 10px 20px;
+        }
+        .completion-code-box {
+            font-size: 26px;
+            padding: 12px 20px;
+        }
+        .completion-instruction {
+            font-size: 16px;
+        }
+    }
 </style>
 
 <div class="container">
     <p class="thank-you">Thank you for joining!</p>
     <hr>
     <!-- Bonus Earnings Table -->
-    <!-- No need to show to the person who drops out -->
     {% if selected_periods and not is_dropout %}        
         <p class="bonus-section"><br>Bonus Earnings</p>
         <table class="bonus-table">
@@ -186,23 +263,42 @@
 
     <hr>
 
-    <p class="final-message">
-        Your participation has been recorded. Please proceed to finalize your compensation.
-    </p>
-
-    <div class="button-container">
-        <form method="post">
-            <button type="submit" class="continue-button">Continue</button>
-        </form>
+    <div class="completion-section">
+        <p class="completion-instruction">
+            <strong>IMPORTANT:</strong><br>
+            To receive your payment, please copy the code below and <strong>enter it into Prolific</strong> before exiting this page.
+        </p>
+        <div id="completionCodeBox" class="completion-code-box">
+            {{ completion_code }}
+        </div>
+        <!-- <button id="copyButton" class="copy-button">Click to Copy Code</button>
+        <p id="copyMessage" class="copy-message">Code copied to clipboard!</p> -->
     </div>
+
 </div>
 
-<!-- <script>
-    let completionlink = js_vars.completionlink;
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const copyButton = document.getElementById('copyButton');
+        const completionCodeBox = document.getElementById('completionCodeBox');
+        const copyMessage = document.getElementById('copyMessage');
 
-    window.onload = function(){
-        window.location.href=completionlink;
-    }
-</script> -->
+        copyButton.addEventListener('click', function() {
+            const codeToCopy = completionCodeBox.innerText.trim();
+            // Use document.execCommand('copy') for better iframe compatibility
+            const tempInput = document.createElement('textarea');
+            tempInput.value = codeToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            copyMessage.classList.add('show');
+            setTimeout(() => {
+                copyMessage.classList.remove('show');
+            }, 2000); // Message disappears after 2 seconds
+        });
+    });
+</script>
 
 {% endblock %}

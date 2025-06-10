@@ -2,6 +2,7 @@
 import json
 import csv
 import os
+import time
 import random
 from otree.api import *
 from .utils import store_intro
@@ -96,9 +97,9 @@ class Subsession(BaseSubsession):
     def group_by_arrival_time_method(subsession, waiting_players):
         
         eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
-        group_size = 3
+        group_size = 9
 
-        # Create group
+        # Case 1: Create group of 9
         if (len(eligible)) >= group_size:
             # Randomly pick 9 from the list of available players
             selected = random.sample(eligible, group_size)
@@ -132,9 +133,18 @@ class Subsession(BaseSubsession):
 
             print(f"[DEBUG] formed 9‑block {group_id_9} → {'Priming' if is_priming else 'Baseline'}")
 
-            # Returning the list lets oTree create this group and move on
+            # Let oTree create this group and move on
             return selected
         
+        # Case 2: Timeout fallback — one person waited too long
+        for p in waiting_players:
+            wait_start = p.participant.vars.get("sync_wait_start", None)
+            if not wait_start:
+                p.participant.vars["sync_wait_start"] = time.time()
+            elif time.time() - p.participant.vars["sync_wait_start"] > 300:  # 5 mins
+                print(f"[SyncTop] Timeout fallback: Player {p.id_in_subsession} solo exit")
+                return [p]  # Let this player proceed alone to be routed to Payment
+
         # Fewer than nine → keep waiting
         return None
     pass
