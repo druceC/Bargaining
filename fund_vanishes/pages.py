@@ -111,7 +111,7 @@ class SyncTop(BaseWaitPage):
     wait_for_all_groups = False
     group_by_arrival_time = True
     body_text = "Please wait to be matched with other participants. <br><br> Pairing can take some time, if you are on this page for more than 5 minutes, please refresh the page occasionally..."
-    timeout_seconds = 10 
+    timeout_seconds = 300 
 
     #  Ensure page is only displayed for players who still need to play 5 rounds
     def is_displayed(self):
