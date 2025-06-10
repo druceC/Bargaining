@@ -1177,8 +1177,8 @@ class Priming(Page):
         # Timeout Handling Logic
         if self.timeout_happened:
             # Submit default 
-            self.player.qp1 = ""
-            self.player.qp3 = ""
+            self.player.qp1 = 0
+            self.player.qp3 = 0
             self.participant.vars["timed_out"] = True
             store_survey_response(self.player, "Priming", self.form_fields, tag="timeout")
         else:
