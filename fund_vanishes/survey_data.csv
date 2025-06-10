@@ -1498,3 +1498,27 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Survey Page,Quest
 2025-06-08T05:52:23.519228,i6v2wtq6,2,1,baseline,3,SchwartzHierarchy,influential,1
 2025-06-08T05:52:27.297738,i6v2wtq6,2,1,baseline,3,Part8,retaliation,5
 2025-06-08T05:52:27.299491,i6v2wtq6,2,1,baseline,3,Part8,retaliation_other,6
+2025-06-10T00:58:20.985141,rvnkhah0,4,2,priming,1,Priming,qp1,2
+2025-06-10T00:58:20.986247,rvnkhah0,4,2,priming,1,Priming,qp3,2
+2025-06-10T00:58:25.702475,rvnkhah0,8,2,priming,1,Priming,qp1,3
+2025-06-10T00:58:25.703528,rvnkhah0,8,2,priming,1,Priming,qp3,3
+2025-06-10T00:58:28.682628,rvnkhah0,7,2,priming,1,Priming,qp1,4
+2025-06-10T00:58:28.687207,rvnkhah0,7,2,priming,1,Priming,qp3,2
+2025-06-10T00:58:31.709202,rvnkhah0,6,2,priming,1,Priming,qp1,3
+2025-06-10T00:58:31.710136,rvnkhah0,6,2,priming,1,Priming,qp3,5
+2025-06-10T00:58:35.344574,rvnkhah0,5,2,priming,1,Priming,qp1,1
+2025-06-10T00:58:35.345649,rvnkhah0,5,2,priming,1,Priming,qp3,1
+2025-06-10T00:58:41.303473,rvnkhah0,3,2,priming,1,Priming,qp1,2
+2025-06-10T00:58:41.304622,rvnkhah0,3,2,priming,1,Priming,qp3,3
+2025-06-10T00:58:44.953255,rvnkhah0,2,2,priming,1,Priming,qp1,2
+2025-06-10T00:58:44.954157,rvnkhah0,2,2,priming,1,Priming,qp3,2
+2025-06-10T00:58:48.218232,rvnkhah0,1,2,priming,1,Priming,qp1,3
+2025-06-10T00:58:48.219370,rvnkhah0,1,2,priming,1,Priming,qp3,3
+2025-06-10T00:59:18.817332,rvnkhah0,10,2,priming,1,Priming,qp1,2
+2025-06-10T00:59:18.818523,rvnkhah0,10,2,priming,1,Priming,qp3,3
+2025-06-10T01:21:23.284146,9if1chx5,2,2,priming,1,Priming,qp1,1
+2025-06-10T01:21:23.286505,9if1chx5,2,2,priming,1,Priming,qp3,1
+2025-06-10T01:21:26.443642,9if1chx5,3,2,priming,1,Priming,qp1,1
+2025-06-10T01:21:26.444591,9if1chx5,3,2,priming,1,Priming,qp3,1
+2025-06-10T01:25:53.131541,9if1chx5,1,2,priming,1,Priming (timeout),Priming,qp1,
+2025-06-10T01:25:53.135836,9if1chx5,1,2,priming,1,Priming (timeout),Priming,qp3,

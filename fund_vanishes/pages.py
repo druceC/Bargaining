@@ -1173,8 +1173,17 @@ class Priming(Page):
         }
     
     def before_next_page(self):
-        # Record Response
-        store_survey_response(self.player, "Priming", self.form_fields)
+
+        # Timeout Handling Logic
+        if self.timeout_happened:
+            # Submit default 
+            self.player.qp1 = ""
+            self.player.qp3 = ""
+            self.participant.vars["timed_out"] = True
+            store_survey_response(self.player, "Priming", self.form_fields, tag="timeout")
+        else:
+            # Record Response
+            store_survey_response(self.player, "Priming", self.form_fields)
 
 
 class Baseline(Page):
@@ -1552,6 +1561,7 @@ page_sequence = [
     # Main game loop - 5 times per player
     SyncTop,              # Where groups of 9 are set
     Priming,              # Only show for priming treatment groups
+    AreYouThere,          # Declare Dropout - If no response
 
     WaitingPage,          # Wait Page 1  
     GameStarts,  

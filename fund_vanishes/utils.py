@@ -99,7 +99,7 @@ def ensure_survey_csv_headers():
             writer = csv.writer(file)
             writer.writerow(["Timestamp", "Session_Code", "Participant_ID", "Group_ID", "Treatment", "Round", "Survey Page", "Question", "Response"])
 
-def store_survey_response(player, page_name, form_fields):
+def store_survey_response(player, page_name, form_fields, tag=None):
     """Logs participant survey responses into a separate CSV file."""
     ensure_survey_csv_headers()  # Ensure headers exist
 
@@ -124,6 +124,7 @@ def store_survey_response(player, page_name, form_fields):
                 player.group.id_in_subsession,        # Group ID
                 treatment,                            # Treatment
                 player.round_number,                  # Round number
+                f"{page_name}{' (timeout)' if tag == 'timeout' else ''}",  # Page name + tag,
                 page_name,                            # Survey page name
                 field,                                # Question (form field)
                 response                              # Response value

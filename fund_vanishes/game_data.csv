@@ -2538,3 +2538,153 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Page,Action,Value
 2025-06-04T12:58:02.664172,qd2m4q6g,1,2,priming,5,VoterPage,Voted,False
 2025-06-04T12:58:03.960082,qd2m4q6g,2,2,priming,5,VoterPage,Voted,True
 2025-06-04T12:58:05.095244,qd2m4q6g,3,2,priming,5,VoterPage,Voted,False
+2025-06-10T00:59:27.237542,rvnkhah0,10,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:27.239257,rvnkhah0,10,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:27.239287,rvnkhah0,10,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:30.339509,rvnkhah0,8,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:30.340808,rvnkhah0,8,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:30.340833,rvnkhah0,8,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:33.045533,rvnkhah0,7,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:33.046841,rvnkhah0,7,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:33.046867,rvnkhah0,7,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:35.642422,rvnkhah0,6,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:35.643758,rvnkhah0,6,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:35.643780,rvnkhah0,6,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:38.256074,rvnkhah0,5,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:38.257519,rvnkhah0,5,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:38.257543,rvnkhah0,5,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:40.968506,rvnkhah0,4,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:40.969494,rvnkhah0,4,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:40.969514,rvnkhah0,4,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:44.404745,rvnkhah0,3,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:44.406508,rvnkhah0,3,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:44.406532,rvnkhah0,3,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:47.143592,rvnkhah0,2,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:47.144765,rvnkhah0,2,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:47.144798,rvnkhah0,2,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:50.901354,rvnkhah0,1,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:50.906462,rvnkhah0,1,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:50.906485,rvnkhah0,1,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-10T00:59:53.127973,rvnkhah0,1,2,priming,1,VoterPage,Voted,True
+2025-06-10T00:59:54.638135,rvnkhah0,2,2,priming,1,VoterPage,Voted,False
+2025-06-10T00:59:56.195799,rvnkhah0,3,2,priming,1,VoterPage,Voted,True
+2025-06-10T00:59:57.711501,rvnkhah0,4,2,priming,1,VoterPage,Voted,False
+2025-06-10T00:59:59.444628,rvnkhah0,5,2,priming,1,VoterPage,Voted,True
+2025-06-10T01:00:01.293526,rvnkhah0,6,2,priming,1,VoterPage,Voted,False
+2025-06-10T01:00:02.907876,rvnkhah0,7,2,priming,1,VoterPage,Voted,True
+2025-06-10T01:00:04.576445,rvnkhah0,8,2,priming,1,VoterPage,Voted,False
+2025-06-10T01:00:06.275228,rvnkhah0,10,2,priming,1,VoterPage,Voted,True
+2025-06-10T01:00:25.179162,rvnkhah0,1,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:25.180321,rvnkhah0,1,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:25.180334,rvnkhah0,1,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:27.890915,rvnkhah0,2,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:27.892770,rvnkhah0,2,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:27.892785,rvnkhah0,2,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:30.328552,rvnkhah0,3,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:30.329602,rvnkhah0,3,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:30.329625,rvnkhah0,3,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:33.073644,rvnkhah0,4,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:33.074548,rvnkhah0,4,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:33.074561,rvnkhah0,4,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:35.463979,rvnkhah0,5,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:35.465111,rvnkhah0,5,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:35.465141,rvnkhah0,5,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:38.529925,rvnkhah0,6,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:38.531513,rvnkhah0,6,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:38.531536,rvnkhah0,6,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:41.023306,rvnkhah0,7,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:41.024568,rvnkhah0,7,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:41.024590,rvnkhah0,7,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:44.234384,rvnkhah0,8,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:44.235975,rvnkhah0,8,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:44.236013,rvnkhah0,8,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:48.038328,rvnkhah0,10,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:48.039789,rvnkhah0,10,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:48.039812,rvnkhah0,10,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-10T01:00:49.230743,rvnkhah0,10,2,priming,2,VoterPage,Voted,True
+2025-06-10T01:00:50.654209,rvnkhah0,8,2,priming,2,VoterPage,Voted,False
+2025-06-10T01:00:52.678782,rvnkhah0,7,2,priming,2,VoterPage,Voted,True
+2025-06-10T01:00:54.332447,rvnkhah0,6,2,priming,2,VoterPage,Voted,False
+2025-06-10T01:00:56.164426,rvnkhah0,5,2,priming,2,VoterPage,Voted,True
+2025-06-10T01:00:57.694471,rvnkhah0,4,2,priming,2,VoterPage,Voted,False
+2025-06-10T01:00:59.319041,rvnkhah0,3,2,priming,2,VoterPage,Voted,True
+2025-06-10T01:01:01.454157,rvnkhah0,2,2,priming,2,VoterPage,Voted,False
+2025-06-10T01:01:03.064705,rvnkhah0,1,2,priming,2,VoterPage,Voted,True
+2025-06-10T01:01:24.814931,rvnkhah0,10,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:24.816433,rvnkhah0,10,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:24.816457,rvnkhah0,10,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:28.277276,rvnkhah0,8,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:28.278290,rvnkhah0,8,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:28.278311,rvnkhah0,8,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:32.007192,rvnkhah0,7,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:32.008515,rvnkhah0,7,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:32.008536,rvnkhah0,7,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:36.647378,rvnkhah0,6,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:36.649528,rvnkhah0,6,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:36.649557,rvnkhah0,6,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:40.132961,rvnkhah0,5,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:40.134254,rvnkhah0,5,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:40.134276,rvnkhah0,5,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:43.969966,rvnkhah0,4,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:43.971358,rvnkhah0,4,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:43.971377,rvnkhah0,4,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:48.031206,rvnkhah0,3,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:48.032492,rvnkhah0,3,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:48.032522,rvnkhah0,3,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:51.952154,rvnkhah0,2,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:51.953774,rvnkhah0,2,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:51.953799,rvnkhah0,2,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:56.794678,rvnkhah0,1,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:56.796170,rvnkhah0,1,2,priming,3,ProposerPage,Submitted Proposal,15
+2025-06-10T01:01:56.796195,rvnkhah0,1,2,priming,3,ProposerPage,Submitted Proposal,0
+2025-06-10T01:01:58.225712,rvnkhah0,1,2,priming,3,VoterPage,Voted,True
+2025-06-10T01:02:00.039120,rvnkhah0,10,2,priming,3,VoterPage,Voted,True
+2025-06-10T01:02:01.985144,rvnkhah0,8,2,priming,3,VoterPage,Voted,False
+2025-06-10T01:02:04.284678,rvnkhah0,7,2,priming,3,VoterPage,Voted,True
+2025-06-10T01:02:06.153745,rvnkhah0,6,2,priming,3,VoterPage,Voted,False
+2025-06-10T01:02:07.813703,rvnkhah0,5,2,priming,3,VoterPage,Voted,True
+2025-06-10T01:02:09.426685,rvnkhah0,4,2,priming,3,VoterPage,Voted,False
+2025-06-10T01:02:10.887436,rvnkhah0,3,2,priming,3,VoterPage,Voted,True
+2025-06-10T01:02:12.650177,rvnkhah0,2,2,priming,3,VoterPage,Voted,False
+2025-06-10T01:02:55.351592,rvnkhah0,8,2,priming,4,ProposerPage,Submitted Proposal,0
+2025-06-10T01:02:55.353117,rvnkhah0,8,2,priming,4,ProposerPage,Submitted Proposal,10
+2025-06-10T01:02:55.353143,rvnkhah0,8,2,priming,4,ProposerPage,Submitted Proposal,20
+2025-06-10T01:03:00.671090,rvnkhah0,7,2,priming,4,ProposerPage,Submitted Proposal,20
+2025-06-10T01:03:00.672579,rvnkhah0,7,2,priming,4,ProposerPage,Submitted Proposal,10
+2025-06-10T01:03:00.672605,rvnkhah0,7,2,priming,4,ProposerPage,Submitted Proposal,0
+2025-06-10T01:03:05.644523,rvnkhah0,10,2,priming,4,ProposerPage,Submitted Proposal,10
+2025-06-10T01:03:05.645588,rvnkhah0,10,2,priming,4,ProposerPage,Submitted Proposal,20
+2025-06-10T01:03:05.645609,rvnkhah0,10,2,priming,4,ProposerPage,Submitted Proposal,0
+2025-06-10T01:03:09.987350,rvnkhah0,6,2,priming,4,ProposerPage,Submitted Proposal,10
+2025-06-10T01:03:09.988617,rvnkhah0,6,2,priming,4,ProposerPage,Submitted Proposal,20
+2025-06-10T01:03:09.988640,rvnkhah0,6,2,priming,4,ProposerPage,Submitted Proposal,0
+2025-06-10T01:03:13.963719,rvnkhah0,5,2,priming,4,ProposerPage,Submitted Proposal,10
+2025-06-10T01:03:13.965789,rvnkhah0,5,2,priming,4,ProposerPage,Submitted Proposal,20
+2025-06-10T01:03:13.965811,rvnkhah0,5,2,priming,4,ProposerPage,Submitted Proposal,0
+2025-06-10T01:03:18.169616,rvnkhah0,4,2,priming,4,ProposerPage,Submitted Proposal,20
+2025-06-10T01:03:18.170773,rvnkhah0,4,2,priming,4,ProposerPage,Submitted Proposal,10
+2025-06-10T01:03:18.170801,rvnkhah0,4,2,priming,4,ProposerPage,Submitted Proposal,0
+2025-06-10T01:03:21.913173,rvnkhah0,3,2,priming,4,ProposerPage,Submitted Proposal,20
+2025-06-10T01:03:21.914405,rvnkhah0,3,2,priming,4,ProposerPage,Submitted Proposal,10
+2025-06-10T01:03:21.914427,rvnkhah0,3,2,priming,4,ProposerPage,Submitted Proposal,0
+2025-06-10T01:03:27.650584,rvnkhah0,1,2,priming,4,ProposerPage,Submitted Proposal,0
+2025-06-10T01:03:27.652002,rvnkhah0,1,2,priming,4,ProposerPage,Submitted Proposal,10
+2025-06-10T01:03:27.652054,rvnkhah0,1,2,priming,4,ProposerPage,Submitted Proposal,20
+2025-06-10T01:03:45.433605,rvnkhah0,2,2,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:03:45.435275,rvnkhah0,2,2,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:03:45.435295,rvnkhah0,2,2,priming,4,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:04:29.644048,rvnkhah0,2,2,priming,4,ProposerPage2,Timeout - Auto Proposal,-10
+2025-06-10T01:04:29.645393,rvnkhah0,2,2,priming,4,ProposerPage2,Timeout - Auto Proposal,-10
+2025-06-10T01:04:29.645417,rvnkhah0,2,2,priming,4,ProposerPage2,Timeout - Auto Proposal,-10
+2025-06-10T01:37:00.031104,9if1chx5,3,2,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:37:00.034974,9if1chx5,3,2,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:37:00.034992,9if1chx5,3,2,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:37:00.050322,9if1chx5,2,2,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:37:00.050842,9if1chx5,2,2,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:37:00.050851,9if1chx5,2,2,priming,1,ProposerPage,Timeout - Auto Proposal,-10
+2025-06-10T01:37:45.770612,9if1chx5,2,2,priming,1,ProposerPage2,Timeout - Auto Proposal,-10
+2025-06-10T01:37:45.771992,9if1chx5,2,2,priming,1,ProposerPage2,Timeout - Auto Proposal,-10
+2025-06-10T01:37:45.772017,9if1chx5,2,2,priming,1,ProposerPage2,Timeout - Auto Proposal,-10
+2025-06-10T01:37:45.860988,9if1chx5,3,2,priming,1,ProposerPage2,Timeout - Auto Proposal,-10
+2025-06-10T01:37:45.861428,9if1chx5,3,2,priming,1,ProposerPage2,Timeout - Auto Proposal,-10
+2025-06-10T01:37:45.861439,9if1chx5,3,2,priming,1,ProposerPage2,Timeout - Auto Proposal,-10
