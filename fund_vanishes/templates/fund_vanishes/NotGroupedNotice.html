@@ -1,0 +1,96 @@
+{% extends "global/Page.html" %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f6f4fa;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card {
+        max-width: 640px;
+        margin: 60px auto;
+        background: #fff;
+        padding: 48px 36px;
+        border-radius: 20px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h2 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #6a1b9a;
+        margin-bottom: 12px;
+    }
+
+    .message {
+        font-size: 17px;
+        color: #555;
+        margin-bottom: 28px;
+    }
+
+    .info-box {
+        background-color: #f3ecfb;
+        border: 1px solid #d9c7ef;
+        border-radius: 14px;
+        padding: 20px;
+        font-size: 16px;
+        color: #4b3d63;
+        margin-bottom: 36px;
+    }
+
+    .amount {
+        font-size: 30px;
+        font-weight: 700;
+        color: #6a1b9a;
+        background: #e6d9f5;
+        display: inline-block;
+        padding: 14px 34px;
+        border-radius: 14px;
+        margin-top: 14px;
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .next-button {
+        background-color: #6a1b9a;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .next-button:hover {
+        background-color: #5a1485;
+    }
+</style>
+
+<div class="card">
+    <h2>Sorry, we couldn't group you in time.</h2>
+    <p class="message">You waited over 5 minutes and were not matched with other participants.</p>
+
+    <div class="info-box">
+        <strong>You will still receive your participation fee of:</strong><br>
+        <div class="amount">${{ fixed_fee_amount }}</div>
+    </div>
+
+    <form method="post">
+        <button class="next-button"><strong>Next</strong></button>
+    </form>
+</div>
+{% endblock %}

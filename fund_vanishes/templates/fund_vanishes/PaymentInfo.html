@@ -131,34 +131,40 @@
 
     /* --- Completion Code Specific Styling --- */
     .completion-section {
-        background: #fdf5e6; /* Lighter, contrasting background */
-        border: 2px solid #979199; /* Yellow/orange border for attention */
+        /* background: #fdf5e6; 
+        border: 2px solid #979199;  */
+        background: #f4eaff;
+        border: 2px solid #6A0DAD;
+
         padding: 25px;
         border-radius: 12px;
         margin-top: 30px;
-        box-shadow: 0px 5px 15px rgba(255, 204, 0, 0.2);
-        animation: pulseBorder 1.5s infinite alternate; /* Gentle pulsing animation */
+        box-shadow: 0 2px 8px rgba(106, 13, 173, 0.05);
     }
 
     .completion-instruction {
-        font-size: 18px;
-        font-weight: 600;
-        color: #251d34;
         margin-bottom: 15px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #333;
+
     }
 
     .completion-code-box {
-        background: #ffe066; /* Bright yellow background for the code */
+        /* background: #ffe066;  */
         padding: 15px 25px;
+        background: #e7dcff;
+        color: #4e0c86;
+
         border-radius: 8px;
         font-size: 32px; /* Larger font size */
         font-weight: 700; /* Extra bold */
-        color: #b05700; /* Even darker orange for strong contrast */
+        /* color: #b05700;  */
         letter-spacing: 1.5px; /* Spacing for readability */
         display: inline-block;
         margin-bottom: 20px;
         cursor: copy; /* Indicate it's copyable */
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
         position: relative;
         transition: transform 0.2s ease, background 0.2s ease;
     }
@@ -169,21 +175,25 @@
     }
 
     .copy-button {
-        background-color: #6A0DAD;
-        color: white;
+        background: linear-gradient(135deg, #6A0DAD, #4e0c86);
+        color: #fff;
         font-size: 16px;
-        padding: 10px 20px;
+        font-weight: 600;
+        padding: 12px 26px;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: background 0.3s ease, transform 0.2s ease;
-        margin-top: 10px;
+        transition: all 0.25s ease-in-out;
+        box-shadow: 0 4px 10px rgba(106, 13, 173, 0.2);
+        letter-spacing: 0.5px;
     }
 
     .copy-button:hover {
-        background-color: #4e0c86;
+        background: linear-gradient(135deg, #5b0ab0, #3e0671);
         transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(106, 13, 173, 0.25);
     }
+
 
     .copy-message {
         font-size: 14px;
@@ -264,15 +274,16 @@
     <hr>
 
     <div class="completion-section">
+        <p class="bonus-section">Completion Code</p>
+
         <p class="completion-instruction">
-            <strong>IMPORTANT:</strong><br>
-            To receive your payment, please copy the code below and <strong>enter it into Prolific</strong> before exiting this page.
-        </p>
+            Please copy the code below and submit it on <strong>Prolific</strong> to confirm your participation and receive your payment.
+        </p><br>
         <div id="completionCodeBox" class="completion-code-box">
             {{ completion_code }}
         </div>
-        <!-- <button id="copyButton" class="copy-button">Click to Copy Code</button>
-        <p id="copyMessage" class="copy-message">Code copied to clipboard!</p> -->
+        <button id="copyButton" class="copy-button"  type="button">📋 Click to Copy Code</button>
+        <p id="copyMessage" class="copy-message">Code copied to clipboard!</p>
     </div>
 
 </div>

@@ -97,7 +97,7 @@ class Subsession(BaseSubsession):
     def group_by_arrival_time_method(subsession, waiting_players):
         
         eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
-        group_size = 9
+        group_size = 3
 
         # Case 1: Create group of 9
         if (len(eligible)) >= group_size:
@@ -143,6 +143,7 @@ class Subsession(BaseSubsession):
                 p.participant.vars["sync_wait_start"] = time.time()
             elif time.time() - p.participant.vars["sync_wait_start"] > 300:  # 5 mins
                 print(f"[SyncTop] Timeout fallback: Player {p.id_in_subsession} solo exit")
+                p.participant.vars["waiting_timeout"] = True
                 return [p]  # Let this player proceed alone to be routed to Payment
 
         # Fewer than nine → keep waiting
