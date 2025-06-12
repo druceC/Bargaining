@@ -842,6 +842,8 @@ class ResultsPage(BasePage):
         proposer_id = selected_proposal.get("proposer_id")
         proposer_display = f"Participant {proposer_id}" if proposer_id else "Unknown"
 
+        store_decision(self.player, "ResultsPage", "SelectedProposal", selected_proposal)
+
         # Get players in the same subgroup
         subgroup_players = [p for p in self.group.get_players()
                             if p.participant.vars.get("subgroup_id") == subgroup_id]
