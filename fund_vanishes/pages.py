@@ -1251,6 +1251,14 @@ class PaymentInfo(Page):
             "completion_code": completion_code
         })
 
+        # Save to player payment variables 
+        self.player.final_payment = final_earnings_data["final_payment"]
+        self.player.total_bonus = final_earnings_data["total_bonus"]
+        self.player.survey_fee = final_earnings_data["survey_fee"]
+        self.player.base_fee = final_earnings_data["base_fee"]
+        self.player.completion_code = completion_code
+
+
         return {
             "is_dropout": self.participant.vars.get("dropout", False),
             "selected_periods": final_earnings_data["selected_periods"],

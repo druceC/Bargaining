@@ -388,6 +388,13 @@ class Player(BasePlayer):
     s2 = models.IntegerField(label="Participant 2")   # Share allocated to second player
     s3 = models.IntegerField(label="Participant 3")   # Share allocated to third player
 
+    # Payment variables
+    final_payment = models.FloatField()
+    total_bonus = models.FloatField()
+    survey_fee = models.FloatField()
+    base_fee = models.FloatField()
+    completion_code = models.StringField()
+
     def treatment(self):
         return "priming" if self.is_priming else "baseline"
 
