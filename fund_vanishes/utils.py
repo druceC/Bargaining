@@ -9,7 +9,8 @@ from pathlib import Path
 INTRO_CSV = Path(__file__).resolve().parent / 'meta_data.csv'
 GAME_CSV = Path(__file__).resolve().parent / 'game_data.csv'
 SURVEY_CSV = Path(__file__).resolve().parent / 'survey_data.csv'
-EARNINGS_CSV = Path(__file__).resolve().parent / 'earnings_data.csv'
+ROUND_EARNINGS_CSV = Path(__file__).resolve().parent / 'round_earnings_data.csv'
+PAYMENT_CSV = Path(__file__).resolve().parent / 'payment_data.csv'
 LOGS_CSV = Path(__file__).resolve().parent / 'logs_data.csv'
 
 # META DATA  ------------------------------------------------------------------------------
@@ -134,35 +135,67 @@ def store_survey_response(player, page_name, form_fields, tag=None):
 # EARNINGS DATA  ------------------------------------------------------------------------------
 
 def ensure_earnings_csv_headers():
-    """Creates the earnings CSV file with headers if it does not exist."""
-    if not default_storage.exists(FILES["earnings"]):
-        with default_storage.open(FILES["earnings"], mode='w', newline='') as file:
+    if not default_storage.exists(ROUND_EARNINGS_CSV):
+        with default_storage.open(ROUND_EARNINGS_CSV, mode='w') as file:
             writer = csv.writer(file)
             writer.writerow([
                 "Timestamp",
                 "Session_Code",
                 "Participant_ID",
-                "Selected_Periods",
-                "Final_Payment",
-                "Total_Bonus"
+                "Group_Index",
+                "Period",
+                "Earnings"
             ])
 
-def store_earnings(player, earnings_data):
-    """Logs final earnings and selected periods for a participant."""
+def store_earnings(player, current_period, earnings):
     ensure_earnings_csv_headers()  # Ensure headers exist
 
-    with default_storage.open(FILES["earnings"], mode='a', newline='') as file:
+    with default_storage.open(ROUND_EARNINGS_CSV, mode='a') as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            datetime.datetime.now().isoformat(),                        # Timestamp 
+            player.session.code,                                        # Session_Code 
+            player.participant.id_in_session,                           # Participant_ID
+            player.participant.vars.get("group_index", "N/A"),          # Group_Index
+            current_period,                                             # Period
+            earnings                                                    # Earnings
+        ])
+
+
+# FINAL PAYMENT DATA  ------------------------------------------------------------------------------
+
+def ensure_payment_csv_headers():
+    if not default_storage.exists(PAYMENT_CSV):
+        with default_storage.open(PAYMENT_CSV, mode='w') as file:
+            writer = csv.writer(file)
+            writer.writerow([
+                "Timestamp",
+                "Session_Code",
+                "Participant_ID",
+                "Group_Index",
+                "Selected_Periods",
+                "Final_Payment",
+                "Total_Bonus",
+                "Survey_Fee",
+                "Base_Fee",
+                "Completion_Code"
+            ])
+
+def store_payment(player, payment_data):
+    ensure_payment_csv_headers()  # Ensure headers exist
+
+    with default_storage.open(PAYMENT_CSV, mode='a') as file:
         writer = csv.writer(file)
         writer.writerow([
             datetime.datetime.now().isoformat(),                                # Timestamp
             player.session.code,                                                # Session Code
             player.participant.id_in_session,                                   # Participant ID
             player.participant.vars.get("group_index", "N/A"),                  # Group Index
-            ",".join(map(str, earnings_data.get("selected_periods", []))),      # Selected Periods (comma-separated)
-            earnings_data.get("final_payment", 0),                              # Final Payment
-            earnings_data.get("total_bonus", 0)                                 # Total Bonus
+            ",".join(map(str, payment_data.get("selected_periods", []))),       # Selected Periods (comma-separated)
+            payment_data.get("final_payment", 0),                              # Final Payment
+            payment_data.get("total_bonus", 0),                                # Total Bonus
+            payment_data.get("survey_fee", 0),                                 # Survey Fee
+            payment_data.get("base_fee", 0),                                   # Base Fee
+            payment_data.get("completion_code", "N/A")                         # Completion Code
         ])
-
-
-# LOGS, DROPOUTS ------------------------------------------------------------------------------
 

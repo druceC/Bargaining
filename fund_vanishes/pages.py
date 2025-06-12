@@ -3,7 +3,7 @@
 from otree.api import *
 from otree.api import Page
 from .models import Player
-from .utils import store_intro, store_survey_response, store_decision, store_earnings
+from .utils import store_intro, store_survey_response, store_decision, store_earnings, store_payment
 # from .survey import Player
 from .models import Constants
 from .models import Group
@@ -1200,7 +1200,6 @@ class PaymentInfo(Page):
     # Adjust payment
 
     def is_displayed(self):
-        # Payment info is only displayed when (1) All periods have been played or (2) Dropout is detected
         return self.participant.vars.get('periods_played', 0) >= Constants.no_periods or self.group.drop_out_detected or self.participant.vars.get("not_grouped", False) or self.participant.vars.get("waiting_timeout", False)
         # True
 
@@ -1240,6 +1239,16 @@ class PaymentInfo(Page):
         else:
             completion_code = "N/A"
 
+        # Store payment data
+        store_payment(self.player, {
+            "selected_periods": final_earnings_data["selected_periods"],
+            "final_payment": final_earnings_data["final_payment"],
+            "total_bonus": final_earnings_data["total_bonus"],
+            "survey_fee": final_earnings_data["survey_fee"],
+            "base_fee": final_earnings_data["base_fee"],
+            "completion_code": completion_code
+        })
+
         return {
             "is_dropout": self.participant.vars.get("dropout", False),
             "selected_periods": final_earnings_data["selected_periods"],
@@ -1250,17 +1259,6 @@ class PaymentInfo(Page):
             "base_fee": final_earnings_data["base_fee"],
             "completion_code": completion_code
         }
-
-    def before_next_page(self):
-        # Record Earnings
-        store_earnings(self.player, {
-            "selected_periods": final_earnings_data["selected_periods"],
-            "final_payment": final_earnings_data["final_payment"],
-            "total_bonus": final_earnings_data["total_bonus"],
-            "survey_fee": final_earnings_data["survey_fee"],
-            "base_fee": final_earnings_data["base_fee"],
-            "completion_code": completion_code
-        })
 
     # Completion Link for Prolific
 

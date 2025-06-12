@@ -1,0 +1,5 @@
+Timestamp,Session_Code,Participant_ID,Group_Index,Selected_Periods,Final_Payment,Total_Bonus,Survey_Fee,Base_Fee,Completion_Code
+2025-06-12T06:06:07.643220,hfl1fp5v,3,1,"{'period': 2, 'tokens': 0.0, 'usd_equivalent': 0.0},{'period': 1, 'tokens': 10.0, 'usd_equivalent': 2.5}",4.5,2.5,0,2,PFB-841ZC2
+2025-06-12T06:06:10.405568,hfl1fp5v,2,1,"{'period': 1, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 2, 'tokens': 0.0, 'usd_equivalent': 0.0}",4.5,2.5,0,2,PFB-841ZC2
+2025-06-12T06:06:13.247449,hfl1fp5v,1,1,"{'period': 2, 'tokens': 0.0, 'usd_equivalent': 0.0},{'period': 1, 'tokens': 10.0, 'usd_equivalent': 2.5}",4.5,2.5,0,2,PFB-841ZC2
+2025-06-12T06:13:54.695113,88zkteu0,1,1,"{'period': 2, 'tokens': 0.0, 'usd_equivalent': 0.0},{'period': 1, 'tokens': 10.0, 'usd_equivalent': 2.5}",4.5,2.5,0,2,PFB-841ZC2
