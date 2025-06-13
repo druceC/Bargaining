@@ -45,9 +45,16 @@ class BaseWaitPage(WaitPage):
         # Don't show page if dropout is detected
         return not self.group.drop_out_detected
 
+
 class WelcomePage(Page):
     def is_displayed(self):
         return self.round_number == 1
+
+    def before_next_page(self):
+        self.player.prolific_id = self.participant.label
+        self.player.study_id = self.session.config.get('study_id')
+        self.player.player_session_id = self.session.config.get('session_id')
+
 
 class ExperimentInstructions(Page):
     def is_displayed(self):

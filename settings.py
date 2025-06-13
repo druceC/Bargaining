@@ -14,6 +14,8 @@ SESSION_CONFIGS = [
         'app_sequence': ['filter_app','fund_vanishes'],              # Ensure only existing apps are listed
         # 'app_sequence':['fund_vanishes'],
         # 'group_by_arrival_time': True,                  # Enable dynamic grouping
+        'study_id': 'Study001',
+        'player_session_id': 'Pilot1',
     },
 ]
 

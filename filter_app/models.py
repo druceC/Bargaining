@@ -14,7 +14,6 @@ import pycountry
 
 # Get list of all country names using pycountry
 COUNTRIES = sorted([country.name for country in pycountry.countries])
-# COUNTRIES.insert(0, "Other (please specify)")  # Append to the beginning of the list
 
 def load_language_choices():
     filepath = os.path.join(os.path.dirname(__file__), 'iso_639_3_new.csv')
@@ -104,14 +103,18 @@ class Player(BasePlayer):
 
     # PROLIFIC SET-UP
     
-    prolific_id = models.LongStringField(
-        # blank=False,
-        # min_length=24,
-        # max_length=24,
-        # error_messages={"min_length": "Must be exactly 24 characters."},
-        label="Please enter your prolific ID:",
-        # Add photo of sample prolific ID and where to find it
-    )
+    # prolific_id = models.LongStringField(
+    #     # blank=False,
+    #     # min_length=24,
+    #     # max_length=24,
+    #     # error_messages={"min_length": "Must be exactly 24 characters."},
+    #     label="Please enter your prolific ID:",
+    #     # Add photo of sample prolific ID and where to find it
+    # )
+
+    prolific_id = models.StringField(blank=True)
+    study_id = models.StringField(blank=True)
+    player_session_id = models.StringField(blank=True)
 
     #####################################################################################
     
