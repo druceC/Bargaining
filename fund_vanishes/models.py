@@ -381,7 +381,9 @@ class Player(BasePlayer):
     is_priming = models.BooleanField()                  # Randomly assign each player to either receive priming or baseline treatment
     group_id_9 = models.IntegerField()
     subgroup_id = models.IntegerField()
-
+    id_in_subgroup = models.IntegerField()
+    dropout = models.BooleanField(initial = False)                     # Dropout Flag
+    ungrouped = models.BooleanField(initial = False)                   # Ungrouped Flag
     
     # Store the SELECTED share allocation proposal for each participant
     s1 = models.IntegerField(label="Participant 1")   # Share allocated to first player
@@ -693,21 +695,13 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
     )
 
-    qp2 = models.StringField(
-        choices=[
-            [1, "1 (Feminine)"],
-            [2, "2"],
-            [3, "3"],
-            [4, "4"],
-            [5, "5"],
-            [6, "6"],
-            [7, "7"],
-            [8, "8"],
-            [9, "9"],
-            [10, "10 (Masculine)"]
-        ],
-        label="On a scale of 1-10, where 1 is feminine and 10 is masculine, how would you rate the expression of your gender identity?",
+    gen_cgi = models.StringField(
+        choices=[[0, '0 (Very masculine)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
+                 [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
+                 [10, '10 (Very feminine)']],
+        label='In general, how do you see yourself? Where would you put yourself on this scale (0-10) from "Very masculine" to "Very feminine"?',
         widget=widgets.RadioSelect,
+        blank=True,
     )
 
     qp3 = models.StringField(
@@ -718,8 +712,12 @@ class Player(BasePlayer):
             [4, "4"],
             [5, "5 (Extremely Important)"]
         ],
-        label="You have stated that you rate your expression of your gender identity as ____. How important is it for you to express your gender identity to others?",
+        label="How important is it for you that others know your self-described masculinty / femininity level as you answered in the preceding question?",
         widget=widgets.RadioSelect,
+    )
+
+    qp4 = models.LongStringField(
+        label="Can you provide a brief explanation for your answer to the preceding question on how important is it for you that others know your masculinity / femininity.",
     )
     #------------------------------------------------------------------------------------------------------------------------------------
     
@@ -757,6 +755,33 @@ class Player(BasePlayer):
         label='In general, how do you see yourself? Where would you put yourself on this scale (0-10) from "Very masculine" to "Very feminine"?',
         widget=widgets.RadioSelect,
     )
+    
+    trans_1 = models.StringField(
+        choices=[
+            [1, '(Strongly Disagree)'], 
+            [2, ''], 
+            [3, ''], 
+            [4, ''],
+            [5, '(Strongly Agree)']
+        ],
+        label='I avoid interacting with people whose gender is unclear to me.',
+        widget=widgets.RadioSelect,  
+    )
+
+    trans_2 = models.StringField(
+        choices=[
+            [1, '(Strongly Disagree)'], 
+            [2, ''], 
+            [3, ''], 
+            [4, ''],
+            [5, '(Strongly Agree)']
+        ],
+        label='There are only two genders: male and female.',
+        widget=widgets.RadioSelect,  
+    )
+
+
+    
 
     # Income ----------------------
 
@@ -891,6 +916,7 @@ class Player(BasePlayer):
               "the money only between two people, with the third person getting nothing? Where 1 is completely "
               "unacceptable and 7 is completely acceptable.",
         widget=widgets.RadioSelect,
+        blank = False,
     )
     mwc_others = models.StringField(
         choices=[[1, "1 (Extremely unlikely)"],
@@ -900,6 +926,7 @@ class Player(BasePlayer):
               "question, how likely is it that the money will be split only between two of them, with the third "
               "person getting nothing? Where 1 is extremely unlikely and 7 is extremely likely.",
         widget=widgets.RadioSelect,
+        blank = False,
     )
 
     # Part 1c ----------------------
@@ -939,29 +966,29 @@ class Player(BasePlayer):
 
     # Part 2a ----------------------
 
-    party_like = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label='Is there a political party that you feel closer to than other parties?',
-        widget=widgets.RadioSelect,
-    )
-    # Only show party and party_prox if party_like == 1 
-    party = models.StringField(
-        choices=[[1, 'Republican Party'], [2, 'Democratic Party'], [3, 'Libertarian Party'], [4, 'Other (please specify)']],
-        label='Which political party do you feel closest to?',
-        widget=widgets.RadioSelect,
-        blank = True
-    )
+    # party_like = models.StringField(
+    #     choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
+    #     label='Is there a political party that you feel closer to than other parties?',
+    #     widget=widgets.RadioSelect,
+    # )
+    # # Only show party and party_prox if party_like == 1 
+    # party = models.StringField(
+    #     choices=[[1, 'Republican Party'], [2, 'Democratic Party'], [3, 'Libertarian Party'], [4, 'Other (please specify)']],
+    #     label='Which political party do you feel closest to?',
+    #     widget=widgets.RadioSelect,
+    #     blank = True
+    # )
 
-    # New field for custom input
-    other_party = models.StringField(blank=True)
+    # # New field for custom input
+    # other_party = models.StringField(blank=True)
 
-    party_prox = models.StringField(
-        choices=[[1, 'Very close'], [2, 'Somewhat close'], [3, 'Not close'], [4, 'Not at all close'],
-                 [5, "Don't know"]],
-        label='How close do you feel to this party?',
-        widget=widgets.RadioSelect,
-        blank = True
-    )
+    # party_prox = models.StringField(
+    #     choices=[[1, 'Very close'], [2, 'Somewhat close'], [3, 'Not close'], [4, 'Not at all close'],
+    #              [5, "Don't know"]],
+    #     label='How close do you feel to this party?',
+    #     widget=widgets.RadioSelect,
+    #     blank = True
+    # )
 
     # Part 2b ----------------------
 
@@ -1030,35 +1057,6 @@ class Player(BasePlayer):
         blank = True
     )
 
-    # Part 4 ----------------------
-
-    # Parent-related questions
-
-    # Mother country of birth
-    mth_spbrn = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label="Was your mother born in the United States?",
-        widget=widgets.RadioSelect,
-    )
-    # Conditional on question above
-    mth_cntbrn = models.StringField(
-        label="In which country was your mother born?",
-        choices=COUNTRIES,
-        blank=True
-    )
-    # Father country of birth
-    fth_spbrn = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label="Was your father born in the United States?",
-        widget=widgets.RadioSelect,
-    )
-    # Conditional on question above
-    fth_cntbrn = models.StringField(
-        label="In which country was your father born?",
-        choices=COUNTRIES,
-        blank=True
-    )
-
     # Part 5 ----------------------
 
     mwc_bonus = models.StringField(
@@ -1081,7 +1079,7 @@ class Player(BasePlayer):
         choices=[[0, "0 (Not at all)"], [1, "1"],
                  [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
                  [10, "10 (Enjoyed a lot)"]],
-        label='How much did you enjoy this experiment? 0 means "not at all" and 10 means "enjoyed a lot".',
+        label='How much did you enjoy this resource division experiment? 0 means "not at all" and 10 means "enjoyed a lot".',
         widget=widgets.RadioSelect,
         blank = False,
     )

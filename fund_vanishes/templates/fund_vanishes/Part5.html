@@ -200,59 +200,36 @@
             <div class="progress"></div>
         </div>
 
-        <div class="survey-header">Academic & Political Background</div>
+        <!-- <div class="survey-header">Background & Risk Preferences</div> -->
         <br>
         <form id="surveyForm" method="post">
             <div class="form-container">
                 
+                <!-- Occupation -->
+                <div class="question-block">
+                    {{ form.occ.label }}
+                    <div class="radio-scale">
+                        {{ form.occ }}
+                    </div>
+                </div>
+                <br>
+
+                <!-- Risk -->
+                <div class="question-block">
+                    {{ form.risk.label }}
+                    <div class="radio-scale">
+                        {{ form.risk }}
+                    </div>
+                </div>
+                <br>
+
                 <!-- Number of Economics Courses Taken -->
                 <div class="question-block">
                     {{ form.econ.label }}
                     <div class = "sub">Please only use numbers to answer.</div>
                     {{ form.econ }}
                 </div>
-    
-                <!-- Whether there is a political party they like -->
-                <div class="question-block">
-                    {{ form.party_like.label }}
-                    <div class="radio-scale">
-                        {{ form.party_like }}
-                    </div>
-                </div>
-    
-                <!-- Conditionally displayed field for party -->
-                <div class="question-block">
-                    <div id="otherBirthContainer" style="display: none;">
-                        <p>{{ form.party.label }}</p>
-                        <div class="radio-scale">
-                            {{ form.party }}
-                        </div>
-                        <!-- <input type="text" id="otherBirthText" name="party"> -->
-                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
-                    </div>
-                </div>
-    
-                <!-- Show if answer to question above is "2" -->
-                <div class="question-block">
-                    <div id="otherPartyContainer" style="display: none;">
-                        <!-- {{ form.other_party.label }}</p> -->
-                        {{ form.other_party }}
-                        <!-- <input type="text" id="otherCitText" name="fth_cntbrn"> -->
-                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
-                    </div>
-                </div>
-    
-                <!-- Show if answer to question above is "2" -->
-                <div class="question-block">
-                    <div id="otherCitContainer" style="display: none;">
-                        {{ form.party_prox.label }}</p>
-                        <div class="radio-scale">
-                            {{ form.party_prox }}
-                        </div>
-                        <!-- <input type="text" id="otherCitText" name="fth_cntbrn"> -->
-                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
-                    </div>
-                </div>
+                <br>
     
             </div>
         </form>

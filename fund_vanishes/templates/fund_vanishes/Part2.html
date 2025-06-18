@@ -242,7 +242,7 @@
         <form id="surveyForm" method="post">
             <div class="form-container">
                 <br>
-                <div class="survey-header">A Few Questions About You</div>
+                <!-- <div class="survey-header">A Few Questions About You</div> -->
                 <br>
                 <!-- Age Question -->
                 {{ form.age.label }}<br>
@@ -254,14 +254,22 @@
                 </select><br><br><br>
         
                 <!-- Risk Level Question -->
-                {{ form.risk.label }}<br>
+                {{ form.sex.label }}<br>
                 <div class="radio-scale">
-                    {{ form.risk }}<br><br>
+                    {{ form.sex }}<br><br>
                 </div>
     
-                <!-- Occupation Question -->
-                {{ form.occ.label }}<br>
-                {{ form.occ }}<br><br>
+                <!-- Trans 1 Question -->
+                {{ form.trans_1.label }}<br>
+                <div class="radio-scale">
+                    {{ form.trans_1 }}<br><br>
+                </div>
+
+                 <!-- Trans 2 Question -->
+                 {{ form.trans_2.label }}<br>
+                 <div class="radio-scale">
+                    {{ form.trans_2 }}<br><br>
+                </div>
         
             </div>
         </form>

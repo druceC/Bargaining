@@ -117,20 +117,130 @@
     }
 
     .survey-header {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
-        color: #E09F3E; /* Warm orange */
-        margin-bottom: 12px;
+        color: #cc7400;
+        margin-bottom: 8px;
         text-align: center;
     }
-    
 
     .survey-subtext {
-        font-size: 16px;
-        color: #868686;
-        font-weight: 400;
-        margin-bottom: 24px;
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 25px;
         text-align: center;
+    }
+
+    .radio-scale label {
+        display: block;
+        margin: 6px 0;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .radio-scale label:hover {
+        color: #cc8b00;
+        font-weight: 500;
+        background-color: rgba(0, 68, 204, 0.05);
+        border-radius: 4px;
+        padding: 4px 6px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input[type="text"]:hover,
+    select:hover {
+        border-color: #cc8b00;
+        box-shadow: 0 0 0 2px rgba(0, 68, 204, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    .survey-header {
+        font-size: 22px;
+        font-weight: 600;
+        color: #cc7400;
+        margin-bottom: 8px;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    .question-block {
+        margin-bottom: 30px;
+    }
+
+    .question-block p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .sub {
+        font-size: 12px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #777;
+    }
+
+    .question-block label {
+        display: block;
+        font-size: 16px;
+        margin: 6px 0;
+        cursor: pointer;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        border-color: #0044cc;
+        outline: none;
+    }
+
+    .question-block {
+        margin-bottom: 30px;
+    }
+
+    .question-block p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .sub {
+        font-size: 12px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #777;
+    }
+
+    .question-block label {
+        display: block;
+        font-size: 16px;
+        margin: 6px 0;
+        cursor: pointer;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        border-color: #0044cc;
+        outline: none;
     }
 
 </style>
@@ -153,30 +263,43 @@
                 <div class="survey-subtext">Please answer a few demographic questions before proceeding.</div>
                 <hr>
                 <br>
-                <!-- Were you born in the US? -->
-                <label class="question">{{ form.spbrn.label }}</label>
-                {{ form.spbrn }}<br>
+
+                <div class="question-block">
+                    <!-- Were you born in the US? -->
+                    <label class="question">{{ form.spbrn.label }}</label>
+                    <div class = "radio-scale">
+                        {{ form.spbrn }}
+                    </div>
+                </div>
 
                 <!-- Country of Birth (Conditional) -->
-                <div id="countryBirthContainer" style="display: none;">
-                    <label class="question">{{ form.cntbrn.label }}</label>
-                    {{ form.cntbrn }}<br>
+                <div class="question-block">
+                    <div id="countryBirthContainer" style="display: none;">
+                        <label class="question">{{ form.cntbrn.label }}</label>
+                        <div class = "radio-scale">
+                            {{ form.cntbrn }}
+                        </div>
+                    </div>
                 </div>
-
                 <br>
 
-                <!-- Are you an American citizen? -->
-                <label class="question">{{ form.spcit.label }}</label>
-                {{ form.spcit }}<br>
-
-                <!-- Other Citizenship (Conditional) -->
-                <div id="citizenshipContainer" style="display: none;">
-                    <label class="question">{{ form.other_cit.label }}</label>
-                    {{ form.other_cit }}<br>
+                <div class="question-block">
+                    <!-- Are you an American citizen? -->
+                    <label class="question">{{ form.spcit.label }}</label>
+                    <div class = "radio-scale">
+                        {{ form.spcit }}
+                    </div>
                 </div>
 
+                <div class="question-block">
+                    <!-- Other Citizenship (Conditional) -->
+                    <div id="citizenshipContainer" style="display: none;">
+                        <label class="question">{{ form.other_cit.label }}</label>
+                        {{ form.other_cit }}
+                    </div>
+                </div>
                 <br>
-
+                <br>
             </div>
 
             <button class="next-button" type="submit" onclick="return handleNextClick(event)">Next</button>

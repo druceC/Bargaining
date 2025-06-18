@@ -104,17 +104,33 @@
         border-radius: 6px;
         margin-top: 5px;
     }
+
+    .survey-header {
+        font-size: 22px;
+        font-weight: 600;
+        color: #cc7400;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 25px;
+        text-align: center;
+    }
 </style>
 <div class = "wrapper">
     <div class="survey-container">
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
-    
+        <div class="survey-header">Income</div>
+        <br>
         <div class="form-container">
             {{ formfields }}
         </div><br>
-    
+        <br>
         <button class="next-button" onclick="updateProgress()">Continue to Game</button>
         <div class="note">Questionnaire complete. You’re now ready to begin the game.</div>
     </div>

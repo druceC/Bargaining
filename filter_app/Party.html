@@ -1,0 +1,500 @@
+{{ block content }}
+
+{# Enhanced Survey Page UI #}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f9f7e5, #FFE085); /* Soft pastel yellow gradient */
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* height: 100vh; */
+        margin: 0;
+    }
+
+    body {
+        background: linear-gradient(135deg, #f9f7e5, #FFE085); /* Soft pastel yellow gradient */
+        background-size: 200% 200%;
+        transition: background 1s ease-in-out;
+    }
+
+    .survey-container {
+        width: 90%;
+        max-width: 700px;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Outer wrapper to ensure perfect centering */
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .survey-header {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0044cc;
+        margin-bottom: 10px;
+    }
+
+    .survey-subtext {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress {
+        height: 100%;
+        width: 0%;
+        background: #FFB627; /* Warm accent color */
+        transition: width 0.5s ease-in-out;
+    }
+
+    .form-container {
+        text-align: left;
+    }
+
+    .next-button {
+        background: linear-gradient(135deg, #FFB627, #FF8A00);
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .next-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 5px 15px rgba(255, 138, 0, 0.3);
+    }
+
+
+    .radio-scale label {
+        display: block;
+        margin: 6px 0;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .radio-scale label:hover {
+        color: #cc8b00;
+        font-weight: 500;
+        background-color: rgba(0, 68, 204, 0.05);
+        border-radius: 4px;
+        padding: 4px 6px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input[type="text"]:hover,
+    select:hover {
+        border-color: #cc8b00;
+        box-shadow: 0 0 0 2px rgba(0, 68, 204, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    .survey-header {
+        font-size: 22px;
+        font-weight: 600;
+        color: #cc7400;
+        margin-bottom: 8px;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    .question-block {
+        margin-bottom: 30px;
+    }
+
+    .question-block p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .sub {
+        font-size: 12px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #777;
+    }
+
+    .question-block label {
+        display: block;
+        font-size: 16px;
+        margin: 6px 0;
+        cursor: pointer;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        border-color: #0044cc;
+        outline: none;
+    }
+
+    .note {
+        font-size: 14px;
+        color: #777;
+        margin-top: 15px;
+    }
+</style>
+
+<div class = "wrapper">
+    <div class="survey-container">
+    
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+
+        <div class="survey-header">Political Background</div>
+        <br>
+        <form id="surveyForm" method="post">
+            <div class="form-container">
+    
+            
+                <!-- Political affiliation -->
+                <div class="question-block">
+                    <p>{{ form.party.label }}</p>
+                    <div class="radio-scale">
+                        {{ form.party }}
+                    </div>
+                    <!-- <input type="text" id="otherBirthText" name="party"> -->
+                </div>
+
+                <!-- Hidden: Show if answer to above is (3) or (4)-->
+                <div class="question-block">
+                    <div id="otherBirthContainer" style="display: none;">
+                        {{ form.party_closer.label }}
+                        <div class="radio-scale">
+                            <div class="birthTextInput">
+                                {{ form.party_closer }}
+                            </div>
+                        </div>
+                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
+                    </div>
+                    
+                </div>
+    
+                <!-- Strong Republican Question -->
+                <!-- Hidden: Show if answer to first question is (1) -->
+                <div class="question-block">
+                    <div id="otherCitContainer" style="display: none;">
+                        {{ form.party_strong_republican.label }}
+                        <div class="radio-scale">
+                            <div class="citTextInput">
+                                {{ form.party_strong_republican }}
+                            </div>
+                        </div>
+                        <p id="error-message1" style="color: red; display: none;">This field is required.</p>
+                    </div>
+                </div>
+                
+                <!-- Strong Democrat Question -->
+                 <!-- Hidden: Show if answer to first question is (2) -->
+                <div class="question-block">
+                    <div id="otherPartyContainer" style="display: none;">
+                        {{ form.party_strong_democrat.label }}
+                        <div class="radio-scale">
+                            <div class="partyTextInput">
+                                {{ form.party_strong_democrat }}
+                            </div>
+                        </div>
+                        <p id="error-message2" style="color: red; display: none;">This field is required.</p>
+                    </div>
+                </div>
+    
+            </div>
+        </form>
+    
+        <button class="next-button" onclick="handleNextClick()">Next</button>
+        <div class="note">Click next to proceed.</div>
+    </div>
+</div>
+
+<script>
+
+    function validateProgress() {
+        const form = document.getElementById("surveyForm");
+        const requiredGroups = new Set();
+
+        // Collect all question names (e.g., from radio buttons)
+        form.querySelectorAll("input, select, textarea").forEach(input => {
+            if (input.name) requiredGroups.add(input.name);
+        });
+
+        let allAnswered = true;
+
+        requiredGroups.forEach(name => {
+            const answered =
+                form.querySelector(`input[name="${name}"]:checked`) ||
+                (form.querySelector(`select[name="${name}"]`)?.value?.trim() !== "") ||
+                (form.querySelector(`textarea[name="${name}"]`)?.value?.trim() !== "");
+            if (!answered) {
+                allAnswered = false;
+            }
+        });
+
+        if (allAnswered) {
+            updateProgress();
+            form.submit();
+        } else {
+            alert("Please answer all the required questions before proceeding.");
+        }
+    }
+
+    // Prevent form submission if volunt_hrs is required but not answered
+    function validateForm() {
+        let selectedVolunteer = document.querySelector('input[name="party"]:checked');
+        let selectedHours = document.querySelector('input[name="party_strong_republican"]:checked');
+        let selectedHours1 = document.querySelector('input[name="party_strong_democrat"]:checked');
+        let selectedHours2 = document.querySelector('input[name="party_closer"]:checked');
+        let errorMessage = document.getElementById("error-message");
+        let errorMessage1 = document.getElementById("error-message1");
+        let errorMessage2 = document.getElementById("error-message2");
+        let firstErrorField = null; // Track the first error field to scroll to
+
+        // Case 1: Require Republican Q3 Question
+
+        // If claiming to be "Republican" require Q3: Republican Variation
+        if (selectedVolunteer && selectedVolunteer.value == "1") { 
+            if (!selectedHours || selectedHours.value.trim() === "") {
+                errorMessage1.style.display = "block"; // Show error message
+                firstErrorField = selectedHours;
+                return false;
+            } else {
+                errorMessage1.style.display = "none"; // Hide error message if fixed
+            }
+        }
+
+        // Case 2: Require Democrat Q3 Question
+
+        // If claiming to be "Democrat" require Q3: Democrat Variation
+        if (selectedVolunteer && selectedVolunteer.value == "2") { 
+            if (!selectedHours1 || selectedHours1.value.trim() === "") {
+                errorMessage2.style.display = "block"; // Show error message
+                firstErrorField = selectedHours1;
+                return false;
+            } else {
+                errorMessage2.style.display = "none"; // Hide error message if fixed
+            }
+        }
+
+        // Case 2: Require Q2 
+
+        // If claiming to be "Independent" or "Something Else" require Q2
+        if ((selectedVolunteer && selectedVolunteer.value == "3") || (selectedVolunteer && selectedVolunteer.value == "4") ) { 
+            if (!selectedHours2 || selectedHours2.value.trim() === "") {
+                errorMessage.style.display = "block"; // Show error message
+                firstErrorField = selectedHours2;
+                return false;
+            } else {
+                errorMessage.style.display = "none"; // Hide error message if fixed
+            }
+        }
+
+        // Scroll to the first error field if there is one
+        if (firstErrorField) {
+            firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+            firstErrorField.focus();
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission if no errors
+
+    }
+
+    function handleNextClick() {
+        if (!validateForm()) {
+            event.preventDefault();
+            return false; // Prevent form submission if validation fails
+        }
+        else{
+            validateProgress(); // Only runs if validateForm() passes
+            return true;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let progress = document.querySelector(".progress");
+        if (!progress) {
+            console.warn("Progress bar element not found!");
+            return;
+        }
+
+        let spbrnInputs = document.querySelectorAll("input[name='party']");
+        // let spcitInputs = document.querySelectorAll("input[name='party_closer']");
+        // let partyInputs = document.querySelectorAll("input[name='party_strong_republican']");
+        // let partyInputs2 = document.querySelectorAll("input[name='party_strong_democrat']");
+
+        // 2nd question
+        let otherBirthContainer = document.getElementById("otherBirthContainer");
+        // 3rd question: Republican Variation
+        let otherCitContainer = document.getElementById("otherCitContainer");
+        // 4th question: Democrat Variation
+        let otherPartyContainer = document.getElementById("otherPartyContainer");
+
+        // Make toggle questions required as applicable
+        let birthTextInput = document.querySelectorAll("input[name='party_closer']");
+        let citTextInput = document.querySelectorAll("input[name='party_strong_republican']");
+        let partyTextInput = document.querySelectorAll("input[name='party_strong_democrat']");
+
+        let form = document.querySelector("form");
+
+        // Require the second question if answer to the first question is 3 or 4 (ie. Other or Something Else)
+        function toggleBirthField() {
+            let selectedOption = document.querySelector("input[name='party']:checked");
+            if ((selectedOption && selectedOption.value === "3") || (selectedOption && selectedOption.value === "4")) {
+                otherBirthContainer.style.display = "block";
+                birthTextInput.setAttribute("required", "true");
+            } else {
+                otherBirthContainer.style.display = "none";
+                birthTextInput.removeAttribute("required");
+                birthTextInput.value = "";  // Clear input when hidden
+            }
+        }
+
+        // Require the third question (Republican Variation) if answer to the first question is 1 (ie. Republican)
+        function toggleCitField() {
+            let selectedOption = document.querySelector("input[name='party']:checked");
+            // If selected option is "Republican"
+            if (selectedOption && selectedOption.value === '1') {
+                otherCitContainer.style.display = "block";
+                citTextInput.setAttribute("required", "true");
+                // citTextInput.forEach(input => input.setAttribute("required","true"));
+            } else {
+                otherCitContainer.style.display = "none";
+                // citTextInput.forEach(input => input.removeAttribute("required"));
+                // citTextInput.forEach(input => input.value = "");
+                citTextInput.removeAttribute("required");
+                citTextInput.value = "";  // Clear input when hidden
+            }
+        }
+        
+        // Require the third question (Democrat Variation) if answer to the first question is 2 (ie. Democrat)
+        function togglePartyField() {
+            let selectedOption = document.querySelector("input[name='party']:checked");
+            if (selectedOption && selectedOption.value === "2") {
+                otherPartyContainer.style.display = "block";
+                citPartyInput.setAttribute("required", "true");
+                // partyTextInput.forEach(input => input.setAttribute("required","true"));
+            } else {
+                otherPartyContainer.style.display = "none";
+                partyTextInput.removeAttribute("required");
+                partyTextInput.value = "";  // Clear input when hidden
+                // partyTextInput.forEach(input => input.removeAttribute("required"));
+                // partyTextInput.forEach(input => input.value = "");
+            }
+        }
+
+        // Retrieve values from the template safely
+        let currentStep = parseInt("{{ survey_step }}", 10);  
+        let totalSteps = parseInt("{{ total_steps }}", 10);  
+
+        if (isNaN(currentStep)) {
+            console.error("survey_step is NaN. Setting default value: 1");
+            currentStep = 1;
+        }
+
+        if (isNaN(totalSteps)) {
+            console.error("total_steps is NaN. Setting default value: 16");
+            totalSteps = 12;
+        }
+
+        let progressWidth = (currentStep / totalSteps) * 100 + "%";
+        console.log(`🔹 Survey Step (from oTree): ${currentStep}`);
+        console.log(`🔹 Progress Width: ${progressWidth}`);
+
+        progress.style.width = progressWidth;
+
+        // Attach event listeners to radio buttons
+
+        // Question 2
+        spbrnInputs.forEach(input => {
+            input.addEventListener("change", toggleBirthField);
+        });
+
+        // Question 3: Republican Variation
+        spbrnInputs.forEach(input => {
+            input.addEventListener("change", toggleCitField);
+        });
+
+        // Question 3: Democrat Variation
+        spbrnInputs.forEach(input => {
+            input.addEventListener("change", togglePartyField);
+        });
+
+        // Ensure correct visibility on page load
+        setTimeout(() => {
+            console.log("🚀 Running visibility toggles on load");
+            toggleBirthField();
+            toggleCitField();
+            togglePartyField();
+        }, 500);
+
+        function validateForm() {
+            return true;
+        }
+
+        // Form validation before submission
+        function handleNextClick() {
+
+            if (!validateForm()) {
+                return false; // Prevent form submission if validation fails
+            }
+            updateProgress(); // Only runs if validateForm() passes
+            return true;
+        }
+
+        // Change background based on survey step
+        const body = document.querySelector("body");
+        const step = parseInt("{{ survey_step }}");
+
+        if (!isNaN(step)) {
+            body.classList.add(`bg-step-${step}`);
+        } else {
+            body.classList.add("bg-step-1");
+        }
+    });
+</script>
+
+{{ endblock }}

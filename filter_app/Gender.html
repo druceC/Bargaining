@@ -104,6 +104,83 @@
         border-radius: 6px;
         margin-top: 5px;
     }
+
+    
+    .radio-scale label {
+        display: block;
+        margin: 6px 0;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .radio-scale label:hover {
+        color: #cc8b00;
+        font-weight: 500;
+        background-color: rgba(0, 68, 204, 0.05);
+        border-radius: 4px;
+        padding: 4px 6px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input[type="text"]:hover,
+    select:hover {
+        border-color: #cc8b00;
+        box-shadow: 0 0 0 2px rgba(0, 68, 204, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    .question-block {
+        margin-bottom: 30px;
+    }
+
+    .question-block p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .sub {
+        font-size: 12px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #777;
+    }
+
+    .question-block label {
+        display: block;
+        font-size: 16px;
+        margin: 6px 0;
+        cursor: pointer;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        border-color: #0044cc;
+        outline: none;
+    }
+
+    .survey-header {
+        font-size: 22px;
+        font-weight: 600;
+        color: #cc7400;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 25px;
+        text-align: center;
+    }
 </style>
 
 <div class = "wrapper">
@@ -113,31 +190,29 @@
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
-
+        <div class="survey-header">Gender</div>
+        <br>
         <!-- Survey Questions -->
         <div class="form-container">
-    
-            <!-- Sex Question -->
-            {{ form.sex.label }}<br>
-            {{ form.sex }}<br><br>
-    
+
             <!-- Gender Selection -->
-            {{ form.gen.label }}<br>
-            {{ form.gen }}<br>
-    
+            <div class = "question-block">
+                {{ form.gen.label }}
+                <div class = "radio-scale">
+                    {{ form.gen }}
+                </div>
+            </div>
+
             <!-- "Other Gender" Input Field -->
-            <div id="otherTextContainer" style="display: none; margin-top: 5px; margin-left: 20px;">
-                <label for="otherText">Please specify:</label>
-                <input type="text" id="otherText" name="other_gender">
-                <p id="error-message" style="color: red; display: none;">This field is required.</p>
-            </div><br>
-    
-            <!-- Masculinity/Femininity Question -->
-            {{ form.gen_cgi.label }}<br>
-            {{ form.gen_cgi }}<br><br>
+            <div class = "question-block">
+                <div id="otherTextContainer" style="display: none; margin-top: 5px; margin-left: 20px;">
+                    <label for="otherText">Please specify:</label>
+                    <input type="text" id="otherText" name="other_gender">
+                    <p id="error-message" style="color: red; display: none;">This field is required.</p>
+                </div><br>
+            </div>
     
         </div>
-    
         <button class="next-button" onclick="return handleNextClick()">Next</button>
         <div class="note">Click next to proceed.</div>
     </div>
@@ -162,7 +237,7 @@
 
         radioButtons.forEach(radio => {
             radio.addEventListener("change", function() {
-                if (this.value == "4") { // If user selects "I use a different term"
+                if (this.value == "3") { // If user selects "I use a different term"
                     otherTextContainer.style.display = "block";
                     otherTextInput.setAttribute("required","true")
                 } else {

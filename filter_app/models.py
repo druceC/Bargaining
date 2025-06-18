@@ -200,11 +200,11 @@ class Player(BasePlayer):
     )
     gen = models.StringField(
         choices=[
-            [1, 'Man or Male'], 
-            [2, 'Woman or Female'], 
-            [3, 'Non-binary or Genderqueer'], 
-            [4, 'I use a different term (please specify)'],
-            [5, 'I prefer not to answer']
+            [1, 'Man'], 
+            [2, 'Woman'], 
+            # [3, 'Non-binary or Genderqueer'], 
+            [3, 'Other (please specify)'],
+            # [5, 'I prefer not to answer']
         ],
         label='How do you describe your gender?',
         widget=widgets.RadioSelect,  
@@ -212,13 +212,14 @@ class Player(BasePlayer):
     # New field for custom input
     other_gender = models.StringField(blank=True)
 
-    gen_cgi = models.StringField(
-        choices=[[0, '0 (Very masculine)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
-                 [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
-                 [10, '10 (Very feminine)']],
-        label='In general, how do you see yourself? Where would you put yourself on this scale (0-10) from "Very masculine" to "Very feminine"?',
-        widget=widgets.RadioSelect,
-    )
+    # gen_cgi = models.StringField(
+    #     choices=[[0, '0 (Very masculine)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
+    #              [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
+    #              [10, '10 (Very feminine)']],
+    #     label='In general, how do you see yourself? Where would you put yourself on this scale (0-10) from "Very masculine" to "Very feminine"?',
+    #     widget=widgets.RadioSelect,
+    #     blank=True,
+    # )
 
     # Income ----------------------
 
@@ -278,7 +279,7 @@ class Player(BasePlayer):
             (5, "4-year college degree"),
             (6, "Postgraduate degree (MA, MBA, MD, JD, PhD, etc.)"),
         ],
-        label='What is your highest education attained?',
+        label='What is your highest level of education attained?',
     )
 
     # Nationality ----------------------
@@ -391,7 +392,7 @@ class Player(BasePlayer):
         choices=[[0, '0 (Extremely unlikely)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
                  [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
                  [10, '10 (Extremely likely)']],
-        label='In general, how willing are you to take risks??',
+        label='In general, how willing are you to take risks?',
         widget=widgets.RadioSelect,
     )
 
@@ -509,6 +510,59 @@ class Player(BasePlayer):
         label="What other religion do you belong to?",
         blank = True
     )
+
+    # Party Questions --------------------------
+    # party_like = models.StringField(
+    #     choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
+    #     label='Is there a political party that you feel closer to than other parties?',
+    #     widget=widgets.RadioSelect,
+    # )
+    # Only show party and party_prox if party_like == 1 
+    party = models.StringField(
+        choices=[[1, 'Republican'], [2, 'Democrat'], [3, 'Independent'], [4, 'Something Else']],
+        # label='Generally speaking, do you usually think of yourself as a Democrat, a Republican, an independent, or something else?',
+        label='In general, do you usually think of yourself as a Democrat, a Republican, an independent, or something else?',
+        widget=widgets.RadioSelect,
+    )
+
+    party_closer = models.StringField(
+        choices=[[1, 'Closer to the Republican Party'], [2, 'Closer to the Democratic Party'], [3, 'Neither'], ],
+        # label='Do you think of yourself as closer to the Republican or Democratic Party?',
+        label='Do you think of yourself as closer to the Republican or Democratic Party?',
+        widget=widgets.RadioSelect,
+        blank = True        # optional depending on answer to party
+    )
+
+    party_strong_republican = models.StringField(
+        choices=[[1, 'Strong Republican'], [2, 'Not Very Strong Republican'], ],
+        # choices=[[1, 'Strong Republican / Strong Democrat'], [2, 'Not Very Strong Republican / Not Very Strong Democrat'], ],
+        # label='Would you call yourself a strong ${Republican / Democrat} or a not very strong ${Rep / Dem}?',
+        label='Would you call yourself a strong Republican or not a very strong Republican?',
+        widget=widgets.RadioSelect,
+        blank = True        # optional depending on answer to party_closer
+    )
+
+    party_strong_democrat = models.StringField(
+        choices=[[1, 'Strong Democrat'], [2, 'Not Very Democrat'], ],
+        # choices=[[1, 'Strong Republican / Strong Democrat'], [2, 'Not Very Strong Republican / Not Very Strong Democrat'], ],
+        # label='Would you call yourself a strong ${Republican / Democrat} or a not very strong ${Rep / Dem}?',
+         label='Would you call yourself a strong Democrat or not a very strong Democrat?',
+        widget=widgets.RadioSelect,
+        blank = True         # optional depending on answer to party_closer
+    )
+
+    # # New field for custom input
+    # other_party = models.StringField(blank=True)
+
+    # party_prox = models.StringField(
+    #     choices=[[1, 'Very close'], [2, 'Somewhat close'], [3, 'Not close'], [4, 'Not at all close'],
+    #              [5, "Don't know"]],
+    #     label='How close do you feel to this party?',
+    #     widget=widgets.RadioSelect,
+    #     blank = True
+    # )
+
+    
 
     # Part 4 ----------------------
 

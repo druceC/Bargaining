@@ -106,6 +106,82 @@
         margin-top: 5px;
         box-sizing: border-box;
     }
+
+    .radio-scale label {
+        display: block;
+        margin: 6px 0;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .radio-scale label:hover {
+        color: #cc8b00;
+        font-weight: 500;
+        background-color: rgba(0, 68, 204, 0.05);
+        border-radius: 4px;
+        padding: 4px 6px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input[type="text"]:hover,
+    select:hover {
+        border-color: #cc8b00;
+        box-shadow: 0 0 0 2px rgba(0, 68, 204, 0.08);
+        transition: all 0.2s ease;
+    }
+
+    .question-block {
+        margin-bottom: 30px;
+    }
+
+    .question-block p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .sub {
+        font-size: 12px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #777;
+    }
+
+    .question-block label {
+        display: block;
+        font-size: 16px;
+        margin: 6px 0;
+        cursor: pointer;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        border-color: #0044cc;
+        outline: none;
+    }
+
+    .survey-header {
+        font-size: 22px;
+        font-weight: 600;
+        color: #cc7400;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .survey-subtext {
+        font-size: 15px;
+        color: #555;
+        margin-bottom: 25px;
+        text-align: center;
+    }
 </style>
 
 <div class = "wrapper">
@@ -116,10 +192,15 @@
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
-    
-        <div class="form-container">{{ form.degree.label }}</label>
-            {{ form.degree }}<br>
-        </div><br><br>
+        <div class="survey-header">Education</div>
+        <br>
+        <div class = "question-block">
+            <div class = "radio-scale">
+                <div class="form-container">{{ form.degree.label }}</label>
+                    {{ form.degree }}<br>
+                </div><br><br>
+            </div>
+        </div>
     
         <button class="next-button" onclick="handleNextClick()">Next</button>
         <div class="note">Click next to proceed.</div>

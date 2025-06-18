@@ -52,3 +52,625 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Survey Page,Quest
 2025-06-12T06:13:48.689269,88zkteu0,1,2,priming,2,Part8,Part8,retaliation_other,5
 2025-06-12T06:13:54.660004,88zkteu0,1,2,priming,2,Bonus,Bonus,bonus,bargaining
 2025-06-12T06:13:54.661413,88zkteu0,1,2,priming,2,Bonus,Bonus,enjoy,4
+2025-06-15T10:40:42.495674,mhf8ysvl,2,2,priming,1,Priming,Priming,qp1,2
+2025-06-15T10:40:42.498288,mhf8ysvl,2,2,priming,1,Priming,Priming,qp3,2
+2025-06-15T10:40:44.218156,mhf8ysvl,1,2,priming,1,Priming,Priming,qp1,2
+2025-06-15T10:40:44.219651,mhf8ysvl,1,2,priming,1,Priming,Priming,qp3,2
+2025-06-15T10:41:56.166073,mhf8ysvl,3,2,priming,1,Priming,Priming,qp1,2
+2025-06-15T10:41:56.167293,mhf8ysvl,3,2,priming,1,Priming,Priming,qp3,2
+2025-06-15T10:44:07.915642,mhf8ysvl,1,2,priming,5,Part1,Part1,cmt_propr,12
+2025-06-15T10:44:07.917609,mhf8ysvl,1,2,priming,5,Part1,Part1,cmt_vtr,21
+2025-06-15T10:44:12.798282,mhf8ysvl,1,2,priming,5,Part2,Part2,age,18
+2025-06-15T10:44:12.800050,mhf8ysvl,1,2,priming,5,Part2,Part2,risk,4
+2025-06-15T10:44:12.800082,mhf8ysvl,1,2,priming,5,Part2,Part2,occ,student
+2025-06-15T10:44:19.184187,mhf8ysvl,1,2,priming,5,Part3,Part3,power_q1a,2
+2025-06-15T10:44:19.186032,mhf8ysvl,1,2,priming,5,Part3,Part3,power_q1b,4
+2025-06-15T10:44:19.186062,mhf8ysvl,1,2,priming,5,Part3,Part3,power_q2,3
+2025-06-15T10:44:19.186084,mhf8ysvl,1,2,priming,5,Part3,Part3,power_q3,2
+2025-06-15T10:44:25.326115,mhf8ysvl,1,2,priming,5,Part4,Part4,atq_1,12
+2025-06-15T10:44:25.328166,mhf8ysvl,1,2,priming,5,Part4,Part4,atq_2,21
+2025-06-15T10:44:25.328192,mhf8ysvl,1,2,priming,5,Part4,Part4,atq_3,12
+2025-06-15T10:44:32.053167,mhf8ysvl,1,2,priming,5,Part5,Part5,econ,15
+2025-06-15T10:44:32.054918,mhf8ysvl,1,2,priming,5,Part5,Part5,party_like,1
+2025-06-15T10:44:32.054947,mhf8ysvl,1,2,priming,5,Part5,Part5,party,1
+2025-06-15T10:44:32.054966,mhf8ysvl,1,2,priming,5,Part5,Part5,other_party,
+2025-06-15T10:44:32.054983,mhf8ysvl,1,2,priming,5,Part5,Part5,party_prox,4
+2025-06-15T10:44:40.395081,mhf8ysvl,1,2,priming,5,Part6,Part6,plop_unempl,3
+2025-06-15T10:44:40.397143,mhf8ysvl,1,2,priming,5,Part6,Part6,plop_comp,3
+2025-06-15T10:44:40.397177,mhf8ysvl,1,2,priming,5,Part6,Part6,plop_incdist,5
+2025-06-15T10:44:40.397199,mhf8ysvl,1,2,priming,5,Part6,Part6,plop_priv,3
+2025-06-15T10:44:40.397219,mhf8ysvl,1,2,priming,5,Part6,Part6,plop_luckeffort,7
+2025-06-15T10:44:40.397240,mhf8ysvl,1,2,priming,5,Part6,Part6,democracy_obedience,4
+2025-06-15T10:44:49.917226,mhf8ysvl,1,2,priming,5,Part7,Part7,rel,1
+2025-06-15T10:44:49.919434,mhf8ysvl,1,2,priming,5,Part7,Part7,rel_spec,7
+2025-06-15T10:44:49.919473,mhf8ysvl,1,2,priming,5,Part7,Part7,rel_other,apple
+2025-06-15T10:44:54.413178,mhf8ysvl,1,2,priming,5,GenderAttitudes,GenderAttitudes,gender_q1,1
+2025-06-15T10:44:54.415482,mhf8ysvl,1,2,priming,5,GenderAttitudes,GenderAttitudes,gender_q2,3
+2025-06-15T10:44:54.415518,mhf8ysvl,1,2,priming,5,GenderAttitudes,GenderAttitudes,gender_q3,3
+2025-06-15T10:44:54.415543,mhf8ysvl,1,2,priming,5,GenderAttitudes,GenderAttitudes,gender_q4,4
+2025-06-15T10:44:59.088455,mhf8ysvl,1,2,priming,5,MWC,MWC,mwc,3
+2025-06-15T10:44:59.090602,mhf8ysvl,1,2,priming,5,MWC,MWC,mwc_others,3
+2025-06-15T10:45:06.601849,mhf8ysvl,1,2,priming,5,SchwartzHierarchy,SchwartzHierarchy,social_power,0
+2025-06-15T10:45:06.603905,mhf8ysvl,1,2,priming,5,SchwartzHierarchy,SchwartzHierarchy,wealth,4
+2025-06-15T10:45:06.603937,mhf8ysvl,1,2,priming,5,SchwartzHierarchy,SchwartzHierarchy,authority,1
+2025-06-15T10:45:06.603959,mhf8ysvl,1,2,priming,5,SchwartzHierarchy,SchwartzHierarchy,humble,2
+2025-06-15T10:45:06.603981,mhf8ysvl,1,2,priming,5,SchwartzHierarchy,SchwartzHierarchy,influential,6
+2025-06-15T10:45:09.659949,mhf8ysvl,1,2,priming,5,Part8,Part8,retaliation,2
+2025-06-15T10:45:09.661232,mhf8ysvl,1,2,priming,5,Part8,Part8,retaliation_other,3
+2025-06-15T10:45:16.150386,mhf8ysvl,1,2,priming,5,Bonus,Bonus,bonus,bargaining
+2025-06-15T10:45:16.151765,mhf8ysvl,1,2,priming,5,Bonus,Bonus,enjoy,2
+2025-06-15T10:47:17.317836,mhf8ysvl,4,3,baseline,5,Baseline,Baseline,qp1,2
+2025-06-15T10:47:17.319593,mhf8ysvl,4,3,baseline,5,Baseline,Baseline,qp3,3
+2025-06-15T10:47:22.247176,mhf8ysvl,4,3,baseline,5,Part1,Part1,cmt_propr,apple
+2025-06-15T10:47:22.248347,mhf8ysvl,4,3,baseline,5,Part1,Part1,cmt_vtr,orange
+2025-06-15T10:47:26.716896,mhf8ysvl,4,3,baseline,5,Part2,Part2,age,18
+2025-06-15T10:47:26.718261,mhf8ysvl,4,3,baseline,5,Part2,Part2,risk,3
+2025-06-15T10:47:26.718294,mhf8ysvl,4,3,baseline,5,Part2,Part2,occ,student
+2025-06-15T10:47:31.574942,mhf8ysvl,4,3,baseline,5,Part3,Part3,power_q1a,3
+2025-06-15T10:47:31.576262,mhf8ysvl,4,3,baseline,5,Part3,Part3,power_q1b,2
+2025-06-15T10:47:31.576294,mhf8ysvl,4,3,baseline,5,Part3,Part3,power_q2,4
+2025-06-15T10:47:31.576320,mhf8ysvl,4,3,baseline,5,Part3,Part3,power_q3,2
+2025-06-15T10:47:35.424940,mhf8ysvl,4,3,baseline,5,Part4,Part4,atq_1,12
+2025-06-15T10:47:35.426025,mhf8ysvl,4,3,baseline,5,Part4,Part4,atq_2,21
+2025-06-15T10:47:35.426058,mhf8ysvl,4,3,baseline,5,Part4,Part4,atq_3,12
+2025-06-15T10:54:01.511868,mhf8ysvl,4,3,baseline,5,Part5,Part5,econ,12
+2025-06-15T10:54:01.513145,mhf8ysvl,4,3,baseline,5,Part5,Part5,party_like,1
+2025-06-15T10:54:01.513172,mhf8ysvl,4,3,baseline,5,Part5,Part5,party,2
+2025-06-15T10:54:01.513193,mhf8ysvl,4,3,baseline,5,Part5,Part5,other_party,
+2025-06-15T10:54:01.513213,mhf8ysvl,4,3,baseline,5,Part5,Part5,party_prox,3
+2025-06-15T10:54:07.980161,mhf8ysvl,4,3,baseline,5,Part6,Part6,plop_unempl,3
+2025-06-15T10:54:07.981493,mhf8ysvl,4,3,baseline,5,Part6,Part6,plop_comp,5
+2025-06-15T10:54:07.981522,mhf8ysvl,4,3,baseline,5,Part6,Part6,plop_incdist,6
+2025-06-15T10:54:07.981542,mhf8ysvl,4,3,baseline,5,Part6,Part6,plop_priv,1
+2025-06-15T10:54:07.981562,mhf8ysvl,4,3,baseline,5,Part6,Part6,plop_luckeffort,6
+2025-06-15T10:54:07.981584,mhf8ysvl,4,3,baseline,5,Part6,Part6,democracy_obedience,5
+2025-06-15T10:54:13.188873,mhf8ysvl,4,3,baseline,5,Part7,Part7,rel,1
+2025-06-15T10:54:13.190052,mhf8ysvl,4,3,baseline,5,Part7,Part7,rel_spec,7
+2025-06-15T10:54:13.190080,mhf8ysvl,4,3,baseline,5,Part7,Part7,rel_other,apple
+2025-06-15T10:54:16.946250,mhf8ysvl,4,3,baseline,5,GenderAttitudes,GenderAttitudes,gender_q1,2
+2025-06-15T10:54:16.947564,mhf8ysvl,4,3,baseline,5,GenderAttitudes,GenderAttitudes,gender_q2,2
+2025-06-15T10:54:16.947597,mhf8ysvl,4,3,baseline,5,GenderAttitudes,GenderAttitudes,gender_q3,1
+2025-06-15T10:54:16.947621,mhf8ysvl,4,3,baseline,5,GenderAttitudes,GenderAttitudes,gender_q4,2
+2025-06-15T10:54:42.174439,mhf8ysvl,5,3,baseline,5,Baseline,Baseline,qp1,2
+2025-06-15T10:54:42.175860,mhf8ysvl,5,3,baseline,5,Baseline,Baseline,qp3,2
+2025-06-15T10:54:47.869445,mhf8ysvl,5,3,baseline,5,Part1,Part1,cmt_propr,apple
+2025-06-15T10:54:47.870595,mhf8ysvl,5,3,baseline,5,Part1,Part1,cmt_vtr,orange
+2025-06-15T10:54:52.809301,mhf8ysvl,5,3,baseline,5,Part2,Part2,age,18
+2025-06-15T10:54:52.810578,mhf8ysvl,5,3,baseline,5,Part2,Part2,risk,3
+2025-06-15T10:54:52.810606,mhf8ysvl,5,3,baseline,5,Part2,Part2,occ,student
+2025-06-15T10:54:56.898586,mhf8ysvl,5,3,baseline,5,Part3,Part3,power_q1a,2
+2025-06-15T10:54:56.899892,mhf8ysvl,5,3,baseline,5,Part3,Part3,power_q1b,2
+2025-06-15T10:54:56.899916,mhf8ysvl,5,3,baseline,5,Part3,Part3,power_q2,3
+2025-06-15T10:54:56.899933,mhf8ysvl,5,3,baseline,5,Part3,Part3,power_q3,4
+2025-06-15T10:55:00.595953,mhf8ysvl,5,3,baseline,5,Part4,Part4,atq_1,12
+2025-06-15T10:55:00.598374,mhf8ysvl,5,3,baseline,5,Part4,Part4,atq_2,21
+2025-06-15T10:55:00.598408,mhf8ysvl,5,3,baseline,5,Part4,Part4,atq_3,12
+2025-06-15T10:55:06.302242,mhf8ysvl,5,3,baseline,5,Part5,Part5,econ,4
+2025-06-15T10:55:06.303758,mhf8ysvl,5,3,baseline,5,Part5,Part5,party_like,1
+2025-06-15T10:55:06.303790,mhf8ysvl,5,3,baseline,5,Part5,Part5,party,2
+2025-06-15T10:55:06.303811,mhf8ysvl,5,3,baseline,5,Part5,Part5,other_party,
+2025-06-15T10:55:06.303832,mhf8ysvl,5,3,baseline,5,Part5,Part5,party_prox,3
+2025-06-15T10:55:14.369812,mhf8ysvl,5,3,baseline,5,Part6,Part6,plop_unempl,3
+2025-06-15T10:55:14.370967,mhf8ysvl,5,3,baseline,5,Part6,Part6,plop_comp,7
+2025-06-15T10:55:14.370994,mhf8ysvl,5,3,baseline,5,Part6,Part6,plop_incdist,3
+2025-06-15T10:55:14.371024,mhf8ysvl,5,3,baseline,5,Part6,Part6,plop_priv,6
+2025-06-15T10:55:14.371041,mhf8ysvl,5,3,baseline,5,Part6,Part6,plop_luckeffort,7
+2025-06-15T10:55:14.371072,mhf8ysvl,5,3,baseline,5,Part6,Part6,democracy_obedience,3
+2025-06-15T10:55:17.626559,mhf8ysvl,5,3,baseline,5,Part7,Part7,rel,1
+2025-06-15T10:55:17.627727,mhf8ysvl,5,3,baseline,5,Part7,Part7,rel_spec,4
+2025-06-15T10:55:17.627759,mhf8ysvl,5,3,baseline,5,Part7,Part7,rel_other,
+2025-06-15T10:55:22.183671,mhf8ysvl,5,3,baseline,5,GenderAttitudes,GenderAttitudes,gender_q1,2
+2025-06-15T10:55:22.184782,mhf8ysvl,5,3,baseline,5,GenderAttitudes,GenderAttitudes,gender_q2,2
+2025-06-15T10:55:22.184807,mhf8ysvl,5,3,baseline,5,GenderAttitudes,GenderAttitudes,gender_q3,3
+2025-06-15T10:55:22.184825,mhf8ysvl,5,3,baseline,5,GenderAttitudes,GenderAttitudes,gender_q4,3
+2025-06-15T10:55:26.761981,mhf8ysvl,5,3,baseline,5,MWC_BONUS,MWC_BONUS,mwc_bonus,3
+2025-06-15T10:55:26.766607,mhf8ysvl,5,3,baseline,5,MWC_BONUS,MWC_BONUS,mwc_bonus_others,4
+2025-06-15T10:55:33.605993,mhf8ysvl,5,3,baseline,5,SchwartzHierarchy,SchwartzHierarchy,social_power,4
+2025-06-15T10:55:33.607259,mhf8ysvl,5,3,baseline,5,SchwartzHierarchy,SchwartzHierarchy,wealth,1
+2025-06-15T10:55:33.607292,mhf8ysvl,5,3,baseline,5,SchwartzHierarchy,SchwartzHierarchy,authority,2
+2025-06-15T10:55:33.607316,mhf8ysvl,5,3,baseline,5,SchwartzHierarchy,SchwartzHierarchy,humble,3
+2025-06-15T10:55:33.607333,mhf8ysvl,5,3,baseline,5,SchwartzHierarchy,SchwartzHierarchy,influential,5
+2025-06-15T10:55:38.089795,mhf8ysvl,5,3,baseline,5,Part8,Part8,retaliation,2
+2025-06-15T10:55:38.091026,mhf8ysvl,5,3,baseline,5,Part8,Part8,retaliation_other,3
+2025-06-15T10:55:41.895464,mhf8ysvl,5,3,baseline,5,Bonus,Bonus,bonus,12
+2025-06-15T10:55:41.896227,mhf8ysvl,5,3,baseline,5,Bonus,Bonus,enjoy,1
+2025-06-17T07:22:32.855551,8bsbut2p,2,2,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T07:22:32.858603,8bsbut2p,2,2,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T07:22:32.858629,8bsbut2p,2,2,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T07:22:32.858647,8bsbut2p,2,2,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T07:22:34.484853,8bsbut2p,1,2,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T07:22:34.486243,8bsbut2p,1,2,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T07:22:34.486272,8bsbut2p,1,2,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T07:22:34.486299,8bsbut2p,1,2,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T07:24:50.135204,8bsbut2p,9,4,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T07:24:50.136572,8bsbut2p,9,4,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T07:24:50.136596,8bsbut2p,9,4,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T07:24:50.136617,8bsbut2p,9,4,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T07:25:23.222820,8bsbut2p,8,4,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T07:25:23.224074,8bsbut2p,8,4,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T07:25:23.224113,8bsbut2p,8,4,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T07:25:23.224132,8bsbut2p,8,4,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T07:25:38.667343,8bsbut2p,7,4,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T07:25:38.669009,8bsbut2p,7,4,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T07:25:38.669037,8bsbut2p,7,4,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T07:25:38.669054,8bsbut2p,7,4,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T07:27:36.900591,8bsbut2p,16,6,priming,1,Priming,Priming,qp1,2
+2025-06-17T07:27:36.901979,8bsbut2p,16,6,priming,1,Priming,Priming,gen_cgi,3
+2025-06-17T07:27:36.902006,8bsbut2p,16,6,priming,1,Priming,Priming,qp3,2
+2025-06-17T07:27:36.902024,8bsbut2p,16,6,priming,1,Priming,Priming,qp4,asdf
+2025-06-17T07:28:38.725740,8bsbut2p,14,6,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T07:28:38.727423,8bsbut2p,14,6,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T07:28:38.727436,8bsbut2p,14,6,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T07:28:38.727445,8bsbut2p,14,6,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T07:28:38.938962,8bsbut2p,15,6,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T07:28:38.940177,8bsbut2p,15,6,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T07:28:38.940190,8bsbut2p,15,6,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T07:28:38.940199,8bsbut2p,15,6,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T08:10:41.573279,j9m2lmj5,1,2,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T08:10:41.576189,j9m2lmj5,1,2,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T08:10:41.576221,j9m2lmj5,1,2,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T08:10:41.576240,j9m2lmj5,1,2,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T08:11:25.473678,j9m2lmj5,2,2,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T08:11:25.475297,j9m2lmj5,2,2,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T08:11:25.475323,j9m2lmj5,2,2,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T08:11:25.475341,j9m2lmj5,2,2,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T08:11:25.492293,j9m2lmj5,3,2,priming,1,Priming (timeout),Priming,qp1,0
+2025-06-17T08:11:25.493260,j9m2lmj5,3,2,priming,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T08:11:25.493288,j9m2lmj5,3,2,priming,1,Priming (timeout),Priming,qp3,0
+2025-06-17T08:11:25.493318,j9m2lmj5,3,2,priming,1,Priming (timeout),Priming,qp4,
+2025-06-17T08:20:21.555298,1tf8nbm0,1,1,baseline,1,Priming (timeout),Priming,qp1,0
+2025-06-17T08:20:21.558029,1tf8nbm0,1,1,baseline,1,Priming (timeout),Priming,gen_cgi,3
+2025-06-17T08:20:21.558065,1tf8nbm0,1,1,baseline,1,Priming (timeout),Priming,qp3,0
+2025-06-17T08:20:21.558095,1tf8nbm0,1,1,baseline,1,Priming (timeout),Priming,qp4,
+2025-06-17T08:25:20.932848,1tf8nbm0,2,1,baseline,1,Priming (timeout),Priming,qp1,0
+2025-06-17T08:25:20.933904,1tf8nbm0,2,1,baseline,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T08:25:20.933940,1tf8nbm0,2,1,baseline,1,Priming (timeout),Priming,qp3,0
+2025-06-17T08:25:20.933969,1tf8nbm0,2,1,baseline,1,Priming (timeout),Priming,qp4,
+2025-06-17T08:25:35.528809,1tf8nbm0,2,1,baseline,1,Baseline,Baseline,qp1,2
+2025-06-17T08:25:35.530686,1tf8nbm0,2,1,baseline,1,Baseline,Baseline,gen_cgi,2
+2025-06-17T08:25:35.530723,1tf8nbm0,2,1,baseline,1,Baseline,Baseline,qp3,2
+2025-06-17T08:25:35.530741,1tf8nbm0,2,1,baseline,1,Baseline,Baseline,qp4,asdfasdfasdfasdfasdf
+2025-06-17T08:26:31.793509,1tf8nbm0,2,1,baseline,1,Part1,Part1,cmt_propr,12
+2025-06-17T08:26:31.794752,1tf8nbm0,2,1,baseline,1,Part1,Part1,cmt_vtr,21
+2025-06-17T08:28:57.830117,1tf8nbm0,2,1,baseline,1,Part2,Part2,age,20
+2025-06-17T08:28:57.832653,1tf8nbm0,2,1,baseline,1,Part2,Part2,sex,4
+2025-06-17T08:28:57.832670,1tf8nbm0,2,1,baseline,1,Part2,Part2,trans_1,5
+2025-06-17T08:28:57.832682,1tf8nbm0,2,1,baseline,1,Part2,Part2,trans_2,2
+2025-06-17T08:29:04.402007,1tf8nbm0,2,1,baseline,1,Part3,Part3,power_q1a,2
+2025-06-17T08:29:04.403949,1tf8nbm0,2,1,baseline,1,Part3,Part3,power_q1b,2
+2025-06-17T08:29:04.403978,1tf8nbm0,2,1,baseline,1,Part3,Part3,power_q2,2
+2025-06-17T08:29:04.403995,1tf8nbm0,2,1,baseline,1,Part3,Part3,power_q3,4
+2025-06-17T08:29:09.946628,1tf8nbm0,2,1,baseline,1,Part4,Part4,atq_1,12
+2025-06-17T08:29:09.948405,1tf8nbm0,2,1,baseline,1,Part4,Part4,atq_2,21
+2025-06-17T08:29:09.948439,1tf8nbm0,2,1,baseline,1,Part4,Part4,atq_3,12
+2025-06-17T08:34:41.360490,1tf8nbm0,2,1,baseline,1,Part5,Part5,econ,12
+2025-06-17T08:34:41.365853,1tf8nbm0,2,1,baseline,1,Part5,Part5,risk,2
+2025-06-17T08:34:41.365887,1tf8nbm0,2,1,baseline,1,Part5,Part5,occ,ASDF
+2025-06-17T08:34:48.840162,1tf8nbm0,2,1,baseline,1,Part6,Part6,plop_unempl,4
+2025-06-17T08:34:48.842495,1tf8nbm0,2,1,baseline,1,Part6,Part6,plop_comp,4
+2025-06-17T08:34:48.842526,1tf8nbm0,2,1,baseline,1,Part6,Part6,plop_incdist,3
+2025-06-17T08:34:48.842544,1tf8nbm0,2,1,baseline,1,Part6,Part6,plop_priv,6
+2025-06-17T08:34:48.842561,1tf8nbm0,2,1,baseline,1,Part6,Part6,plop_luckeffort,6
+2025-06-17T08:34:48.842577,1tf8nbm0,2,1,baseline,1,Part6,Part6,democracy_obedience,4
+2025-06-17T08:34:57.254283,1tf8nbm0,2,1,baseline,1,Part7,Part7,rel,1
+2025-06-17T08:34:57.255939,1tf8nbm0,2,1,baseline,1,Part7,Part7,rel_spec,7
+2025-06-17T08:34:57.255975,1tf8nbm0,2,1,baseline,1,Part7,Part7,rel_other,12
+2025-06-17T08:35:01.149052,1tf8nbm0,2,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,2
+2025-06-17T08:35:01.151025,1tf8nbm0,2,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,4
+2025-06-17T08:35:01.151052,1tf8nbm0,2,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,3
+2025-06-17T08:35:01.151071,1tf8nbm0,2,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,3
+2025-06-17T08:35:03.885602,1tf8nbm0,2,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus,3
+2025-06-17T08:35:03.887266,1tf8nbm0,2,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus_others,3
+2025-06-17T08:35:09.607912,1tf8nbm0,2,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,social_power,4
+2025-06-17T08:35:09.609508,1tf8nbm0,2,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,wealth,1
+2025-06-17T08:35:09.609538,1tf8nbm0,2,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,authority,5
+2025-06-17T08:35:09.609562,1tf8nbm0,2,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,humble,3
+2025-06-17T08:35:09.609586,1tf8nbm0,2,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,influential,7
+2025-06-17T08:35:12.255922,1tf8nbm0,2,1,baseline,1,Part8,Part8,retaliation,3
+2025-06-17T08:35:12.257818,1tf8nbm0,2,1,baseline,1,Part8,Part8,retaliation_other,3
+2025-06-17T08:35:15.551522,1tf8nbm0,2,1,baseline,1,Bonus,Bonus,bonus,ASDF
+2025-06-17T08:35:15.553585,1tf8nbm0,2,1,baseline,1,Bonus,Bonus,enjoy,4
+2025-06-17T08:37:15.677734,1tf8nbm0,2,1,baseline,2,Priming (timeout),Priming,qp1,0
+2025-06-17T08:37:15.679715,1tf8nbm0,2,1,baseline,2,Priming (timeout),Priming,gen_cgi,2
+2025-06-17T08:37:15.679744,1tf8nbm0,2,1,baseline,2,Priming (timeout),Priming,qp3,0
+2025-06-17T08:37:15.679767,1tf8nbm0,2,1,baseline,2,Priming (timeout),Priming,qp4,
+2025-06-17T08:38:51.821301,1tf8nbm0,2,1,baseline,2,Baseline,Baseline,qp1,2
+2025-06-17T08:38:51.823099,1tf8nbm0,2,1,baseline,2,Baseline,Baseline,gen_cgi,2
+2025-06-17T08:38:51.823123,1tf8nbm0,2,1,baseline,2,Baseline,Baseline,qp3,2
+2025-06-17T08:38:51.823139,1tf8nbm0,2,1,baseline,2,Baseline,Baseline,qp4,asdf
+2025-06-17T08:38:55.500302,1tf8nbm0,2,1,baseline,2,Part1,Part1,cmt_propr,12
+2025-06-17T08:38:55.507971,1tf8nbm0,2,1,baseline,2,Part1,Part1,cmt_vtr,21
+2025-06-17T08:38:59.968664,1tf8nbm0,2,1,baseline,2,Part2,Part2,age,18
+2025-06-17T08:38:59.970418,1tf8nbm0,2,1,baseline,2,Part2,Part2,sex,2
+2025-06-17T08:38:59.970446,1tf8nbm0,2,1,baseline,2,Part2,Part2,trans_1,2
+2025-06-17T08:38:59.970464,1tf8nbm0,2,1,baseline,2,Part2,Part2,trans_2,3
+2025-06-17T08:39:04.555948,1tf8nbm0,2,1,baseline,2,Part3,Part3,power_q1a,2
+2025-06-17T08:39:04.558061,1tf8nbm0,2,1,baseline,2,Part3,Part3,power_q1b,2
+2025-06-17T08:39:04.558099,1tf8nbm0,2,1,baseline,2,Part3,Part3,power_q2,3
+2025-06-17T08:39:04.558123,1tf8nbm0,2,1,baseline,2,Part3,Part3,power_q3,4
+2025-06-17T08:39:07.421638,1tf8nbm0,2,1,baseline,2,Part4,Part4,atq_1,12
+2025-06-17T08:39:07.423699,1tf8nbm0,2,1,baseline,2,Part4,Part4,atq_2,21
+2025-06-17T08:39:07.423723,1tf8nbm0,2,1,baseline,2,Part4,Part4,atq_3,12
+2025-06-17T08:41:01.680249,1tf8nbm0,3,1,baseline,1,Priming,Priming,qp1,2
+2025-06-17T08:41:01.681638,1tf8nbm0,3,1,baseline,1,Priming,Priming,gen_cgi,3
+2025-06-17T08:41:01.681669,1tf8nbm0,3,1,baseline,1,Priming,Priming,qp3,2
+2025-06-17T08:41:01.681694,1tf8nbm0,3,1,baseline,1,Priming,Priming,qp4,apple
+2025-06-17T08:41:03.737635,1tf8nbm0,3,1,baseline,1,Baseline,Baseline,qp1,2
+2025-06-17T08:41:03.738773,1tf8nbm0,3,1,baseline,1,Baseline,Baseline,gen_cgi,3
+2025-06-17T08:41:03.738800,1tf8nbm0,3,1,baseline,1,Baseline,Baseline,qp3,2
+2025-06-17T08:41:03.738817,1tf8nbm0,3,1,baseline,1,Baseline,Baseline,qp4,apple
+2025-06-17T08:41:06.720128,1tf8nbm0,3,1,baseline,1,Part1,Part1,cmt_propr,12
+2025-06-17T08:41:06.721141,1tf8nbm0,3,1,baseline,1,Part1,Part1,cmt_vtr,21
+2025-06-17T08:41:11.208777,1tf8nbm0,3,1,baseline,1,Part2,Part2,age,18
+2025-06-17T08:41:11.210289,1tf8nbm0,3,1,baseline,1,Part2,Part2,sex,2
+2025-06-17T08:41:11.210328,1tf8nbm0,3,1,baseline,1,Part2,Part2,trans_1,2
+2025-06-17T08:41:11.210351,1tf8nbm0,3,1,baseline,1,Part2,Part2,trans_2,3
+2025-06-17T08:41:15.510983,1tf8nbm0,3,1,baseline,1,Part3,Part3,power_q1a,2
+2025-06-17T08:41:15.512270,1tf8nbm0,3,1,baseline,1,Part3,Part3,power_q1b,3
+2025-06-17T08:41:15.512298,1tf8nbm0,3,1,baseline,1,Part3,Part3,power_q2,2
+2025-06-17T08:41:15.512317,1tf8nbm0,3,1,baseline,1,Part3,Part3,power_q3,4
+2025-06-17T08:41:18.689504,1tf8nbm0,3,1,baseline,1,Part4,Part4,atq_1,12
+2025-06-17T08:41:18.690834,1tf8nbm0,3,1,baseline,1,Part4,Part4,atq_2,21
+2025-06-17T08:41:18.690868,1tf8nbm0,3,1,baseline,1,Part4,Part4,atq_3,12
+2025-06-17T08:41:57.358831,1tf8nbm0,2,1,baseline,2,Part5,Part5,econ,12
+2025-06-17T08:41:57.360070,1tf8nbm0,2,1,baseline,2,Part5,Part5,risk,2
+2025-06-17T08:41:57.360102,1tf8nbm0,2,1,baseline,2,Part5,Part5,occ,asdf
+2025-06-17T08:42:03.197987,1tf8nbm0,2,1,baseline,2,Part6,Part6,plop_unempl,2
+2025-06-17T08:42:03.199264,1tf8nbm0,2,1,baseline,2,Part6,Part6,plop_comp,5
+2025-06-17T08:42:03.199292,1tf8nbm0,2,1,baseline,2,Part6,Part6,plop_incdist,3
+2025-06-17T08:42:03.199331,1tf8nbm0,2,1,baseline,2,Part6,Part6,plop_priv,7
+2025-06-17T08:42:03.199354,1tf8nbm0,2,1,baseline,2,Part6,Part6,plop_luckeffort,5
+2025-06-17T08:42:03.199372,1tf8nbm0,2,1,baseline,2,Part6,Part6,democracy_obedience,5
+2025-06-17T08:42:09.110823,1tf8nbm0,2,1,baseline,2,Part7,Part7,rel,1
+2025-06-17T08:42:09.112259,1tf8nbm0,2,1,baseline,2,Part7,Part7,rel_spec,7
+2025-06-17T08:42:09.112289,1tf8nbm0,2,1,baseline,2,Part7,Part7,rel_other,asdf
+2025-06-17T08:42:13.696075,1tf8nbm0,2,1,baseline,2,GenderAttitudes,GenderAttitudes,gender_q1,2
+2025-06-17T08:42:13.697416,1tf8nbm0,2,1,baseline,2,GenderAttitudes,GenderAttitudes,gender_q2,4
+2025-06-17T08:42:13.697457,1tf8nbm0,2,1,baseline,2,GenderAttitudes,GenderAttitudes,gender_q3,2
+2025-06-17T08:42:13.697491,1tf8nbm0,2,1,baseline,2,GenderAttitudes,GenderAttitudes,gender_q4,4
+2025-06-17T08:42:16.648712,1tf8nbm0,2,1,baseline,2,MWC_BONUS,MWC_BONUS,mwc_bonus,3
+2025-06-17T08:42:16.650218,1tf8nbm0,2,1,baseline,2,MWC_BONUS,MWC_BONUS,mwc_bonus_others,4
+2025-06-17T08:42:23.229365,1tf8nbm0,2,1,baseline,2,SchwartzHierarchy,SchwartzHierarchy,social_power,3
+2025-06-17T08:42:23.230535,1tf8nbm0,2,1,baseline,2,SchwartzHierarchy,SchwartzHierarchy,wealth,6
+2025-06-17T08:42:23.230561,1tf8nbm0,2,1,baseline,2,SchwartzHierarchy,SchwartzHierarchy,authority,1
+2025-06-17T08:42:23.230579,1tf8nbm0,2,1,baseline,2,SchwartzHierarchy,SchwartzHierarchy,humble,3
+2025-06-17T08:42:23.230596,1tf8nbm0,2,1,baseline,2,SchwartzHierarchy,SchwartzHierarchy,influential,6
+2025-06-17T08:42:25.831634,1tf8nbm0,2,1,baseline,2,Part8,Part8,retaliation,2
+2025-06-17T08:42:25.833111,1tf8nbm0,2,1,baseline,2,Part8,Part8,retaliation_other,5
+2025-06-17T08:42:35.252277,1tf8nbm0,3,1,baseline,1,Part5,Part5,econ,12
+2025-06-17T08:42:35.253251,1tf8nbm0,3,1,baseline,1,Part5,Part5,risk,5
+2025-06-17T08:42:35.253272,1tf8nbm0,3,1,baseline,1,Part5,Part5,occ,studet
+2025-06-17T08:42:42.520933,1tf8nbm0,3,1,baseline,1,Part6,Part6,plop_unempl,3
+2025-06-17T08:42:42.522253,1tf8nbm0,3,1,baseline,1,Part6,Part6,plop_comp,5
+2025-06-17T08:42:42.522286,1tf8nbm0,3,1,baseline,1,Part6,Part6,plop_incdist,6
+2025-06-17T08:42:42.522317,1tf8nbm0,3,1,baseline,1,Part6,Part6,plop_priv,3
+2025-06-17T08:42:42.522341,1tf8nbm0,3,1,baseline,1,Part6,Part6,plop_luckeffort,4
+2025-06-17T08:42:42.522365,1tf8nbm0,3,1,baseline,1,Part6,Part6,democracy_obedience,4
+2025-06-17T08:42:46.441550,1tf8nbm0,3,1,baseline,1,Part7,Part7,rel,1
+2025-06-17T08:42:46.442872,1tf8nbm0,3,1,baseline,1,Part7,Part7,rel_spec,7
+2025-06-17T08:42:46.442911,1tf8nbm0,3,1,baseline,1,Part7,Part7,rel_other,asd
+2025-06-17T08:42:50.219956,1tf8nbm0,3,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,2
+2025-06-17T08:42:50.221192,1tf8nbm0,3,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,3
+2025-06-17T08:42:50.221222,1tf8nbm0,3,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,3
+2025-06-17T08:42:50.221239,1tf8nbm0,3,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,3
+2025-06-17T08:42:54.718542,1tf8nbm0,3,1,baseline,1,MWC,MWC,mwc,3
+2025-06-17T08:42:54.720611,1tf8nbm0,3,1,baseline,1,MWC,MWC,mwc_others,2
+2025-06-17T08:43:13.032666,1tf8nbm0,8,1,baseline,1,Priming,Priming,qp1,2
+2025-06-17T08:43:13.033995,1tf8nbm0,8,1,baseline,1,Priming,Priming,gen_cgi,2
+2025-06-17T08:43:13.034019,1tf8nbm0,8,1,baseline,1,Priming,Priming,qp3,2
+2025-06-17T08:43:13.034037,1tf8nbm0,8,1,baseline,1,Priming,Priming,qp4,12
+2025-06-17T08:43:15.047996,1tf8nbm0,8,1,baseline,1,Baseline,Baseline,qp1,2
+2025-06-17T08:43:15.048924,1tf8nbm0,8,1,baseline,1,Baseline,Baseline,gen_cgi,2
+2025-06-17T08:43:15.048950,1tf8nbm0,8,1,baseline,1,Baseline,Baseline,qp3,2
+2025-06-17T08:43:15.048967,1tf8nbm0,8,1,baseline,1,Baseline,Baseline,qp4,12
+2025-06-17T08:43:17.941232,1tf8nbm0,8,1,baseline,1,Part1,Part1,cmt_propr,12
+2025-06-17T08:43:17.942259,1tf8nbm0,8,1,baseline,1,Part1,Part1,cmt_vtr,21
+2025-06-17T08:43:22.088463,1tf8nbm0,8,1,baseline,1,Part2,Part2,age,18
+2025-06-17T08:43:22.089928,1tf8nbm0,8,1,baseline,1,Part2,Part2,sex,2
+2025-06-17T08:43:22.089962,1tf8nbm0,8,1,baseline,1,Part2,Part2,trans_1,2
+2025-06-17T08:43:22.089983,1tf8nbm0,8,1,baseline,1,Part2,Part2,trans_2,2
+2025-06-17T08:43:26.441664,1tf8nbm0,8,1,baseline,1,Part3,Part3,power_q1a,2
+2025-06-17T08:43:26.443337,1tf8nbm0,8,1,baseline,1,Part3,Part3,power_q1b,3
+2025-06-17T08:43:26.443371,1tf8nbm0,8,1,baseline,1,Part3,Part3,power_q2,2
+2025-06-17T08:43:26.443390,1tf8nbm0,8,1,baseline,1,Part3,Part3,power_q3,3
+2025-06-17T08:43:29.143409,1tf8nbm0,8,1,baseline,1,Part4,Part4,atq_1,12
+2025-06-17T08:43:29.144608,1tf8nbm0,8,1,baseline,1,Part4,Part4,atq_2,21
+2025-06-17T08:43:29.144635,1tf8nbm0,8,1,baseline,1,Part4,Part4,atq_3,12
+2025-06-17T08:43:34.199092,1tf8nbm0,8,1,baseline,1,Part5,Part5,econ,12
+2025-06-17T08:43:34.200359,1tf8nbm0,8,1,baseline,1,Part5,Part5,risk,3
+2025-06-17T08:43:34.200385,1tf8nbm0,8,1,baseline,1,Part5,Part5,occ,student
+2025-06-17T08:43:40.532031,1tf8nbm0,8,1,baseline,1,Part6,Part6,plop_unempl,3
+2025-06-17T08:43:40.533139,1tf8nbm0,8,1,baseline,1,Part6,Part6,plop_comp,5
+2025-06-17T08:43:40.533164,1tf8nbm0,8,1,baseline,1,Part6,Part6,plop_incdist,6
+2025-06-17T08:43:40.533182,1tf8nbm0,8,1,baseline,1,Part6,Part6,plop_priv,6
+2025-06-17T08:43:40.533199,1tf8nbm0,8,1,baseline,1,Part6,Part6,plop_luckeffort,7
+2025-06-17T08:43:40.533215,1tf8nbm0,8,1,baseline,1,Part6,Part6,democracy_obedience,7
+2025-06-17T08:43:44.824534,1tf8nbm0,8,1,baseline,1,Part7,Part7,rel,1
+2025-06-17T08:43:44.825353,1tf8nbm0,8,1,baseline,1,Part7,Part7,rel_spec,7
+2025-06-17T08:43:44.825375,1tf8nbm0,8,1,baseline,1,Part7,Part7,rel_other,12
+2025-06-17T08:43:53.492544,1tf8nbm0,8,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,3
+2025-06-17T08:43:53.493873,1tf8nbm0,8,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,3
+2025-06-17T08:43:53.493904,1tf8nbm0,8,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,3
+2025-06-17T08:43:53.493926,1tf8nbm0,8,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,2
+2025-06-17T08:44:00.243078,1tf8nbm0,8,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus,3
+2025-06-17T08:44:00.244319,1tf8nbm0,8,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus_others,3
+2025-06-17T08:44:11.600657,1tf8nbm0,9,1,baseline,1,Priming,Priming,qp1,2
+2025-06-17T08:44:11.602026,1tf8nbm0,9,1,baseline,1,Priming,Priming,gen_cgi,3
+2025-06-17T08:44:11.602056,1tf8nbm0,9,1,baseline,1,Priming,Priming,qp3,2
+2025-06-17T08:44:11.602077,1tf8nbm0,9,1,baseline,1,Priming,Priming,qp4,12
+2025-06-17T08:44:15.255789,1tf8nbm0,9,1,baseline,1,Baseline,Baseline,qp1,2
+2025-06-17T08:44:15.256809,1tf8nbm0,9,1,baseline,1,Baseline,Baseline,gen_cgi,3
+2025-06-17T08:44:15.256842,1tf8nbm0,9,1,baseline,1,Baseline,Baseline,qp3,2
+2025-06-17T08:44:15.256867,1tf8nbm0,9,1,baseline,1,Baseline,Baseline,qp4,12
+2025-06-17T08:44:17.689689,1tf8nbm0,9,1,baseline,1,Part1,Part1,cmt_propr,12
+2025-06-17T08:44:17.691377,1tf8nbm0,9,1,baseline,1,Part1,Part1,cmt_vtr,21
+2025-06-17T08:44:21.611673,1tf8nbm0,9,1,baseline,1,Part2,Part2,age,18
+2025-06-17T08:44:21.613309,1tf8nbm0,9,1,baseline,1,Part2,Part2,sex,2
+2025-06-17T08:44:21.613343,1tf8nbm0,9,1,baseline,1,Part2,Part2,trans_1,2
+2025-06-17T08:44:21.613365,1tf8nbm0,9,1,baseline,1,Part2,Part2,trans_2,2
+2025-06-17T08:44:26.928788,1tf8nbm0,9,1,baseline,1,Part3,Part3,power_q1a,2
+2025-06-17T08:44:26.929992,1tf8nbm0,9,1,baseline,1,Part3,Part3,power_q1b,3
+2025-06-17T08:44:26.930020,1tf8nbm0,9,1,baseline,1,Part3,Part3,power_q2,4
+2025-06-17T08:44:26.930042,1tf8nbm0,9,1,baseline,1,Part3,Part3,power_q3,5
+2025-06-17T08:44:29.946868,1tf8nbm0,9,1,baseline,1,Part4,Part4,atq_1,12
+2025-06-17T08:44:29.948310,1tf8nbm0,9,1,baseline,1,Part4,Part4,atq_2,21
+2025-06-17T08:44:29.948342,1tf8nbm0,9,1,baseline,1,Part4,Part4,atq_3,12
+2025-06-17T08:44:35.670550,1tf8nbm0,9,1,baseline,1,Part5,Part5,econ,2
+2025-06-17T08:44:35.671219,1tf8nbm0,9,1,baseline,1,Part5,Part5,risk,1
+2025-06-17T08:44:35.671236,1tf8nbm0,9,1,baseline,1,Part5,Part5,occ,student
+2025-06-17T08:44:44.328623,1tf8nbm0,9,1,baseline,1,Part6,Part6,plop_unempl,3
+2025-06-17T08:44:44.329928,1tf8nbm0,9,1,baseline,1,Part6,Part6,plop_comp,4
+2025-06-17T08:44:44.329959,1tf8nbm0,9,1,baseline,1,Part6,Part6,plop_incdist,7
+2025-06-17T08:44:44.329980,1tf8nbm0,9,1,baseline,1,Part6,Part6,plop_priv,7
+2025-06-17T08:44:44.330001,1tf8nbm0,9,1,baseline,1,Part6,Part6,plop_luckeffort,8
+2025-06-17T08:44:44.330022,1tf8nbm0,9,1,baseline,1,Part6,Part6,democracy_obedience,9
+2025-06-17T08:44:47.465840,1tf8nbm0,9,1,baseline,1,Part7,Part7,rel,1
+2025-06-17T08:44:47.467250,1tf8nbm0,9,1,baseline,1,Part7,Part7,rel_spec,4
+2025-06-17T08:44:47.467279,1tf8nbm0,9,1,baseline,1,Part7,Part7,rel_other,
+2025-06-17T08:44:52.388810,1tf8nbm0,9,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,2
+2025-06-17T08:44:52.390024,1tf8nbm0,9,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,3
+2025-06-17T08:44:52.390066,1tf8nbm0,9,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,2
+2025-06-17T08:44:52.390085,1tf8nbm0,9,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,3
+2025-06-17T08:45:15.693404,1tf8nbm0,10,1,baseline,1,Priming,Priming,qp1,2
+2025-06-17T08:45:15.695462,1tf8nbm0,10,1,baseline,1,Priming,Priming,gen_cgi,3
+2025-06-17T08:45:15.695492,1tf8nbm0,10,1,baseline,1,Priming,Priming,qp3,2
+2025-06-17T08:45:15.695514,1tf8nbm0,10,1,baseline,1,Priming,Priming,qp4,12
+2025-06-17T08:45:17.566529,1tf8nbm0,10,1,baseline,1,Baseline,Baseline,qp1,2
+2025-06-17T08:45:17.567664,1tf8nbm0,10,1,baseline,1,Baseline,Baseline,gen_cgi,3
+2025-06-17T08:45:17.567691,1tf8nbm0,10,1,baseline,1,Baseline,Baseline,qp3,2
+2025-06-17T08:45:17.567708,1tf8nbm0,10,1,baseline,1,Baseline,Baseline,qp4,12
+2025-06-17T08:45:19.992462,1tf8nbm0,10,1,baseline,1,Part1,Part1,cmt_propr,12
+2025-06-17T08:45:19.993499,1tf8nbm0,10,1,baseline,1,Part1,Part1,cmt_vtr,21
+2025-06-17T08:45:24.104715,1tf8nbm0,10,1,baseline,1,Part2,Part2,age,18
+2025-06-17T08:45:24.106039,1tf8nbm0,10,1,baseline,1,Part2,Part2,sex,2
+2025-06-17T08:45:24.106070,1tf8nbm0,10,1,baseline,1,Part2,Part2,trans_1,3
+2025-06-17T08:45:24.106094,1tf8nbm0,10,1,baseline,1,Part2,Part2,trans_2,3
+2025-06-17T08:45:28.713283,1tf8nbm0,10,1,baseline,1,Part3,Part3,power_q1a,2
+2025-06-17T08:45:28.714666,1tf8nbm0,10,1,baseline,1,Part3,Part3,power_q1b,4
+2025-06-17T08:45:28.714697,1tf8nbm0,10,1,baseline,1,Part3,Part3,power_q2,2
+2025-06-17T08:45:28.714718,1tf8nbm0,10,1,baseline,1,Part3,Part3,power_q3,4
+2025-06-17T08:45:31.197082,1tf8nbm0,10,1,baseline,1,Part4,Part4,atq_1,12
+2025-06-17T08:45:31.198504,1tf8nbm0,10,1,baseline,1,Part4,Part4,atq_2,21
+2025-06-17T08:45:31.198535,1tf8nbm0,10,1,baseline,1,Part4,Part4,atq_3,12
+2025-06-17T08:45:36.344801,1tf8nbm0,10,1,baseline,1,Part5,Part5,econ,2
+2025-06-17T08:45:36.346245,1tf8nbm0,10,1,baseline,1,Part5,Part5,risk,2
+2025-06-17T08:45:36.346280,1tf8nbm0,10,1,baseline,1,Part5,Part5,occ,student
+2025-06-17T08:45:42.249196,1tf8nbm0,10,1,baseline,1,Part6,Part6,plop_unempl,4
+2025-06-17T08:45:42.250963,1tf8nbm0,10,1,baseline,1,Part6,Part6,plop_comp,5
+2025-06-17T08:45:42.251000,1tf8nbm0,10,1,baseline,1,Part6,Part6,plop_incdist,8
+2025-06-17T08:45:42.251026,1tf8nbm0,10,1,baseline,1,Part6,Part6,plop_priv,6
+2025-06-17T08:45:42.251043,1tf8nbm0,10,1,baseline,1,Part6,Part6,plop_luckeffort,6
+2025-06-17T08:45:42.251060,1tf8nbm0,10,1,baseline,1,Part6,Part6,democracy_obedience,7
+2025-06-17T08:45:45.584232,1tf8nbm0,10,1,baseline,1,Part7,Part7,rel,2
+2025-06-17T08:45:45.585802,1tf8nbm0,10,1,baseline,1,Part7,Part7,rel_spec,
+2025-06-17T08:45:45.585828,1tf8nbm0,10,1,baseline,1,Part7,Part7,rel_other,
+2025-06-17T08:45:49.552415,1tf8nbm0,10,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,3
+2025-06-17T08:45:49.553648,1tf8nbm0,10,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,4
+2025-06-17T08:45:49.553681,1tf8nbm0,10,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,2
+2025-06-17T08:45:49.553706,1tf8nbm0,10,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,4
+2025-06-17T08:50:19.336251,1tf8nbm0,9,1,baseline,1,MWC,MWC,mwc,2
+2025-06-17T08:50:19.337584,1tf8nbm0,9,1,baseline,1,MWC,MWC,mwc_others,4
+2025-06-17T09:19:33.442426,qpqdp5z6,14,1,baseline,1,Priming,Priming,qp1,2
+2025-06-17T09:19:33.444925,qpqdp5z6,14,1,baseline,1,Priming,Priming,gen_cgi,5
+2025-06-17T09:19:33.444957,qpqdp5z6,14,1,baseline,1,Priming,Priming,qp3,2
+2025-06-17T09:19:33.444980,qpqdp5z6,14,1,baseline,1,Priming,Priming,qp4,because/./////
+2025-06-17T09:19:42.391619,qpqdp5z6,14,1,baseline,1,Part1,Part1,cmt_propr,12
+2025-06-17T09:19:42.393068,qpqdp5z6,14,1,baseline,1,Part1,Part1,cmt_vtr,considerations
+2025-06-17T09:19:51.585938,qpqdp5z6,14,1,baseline,1,Part2,Part2,age,18
+2025-06-17T09:19:51.587566,qpqdp5z6,14,1,baseline,1,Part2,Part2,sex,4
+2025-06-17T09:19:51.587596,qpqdp5z6,14,1,baseline,1,Part2,Part2,trans_1,2
+2025-06-17T09:19:51.587618,qpqdp5z6,14,1,baseline,1,Part2,Part2,trans_2,3
+2025-06-17T09:19:59.589088,qpqdp5z6,14,1,baseline,1,Part3,Part3,power_q1a,3
+2025-06-17T09:19:59.592344,qpqdp5z6,14,1,baseline,1,Part3,Part3,power_q1b,2
+2025-06-17T09:19:59.592374,qpqdp5z6,14,1,baseline,1,Part3,Part3,power_q2,3
+2025-06-17T09:19:59.592394,qpqdp5z6,14,1,baseline,1,Part3,Part3,power_q3,3
+2025-06-17T09:20:04.000368,qpqdp5z6,14,1,baseline,1,Part4,Part4,atq_1,12
+2025-06-17T09:20:04.001514,qpqdp5z6,14,1,baseline,1,Part4,Part4,atq_2,21
+2025-06-17T09:20:04.001536,qpqdp5z6,14,1,baseline,1,Part4,Part4,atq_3,12
+2025-06-17T09:20:12.691419,qpqdp5z6,14,1,baseline,1,Part5,Part5,econ,2
+2025-06-17T09:20:12.694480,qpqdp5z6,14,1,baseline,1,Part5,Part5,risk,5
+2025-06-17T09:20:12.694514,qpqdp5z6,14,1,baseline,1,Part5,Part5,occ,student
+2025-06-17T09:20:21.000071,qpqdp5z6,14,1,baseline,1,Part6,Part6,plop_unempl,5
+2025-06-17T09:20:21.002040,qpqdp5z6,14,1,baseline,1,Part6,Part6,plop_comp,5
+2025-06-17T09:20:21.002101,qpqdp5z6,14,1,baseline,1,Part6,Part6,plop_incdist,6
+2025-06-17T09:20:21.002124,qpqdp5z6,14,1,baseline,1,Part6,Part6,plop_priv,3
+2025-06-17T09:20:21.002145,qpqdp5z6,14,1,baseline,1,Part6,Part6,plop_luckeffort,6
+2025-06-17T09:20:21.002166,qpqdp5z6,14,1,baseline,1,Part6,Part6,democracy_obedience,5
+2025-06-17T09:20:25.428702,qpqdp5z6,9,1,baseline,1,Priming (timeout),Priming,qp1,0
+2025-06-17T09:20:25.430038,qpqdp5z6,9,1,baseline,1,Priming (timeout),Priming,gen_cgi,
+2025-06-17T09:20:25.430072,qpqdp5z6,9,1,baseline,1,Priming (timeout),Priming,qp3,0
+2025-06-17T09:20:25.430099,qpqdp5z6,9,1,baseline,1,Priming (timeout),Priming,qp4,
+2025-06-17T09:20:25.545255,qpqdp5z6,14,1,baseline,1,Part7,Part7,rel,1
+2025-06-17T09:20:25.547591,qpqdp5z6,14,1,baseline,1,Part7,Part7,rel_spec,5
+2025-06-17T09:20:25.547631,qpqdp5z6,14,1,baseline,1,Part7,Part7,rel_other,
+2025-06-17T09:20:32.146227,qpqdp5z6,14,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,3
+2025-06-17T09:20:32.148478,qpqdp5z6,14,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,4
+2025-06-17T09:20:32.148520,qpqdp5z6,14,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,2
+2025-06-17T09:20:32.148545,qpqdp5z6,14,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,1
+2025-06-17T09:20:35.532717,qpqdp5z6,14,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus,4
+2025-06-17T09:20:35.534554,qpqdp5z6,14,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus_others,6
+2025-06-17T09:20:44.998126,qpqdp5z6,14,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,social_power,6
+2025-06-17T09:20:44.999479,qpqdp5z6,14,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,wealth,3
+2025-06-17T09:20:44.999517,qpqdp5z6,14,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,authority,0
+2025-06-17T09:20:44.999545,qpqdp5z6,14,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,humble,3
+2025-06-17T09:20:44.999566,qpqdp5z6,14,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,influential,6
+2025-06-17T09:20:48.514333,qpqdp5z6,14,1,baseline,1,Part8,Part8,retaliation,4
+2025-06-17T09:20:48.517376,qpqdp5z6,14,1,baseline,1,Part8,Part8,retaliation_other,4
+2025-06-17T09:20:53.945345,qpqdp5z6,14,1,baseline,1,Bonus,Bonus,bonus,bargaining
+2025-06-17T09:20:53.946712,qpqdp5z6,14,1,baseline,1,Bonus,Bonus,enjoy,5
+2025-06-17T09:22:54.034613,qpqdp5z6,14,1,baseline,2,Priming (timeout),Priming,qp1,0
+2025-06-17T09:22:54.035594,qpqdp5z6,14,1,baseline,2,Priming (timeout),Priming,gen_cgi,
+2025-06-17T09:22:54.035610,qpqdp5z6,14,1,baseline,2,Priming (timeout),Priming,qp3,0
+2025-06-17T09:22:54.035622,qpqdp5z6,14,1,baseline,2,Priming (timeout),Priming,qp4,
+2025-06-18T06:28:12.571818,f2csi0yn,7,1,baseline,1,Part1,Part1,cmt_propr,12
+2025-06-18T06:28:12.575200,f2csi0yn,7,1,baseline,1,Part1,Part1,cmt_vtr,21
+2025-06-18T06:28:37.237814,f2csi0yn,7,1,baseline,1,Part2,Part2,age,18
+2025-06-18T06:28:37.240040,f2csi0yn,7,1,baseline,1,Part2,Part2,sex,2
+2025-06-18T06:28:37.240073,f2csi0yn,7,1,baseline,1,Part2,Part2,trans_1,1
+2025-06-18T06:28:37.240095,f2csi0yn,7,1,baseline,1,Part2,Part2,trans_2,1
+2025-06-18T06:28:44.006710,f2csi0yn,7,1,baseline,1,Part3,Part3,power_q1a,2
+2025-06-18T06:28:44.008783,f2csi0yn,7,1,baseline,1,Part3,Part3,power_q1b,3
+2025-06-18T06:28:44.008820,f2csi0yn,7,1,baseline,1,Part3,Part3,power_q2,2
+2025-06-18T06:28:44.008849,f2csi0yn,7,1,baseline,1,Part3,Part3,power_q3,4
+2025-06-18T06:29:02.784075,f2csi0yn,7,1,baseline,1,Part4,Part4,atq_1,12
+2025-06-18T06:29:02.786182,f2csi0yn,7,1,baseline,1,Part4,Part4,atq_2,21
+2025-06-18T06:29:02.786215,f2csi0yn,7,1,baseline,1,Part4,Part4,atq_3,12
+2025-06-18T06:29:18.358889,f2csi0yn,7,1,baseline,1,Part5,Part5,econ,2
+2025-06-18T06:29:18.361230,f2csi0yn,7,1,baseline,1,Part5,Part5,risk,3
+2025-06-18T06:29:18.361259,f2csi0yn,7,1,baseline,1,Part5,Part5,occ,student
+2025-06-18T06:29:55.358279,f2csi0yn,7,1,baseline,1,Part6,Part6,plop_unempl,4
+2025-06-18T06:29:55.360728,f2csi0yn,7,1,baseline,1,Part6,Part6,plop_comp,4
+2025-06-18T06:29:55.360755,f2csi0yn,7,1,baseline,1,Part6,Part6,plop_incdist,4
+2025-06-18T06:29:55.360772,f2csi0yn,7,1,baseline,1,Part6,Part6,plop_priv,5
+2025-06-18T06:29:55.360789,f2csi0yn,7,1,baseline,1,Part6,Part6,plop_luckeffort,4
+2025-06-18T06:29:55.360806,f2csi0yn,7,1,baseline,1,Part6,Part6,democracy_obedience,6
+2025-06-18T06:30:01.879723,f2csi0yn,7,1,baseline,1,Part7,Part7,rel,1
+2025-06-18T06:30:01.881642,f2csi0yn,7,1,baseline,1,Part7,Part7,rel_spec,5
+2025-06-18T06:30:01.881669,f2csi0yn,7,1,baseline,1,Part7,Part7,rel_other,
+2025-06-18T06:30:34.734364,f2csi0yn,7,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,1
+2025-06-18T06:30:34.736574,f2csi0yn,7,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,2
+2025-06-18T06:30:34.736608,f2csi0yn,7,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,1
+2025-06-18T06:30:34.736632,f2csi0yn,7,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,2
+2025-06-18T06:31:11.302778,f2csi0yn,7,1,baseline,1,MWC,MWC,mwc,1
+2025-06-18T06:31:11.304609,f2csi0yn,7,1,baseline,1,MWC,MWC,mwc_others,3
+2025-06-18T06:31:39.720297,f2csi0yn,7,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,social_power,0
+2025-06-18T06:31:39.722524,f2csi0yn,7,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,wealth,5
+2025-06-18T06:31:39.722550,f2csi0yn,7,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,authority,5
+2025-06-18T06:31:39.722574,f2csi0yn,7,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,humble,5
+2025-06-18T06:31:39.722592,f2csi0yn,7,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,influential,5
+2025-06-18T06:31:52.460853,f2csi0yn,7,1,baseline,1,Part8,Part8,retaliation,1
+2025-06-18T06:31:52.463003,f2csi0yn,7,1,baseline,1,Part8,Part8,retaliation_other,1
+2025-06-18T06:35:24.512537,f2csi0yn,22,1,baseline,1,Priming,Priming,qp1,2
+2025-06-18T06:35:24.517225,f2csi0yn,22,1,baseline,1,Priming,Priming,gen_cgi,2
+2025-06-18T06:35:24.517438,f2csi0yn,22,1,baseline,1,Priming,Priming,qp3,2
+2025-06-18T06:35:24.517498,f2csi0yn,22,1,baseline,1,Priming,Priming,qp4,explanation
+2025-06-18T06:35:29.629964,f2csi0yn,22,1,baseline,1,Part1,Part1,cmt_propr,12
+2025-06-18T06:35:29.632053,f2csi0yn,22,1,baseline,1,Part1,Part1,cmt_vtr,21
+2025-06-18T06:35:36.978070,f2csi0yn,22,1,baseline,1,Part2,Part2,age,18
+2025-06-18T06:35:36.980622,f2csi0yn,22,1,baseline,1,Part2,Part2,sex,2
+2025-06-18T06:35:36.980652,f2csi0yn,22,1,baseline,1,Part2,Part2,trans_1,5
+2025-06-18T06:35:36.980670,f2csi0yn,22,1,baseline,1,Part2,Part2,trans_2,5
+2025-06-18T06:35:43.899685,f2csi0yn,22,1,baseline,1,Part3,Part3,power_q1a,5
+2025-06-18T06:35:43.901882,f2csi0yn,22,1,baseline,1,Part3,Part3,power_q1b,1
+2025-06-18T06:35:43.901916,f2csi0yn,22,1,baseline,1,Part3,Part3,power_q2,5
+2025-06-18T06:35:43.901942,f2csi0yn,22,1,baseline,1,Part3,Part3,power_q3,3
+2025-06-18T06:35:51.182830,f2csi0yn,22,1,baseline,1,Part4,Part4,atq_1,12
+2025-06-18T06:35:51.184657,f2csi0yn,22,1,baseline,1,Part4,Part4,atq_2,21
+2025-06-18T06:35:51.184688,f2csi0yn,22,1,baseline,1,Part4,Part4,atq_3,12
+2025-06-18T06:35:57.425274,f2csi0yn,22,1,baseline,1,Part5,Part5,econ,12
+2025-06-18T06:35:57.426961,f2csi0yn,22,1,baseline,1,Part5,Part5,risk,6
+2025-06-18T06:35:57.427001,f2csi0yn,22,1,baseline,1,Part5,Part5,occ,student
+2025-06-18T06:36:07.158091,f2csi0yn,22,1,baseline,1,Part6,Part6,plop_unempl,4
+2025-06-18T06:36:07.159957,f2csi0yn,22,1,baseline,1,Part6,Part6,plop_comp,4
+2025-06-18T06:36:07.159986,f2csi0yn,22,1,baseline,1,Part6,Part6,plop_incdist,7
+2025-06-18T06:36:07.160005,f2csi0yn,22,1,baseline,1,Part6,Part6,plop_priv,7
+2025-06-18T06:36:07.160023,f2csi0yn,22,1,baseline,1,Part6,Part6,plop_luckeffort,9
+2025-06-18T06:36:07.160040,f2csi0yn,22,1,baseline,1,Part6,Part6,democracy_obedience,3
+2025-06-18T06:36:14.388471,f2csi0yn,22,1,baseline,1,Part7,Part7,rel,1
+2025-06-18T06:36:14.390340,f2csi0yn,22,1,baseline,1,Part7,Part7,rel_spec,8
+2025-06-18T06:36:14.390374,f2csi0yn,22,1,baseline,1,Part7,Part7,rel_other,
+2025-06-18T06:36:19.435255,f2csi0yn,22,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,2
+2025-06-18T06:36:19.436947,f2csi0yn,22,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,3
+2025-06-18T06:36:19.436985,f2csi0yn,22,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,4
+2025-06-18T06:36:19.437009,f2csi0yn,22,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,2
+2025-06-18T06:36:23.048485,f2csi0yn,22,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus,3
+2025-06-18T06:36:23.050123,f2csi0yn,22,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus_others,5
+2025-06-18T06:36:29.459510,f2csi0yn,22,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,social_power,3
+2025-06-18T06:36:29.461972,f2csi0yn,22,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,wealth,3
+2025-06-18T06:36:29.462003,f2csi0yn,22,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,authority,3
+2025-06-18T06:36:29.462032,f2csi0yn,22,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,humble,3
+2025-06-18T06:36:29.462055,f2csi0yn,22,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,influential,3
+2025-06-18T06:36:33.452484,f2csi0yn,22,1,baseline,1,Part8,Part8,retaliation,4
+2025-06-18T06:36:33.454313,f2csi0yn,22,1,baseline,1,Part8,Part8,retaliation_other,6
+2025-06-18T06:36:39.874930,f2csi0yn,22,1,baseline,1,Bonus,Bonus,bonus,bargaining
+2025-06-18T06:36:39.876489,f2csi0yn,22,1,baseline,1,Bonus,Bonus,enjoy,4
+2025-06-18T06:38:40.926503,f2csi0yn,22,1,baseline,2,Priming (timeout),Priming,qp1,0
+2025-06-18T06:38:40.928373,f2csi0yn,22,1,baseline,2,Priming (timeout),Priming,gen_cgi,
+2025-06-18T06:38:40.928402,f2csi0yn,22,1,baseline,2,Priming (timeout),Priming,qp3,0
+2025-06-18T06:38:40.928463,f2csi0yn,22,1,baseline,2,Priming (timeout),Priming,qp4,
+2025-06-18T06:38:50.501601,f2csi0yn,18,1,baseline,1,Priming,Priming,qp1,3
+2025-06-18T06:38:50.503407,f2csi0yn,18,1,baseline,1,Priming,Priming,gen_cgi,5
+2025-06-18T06:38:50.503443,f2csi0yn,18,1,baseline,1,Priming,Priming,qp3,2
+2025-06-18T06:38:50.503465,f2csi0yn,18,1,baseline,1,Priming,Priming,qp4,explanation
+2025-06-18T06:38:58.419214,f2csi0yn,18,1,baseline,1,Part1,Part1,cmt_propr,considerations
+2025-06-18T06:38:58.420289,f2csi0yn,18,1,baseline,1,Part1,Part1,cmt_vtr,some
+2025-06-18T06:39:05.572663,f2csi0yn,18,1,baseline,1,Part2,Part2,age,18
+2025-06-18T06:39:05.574043,f2csi0yn,18,1,baseline,1,Part2,Part2,sex,4
+2025-06-18T06:39:05.574074,f2csi0yn,18,1,baseline,1,Part2,Part2,trans_1,3
+2025-06-18T06:39:05.574095,f2csi0yn,18,1,baseline,1,Part2,Part2,trans_2,3
+2025-06-18T06:39:10.856904,f2csi0yn,18,1,baseline,1,Part3,Part3,power_q1a,2
+2025-06-18T06:39:10.858576,f2csi0yn,18,1,baseline,1,Part3,Part3,power_q1b,3
+2025-06-18T06:39:10.858609,f2csi0yn,18,1,baseline,1,Part3,Part3,power_q2,4
+2025-06-18T06:39:10.858633,f2csi0yn,18,1,baseline,1,Part3,Part3,power_q3,4
+2025-06-18T06:39:16.118756,f2csi0yn,18,1,baseline,1,Part4,Part4,atq_1,11
+2025-06-18T06:39:16.120598,f2csi0yn,18,1,baseline,1,Part4,Part4,atq_2,12
+2025-06-18T06:39:16.120629,f2csi0yn,18,1,baseline,1,Part4,Part4,atq_3,14
+2025-06-18T06:39:21.555519,f2csi0yn,18,1,baseline,1,Part5,Part5,econ,12
+2025-06-18T06:39:21.557011,f2csi0yn,18,1,baseline,1,Part5,Part5,risk,5
+2025-06-18T06:39:21.557046,f2csi0yn,18,1,baseline,1,Part5,Part5,occ,student
+2025-06-18T06:39:30.553116,f2csi0yn,18,1,baseline,1,Part6,Part6,plop_unempl,5
+2025-06-18T06:39:30.554183,f2csi0yn,18,1,baseline,1,Part6,Part6,plop_comp,6
+2025-06-18T06:39:30.554206,f2csi0yn,18,1,baseline,1,Part6,Part6,plop_incdist,6
+2025-06-18T06:39:30.554224,f2csi0yn,18,1,baseline,1,Part6,Part6,plop_priv,6
+2025-06-18T06:39:30.554241,f2csi0yn,18,1,baseline,1,Part6,Part6,plop_luckeffort,6
+2025-06-18T06:39:30.554257,f2csi0yn,18,1,baseline,1,Part6,Part6,democracy_obedience,6
+2025-06-18T06:39:35.606637,f2csi0yn,18,1,baseline,1,Part7,Part7,rel,1
+2025-06-18T06:39:35.607954,f2csi0yn,18,1,baseline,1,Part7,Part7,rel_spec,5
+2025-06-18T06:39:35.607993,f2csi0yn,18,1,baseline,1,Part7,Part7,rel_other,
+2025-06-18T06:39:40.675298,f2csi0yn,18,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q1,2
+2025-06-18T06:39:40.676780,f2csi0yn,18,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q2,3
+2025-06-18T06:39:40.676815,f2csi0yn,18,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q3,4
+2025-06-18T06:39:40.676837,f2csi0yn,18,1,baseline,1,GenderAttitudes,GenderAttitudes,gender_q4,3
+2025-06-18T06:39:44.272075,f2csi0yn,18,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus,3
+2025-06-18T06:39:44.273727,f2csi0yn,18,1,baseline,1,MWC_BONUS,MWC_BONUS,mwc_bonus_others,4
+2025-06-18T06:39:51.556845,f2csi0yn,18,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,social_power,3
+2025-06-18T06:39:51.558854,f2csi0yn,18,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,wealth,3
+2025-06-18T06:39:51.558896,f2csi0yn,18,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,authority,3
+2025-06-18T06:39:51.558920,f2csi0yn,18,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,humble,3
+2025-06-18T06:39:51.558942,f2csi0yn,18,1,baseline,1,SchwartzHierarchy,SchwartzHierarchy,influential,3
+2025-06-18T06:39:55.390671,f2csi0yn,18,1,baseline,1,Part8,Part8,retaliation,3
+2025-06-18T06:39:55.391848,f2csi0yn,18,1,baseline,1,Part8,Part8,retaliation_other,4
+2025-06-18T07:58:47.822894,2i6td392,3,2,priming,1,Priming,Priming,qp1,3
+2025-06-18T07:58:47.826279,2i6td392,3,2,priming,1,Priming,Priming,gen_cgi,4
+2025-06-18T07:58:47.826300,2i6td392,3,2,priming,1,Priming,Priming,qp3,2
+2025-06-18T07:58:47.826314,2i6td392,3,2,priming,1,Priming,Priming,qp4,sample
+2025-06-18T07:58:49.756309,2i6td392,1,2,priming,1,Priming,Priming,qp1,2
+2025-06-18T07:58:49.757255,2i6td392,1,2,priming,1,Priming,Priming,gen_cgi,4
+2025-06-18T07:58:49.757294,2i6td392,1,2,priming,1,Priming,Priming,qp3,2
+2025-06-18T07:58:49.757326,2i6td392,1,2,priming,1,Priming,Priming,qp4,sample
+2025-06-18T07:58:50.765666,2i6td392,2,2,priming,1,Priming,Priming,qp1,2
+2025-06-18T07:58:50.766620,2i6td392,2,2,priming,1,Priming,Priming,gen_cgi,3
+2025-06-18T07:58:50.766647,2i6td392,2,2,priming,1,Priming,Priming,qp3,2
+2025-06-18T07:58:50.766669,2i6td392,2,2,priming,1,Priming,Priming,qp4,sample
+2025-06-18T07:59:17.030693,2i6td392,3,2,priming,1,Baseline,Baseline,qp1,3
+2025-06-18T07:59:17.031913,2i6td392,3,2,priming,1,Baseline,Baseline,gen_cgi,4
+2025-06-18T07:59:17.031940,2i6td392,3,2,priming,1,Baseline,Baseline,qp3,2
+2025-06-18T07:59:17.031960,2i6td392,3,2,priming,1,Baseline,Baseline,qp4,sample
+2025-06-18T07:59:18.698780,2i6td392,1,2,priming,1,Baseline,Baseline,qp1,2
+2025-06-18T07:59:18.700187,2i6td392,1,2,priming,1,Baseline,Baseline,gen_cgi,4
+2025-06-18T07:59:18.700219,2i6td392,1,2,priming,1,Baseline,Baseline,qp3,2
+2025-06-18T07:59:18.700242,2i6td392,1,2,priming,1,Baseline,Baseline,qp4,sample
+2025-06-18T07:59:20.940582,2i6td392,2,2,priming,1,Baseline,Baseline,qp1,2
+2025-06-18T07:59:20.941624,2i6td392,2,2,priming,1,Baseline,Baseline,gen_cgi,3
+2025-06-18T07:59:20.941648,2i6td392,2,2,priming,1,Baseline,Baseline,qp3,2
+2025-06-18T07:59:20.941666,2i6td392,2,2,priming,1,Baseline,Baseline,qp4,sample

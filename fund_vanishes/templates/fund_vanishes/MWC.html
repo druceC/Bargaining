@@ -179,6 +179,31 @@
         display: block;
         margin-bottom: 6px;
     }
+    .scenario-box {
+        background: #f9f9f9;
+        padding: 20px;
+        border-left: 4px solid #0044cc;
+        border-radius: 6px;
+        margin-bottom: 30px;
+    }
+
+    .scenario-box p {
+        margin: 10px 0;
+        line-height: 1.6;
+    }
+
+    .survey-header {
+        font-size: 24px;
+        font-weight: 600;
+        color: #3600cc;
+        margin-bottom: 16px;
+    }
+
+    .survey-subtext {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 30px;
+    }
 
 
 
@@ -192,6 +217,12 @@
         <div class="progress-bar">
             <div class="progress"></div>
         </div>
+        <br>
+        <!-- <div class="survey-header">Fairness in Group Decision-Making</div> -->
+        <div class="survey-subtext">
+            Reflect on the scenario below and share your views. 
+        </div>
+        <br>
     
         <form id="surveyForm" method="post">
             <div class="form-container">
@@ -202,17 +233,17 @@
                 {{ form.mwc_others }}
                 <br><br> -->
                 <div class="question-block">
-                    <div class="context-box">
+                    <div class="scenario-box">
                         <label class="question-label">
                             <em>Consider the following situation:</em>
                         </label>
                         <p>
                             A group of three people are negotiating how to split a sum of money. At least two of them must agree on the split.
                         </p>
-                        <p>
-                            In your view, how acceptable is it to split the money <strong>only between two people</strong>, with the third person <strong>getting nothing</strong>?
-                        </p>
                     </div>
+                    <p>
+                        In your view, how acceptable is it to split the money <strong>only between two people</strong>, with the third person <strong>getting nothing</strong>?
+                    </p>
                     <div class="radio-group">
                         <div class="radio-scale">
                             {{ form.mwc }}
@@ -223,14 +254,9 @@
                 <br>
                 
                 <div class="question-block">
-                    <div class="context-box">
-                        <label class="question-label">
-                            <em>Now consider this:</em>
-                        </label>
-                        <p>
-                            If three people in this country were to face the situation described above, how likely is it that the money will be split only between two of them, with the third person getting nothing?
-                        </p>
-                    </div>
+                    <p>
+                        If three people in this country were to face the situation described above, how likely is it that the money will be split only between two of them, with the third person getting nothing?
+                    </p>
                     <div class="radio-group">
                         <div class="radio-scale">
                             {{ form.mwc_others }}

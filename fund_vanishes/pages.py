@@ -135,6 +135,7 @@ class SyncTop(BaseWaitPage):
 
             # Player failed to get matched in time
             participant.vars["not_grouped"] = True
+            self.player.ungrouped = True
             participant.vars["waiting_timeout"] = True
             participant.vars["dropout"] = True
             participant.vars["has_synced"] = True
@@ -303,7 +304,11 @@ class ProposerPage(BasePage):
             "proposal": allocation
         })
 
-        # # Save updated proposals JSON string
+        # Save subgroup ID of the player for this round in oTree data tab
+        self.player.subgroup_id = subgroup_id
+        self.player.id_in_subgroup = id_in_subgroup 
+
+        # Save updated proposals JSON string
         self.group.subgroup_proposals_str = json.dumps(subgroup_proposals)
         print(f"[DEBUG] Subgroup {subgroup_id} proposals so far: {subgroup_proposals[subgroup_key]}")
             
@@ -381,6 +386,8 @@ class ProposerPage2(BasePage):
 
             # Declare dropout
             self.participant.vars["dropout"] = True
+            self.player.dropout = True
+            self.player.completion_code = DROPOUT_CODE
             self.group.drop_out_detected = True
             self.group.drop_out_finalized = True
 
@@ -740,8 +747,10 @@ class VoterPage2(BasePage):
             
             # Declare dropout
             self.participant.vars["dropout"] = True
+            self.player.dropout = True
             self.group.drop_out_detected = True
             self.group.drop_out_finalized = True
+            self.player.completion_code = DROPOUT_CODE
 
             # Notify other players
             for p in self.group.get_players():
@@ -1086,7 +1095,9 @@ class AreYouThere(BasePage):
             # Also set the GROUP-LEVEL dropout flag
             self.group.drop_out_detected = True
             self.participant.vars["dropout"] = True
+            self.player.dropout = True
             self.group.drop_out_finalized = True
+            self.player.completion_code = DROPOUT_CODE
         else:
             # Clean up timeout
             self.participant.vars.pop("expiry_timestamp", None)
@@ -1119,7 +1130,9 @@ class AreYouThereVoter(BasePage):
             # Also set the GROUP-LEVEL dropout flag
             self.group.drop_out_detected = True
             self.participant.vars["dropout"] = True
+            self.player.dropout = True
             self.group.drop_out_finalized = True
+            self.player.completion_code = DROPOUT_CODE
         else:
             # Clean up timeout
             self.participant.vars.pop("expiry_timestamp", None)
@@ -1150,6 +1163,7 @@ class DropoutNotice(Page):
 
 class NotGroupedNotice(Page):
     def is_displayed(self):
+        self.player.ungrouped = True
         # Show this page only if the participant timed out and was not grouped
         return self.participant.vars.get("not_grouped", False) or self.participant.vars.get("waiting_timeout", False)
 
@@ -1286,12 +1300,13 @@ class PaymentInfo(Page):
 
 class Priming(Page):
     form_model = 'player'
-    form_fields = ['qp1', 'qp3']
+    form_fields = ['qp1', 'gen_cgi', 'qp3', 'qp4']
     timeout_seconds = 120
 
     def is_displayed(self):
         # Display only if player selected for priming treatment
-        return self.participant.vars.get("is_priming", False) and self.round_number == 1
+        # return self.participant.vars.get("is_priming", False) and self.round_number == 1
+        return True
 
     def vars_for_template(self):
         # Pass the player's gender selection to template
@@ -1318,12 +1333,13 @@ class Priming(Page):
 
 class Baseline(Page):
     form_model = 'player'
-    form_fields = ['qp1', 'qp3']
+    form_fields = ['qp1', 'gen_cgi', 'qp3','qp4']
     # timeout_seconds = 120
 
     def is_displayed(self):
         # Display only if player selected for baseline treatment
-        return not self.participant.vars.get("is_priming") and self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
+        # return not self.participant.vars.get("is_priming") and self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
+        return True
 
     def vars_for_template(self):
         # Pass the player's gender selection to template
@@ -1368,7 +1384,7 @@ class Part1(Page):
 
 class Part2(Page):
     form_model = 'player'
-    form_fields = ['age', 'risk','occ']
+    form_fields = ['age', 'sex', 'trans_1', 'trans_2']
 
     def is_displayed(self):
         # Display only if offer was accepted
@@ -1437,8 +1453,8 @@ class Part4(Page):
 
 class Part5(Page):
     form_model = 'player'
-    form_fields = ['econ', 'party_like', 'party', 'other_party','party_prox']
-    # form_fields = ['econ', 'party_like', 'party', 'party_prox']
+    # form_fields = ['econ', 'party_like', 'party', 'other_party','party_prox']
+    form_fields = ['econ', 'risk', 'occ']
 
     def is_displayed(self):
         # Display page only if offer was accepted
@@ -1453,13 +1469,6 @@ class Part5(Page):
         }
     
     def before_next_page(self):
-        if self.player.party_like != '1':
-            self.player.party = ''
-            self.player.party_prox = ''
-
-        if self.player.party != '4':
-            self.player.other_party = ''
-
         # Record response
         store_survey_response(self.player, "Part5", self.form_fields)
         # Increase survey step when the player moves to the next page

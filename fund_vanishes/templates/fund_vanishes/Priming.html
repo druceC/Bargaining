@@ -119,9 +119,19 @@
             {{ form.qp1 }}<br><br>
 
             <label class="question-label">
-                You have rated your gender identity expression to be <strong>{{ gender_expression }}</strong> on the masculinity-femininity (0 = masculine, 10 = feminine) scale. How important is it for you to express your gender identity to others?
+                In general, how do you see yourself? Where would you put yourself on this scale (0-10) from "Very masculine" to "Very feminine"?
+            </label>
+            {{ form.gen_cgi }}<br><br>
+
+            <label class="question-label">
+               Considering your rating on the masculinity-feminity scale, how important is it for you to express your gender identity to others?
             </label>
             {{ form.qp3 }}<br><br>
+
+            <label class="question-label">
+                Could you briefly explain answer to the preceding question? <br><em>Why is important–or not–for others know your masculinity / femininity?</em>
+            </label>
+            {{ form.qp4 }}<br><br>
         </div>
 
         <button class="next-button" onclick="updateProgress()">Next</button>

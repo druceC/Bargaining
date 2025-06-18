@@ -20,7 +20,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fund_vanishes.settings")
 from django.core.files.storage import default_storage
 
 # Variables for Progress Bar 
-INTRO_QUESTIONS = 3
+INTRO_QUESTIONS = 4
 
 # Timeout
 PROPOSAL_TIMEOUT = 60                  # Proposer Page 
@@ -180,18 +180,18 @@ class Education(Page):
         # Store responses
         store_survey_response(self.player, "Education", self.form_fields)
 
-
 class Gender(Page):
     form_model = 'player'
-    form_fields = ['sex', 'gen', 'other_gender', 'gen_cgi',]
+    # form_fields = ['sex', 'gen', 'other_gender', 'gen_cgi',]
+    form_fields = ['gen', 'other_gender']
 
     # Gender choices mapping
     GENDER_CHOICES = {
         "1": "man or male",
         "2": "woman or female",
-        "3": "non-binary or genderqueer",
-        "4": "I use a different term",
-        "5": "I prefer not to answer"
+        "3": "Other (please specify)",
+        # "4": "I use a different term",
+        # "5": "I prefer not to answer"
     }
 
     def is_displayed(self):
@@ -208,17 +208,57 @@ class Gender(Page):
         store_survey_response(self.player, "Gender", self.form_fields)
         
         # If user didn't select "I use a different term"
-        if self.player.gen != '4':
+        if self.player.gen != '3':
             self.player.other_gender = ''
         
         # Assign the provided gender label into "selected_gender" variable or a custom one if 'gen' == '4'
-        if str(self.player.gen).strip() == "4":
+        if str(self.player.gen).strip() == "3":
             self.participant.vars["selected_gender"] = self.player.other_gender  # Custom term
         else:
             self.participant.vars["selected_gender"] = self.GENDER_CHOICES.get(str(self.player.gen), "Not specified")
 
         # Save gender_cgi for templating in priming/baselin
-        self.participant.vars["gender_expression"] = self.player.gen_cgi
+        # self.participant.vars["gender_expression"] = self.player.gen_cgi
+
+class Party(Page):
+    form_model = 'player'
+    # form_fields = ['sex', 'gen', 'other_gender', 'gen_cgi',]
+    form_fields = ['party', 'party_closer', 'party_strong_republican', 'party_strong_democrat']
+
+    def is_displayed(self):
+        return self.round_number == 1
+    
+    def vars_for_template(self):
+        return {
+            "survey_step": 3,
+            "total_steps": INTRO_QUESTIONS 
+        }
+
+    def before_next_page(self):
+
+        # If user selected "Independent" or "Something Else"
+        if self.player.party != '1' and self.player.party != '2':
+            self.player.party_strong_republican = ''
+            self.player.party_strong_democrat = ''
+
+        # If user selected "Republican" for first question
+        if self.player.party == '1':
+            # Make strong democrat question unrequired
+            self.player.party_strong_democrat = ''
+            # Make second question unrequired
+            self.player.party_closer = ''
+
+        # If user selected "Democrat" for second question
+        if self.player.party == '2':
+            # Make strong republican question unrequired
+            self.player.party_strong_republican = ''
+            # Make second question unrequired
+            self.player.party_closer = ''
+
+
+        # Record response
+        store_survey_response(self.player, "Party", self.form_fields)
+
 
 
 class Income(Page):
@@ -230,7 +270,7 @@ class Income(Page):
     
     def vars_for_template(self):
         return {
-            "survey_step": 3,
+            "survey_step": 4,
             "total_steps": INTRO_QUESTIONS  # Adjust based on survey length
         }
     
@@ -259,8 +299,9 @@ page_sequence = [
     # IntroQuestions,                       # Inquire Prolific ID
     Nationality,    
     Education,      
-    Gender,       
-    Income,         
+    Gender, 
+    Party,       
+    Income,        
 
     # Game Instruction Pages
     ExperimentInstructions,
