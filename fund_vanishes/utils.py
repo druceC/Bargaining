@@ -4,7 +4,7 @@ import csv
 import datetime
 from django.core.files.storage import default_storage
 from pathlib import Path
-from .drive_upload import upload_csv
+# from .drive_upload import upload_csv
 
 # CSV files for storage
 INTRO_CSV = Path(__file__).resolve().parent / 'meta_data.csv'

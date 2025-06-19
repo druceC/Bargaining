@@ -3,7 +3,7 @@
 import csv
 import datetime
 from django.core.files.storage import default_storage
-from fund_vanishes.drive_upload import upload_csv
+# from fund_vanishes.drive_upload import upload_csv
 from pathlib import Path
 
 # CSV files for storage
