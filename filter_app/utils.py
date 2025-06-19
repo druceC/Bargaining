@@ -48,7 +48,7 @@ def store_intro(player):
             # treatment                                           # Treatment
         ])
 
-    upload_csv(INTRO_CSV, 'meta_data.csv')
+    # upload_csv(INTRO_CSV, 'meta_data.csv')
 
 # GAME DATA ------------------------------------------------------------------------------
 
@@ -88,7 +88,7 @@ def store_decision(player, page_name, action, data_dict):
                 value                                               # Vote on Proposal
             ])
 
-    upload_csv(GAME_CSV, 'game_data.csv')
+    # upload_csv(GAME_CSV, 'game_data.csv')
 
 # SURVEY DATA  ------------------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ def store_survey_response(player, page_name, form_fields):
                 response                              # Response value
             ])
 
-    upload_csv(SURVEY_CSV, 'survey_data.csv')
+    # upload_csv(SURVEY_CSV, 'survey_data.csv')
 
 # EARNINGS DATA  ------------------------------------------------------------------------------
 
@@ -163,7 +163,7 @@ def store_payment(player, payment_data):
             payment_data.get("completion_code", "N/A")                         # Completion Code
         ])
     
-    upload_csv(PAYMENT_CSV, 'payment_data.csv')
+    # upload_csv(PAYMENT_CSV, 'payment_data.csv')
 
 
 # LOGS, DROPOUTS ------------------------------------------------------------------------------
@@ -198,4 +198,4 @@ def store_earnings(player, current_period, earnings):
             earnings                                                    # Earnings
         ])
 
-    upload_csv(ROUND_EARNINGS, 'round_earnings_data.csv')
+    # upload_csv(ROUND_EARNINGS, 'round_earnings_data.csv')
