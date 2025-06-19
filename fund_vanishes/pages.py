@@ -1729,7 +1729,7 @@ page_sequence = [
     # Part7,                  # Religion, (Specify Religion)
     GenderAttitudes,        # Gender attitudes
     MWC,                    # Assign to even ID players
-    MWC_BONUS,              # Assign to odd ID players
+    MWC_bonus,              # Assign to odd ID players
     SchwartzHierarchy,      # Schwartz hierarchy
     Part8,                  # Retaliation, Retaliation_Other
     Bonus,                  # bonus + enjoy question
