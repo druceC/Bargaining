@@ -1533,8 +1533,8 @@ class GenderAttitudes(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True 
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True 
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1557,8 +1557,8 @@ class MWC(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True and self.player.id_in_group % 2 == 1  # odd-numbered players
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 1  # odd-numbered players
+        return True and self.player.id_in_group % 2 == 1  # odd-numbered players
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 1  # odd-numbered players
 
     def vars_for_template(self):
         return {
@@ -1580,8 +1580,8 @@ class MWC_bonus(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True and self.player.id_in_group % 2 == 0
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 0
+        return True and self.player.id_in_group % 2 == 0
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 0
 
     def vars_for_template(self):
         return {
@@ -1604,8 +1604,8 @@ class SchwartzHierarchy(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         field_descriptions = {
@@ -1635,8 +1635,8 @@ class Part8(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1657,8 +1657,8 @@ class Bonus(Page):
 
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1697,36 +1697,36 @@ class Fin(Page):
 page_sequence = [
 
     # Main game loop - 5 times per player
-    SyncTop,              # Where groups of 9 are set
-    Priming,              # Only show for priming treatment groups
+    # SyncTop,              # Where groups of 9 are set
+    # Priming,              # Only show for priming treatment groups
 
-    WaitingPage,          # Wait Page 1  
-    GameStarts,  
-    ProposerPage,         
-    AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds   
-    ProposerPage2,  
+    # WaitingPage,          # Wait Page 1  
+    # GameStarts,  
+    # ProposerPage,         
+    # AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds   
+    # ProposerPage2,  
 
-    SelectingPage,        # Wait Page 2                         # Timeout = 15 seconds
+    # SelectingPage,        # Wait Page 2                         # Timeout = 15 seconds
 
-    VoterPage,            # Players vote accept / reject
-    AreYouThereVoter,          # Declare Dropout - If no response
-    VoterPage2,  
+    # VoterPage,            # Players vote accept / reject
+    # AreYouThereVoter,          # Declare Dropout - If no response
+    # VoterPage2,  
 
-    VoterWaitPage,        # Wait Page 3 (Detect Dropout) 
-    ResultsPage,          # Show if proposal is accepted / rejected
-    SyncBottom,           # Redirect back to SyncTop until all periods compelted
+    # VoterWaitPage,        # Wait Page 3 (Detect Dropout) 
+    # ResultsPage,          # Show if proposal is accepted / rejected
+    # SyncBottom,           # Redirect back to SyncTop until all periods compelted
 
-    SurveyPage,
-    Baseline,             # Only show for baseline treatment groups
+    # SurveyPage,
+    # Baseline,             # Only show for baseline treatment groups
 
     # Final Survey
-    Part1,                  # Voting and Proposing Considerations
-    Part2,                  # Age, Risk, Occupation
-    Part3,                  # Power index
-    Part4,                  # atq 1, 2, 3 (ie. math questions)
-    Part5,                  # Econ Courses, Party Like, Party, Party Prox
-    Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
-    Part7,                  # Religion, (Specify Religion)
+    # Part1,                  # Voting and Proposing Considerations
+    # Part2,                  # Age, Risk, Occupation
+    # Part3,                  # Power index
+    # Part4,                  # atq 1, 2, 3 (ie. math questions)
+    # Part5,                  # Econ Courses, Party Like, Party, Party Prox
+    # Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
+    # Part7,                  # Religion, (Specify Religion)
     GenderAttitudes,        # Gender attitudes
     MWC,                    # Assign to even ID players
     MWC_BONUS,              # Assign to odd ID players
