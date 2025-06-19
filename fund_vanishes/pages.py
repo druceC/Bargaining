@@ -1365,8 +1365,8 @@ class Part1(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         self.participant.vars["surveyStep"] = self.participant.vars.get("surveyStep", 1)
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
     
     def vars_for_template(self):
         return {
@@ -1388,8 +1388,8 @@ class Part2(Page):
 
     def is_displayed(self):
         # Display only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
     
     def vars_for_template(self):
         return {
@@ -1411,8 +1411,8 @@ class Part3(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1435,8 +1435,8 @@ class Part4(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1458,8 +1458,8 @@ class Part5(Page):
 
     def is_displayed(self):
         # Display page only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1483,8 +1483,8 @@ class Part6(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1506,8 +1506,8 @@ class Part7(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1533,8 +1533,8 @@ class GenderAttitudes(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True 
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True 
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1557,8 +1557,8 @@ class MWC(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True and self.player.id_in_group % 2 == 1  # odd-numbered players
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 1  # odd-numbered players
+        # return True and self.player.id_in_group % 2 == 1  # odd-numbered players
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 1  # odd-numbered players
 
     def vars_for_template(self):
         return {
@@ -1580,8 +1580,8 @@ class MWC_bonus(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True and self.player.id_in_group % 2 == 0
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 0
+        # return True and self.player.id_in_group % 2 == 0
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 0
 
     def vars_for_template(self):
         return {
@@ -1604,8 +1604,8 @@ class SchwartzHierarchy(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         field_descriptions = {
@@ -1635,8 +1635,8 @@ class Part8(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1657,8 +1657,8 @@ class Bonus(Page):
 
     def is_displayed(self):
         # Display only if offer was accepted
-        return True
-        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        # return True
+        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1697,27 +1697,27 @@ class Fin(Page):
 page_sequence = [
 
     # Main game loop - 5 times per player
-    # SyncTop,              # Where groups of 9 are set
-    # Priming,              # Only show for priming treatment groups
+    SyncTop,              # Where groups of 9 are set
+    Priming,              # Only show for priming treatment groups
 
-    # WaitingPage,          # Wait Page 1  
-    # GameStarts,  
-    # ProposerPage,         
-    # AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds   
-    # ProposerPage2,  
+    WaitingPage,          # Wait Page 1  
+    GameStarts,  
+    ProposerPage,         
+    AreYouThere,          # Declare Dropout - If no response    # Timeout = 15 seconds   
+    ProposerPage2,  
 
-    # SelectingPage,        # Wait Page 2                         # Timeout = 15 seconds
+    SelectingPage,        # Wait Page 2                         # Timeout = 15 seconds
 
-    # VoterPage,            # Players vote accept / reject
-    # AreYouThereVoter,          # Declare Dropout - If no response
-    # VoterPage2,  
+    VoterPage,            # Players vote accept / reject
+    AreYouThereVoter,          # Declare Dropout - If no response
+    VoterPage2,  
 
-    # VoterWaitPage,        # Wait Page 3 (Detect Dropout) 
-    # ResultsPage,          # Show if proposal is accepted / rejected
-    # SyncBottom,           # Redirect back to SyncTop until all periods compelted
+    VoterWaitPage,        # Wait Page 3 (Detect Dropout) 
+    ResultsPage,          # Show if proposal is accepted / rejected
+    SyncBottom,           # Redirect back to SyncTop until all periods compelted
 
-    # SurveyPage,
-    # Baseline,             # Only show for baseline treatment groups
+    SurveyPage,
+    Baseline,             # Only show for baseline treatment groups
 
     # Final Survey
     Part1,                  # Voting and Proposing Considerations
