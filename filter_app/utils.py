@@ -10,7 +10,8 @@ from pathlib import Path
 INTRO_CSV = Path(__file__).resolve().parent / 'meta_data.csv'
 GAME_CSV = Path(__file__).resolve().parent / 'game_data.csv'
 SURVEY_CSV = Path(__file__).resolve().parent / 'survey_data.csv'
-EARNINGS_CSV = Path(__file__).resolve().parent / 'earnings_data.csv'
+ROUND_EARNINGS_CSV = Path(__file__).resolve().parent / 'round_earnings_data.csv'
+PAYMENT_CSV = Path(__file__).resolve().parent / 'payment_data.csv'
 LOGS_CSV = Path(__file__).resolve().parent / 'logs_data.csv'
 
 # META DATA  ------------------------------------------------------------------------------
