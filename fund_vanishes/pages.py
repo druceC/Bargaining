@@ -1698,7 +1698,7 @@ page_sequence = [
 
     # Main game loop - 5 times per player
     SyncTop,              # Where groups of 9 are set
-    # Priming,              # Only show for priming treatment groups
+    Priming,              # Only show for priming treatment groups
 
     WaitingPage,          # Wait Page 1  
     GameStarts,  
