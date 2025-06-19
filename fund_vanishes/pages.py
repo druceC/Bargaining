@@ -1305,8 +1305,8 @@ class Priming(Page):
 
     def is_displayed(self):
         # Display only if player selected for priming treatment
-        # return self.participant.vars.get("is_priming", False) and self.round_number == 1
-        return True
+        return self.participant.vars.get("is_priming", False) and self.round_number == 1
+        # return True
 
     def vars_for_template(self):
         # Pass the player's gender selection to template
@@ -1338,8 +1338,8 @@ class Baseline(Page):
 
     def is_displayed(self):
         # Display only if player selected for baseline treatment
-        # return not self.participant.vars.get("is_priming") and self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
-        return True
+        return not self.participant.vars.get("is_priming") and self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
+        # return True
 
     def vars_for_template(self):
         # Pass the player's gender selection to template

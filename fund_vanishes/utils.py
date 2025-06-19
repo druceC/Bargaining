@@ -4,6 +4,7 @@ import csv
 import datetime
 from django.core.files.storage import default_storage
 from pathlib import Path
+from .drive_upload import upload_csv
 
 # CSV files for storage
 INTRO_CSV = Path(__file__).resolve().parent / 'meta_data.csv'
@@ -50,6 +51,9 @@ def store_intro(player):
             player.id_in_group,                                 # Player ID
             # Store dropout
         ])
+    
+    upload_csv(INTRO_CSV, 'meta_data.csv')
+
 
 # GAME DATA ------------------------------------------------------------------------------
 
@@ -61,6 +65,8 @@ def ensure_csv_headers():
             writer.writerow([
                 "Timestamp", "Session_Code", "Participant_ID", "Group_ID", "Treatment", "Round", "Page", "Action", "Value"
             ])
+    
+    upload_csv(GAME_CSV, 'game_data.csv')
 
 # Logs participant actions and decisions into a CSV file.
 def store_decision(player, page_name, action, data_dict):
@@ -90,6 +96,8 @@ def store_decision(player, page_name, action, data_dict):
                 value                                               # Vote on Proposal
                 # Store dropout
             ])
+    
+    upload_csv(GAME_CSV, 'game_data.csv')
 
 # SURVEY DATA  ------------------------------------------------------------------------------
 
@@ -131,6 +139,8 @@ def store_survey_response(player, page_name, form_fields, tag=None):
                 response                              # Response value
                 # Store dropout
             ])
+    
+    upload_csv(SURVEY_CSV, 'survey_data.csv')
 
 # EARNINGS DATA  ------------------------------------------------------------------------------
 
@@ -160,6 +170,8 @@ def store_earnings(player, current_period, earnings):
             current_period,                                             # Period
             earnings                                                    # Earnings
         ])
+
+    upload_csv(ROUND_EARNINGS, 'round_earnings_data.csv')
 
 
 # FINAL PAYMENT DATA  ------------------------------------------------------------------------------
@@ -198,4 +210,6 @@ def store_payment(player, payment_data):
             payment_data.get("base_fee", 0),                                   # Base Fee
             payment_data.get("completion_code", "N/A")                         # Completion Code
         ])
+    
+    upload_csv(PAYMENT_CSV, 'payment_data.csv')
 
