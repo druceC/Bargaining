@@ -1365,8 +1365,8 @@ class Part1(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         self.participant.vars["surveyStep"] = self.participant.vars.get("surveyStep", 1)
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
     
     def vars_for_template(self):
         return {
@@ -1388,8 +1388,8 @@ class Part2(Page):
 
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
     
     def vars_for_template(self):
         return {
@@ -1411,8 +1411,8 @@ class Part3(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1435,8 +1435,8 @@ class Part4(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1458,8 +1458,8 @@ class Part5(Page):
 
     def is_displayed(self):
         # Display page only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1483,8 +1483,8 @@ class Part6(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1506,8 +1506,8 @@ class Part7(Page):
     # @staticmethod
     def is_displayed(self):
         # Display only if offer was accepted
-        # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return True
+        # return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
 
     def vars_for_template(self):
         return {
@@ -1720,13 +1720,13 @@ page_sequence = [
     # Baseline,             # Only show for baseline treatment groups
 
     # Final Survey
-    # Part1,                  # Voting and Proposing Considerations
-    # Part2,                  # Age, Risk, Occupation
-    # Part3,                  # Power index
-    # Part4,                  # atq 1, 2, 3 (ie. math questions)
-    # Part5,                  # Econ Courses, Party Like, Party, Party Prox
-    # Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
-    # Part7,                  # Religion, (Specify Religion)
+    Part1,                  # Voting and Proposing Considerations
+    Part2,                  # Age, Risk, Occupation
+    Part3,                  # Power index
+    Part4,                  # atq 1, 2, 3 (ie. math questions)
+    Part5,                  # Econ Courses, Party Like, Party, Party Prox
+    Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
+    Part7,                  # Religion, (Specify Religion)
     GenderAttitudes,        # Gender attitudes
     MWC,                    # Assign to even ID players
     MWC_bonus,              # Assign to odd ID players
