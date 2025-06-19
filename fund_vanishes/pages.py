@@ -1573,7 +1573,7 @@ class MWC(Page):
         self.participant.vars['surveyStep'] += 1
 
 
-class MWC_BONUS(Page):
+class MWC_bonus(Page):
     form_model = 'player'
     form_fields = ['mwc_bonus', 'mwc_bonus_others']
 
