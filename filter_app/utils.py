@@ -168,3 +168,34 @@ def store_payment(player, payment_data):
 
 # LOGS, DROPOUTS ------------------------------------------------------------------------------
 
+# EARNINGS
+
+
+def ensure_earnings_csv_headers():
+    if not default_storage.exists(ROUND_EARNINGS_CSV):
+        with default_storage.open(ROUND_EARNINGS_CSV, mode='w') as file:
+            writer = csv.writer(file)
+            writer.writerow([
+                "Timestamp",
+                "Session_Code",
+                "Participant_ID",
+                "Group_Index",
+                "Period",
+                "Earnings"
+            ])
+
+def store_earnings(player, current_period, earnings):
+    ensure_earnings_csv_headers()  # Ensure headers exist
+
+    with default_storage.open(ROUND_EARNINGS_CSV, mode='a') as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            datetime.datetime.now().isoformat(),                        # Timestamp 
+            player.session.code,                                        # Session_Code 
+            player.participant.id_in_session,                           # Participant_ID
+            player.participant.vars.get("group_index", "N/A"),          # Group_Index
+            current_period,                                             # Period
+            earnings                                                    # Earnings
+        ])
+
+    upload_csv(ROUND_EARNINGS, 'round_earnings_data.csv')
