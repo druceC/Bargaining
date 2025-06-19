@@ -543,10 +543,10 @@ class Player(BasePlayer):
     )
 
     party_strong_democrat = models.StringField(
-        choices=[[1, 'Strong Democrat'], [2, 'Not Very Democrat'], ],
+        choices=[[1, 'Strong Democrat'], [2, 'Not Very Strong Democrat'], ],
         # choices=[[1, 'Strong Republican / Strong Democrat'], [2, 'Not Very Strong Republican / Not Very Strong Democrat'], ],
         # label='Would you call yourself a strong ${Republican / Democrat} or a not very strong ${Rep / Dem}?',
-         label='Would you call yourself a strong Democrat or not a very strong Democrat?',
+        label='Would you call yourself a strong Democrat or not a very strong Democrat?',
         widget=widgets.RadioSelect,
         blank = True         # optional depending on answer to party_closer
     )
