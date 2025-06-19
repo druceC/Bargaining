@@ -3,6 +3,7 @@
 import csv
 import datetime
 from django.core.files.storage import default_storage
+from fund_vanishes.drive_upload import upload_csv
 from pathlib import Path
 
 # CSV files for storage
@@ -46,6 +47,8 @@ def store_intro(player):
             # treatment                                           # Treatment
         ])
 
+    upload_csv(INTRO_CSV, 'meta_data.csv')
+
 # GAME DATA ------------------------------------------------------------------------------
 
 def ensure_csv_headers():
@@ -84,6 +87,8 @@ def store_decision(player, page_name, action, data_dict):
                 value                                               # Vote on Proposal
             ])
 
+    upload_csv(GAME_CSV, 'game_data.csv')
+
 # SURVEY DATA  ------------------------------------------------------------------------------
 
 def ensure_survey_csv_headers():
@@ -118,36 +123,46 @@ def store_survey_response(player, page_name, form_fields):
                 response                              # Response value
             ])
 
+    upload_csv(SURVEY_CSV, 'survey_data.csv')
+
 # EARNINGS DATA  ------------------------------------------------------------------------------
 
-def ensure_earnings_csv_headers():
-    """Creates the earnings CSV file with headers if it does not exist."""
-    if not default_storage.exists(FILES["earnings"]):
-        with default_storage.open(FILES["earnings"], mode='w', newline='') as file:
+def ensure_payment_csv_headers():
+    if not default_storage.exists(PAYMENT_CSV):
+        with default_storage.open(PAYMENT_CSV, mode='w') as file:
             writer = csv.writer(file)
             writer.writerow([
                 "Timestamp",
                 "Session_Code",
                 "Participant_ID",
+                "Group_Index",
                 "Selected_Periods",
                 "Final_Payment",
-                "Total_Bonus"
+                "Total_Bonus",
+                "Survey_Fee",
+                "Base_Fee",
+                "Completion_Code"
             ])
 
-def store_earnings(player, earnings_data):
-    """Logs final earnings and selected periods for a participant."""
-    ensure_earnings_csv_headers()  # Ensure headers exist
+def store_payment(player, payment_data):
+    ensure_payment_csv_headers()  # Ensure headers exist
 
-    with default_storage.open(FILES["earnings"], mode='a', newline='') as file:
+    with default_storage.open(PAYMENT_CSV, mode='a') as file:
         writer = csv.writer(file)
         writer.writerow([
             datetime.datetime.now().isoformat(),                                # Timestamp
             player.session.code,                                                # Session Code
             player.participant.id_in_session,                                   # Participant ID
-            ",".join(map(str, earnings_data.get("selected_periods", []))),      # Selected Periods (comma-separated)
-            earnings_data.get("final_payment", 0),                              # Final Payment
-            earnings_data.get("total_bonus", 0)                                 # Total Bonus
+            player.participant.vars.get("group_index", "N/A"),                  # Group Index
+            ",".join(map(str, payment_data.get("selected_periods", []))),       # Selected Periods (comma-separated)
+            payment_data.get("final_payment", 0),                              # Final Payment
+            payment_data.get("total_bonus", 0),                                # Total Bonus
+            payment_data.get("survey_fee", 0),                                 # Survey Fee
+            payment_data.get("base_fee", 0),                                   # Base Fee
+            payment_data.get("completion_code", "N/A")                         # Completion Code
         ])
+    
+    upload_csv(PAYMENT_CSV, 'payment_data.csv')
 
 
 # LOGS, DROPOUTS ------------------------------------------------------------------------------
