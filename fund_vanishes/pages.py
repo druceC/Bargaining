@@ -38,6 +38,7 @@ SURVEY_PAGES = 12
 ONLY_PFEE_CODE = "PFEE-7291AX"            # Fixed fee       
 PFEE_BONUS_CODE = "PFB-841ZC2"            # Fixed fee + Bonus
 PFEE_BONUS_SURVEY_CODE = "PFBS-993JDQ"    # Fixed fee + Bonus + Survey Fee
+PFEE_SURVEY_CODE = "PFS-323ADQ"          # Fixed fee + Bonus + Survey Fee
 NO_GROUP_CODE = "NG-5582XJ"               # Fixed fee only, no grouping occurred
 DROPOUT_CODE = "DO-000XKD"                # 0 payment
 
@@ -113,7 +114,7 @@ class SyncTop(BaseWaitPage):
     wait_for_all_groups = False
     group_by_arrival_time = True
     body_text = "We're matching you with other participants. <br><br> This may take a few minutes. If you are on this page for more than 5 minutes, please refresh the page..."
-    timeout_seconds = 300
+    timeout_seconds = 600 
 
     #  Ensure page is only displayed for players who still need to play 5 rounds
     def is_displayed(self):
@@ -134,8 +135,8 @@ class SyncTop(BaseWaitPage):
             # player.dropout = True           # Mark player as dropped out
 
             # Player failed to get matched in time
+            player.ungrouped = True
             participant.vars["not_grouped"] = True
-            self.player.ungrouped = True
             participant.vars["waiting_timeout"] = True
             participant.vars["dropout"] = True
             participant.vars["has_synced"] = True
@@ -191,6 +192,7 @@ class CalculatePage(BasePage):
 # Page shown while waiting for other participants to join and complete mini assessment
 class WaitingPage(BaseWaitPage):
     # template_name = 'fund_vanishes/WaitingPage.html'
+    # timeout_seconds = 6
     body_text = "Waiting for other participants..."
 
     @staticmethod
@@ -209,10 +211,18 @@ class WaitingPage(BaseWaitPage):
             "group_index": self.participant.vars.get("group_index", "N/A")
         }
 
+    def before_next_page(self, timeout_happend):
+         if timeout_happened:
+            # player.ungrouped = True
+            participant.vars["dropout"] = True
+
 
 class GameStarts(Page):
     def is_displayed(self):
         return self.round_number == 1 and not self.participant.vars.get("waiting_timeout", False)
+    
+    def before_next_page(self):
+        self.player.game_start_time = time.time()
 
 
 # Submit Proposal Page: All players propose an allocation, then store
@@ -223,6 +233,7 @@ class ProposerPage(BasePage):
     form_fields = ['s1', 's2', 's3']  
     # Set timeout count
     timeout_seconds = PROPOSAL_TIMEOUT
+    # timeout_seconds = 10
     # Allow for subroup independence
     group_by_arrival_time = False
 
@@ -341,7 +352,9 @@ class ProposerPage2(BasePage):
     def is_displayed(self):
         print(f"[DEBUG] waiting_timeout = {self.participant.vars.get('waiting_timeout', False)}")
         return (
-            self.participant.vars.get("timed_out", False) and not self.group.drop_out_finalized and not self.participant.vars.get("waiting_timeout", False)
+            self.participant.vars.get("timed_out", False) 
+            and not self.group.drop_out_finalized 
+            and not self.participant.vars.get("waiting_timeout", False)
         )
 
     # Provide player ID for template rendering
@@ -386,6 +399,7 @@ class ProposerPage2(BasePage):
 
             # Declare dropout
             self.participant.vars["dropout"] = True
+            self.player.dropout = True
             self.player.dropout = True
             self.player.completion_code = DROPOUT_CODE
             self.group.drop_out_detected = True
@@ -657,7 +671,7 @@ class VoterPage(BasePage):
             'remaining_seconds': remaining
         }
 
-    def before_next_page(self):
+    def before_next_page(self, timeout_happened = False):
         # Clean up timeout
         self.participant.vars.pop("voter_expiry_timestamp", None)
 
@@ -666,7 +680,7 @@ class VoterPage(BasePage):
             self.player.vote = False
             self.drop_out_detected = True
             self.participant.vars["timed_out"] = True
-            self.group.drop_out_finalized = False
+            # self.group.drop_out_finalized = False
             
             # Declare dropout
             # self.participant.vars["dropout"] = True
@@ -748,6 +762,7 @@ class VoterPage2(BasePage):
             # Declare dropout
             self.participant.vars["dropout"] = True
             self.player.dropout = True
+            player.dropout = True
             self.group.drop_out_detected = True
             self.group.drop_out_finalized = True
             self.player.completion_code = DROPOUT_CODE
@@ -991,6 +1006,7 @@ class SyncBottom(BaseWaitPage):
                     p.participant.vars['next_period'] = True
         else:
             print(f"[DEBUG] ✅ All players in group {group_index} have finished.\n")
+            # Send end time for the game propoer
 
         # Set group-level flag
         group.session_finish = all_finished  # only this group's status
@@ -1043,7 +1059,10 @@ class SyncBottom(BaseWaitPage):
     #     participant = player.participant
     #     if timeout_happened:
     #         participant.is_dropout = True 
-    #         player.dropout = True          
+    #         player.dropout = True  
+
+    def before_next_page(self):
+        self.player.game_end_time = time.time()        
 
 # Welcome Page to Survey
 class SurveyPage(Page):
@@ -1051,15 +1070,18 @@ class SurveyPage(Page):
     form_fields = ['feedback']
 
     def is_displayed(self):
+        self.player.game_end_time = time.time()       
+
         # Initialize surveyStep in participant.vars if it does not exist
         if 'surveyStep' not in self.participant.vars:
             self.participant.vars['surveyStep'] = 0
         # return True  # Keep the page displayed
         return (
-            self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
+            (self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
             and not self.participant.vars.get("dropout", False) 
-            and not self.group.drop_out_detected 
-            and not self.participant.vars.get("waiting_timeout", False)
+            # and not self.group.drop_out_detected 
+            and not self.participant.vars.get("waiting_timeout", False))
+            or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
         )
 
     def before_next_page(self):
@@ -1096,6 +1118,7 @@ class AreYouThere(BasePage):
             self.group.drop_out_detected = True
             self.participant.vars["dropout"] = True
             self.player.dropout = True
+            player.dropout = True
             self.group.drop_out_finalized = True
             self.player.completion_code = DROPOUT_CODE
         else:
@@ -1131,6 +1154,7 @@ class AreYouThereVoter(BasePage):
             self.group.drop_out_detected = True
             self.participant.vars["dropout"] = True
             self.player.dropout = True
+            player.dropout = True
             self.group.drop_out_finalized = True
             self.player.completion_code = DROPOUT_CODE
         else:
@@ -1159,13 +1183,25 @@ class DropoutNotice(Page):
             "payment_message": payment_message,
             "timeout_seconds": self.timeout_seconds
         }
+    
+    def before_next_page(self):
+        self.player.survey_fee = 0
+        self.player.game_end_time = time.time()       
 
 
 class NotGroupedNotice(Page):
     def is_displayed(self):
-        self.player.ungrouped = True
-        # Show this page only if the participant timed out and was not grouped
-        return self.participant.vars.get("not_grouped", False) or self.participant.vars.get("waiting_timeout", False)
+        # Only mark them as ungrouped if they're actually ungrouped
+        if self.participant.vars.get("not_grouped", False) or self.participant.vars.get("waiting_timeout", False):
+            self.player.ungrouped = True
+            return True
+        return False
+
+        # self.player.ungrouped = True
+        # # Assign completion code
+        # completion_code = NO_GROUP_CODE
+        # # Show this page only if the participant timed out and was not grouped
+        # return self.participant.vars.get("not_grouped", False) or self.participant.vars.get("waiting_timeout", False)
 
     def vars_for_template(self):
         return {
@@ -1216,10 +1252,16 @@ class PaymentInfo(Page):
     # Adjust payment
 
     def is_displayed(self):
+        # player.experiment_end_time = time.time()
         return self.participant.vars.get('periods_played', 0) >= Constants.no_periods or self.group.drop_out_detected or self.participant.vars.get("not_grouped", False) or self.participant.vars.get("waiting_timeout", False)
         # True
 
     def vars_for_template(self):
+        if not self.participant.vars.get("dropout", False):
+            self.player.survey_fee = 1
+        else:
+            self.player.survey_fee = 0
+
         final_earnings_data = self.player.final_earnings()
         
         # Handle dropout: zero out all earnings
@@ -1230,6 +1272,10 @@ class PaymentInfo(Page):
             final_earnings_data["final_payment"] = 0
             # Update total_bonus to 0 for dropoutee
             final_earnings_data["total_bonus"] = 0
+            # Update total_bonus to 0 for dropoutee
+            final_earnings_data["survey_fee"] = 0
+        else:
+            final_earnings_data["survey_fee"] = 1
 
         # Assign completion code 
         # Case 1: Dropout
@@ -1244,13 +1290,19 @@ class PaymentInfo(Page):
             if final_earnings_data["total_bonus"] > 0:
                 # Case 3a: Fixed + Bonus + Survey
                 if final_earnings_data["survey_fee"] > 0:
+                # if self.player.survey_fee > 0:
                     completion_code = PFEE_BONUS_SURVEY_CODE
                 # Case 3b: Fixed + Bonus
                 else:
                     completion_code = PFEE_BONUS_CODE
-            # Case 3c: Fixed
             else:
-                completion_code = ONLY_PFEE_CODE
+                # Case 3c: Fixed + Survey
+                # if self.player.survey_fee > 0:
+                if final_earnings_data["survey_fee"] > 0:
+                    completion_code = PFEE_SURVEY_CODE
+                 # Case 3d: Fixed Only
+                else:
+                    completion_code = ONLY_PFEE_CODE
         # Default
         else:
             completion_code = "N/A"
@@ -1266,12 +1318,12 @@ class PaymentInfo(Page):
         })
 
         # Save to player payment variables 
-        self.player.final_payment = final_earnings_data["final_payment"]
         self.player.total_bonus = final_earnings_data["total_bonus"]
         self.player.survey_fee = final_earnings_data["survey_fee"]
         self.player.base_fee = final_earnings_data["base_fee"]
         self.player.completion_code = completion_code
-
+        final_earnings_data["final_payment"] = final_earnings_data["base_fee"]+final_earnings_data["survey_fee"]+final_earnings_data["total_bonus"]
+        self.player.final_payment = final_earnings_data["final_payment"]
 
         return {
             "is_dropout": self.participant.vars.get("dropout", False),
@@ -1302,6 +1354,8 @@ class Priming(Page):
     form_model = 'player'
     form_fields = ['qp1', 'gen_cgi', 'qp3', 'qp4']
     timeout_seconds = 120
+    # Allow for subroup independence
+    group_by_arrival_time = False
 
     def is_displayed(self):
         # Display only if player selected for priming treatment
@@ -1309,6 +1363,12 @@ class Priming(Page):
         # return True
 
     def vars_for_template(self):
+         # Ensure that timeout is absolute
+        if "expiry_timestamp_priming" not in self.participant.vars:
+            self.participant.vars["expiry_timestamp_priming"] = time.time() + self.timeout_seconds
+        remaining = max(0, int(self.participant.vars["expiry_timestamp_priming"] - time.time()))
+
+
         # Pass the player's gender selection to template
         return {
             "selected_gender": self.participant.vars.get("selected_gender", "Not specified"),
@@ -1319,11 +1379,17 @@ class Priming(Page):
     
     def before_next_page(self):
 
+        # Clean up timeout
+        self.participant.vars.pop("expiry_timestamp_priming", None)
+
         # Timeout Handling Logic
         if self.timeout_happened:
-            # Submit default 
+            # Submit default values
             self.player.qp1 = "0"
             self.player.qp3 = "0"
+            self.player.gen_cgi = "0"
+            self.player.qp4 = "0"
+
             self.participant.vars["timed_out"] = True
             store_survey_response(self.player, "Priming", self.form_fields, tag="timeout")
         else:
@@ -1338,7 +1404,7 @@ class Baseline(Page):
 
     def is_displayed(self):
         # Display only if player selected for baseline treatment
-        return not self.participant.vars.get("is_priming") and self.participant.vars.get('periods_played', 0) >= Constants.no_periods 
+        return (not self.participant.vars.get("is_priming") and self.participant.vars.get('periods_played', 0) >= Constants.no_periods) or (self.group.drop_out_detected and not self.participant.vars.get("is_priming") and not self.participant.vars.get("dropout", False))
         # return True
 
     def vars_for_template(self):
@@ -1366,7 +1432,7 @@ class Part1(Page):
         # Display only if offer was accepted
         self.participant.vars["surveyStep"] = self.participant.vars.get("surveyStep", 1)
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
     
     def vars_for_template(self):
         return {
@@ -1389,8 +1455,7 @@ class Part2(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) 
-    
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
     def vars_for_template(self):
         return {
             "survey_step": 2,
@@ -1412,7 +1477,7 @@ class Part3(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         return {
@@ -1436,7 +1501,7 @@ class Part4(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         return {
@@ -1459,7 +1524,7 @@ class Part5(Page):
     def is_displayed(self):
         # Display page only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         return {
@@ -1484,7 +1549,7 @@ class Part6(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         return {
@@ -1507,7 +1572,7 @@ class Part7(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         return {
@@ -1534,7 +1599,7 @@ class GenderAttitudes(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True 
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         return {
@@ -1558,7 +1623,7 @@ class MWC(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True and self.player.id_in_group % 2 == 1  # odd-numbered players
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 1  # odd-numbered players
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and self.player.id_in_group % 2 == 1  and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 1)
 
     def vars_for_template(self):
         return {
@@ -1581,7 +1646,7 @@ class MWC_bonus(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True and self.player.id_in_group % 2 == 0
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 0
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and self.player.id_in_group % 2 == 0 and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False) and self.player.id_in_group % 2 == 0)
 
     def vars_for_template(self):
         return {
@@ -1605,7 +1670,7 @@ class SchwartzHierarchy(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         field_descriptions = {
@@ -1636,7 +1701,7 @@ class Part8(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         return {
@@ -1658,7 +1723,7 @@ class Bonus(Page):
     def is_displayed(self):
         # Display only if offer was accepted
         # return True
-        return self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)
+        return (self.participant.vars.get('periods_played', 0) >= Constants.no_periods and not self.participant.vars.get("dropout", False)) or (self.group.drop_out_detected and not self.participant.vars.get("dropout", False))
 
     def vars_for_template(self):
         return {
@@ -1669,9 +1734,11 @@ class Bonus(Page):
 
     def before_next_page(self):
         # Record response
+        self.survey_fee = 1
         store_survey_response(self.player, "Bonus", self.form_fields)
         # Increase survey step when the player moves to the next page
         # self.participant.vars['surveyStep'] += 1
+        self.player.experiment_end_time = time.time()    
 
 
 class Fin(Page):
@@ -1709,12 +1776,15 @@ page_sequence = [
     SelectingPage,        # Wait Page 2                         # Timeout = 15 seconds
 
     VoterPage,            # Players vote accept / reject
-    AreYouThereVoter,          # Declare Dropout - If no response
+    AreYouThereVoter,     # Declare Dropout - If no response
     VoterPage2,  
 
     VoterWaitPage,        # Wait Page 3 (Detect Dropout) 
     ResultsPage,          # Show if proposal is accepted / rejected
     SyncBottom,           # Redirect back to SyncTop until all periods compelted
+
+    DropoutNotice,                      # Display to dropout player
+    DropoutNoticeOtherPlayers,          # Display to all other players
 
     SurveyPage,
     Baseline,             # Only show for baseline treatment groups
@@ -1736,7 +1806,5 @@ page_sequence = [
     
     # Display Total Earnings 
     NotGroupedNotice,
-    DropoutNotice,                      # Display to dropout player
-    DropoutNoticeOtherPlayers,          # Display to all other players
     PaymentInfo,                        # Display Total Earnings 
 ]

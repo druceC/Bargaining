@@ -13,6 +13,7 @@ from pathlib import Path
 from datetime import datetime
 import random
 import datetime
+import time
 import json
 import csv
 import os
@@ -48,6 +49,7 @@ class BaseWaitPage(WaitPage):
 
 class WelcomePage(Page):
     def is_displayed(self):
+        self.player.experiment_start_time = time.time()
         return self.round_number == 1
 
     def before_next_page(self):

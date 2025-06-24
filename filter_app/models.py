@@ -115,6 +115,10 @@ class Player(BasePlayer):
     prolific_id = models.StringField(blank=True)
     study_id = models.StringField(blank=True)
     player_session_id = models.StringField(blank=True)
+    experiment_start_time = models.FloatField()
+    experiment_end_time = models.FloatField()
+    game_start_time = models.FloatField()
+    game_end_time = models.FloatField()
 
     #####################################################################################
     
@@ -192,12 +196,6 @@ class Player(BasePlayer):
     
     # Gender -------------------
 
-    sex = models.StringField(
-        choices=[[1, 'Male'], [2, 'Female'], [3, 'Intersex'], 
-                 [4, 'I prefer not to answer']],
-        label='What sex were you assigned at birth, or your original birth certificate?',
-        widget=widgets.RadioSelect,
-    )
     gen = models.StringField(
         choices=[
             [1, 'Man'], 
@@ -211,15 +209,6 @@ class Player(BasePlayer):
     )
     # New field for custom input
     other_gender = models.StringField(blank=True)
-
-    # gen_cgi = models.StringField(
-    #     choices=[[0, '0 (Very masculine)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
-    #              [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
-    #              [10, '10 (Very feminine)']],
-    #     label='In general, how do you see yourself? Where would you put yourself on this scale (0-10) from "Very masculine" to "Very feminine"?',
-    #     widget=widgets.RadioSelect,
-    #     blank=True,
-    # )
 
     # Income ----------------------
 
@@ -319,197 +308,197 @@ class Player(BasePlayer):
     # FINAL SURVEY QUESTIONS
     
     # Part 1a ----------------------
-    cmt_propr = models.LongStringField(
-        label="In the rounds where you were a proposer, what considerations did you take into account when proposing a distribution?",
-    )
-    cmt_vtr = models.LongStringField(
-        label="In the rounds where you were a voter, what considerations did you take into account, when voting on a distribution?",
-    )
+    # cmt_propr = models.LongStringField(
+    #     label="In the rounds where you were a proposer, what considerations did you take into account when proposing a distribution?",
+    # )
+    # cmt_vtr = models.LongStringField(
+    #     label="In the rounds where you were a voter, what considerations did you take into account, when voting on a distribution?",
+    # )
 
     # Part 1b ----------------------
 
-    retaliation = models.StringField(
-        choices=[[1, "1 (Strongly Disagree)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
-                 [7, "7 (Strongly Agree)"]],
-        label="\"If I feel that someone has wronged me, I will retaliate if given the possibility to do so.\" To what "
-              "extent do you agree with the previous statement, where 1 means strongly disagree and 7 strongly agree?",
-        widget=widgets.RadioSelect,
-    )
-    retaliation_other = models.StringField(
-        choices=[[1, "1 (Strongly Disagree)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
-                 [7, "7 (Strongly Agree)"]],
-        label="\"In general, people in this country retaliate when they feel someone has wronged them if given the "
-              "possibility to do so.\" To what extent do you agree with the previous statement, where 1 means "
-              "strongly disagree and 7 strongly agree? ",
-        widget=widgets.RadioSelect,
-    )
-    mwc = models.StringField(
-        choices=[[1, "1 (Completely Unacceptable)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
-                 [7, "7 (Completely Acceptable)"]],
-        label="Consider the following situation: \"A group of three people are negotiating how to split a sum of "
-              "money. At least two of them must agree on the split.\" a.) In your view, how acceptable is it to split "
-              "the money only between two people, with the third person getting nothing? Where 1 is completely "
-              "unacceptable and 7 is completely acceptable.",
-        widget=widgets.RadioSelect,
-    )
-    mwc_others = models.StringField(
-        choices=[[1, "1 (Extremely unlikely)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
-                 [7, "7 (Extremely likely)"]],
-        label="If three people in this country were to find themselves in the situation described in the previous "
-              "question, how likely is it that the money will be split only between two of them, with the third "
-              "person getting nothing? Where 1 is extremely unlikely and 7 is extremely likely.",
-        widget=widgets.RadioSelect,
-    )
+    # retaliation = models.StringField(
+    #     choices=[[1, "1 (Strongly Disagree)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
+    #              [7, "7 (Strongly Agree)"]],
+    #     label="\"If I feel that someone has wronged me, I will retaliate if given the possibility to do so.\" To what "
+    #           "extent do you agree with the previous statement, where 1 means strongly disagree and 7 strongly agree?",
+    #     widget=widgets.RadioSelect,
+    # )
+    # retaliation_other = models.StringField(
+    #     choices=[[1, "1 (Strongly Disagree)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
+    #              [7, "7 (Strongly Agree)"]],
+    #     label="\"In general, people in this country retaliate when they feel someone has wronged them if given the "
+    #           "possibility to do so.\" To what extent do you agree with the previous statement, where 1 means "
+    #           "strongly disagree and 7 strongly agree? ",
+    #     widget=widgets.RadioSelect,
+    # )
+    # mwc = models.StringField(
+    #     choices=[[1, "1 (Completely Unacceptable)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
+    #              [7, "7 (Completely Acceptable)"]],
+    #     label="Consider the following situation: \"A group of three people are negotiating how to split a sum of "
+    #           "money. At least two of them must agree on the split.\" a.) In your view, how acceptable is it to split "
+    #           "the money only between two people, with the third person getting nothing? Where 1 is completely "
+    #           "unacceptable and 7 is completely acceptable.",
+    #     widget=widgets.RadioSelect,
+    # )
+    # mwc_others = models.StringField(
+    #     choices=[[1, "1 (Extremely unlikely)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
+    #              [7, "7 (Extremely likely)"]],
+    #     label="If three people in this country were to find themselves in the situation described in the previous "
+    #           "question, how likely is it that the money will be split only between two of them, with the third "
+    #           "person getting nothing? Where 1 is extremely unlikely and 7 is extremely likely.",
+    #     widget=widgets.RadioSelect,
+    # )
 
     # Part 1c ----------------------
 
-    atq_1 = models.IntegerField(
-        label="In a lake, there is a patch of lily pads. Every day, the patch doubles in size. If it takes 48 days for the patch to cover the entire lake, how long would it take for the patch to cover half of the lake? (only numbers, no words)?",
-        max=10000000,
-        min=-10000000,
-    )
-    atq_2 = models.IntegerField(
-        label="If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets? (only numbers, no letters)",
-        max=10000000,
-        min=-10000000,
-    )
-    atq_3 = models.IntegerField(
-        label="A bat and a ball cost 1 USD in total. The bat costs 0.8 USD more than the ball. How much does the ball cost? (only numbers, no letters)",
-        max=10000000,
-        min=-10000000,
-    )
+    # atq_1 = models.IntegerField(
+    #     label="In a lake, there is a patch of lily pads. Every day, the patch doubles in size. If it takes 48 days for the patch to cover the entire lake, how long would it take for the patch to cover half of the lake? (only numbers, no words)?",
+    #     max=10000000,
+    #     min=-10000000,
+    # )
+    # atq_2 = models.IntegerField(
+    #     label="If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets? (only numbers, no letters)",
+    #     max=10000000,
+    #     min=-10000000,
+    # )
+    # atq_3 = models.IntegerField(
+    #     label="A bat and a ball cost 1 USD in total. The bat costs 0.8 USD more than the ball. How much does the ball cost? (only numbers, no letters)",
+    #     max=10000000,
+    #     min=-10000000,
+    # )
 
     # Part 1d ----------------------
 
-    age = models.IntegerField(
-        label="What is your age?", min=18, max=110
-    )
-    risk = models.StringField(
-        choices=[[0, '0 (Extremely unlikely)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
-                 [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
-                 [10, '10 (Extremely likely)']],
-        label='In general, how willing are you to take risks?',
-        widget=widgets.RadioSelect,
-    )
+    # age = models.IntegerField(
+    #     label="What is your age?", min=18, max=110
+    # )
+    # risk = models.StringField(
+    #     choices=[[0, '0 (Extremely unlikely)'], [1, '1'], [2, '2'], [3, '3'], [4, '4'],
+    #              [5, '5'], [6, '6'], [7, '7'], [8, '8'], [9, '9'],
+    #              [10, '10 (Extremely likely)']],
+    #     label='In general, how willing are you to take risks?',
+    #     widget=widgets.RadioSelect,
+    # )
 
     # Part 1e ----------------------
 
-    occ = models.StringField(
-        label=' What is your occupation?'
-    )
-    volunt = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No']],
-        label="Have you done any volunteer work in the last 6 months?",
-        widget=widgets.RadioSelect,
-    )
-    # Contingent on selecting volunt == 1
-    volunt_hrs = models.StringField(
-        choices=[[1, "1 to 4 hours"], 
-                [2, "5 to 9 hours"], 
-                [3, "10 to 14 hours"], 
-                [4, "15 or more hours"],
-                [5, "Don't know"]],
-        label = "Approximately how many hours a week do you spend doing volunteer work?",
-        widget = widgets.RadioSelect,
-        blank = True
-    )
+    # occ = models.StringField(
+    #     label=' What is your occupation?'
+    # )
+    # volunt = models.StringField(
+    #     choices=[[1, 'Yes'], [2, 'No']],
+    #     label="Have you done any volunteer work in the last 6 months?",
+    #     widget=widgets.RadioSelect,
+    # )
+    # # Contingent on selecting volunt == 1
+    # volunt_hrs = models.StringField(
+    #     choices=[[1, "1 to 4 hours"], 
+    #             [2, "5 to 9 hours"], 
+    #             [3, "10 to 14 hours"], 
+    #             [4, "15 or more hours"],
+    #             [5, "Don't know"]],
+    #     label = "Approximately how many hours a week do you spend doing volunteer work?",
+    #     widget = widgets.RadioSelect,
+    #     blank = True
+    # )
 
     # Part 2a ----------------------
 
-    party_like = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label='Is there a political party that you feel closer to than other parties?',
-        widget=widgets.RadioSelect,
-    )
-    # Only show party and party_prox if party_like == 1 
-    party = models.StringField(
-        choices=[[1, 'Republican Party'], [2, 'Democratic Party'], [3, 'Libertarian Party'], ['Other (please specify)']],
-        label='Which political party do you feel closest to?',
-        widget=widgets.RadioSelect,
-        blank = True
-    )
+    # party_like = models.StringField(
+    #     choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
+    #     label='Is there a political party that you feel closer to than other parties?',
+    #     widget=widgets.RadioSelect,
+    # )
+    # # Only show party and party_prox if party_like == 1 
+    # party = models.StringField(
+    #     choices=[[1, 'Republican Party'], [2, 'Democratic Party'], [3, 'Libertarian Party'], ['Other (please specify)']],
+    #     label='Which political party do you feel closest to?',
+    #     widget=widgets.RadioSelect,
+    #     blank = True
+    # )
 
-    # New field for custom input
-    other_party = models.StringField(blank=True)
+    # # New field for custom input
+    # other_party = models.StringField(blank=True)
 
-    party_prox = models.StringField(
-        choices=[[1, 'Very close'], [2, 'Somewhat close'], [3, 'Not close'], [4, 'Not at all close'],
-                 [5, "Don't know"]],
-        label='How close do you feel to this party?',
-        widget=widgets.RadioSelect,
-        blank = True
-    )
+    # party_prox = models.StringField(
+    #     choices=[[1, 'Very close'], [2, 'Somewhat close'], [3, 'Not close'], [4, 'Not at all close'],
+    #              [5, "Don't know"]],
+    #     label='How close do you feel to this party?',
+    #     widget=widgets.RadioSelect,
+    #     blank = True
+    # )
 
     # Part 2b ----------------------
 
-    econ = models.IntegerField(
-        label="How many economics and/or finance courses have you taken at the university level?",
-        max=999,
-        min=0,
-    )
+    # econ = models.IntegerField(
+    #     label="How many economics and/or finance courses have you taken at the university level?",
+    #     max=999,
+    #     min=0,
+    # )
 
-    plop_unempl = models.StringField(
-        choices=[[1, "1 (People who are unemployed ought to take any offered job to keep welfare support)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
-                 [10, "10 (People who are unemployed ought to be able to refuse any job they do not want)"]],
-        label='Mark where on the scale that you would place your own political opinions.',
-        widget=widgets.RadioSelect,
-    )
-    plop_comp = models.StringField(
-        choices=[[1, "1 (Competition is good)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
-                 [10, "10 (Competition is damaging)"]],
-        label='Mark where on the scale that you would place your own political opinions.',
-        widget=widgets.RadioSelect,
-    )
-    plop_incdist = models.StringField(
-        choices=[[1, "1 (The income distribution ought to be more equal)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
-                 [10, "10 (There ought to be more economic incentive for the individual to work harder)"]],
-        label='Mark where on the scale that you would place your own political opinions.',
-        widget=widgets.RadioSelect,
-    )
-    plop_priv = models.StringField(
-        choices=[[1, "1 (More public companies ought to be privatized)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
-                 [10, "10 (More companies ought to be state-owned)"]],
-        label='Mark where on the scale that you would place your own political opinions.',
-        widget=widgets.RadioSelect,
-    )
-    plop_luckeffort = models.StringField(
-        choices=[[1, "1 (In the long run, hard work usually brings a better life.)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
-                 [10, "10 (Hard work doesn't generally bring success-it's more a matter of luck and connections)"]],
-        label='Mark where on the scale that you would place your own political opinions.',
-        widget=widgets.RadioSelect,
-    )
+    # plop_unempl = models.StringField(
+    #     choices=[[1, "1 (People who are unemployed ought to take any offered job to keep welfare support)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
+    #              [10, "10 (People who are unemployed ought to be able to refuse any job they do not want)"]],
+    #     label='Mark where on the scale that you would place your own political opinions.',
+    #     widget=widgets.RadioSelect,
+    # )
+    # plop_comp = models.StringField(
+    #     choices=[[1, "1 (Competition is good)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
+    #              [10, "10 (Competition is damaging)"]],
+    #     label='Mark where on the scale that you would place your own political opinions.',
+    #     widget=widgets.RadioSelect,
+    # )
+    # plop_incdist = models.StringField(
+    #     choices=[[1, "1 (The income distribution ought to be more equal)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
+    #              [10, "10 (There ought to be more economic incentive for the individual to work harder)"]],
+    #     label='Mark where on the scale that you would place your own political opinions.',
+    #     widget=widgets.RadioSelect,
+    # )
+    # plop_priv = models.StringField(
+    #     choices=[[1, "1 (More public companies ought to be privatized)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
+    #              [10, "10 (More companies ought to be state-owned)"]],
+    #     label='Mark where on the scale that you would place your own political opinions.',
+    #     widget=widgets.RadioSelect,
+    # )
+    # plop_luckeffort = models.StringField(
+    #     choices=[[1, "1 (In the long run, hard work usually brings a better life.)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
+    #              [10, "10 (Hard work doesn't generally bring success-it's more a matter of luck and connections)"]],
+    #     label='Mark where on the scale that you would place your own political opinions.',
+    #     widget=widgets.RadioSelect,
+    # )
 
     # Part 5 ----------------------
 
     # Religion questions
-    rel = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label="Do you consider yourself as belonging to any particular religion or denomination?",
-        widget=widgets.RadioSelect,
-    )
-    # Contingent on question above
-    rel_spec = models.StringField(
-        choices=[[1, "Christianity - Protestantism"], [2, "Christianity - Catholicism"],
-                 [3, "Christianity - Other denomination"],
-                 [4, "Islam - All denominations"], [5, "Buddhism"], [6, "Hinduism"], [7, "Other"], [8, "Don't know"]],
-        label='Which religion/denomination do you consider yourself belonging to?',
-        widget=widgets.RadioSelect,
-        blank = True
-    )
-    # Conditional on selecting "other" on previous question
-    rel_other = models.StringField(
-        label="What other religion do you belong to?",
-        blank = True
-    )
+    # rel = models.StringField(
+    #     choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
+    #     label="Do you consider yourself as belonging to any particular religion or denomination?",
+    #     widget=widgets.RadioSelect,
+    # )
+    # # Contingent on question above
+    # rel_spec = models.StringField(
+    #     choices=[[1, "Christianity - Protestantism"], [2, "Christianity - Catholicism"],
+    #              [3, "Christianity - Other denomination"],
+    #              [4, "Islam - All denominations"], [5, "Buddhism"], [6, "Hinduism"], [7, "Other"], [8, "Don't know"]],
+    #     label='Which religion/denomination do you consider yourself belonging to?',
+    #     widget=widgets.RadioSelect,
+    #     blank = True
+    # )
+    # # Conditional on selecting "other" on previous question
+    # rel_other = models.StringField(
+    #     label="What other religion do you belong to?",
+    #     blank = True
+    # )
 
     # Party Questions --------------------------
     # party_like = models.StringField(
@@ -569,59 +558,59 @@ class Player(BasePlayer):
     # Parent-related questions
 
     # Mother country of birth
-    mth_spbrn = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label="Was your mother born in the United States?",
-        widget=widgets.RadioSelect,
-    )
-    # Conditional on question above
-    mth_cntbrn = models.StringField(
-        label="In which country was your mother born?",
-        choices=COUNTRIES,
-        blank=True
-    )
-    # Father country of birth
-    fth_spbrn = models.StringField(
-        choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
-        label="Was your father born in the United States?",
-        widget=widgets.RadioSelect,
-    )
-    # Conditional on question above
-    fth_cntbrn = models.StringField(
-        label="In which country was your father born?",
-        choices=COUNTRIES,
-        blank=True
-    )
+    # mth_spbrn = models.StringField(
+    #     choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
+    #     label="Was your mother born in the United States?",
+    #     widget=widgets.RadioSelect,
+    # )
+    # # Conditional on question above
+    # mth_cntbrn = models.StringField(
+    #     label="In which country was your mother born?",
+    #     choices=COUNTRIES,
+    #     blank=True
+    # )
+    # # Father country of birth
+    # fth_spbrn = models.StringField(
+    #     choices=[[1, 'Yes'], [2, 'No'], [3, "Don't know"]],
+    #     label="Was your father born in the United States?",
+    #     widget=widgets.RadioSelect,
+    # )
+    # # Conditional on question above
+    # fth_cntbrn = models.StringField(
+    #     label="In which country was your father born?",
+    #     choices=COUNTRIES,
+    #     blank=True
+    # )
 
     # Part 5 ----------------------
 
-    mwc_bonus = models.StringField(
-        choices=[[1, "1 (Completely Unacceptable)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
-                 [7, "7 (Completely Acceptable)"]],
-        label="Consider the following situation: \"A group of three members of a company's board are tasked with negotiating how to split a sum of \"bonus\" money. At least two of them must agree on the split.\". In your view, how acceptable is it to split the money only between two people, with the third person getting nothing? Where 1 is completely unacceptable and 7 is completely acceptable.",
-        widget=widgets.RadioSelect,
-    )
-    mwc_bonus_others = models.StringField(
-        choices=[[1, "1 (Extremely unlikely)"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
-                 [7, "7 (Extremely likely)"]],
-        label="If three people in this country were to find themselves in the situation described in the previous question, how likely is it that the money will be split only between two of them, with the third person getting nothing? Where 1 is extremely unlikely and 7 is extremely likely.",
-        widget=widgets.RadioSelect,
-    )
-    enjoy = models.StringField(
-        choices=[[0, "0 (Not at all)"], [1, "1"],
-                 [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
-                 [10, "10 (Enjoyed a lot)"]],
-        label='How much did you enjoy this experiment? 0 means "not at all" and 10 means "enjoyed a lot".',
-        widget=widgets.RadioSelect,
-    )
+    # mwc_bonus = models.StringField(
+    #     choices=[[1, "1 (Completely Unacceptable)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
+    #              [7, "7 (Completely Acceptable)"]],
+    #     label="Consider the following situation: \"A group of three members of a company's board are tasked with negotiating how to split a sum of \"bonus\" money. At least two of them must agree on the split.\". In your view, how acceptable is it to split the money only between two people, with the third person getting nothing? Where 1 is completely unacceptable and 7 is completely acceptable.",
+    #     widget=widgets.RadioSelect,
+    # )
+    # mwc_bonus_others = models.StringField(
+    #     choices=[[1, "1 (Extremely unlikely)"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"],
+    #              [7, "7 (Extremely likely)"]],
+    #     label="If three people in this country were to find themselves in the situation described in the previous question, how likely is it that the money will be split only between two of them, with the third person getting nothing? Where 1 is extremely unlikely and 7 is extremely likely.",
+    #     widget=widgets.RadioSelect,
+    # )
+    # enjoy = models.StringField(
+    #     choices=[[0, "0 (Not at all)"], [1, "1"],
+    #              [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6"], [7, "7"], [8, "8"], [9, "9"],
+    #              [10, "10 (Enjoyed a lot)"]],
+    #     label='How much did you enjoy this experiment? 0 means "not at all" and 10 means "enjoyed a lot".',
+    #     widget=widgets.RadioSelect,
+    # )
 
     # Part 6 -------------------------
 
-    bonus = models.LongStringField(
-        label="What do you think is the purpose of this experiment?",
-    )
+    # bonus = models.LongStringField(
+    #     label="What do you think is the purpose of this experiment?",
+    # )
 
 # ------------------------------------------------------------------------------------------------------------------------------------
     
