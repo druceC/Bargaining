@@ -40,8 +40,8 @@ def load_language_choices():
 class Constants(BaseConstants):
     name_in_url = 'fund_vanishes'
     players_per_group = None                # Commented out for dynamic group formation 
-    num_rounds = 5                          # Overall round loop
-    no_periods = 6                          # Custom counter
+    num_rounds = 3                          # Overall round loop
+    no_periods = 4                          # Custom counter
     total_tokens = 30
     token_value = 0.4                       # 4 tokens = 1 USD
 
@@ -97,7 +97,7 @@ class Subsession(BaseSubsession):
     def group_by_arrival_time_method(subsession, waiting_players):
         
         eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
-        group_size = 9
+        group_size = 3
 
         # Case 1: Create group of 9
         if (len(eligible)) >= group_size:
@@ -372,11 +372,13 @@ class Player(BasePlayer):
     #     label="Please enter your prolific ID:",
     # )
 
+    # Timestamp Variables
     experiment_start_time = models.FloatField()
     experiment_end_time = models.FloatField()
     game_start_time = models.FloatField()
     game_end_time = models.FloatField()
     
+    # Matching Variables
     is_priming = models.BooleanField()                  # Randomly assign each player to either receive priming or baseline treatment
     group_id_9 = models.IntegerField()
     subgroup_id = models.IntegerField()
@@ -384,6 +386,9 @@ class Player(BasePlayer):
     dropout = models.BooleanField(initial = False)                     # Dropout Flag
     ungrouped = models.BooleanField(initial = False)                   # Ungrouped Flag
     
+    # Game Tracking Variables
+    last_round_finished = models.IntegerField(initial  = 0)
+
     # Store the SELECTED share allocation proposal for each participant
     s1 = models.IntegerField(label="Participant 1")   # Share allocated to first player
     s2 = models.IntegerField(label="Participant 2")   # Share allocated to second player
@@ -931,17 +936,17 @@ class Player(BasePlayer):
 
     # Part 1c ----------------------
 
-    atq_1 = models.IntegerField(
+    atq_1 = models.FloatField(
         label="In a lake, there is a patch of lily pads. Every day, the patch doubles in size. If it takes 48 days for the patch to cover the entire lake, how long would it take for the patch to cover half of the lake? (only numbers, no words)?",
         max=10000000,
         min=-10000000,
     )
-    atq_2 = models.IntegerField(
+    atq_2 = models.FloatField(
         label="If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets? (only numbers, no letters)",
         max=10000000,
         min=-10000000,
     )
-    atq_3 = models.IntegerField(
+    atq_3 = models.FloatField(
         label="A bat and a ball cost 1 USD in total. The bat costs 0.8 USD more than the ball. How much does the ball cost? (only numbers, no letters)",
         max=10000000,
         min=-10000000,

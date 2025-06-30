@@ -49,3 +49,7 @@ Timestamp,Session_Code,Participant_ID,Group_Index,Selected_Periods,Final_Payment
 2025-06-24T14:02:26.305823,40xrjqh1,3,1,"{'period': 2, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 5, 'tokens': 0.0, 'usd_equivalent': 0.0}",5.5,2.5,1,2,PFBS-993JDQ
 2025-06-24T14:03:35.768146,40xrjqh1,2,1,"{'period': 2, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 4, 'tokens': 10.0, 'usd_equivalent': 2.5}",8.0,5.0,1,2,PFBS-993JDQ
 2025-06-24T14:04:36.127119,40xrjqh1,1,1,"{'period': 4, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 5, 'tokens': 0.0, 'usd_equivalent': 0.0}",5.5,2.5,1,2,PFBS-993JDQ
+2025-06-25T07:01:07.650154,3s426cgl,1,1,"{'period': 1, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 2, 'tokens': 10.0, 'usd_equivalent': 2.5}",8.0,5.0,1,2,PFBS-993JDQ
+2025-06-30T02:55:16.249305,6xb3o1le,7,N/A,,2,0,1,2,NG-5582XJ
+2025-06-30T02:55:25.242505,6xb3o1le,7,N/A,,3,0,1,2,NG-5582XJ
+2025-06-30T03:03:09.295233,6xb3o1le,7,N/A,,3,0,1,2,NG-5582XJ

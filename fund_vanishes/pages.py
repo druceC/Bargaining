@@ -21,7 +21,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fund_vanishes.settings")
 from django.core.files.storage import default_storage
 
 # Set-up questions
-NUM_ROUNDS = 5
+NUM_ROUNDS = 3
 
 # Timeout variables
 PROPOSAL_TIMEOUT = 60                  # Proposer Page 
@@ -821,6 +821,9 @@ class ResultsPage(BasePage):
     timeout_seconds = RESULTS_TIMEOUT
 
     def is_displayed(self):
+        # Update last round played
+        self.player.last_round_finished = self.participant.vars.get('periods_played', 0)
+
         return (
             not self.participant.vars.get("dropout", False) 
             and not self.group.drop_out_detected 
@@ -1519,7 +1522,8 @@ class Part4(Page):
 class Part5(Page):
     form_model = 'player'
     # form_fields = ['econ', 'party_like', 'party', 'other_party','party_prox']
-    form_fields = ['econ', 'risk', 'occ']
+    # form_fields = ['econ', 'risk', 'occ']
+    form_fields = ['econ', 'risk']
 
     def is_displayed(self):
         # Display page only if offer was accepted

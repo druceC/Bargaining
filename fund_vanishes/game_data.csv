@@ -635,3 +635,57 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Page,Action,Value
 2025-06-24T14:01:22.056072,40xrjqh1,3,2,priming,5,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
 2025-06-24T14:01:22.101917,40xrjqh1,2,2,priming,5,ResultsPage,SelectedProposal,3
 2025-06-24T14:01:22.101974,40xrjqh1,2,2,priming,5,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:55:46.647725,3s426cgl,3,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:46.650382,3s426cgl,3,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:46.650434,3s426cgl,3,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:48.513677,3s426cgl,2,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:48.515142,3s426cgl,2,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:48.515174,3s426cgl,2,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:50.274899,3s426cgl,1,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:50.275945,3s426cgl,1,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:50.275967,3s426cgl,1,2,priming,1,ProposerPage,Submitted Proposal,10
+2025-06-25T06:55:52.312713,3s426cgl,1,2,priming,1,VoterPage,Voted,True
+2025-06-25T06:55:54.200509,3s426cgl,2,2,priming,1,VoterPage,Voted,False
+2025-06-25T06:55:56.180270,3s426cgl,3,2,priming,1,VoterPage,Voted,True
+2025-06-25T06:55:56.242815,3s426cgl,3,2,priming,1,ResultsPage,SelectedProposal,2
+2025-06-25T06:55:56.242866,3s426cgl,3,2,priming,1,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:55:56.261866,3s426cgl,2,2,priming,1,ResultsPage,SelectedProposal,2
+2025-06-25T06:55:56.261910,3s426cgl,2,2,priming,1,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:55:56.289539,3s426cgl,1,2,priming,1,ResultsPage,SelectedProposal,2
+2025-06-25T06:55:56.289592,3s426cgl,1,2,priming,1,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:56:14.416450,3s426cgl,3,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:14.418737,3s426cgl,3,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:14.418769,3s426cgl,3,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:18.512570,3s426cgl,2,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:18.515178,3s426cgl,2,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:18.515233,3s426cgl,2,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:20.997369,3s426cgl,1,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:20.999212,3s426cgl,1,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:20.999257,3s426cgl,1,2,priming,2,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:39.368114,3s426cgl,3,2,priming,2,VoterPage,Voted,True
+2025-06-25T06:56:41.329400,3s426cgl,2,2,priming,2,VoterPage,Voted,False
+2025-06-25T06:56:43.526807,3s426cgl,1,2,priming,2,VoterPage,Voted,True
+2025-06-25T06:56:43.578150,3s426cgl,1,2,priming,2,ResultsPage,SelectedProposal,1
+2025-06-25T06:56:43.578190,3s426cgl,1,2,priming,2,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:56:43.611790,3s426cgl,3,2,priming,2,ResultsPage,SelectedProposal,1
+2025-06-25T06:56:43.611813,3s426cgl,3,2,priming,2,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:56:43.631075,3s426cgl,2,2,priming,2,ResultsPage,SelectedProposal,1
+2025-06-25T06:56:43.631101,3s426cgl,2,2,priming,2,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:56:52.242589,3s426cgl,3,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:52.245182,3s426cgl,3,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:52.245218,3s426cgl,3,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:55.778151,3s426cgl,2,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:55.779729,3s426cgl,2,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:56:55.779760,3s426cgl,2,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:57:01.198299,3s426cgl,1,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:57:01.199956,3s426cgl,1,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:57:01.199987,3s426cgl,1,2,priming,3,ProposerPage,Submitted Proposal,10
+2025-06-25T06:57:03.395209,3s426cgl,1,2,priming,3,VoterPage,Voted,False
+2025-06-25T06:57:05.194457,3s426cgl,2,2,priming,3,VoterPage,Voted,False
+2025-06-25T06:57:07.143199,3s426cgl,3,2,priming,3,VoterPage,Voted,True
+2025-06-25T06:57:07.199608,3s426cgl,3,2,priming,3,ResultsPage,SelectedProposal,1
+2025-06-25T06:57:07.199651,3s426cgl,3,2,priming,3,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:57:07.211685,3s426cgl,2,2,priming,3,ResultsPage,SelectedProposal,1
+2025-06-25T06:57:07.211737,3s426cgl,2,2,priming,3,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"
+2025-06-25T06:57:07.238791,3s426cgl,1,2,priming,3,ResultsPage,SelectedProposal,1
+2025-06-25T06:57:07.238818,3s426cgl,1,2,priming,3,ResultsPage,SelectedProposal,"{'s1': 10, 's2': 10, 's3': 10}"

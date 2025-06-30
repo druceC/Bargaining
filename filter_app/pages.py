@@ -30,6 +30,8 @@ PROPOSAL_TIMEOUT_2 = 30                # 2nd Chance Proposer Page
 VOTE_TIMEOUT_2 = 30                    # 2nd Chance Voter Page
 RESULTS_TIMEOUT = 30                   # Results Page timeout
 
+NUMBER_OF_ROUNDS = 3
+
 # ---------------------------------------------------------------------------------------------------
 
 # INTRO QUESTIONS
@@ -65,7 +67,8 @@ class ExperimentInstructions(Page):
     def vars_for_template(self):
         return {
             'proposal_timeout': PROPOSAL_TIMEOUT,
-            'vote_timeout': VOTE_TIMEOUT
+            'vote_timeout': VOTE_TIMEOUT,
+            'num_rounds': NUMBER_OF_ROUNDS
         }
 
 class SampleInstructions(Page):
@@ -140,6 +143,32 @@ class IntroQuestions(Page):             # Page for Prolific ID Input
 
 
 class Nationality(Page):
+    form_model = 'player'
+    form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit']
+    # form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit', 'gen', 'other_gender','degree']
+
+    # @staticmethod
+    def is_displayed(self):
+        return self.round_number == 1
+
+    def vars_for_template(self):
+        return {
+            "survey_step": 1,
+            "total_steps": INTRO_QUESTIONS
+        }
+
+    def before_next_page(self):
+        # Record responses
+        store_survey_response(self.player, "Nationality", self.form_fields)
+
+        if self.player.spbrn != '2':        # If not 'No'
+            self.player.cntbrn = ''         # Clear the field
+        
+        if self.player.spcit != '2':        # If not 'No'
+            self.player.other_cit = ''      # Clear the field
+        
+
+class Nationality_old(Page):
     form_model = 'player'
     # form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit', 'primlang']
     form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit']
@@ -225,7 +254,15 @@ class Gender(Page):
 class Party(Page):
     form_model = 'player'
     # form_fields = ['sex', 'gen', 'other_gender', 'gen_cgi',]
-    form_fields = ['party', 'party_closer', 'party_strong_republican', 'party_strong_democrat']
+    # form_fields = ['party', 'party_closer', 'party_strong_republican', 'party_strong_democrat']
+    form_fields = ['spbrn', 'cntbrn', 'spcit', 'other_cit', 'gen', 'other_gender','degree','party', 'party_closer', 'party_strong_republican', 'party_strong_democrat','inc','inc_hh']
+
+    # Gender choices mapping
+    GENDER_CHOICES = {
+        "1": "man or male",
+        "2": "woman or female",
+        "3": "Other (please specify)",
+    }
 
     def is_displayed(self):
         return self.round_number == 1
@@ -237,6 +274,28 @@ class Party(Page):
         }
 
     def before_next_page(self):
+
+        # Nationality =================================================================
+
+        if self.player.spbrn != '2':        # If not 'No'
+            self.player.cntbrn = ''         # Clear the field
+        
+        if self.player.spcit != '2':        # If not 'No'
+            self.player.other_cit = ''      # Clear the field
+
+
+        # Gender =================================================================
+
+        if self.player.gen != '3':
+            self.player.other_gender = ''
+        
+        # Assign the provided gender label into "selected_gender" variable or a custom one if 'gen' == '4'
+        if str(self.player.gen).strip() == "3":
+            self.participant.vars["selected_gender"] = self.player.other_gender  # Custom term
+        else:
+            self.participant.vars["selected_gender"] = self.GENDER_CHOICES.get(str(self.player.gen), "Not specified")
+
+        # Party =================================================================
 
         # If user selected "Independent" or "Something Else"
         if self.player.party != '1' and self.player.party != '2':
@@ -259,7 +318,7 @@ class Party(Page):
 
 
         # Record response
-        store_survey_response(self.player, "Party", self.form_fields)
+        store_survey_response(self.player, "Intro_Questions", self.form_fields)
 
 
 
@@ -299,11 +358,11 @@ page_sequence = [
 
     # Preliminary Questions
     # IntroQuestions,                       # Inquire Prolific ID
-    Nationality,    
-    Education,      
-    Gender, 
+    # Nationality,    
+    # Education,      
+    # Gender, 
     Party,       
-    Income,        
+    # Income,        
 
     # Game Instruction Pages
     ExperimentInstructions,

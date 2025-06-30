@@ -47,9 +47,9 @@
     }
 
     .survey-header {
-        font-size: 18px;
+        font-size: 24px;
         font-weight: bold;
-        color: #c2a07c;
+        color: #0044cc;
         margin-bottom: 10px;
     }
 
@@ -121,7 +121,7 @@
         transition: all 0.2s ease;
     }
 
-    .survey-header-main {
+    .survey-header {
         font-size: 22px;
         font-weight: 600;
         color: #cc7400;
@@ -181,94 +181,18 @@
 
 <div class = "wrapper">
     <div class="survey-container">
-
-        <div class="progress"></div>
     
-        <br>
-        <div class="survey-header-main">Participant Onboarding</div>
-        <div class="survey-subtext">Please answer a few demographic questions before proceeding.</div>
-        <hr>
-        <br>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
 
-        <!-- <div class="survey-header">Political Background</div> -->
+        <div class="survey-header">Political Background</div>
         <br>
         <form id="surveyForm" method="post">
             <div class="form-container">
     
-                <!-- Nationality -->
-                <div class="survey-header">Nationality</div>
-                <div class="question-block">
-                    <!-- Were you born in the US? -->
-                    <label class="question">{{ form.spbrn.label }}</label>
-                    <div class = "radio-scale">
-                        {{ form.spbrn }}
-                    </div>
-                </div>
-                <!-- Country of Birth (Conditional) -->
-                <div class="question-block">
-                    <div id="countryBirthContainer" style="display: none;">
-                        <label class="question">{{ form.cntbrn.label }}</label>
-                        <div class = "radio-scale">
-                            {{ form.cntbrn }}
-                        </div>
-                    </div>
-                </div>
-                <!-- <br> -->
-
-                <div class="question-block">
-                    <!-- Are you an American citizen? -->
-                    <label class="question">{{ form.spcit.label }}</label>
-                    <div class = "radio-scale">
-                        {{ form.spcit }}
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <!-- Other Citizenship (Conditional) -->
-                    <div id="citizenshipContainer" style="display: none;">
-                        <label class="question">{{ form.other_cit.label }}</label>
-                        {{ form.other_cit }}
-                    </div>
-                </div>
-
-                <br>
-
-                <!-- Education -->
-                <br> 
-                <div class="survey-header">Education</div>
-                <div class = "question-block">
-                    <div class = "radio-scale">
-                        <div class="form-container">{{ form.degree.label }}</label>
-                            {{ form.degree }}<br>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <!-- Gender Selection -->
-                <br>
-                <div class="survey-header">Gender</div>
-
-                <div class = "question-block">
-                    {{ form.gen.label }}
-                    <div class = "radio-scale">
-                        {{ form.gen }}
-                    </div>
-                </div>
-                <div class = "question-block">
-                    <div id="otherTextContainer" style="display: none; margin-top: 5px; margin-left: 20px;">
-                        <label for="otherText">Please specify:</label>
-                        <input type="text" id="otherText" name="other_gender">
-                        <p id="error-message" style="color: red; display: none;">This field is required.</p>
-                    </div>
-                </div>
-                <br>
-
-
+            
                 <!-- Political affiliation -->
-                <br>
-                <div class="survey-header">Political Affiliation</div>
-
                 <div class="question-block">
                     <p>{{ form.party.label }}</p>
                     <div class="radio-scale">
@@ -290,6 +214,7 @@
                     </div>
                     
                 </div>
+    
                 <!-- Strong Republican Question -->
                 <!-- Hidden: Show if answer to first question is (1) -->
                 <div class="question-block">
@@ -298,12 +223,12 @@
                         <div class="radio-scale">
                             <div class="citTextInput">
                                 {{ form.party_strong_republican }}
-                                <br>
                             </div>
                         </div>
                         <p id="error-message1" style="color: red; display: none;">This field is required.</p>
                     </div>
                 </div>
+                
                 <!-- Strong Democrat Question -->
                  <!-- Hidden: Show if answer to first question is (2) -->
                 <div class="question-block">
@@ -317,31 +242,12 @@
                         <p id="error-message2" style="color: red; display: none;">This field is required.</p>
                     </div>
                 </div>
-                <br>
-
-
-                <!-- Income -->
-                <br>
-                <div class="survey-header">Income</div>
-                <div class = "question-block">
-                    {{ form.inc.label }}
-                    <div class = "radio-scale">
-                        {{ form.inc }}
-                    </div>
-                </div>
-
-                <div class = "question-block">
-                    {{ form.inc_hh.label }}
-                    <div class = "radio-scale">
-                        {{ form.inc_hh }}
-                    </div>
-                </div>
-                <br>
+    
             </div>
         </form>
     
-        <button class="next-button" onclick="handleNextClick()">Continue to Game</button>
-        <div class="note">Questionnaire complete. You’re now ready to begin the game.</div>
+        <button class="next-button" onclick="handleNextClick()">Next</button>
+        <div class="note">Click next to proceed.</div>
     </div>
 </div>
 
@@ -369,7 +275,7 @@
         });
 
         if (allAnswered) {
-            // updateProgress();
+            updateProgress();
             form.submit();
         } else {
             alert("Please answer all the required questions before proceeding.");
@@ -378,15 +284,6 @@
 
     // Prevent form submission if volunt_hrs is required but not answered
     function validateForm() {
-        let isValid = true;
-
-        // Citizenship validation
-        let countryBirthInput = document.querySelector('input[name="cntbrn"]');
-        let citizenshipInput = document.querySelector('input[name="other_cit"]');
-        let errorMessageBirth = document.getElementById("error-message-birth");
-        let errorMessageCitizen = document.getElementById("error-message-citizen");
-        // let isValid = true;
-        // Party validation
         let selectedVolunteer = document.querySelector('input[name="party"]:checked');
         let selectedHours = document.querySelector('input[name="party_strong_republican"]:checked');
         let selectedHours1 = document.querySelector('input[name="party_strong_democrat"]:checked');
@@ -396,23 +293,6 @@
         let errorMessage2 = document.getElementById("error-message2");
         let firstErrorField = null; // Track the first error field to scroll to
 
-
-        if (countryBirthInput.required && countryBirthInput.value.trim() === "") {
-            errorMessageBirth.style.display = "block";
-            // return false
-            isValid = false;
-        } else {
-            errorMessageBirth.style.display = "none";
-        }
-
-        if (citizenshipInput.required && citizenshipInput.value.trim() === "") {
-            errorMessageCitizen.style.display = "block";
-            // return false
-            isValid = false;
-        } else {
-            errorMessageCitizen.style.display = "none";
-        }
-
         // Case 1: Require Republican Q3 Question
 
         // If claiming to be "Republican" require Q3: Republican Variation
@@ -420,8 +300,7 @@
             if (!selectedHours || selectedHours.value.trim() === "") {
                 errorMessage1.style.display = "block"; // Show error message
                 firstErrorField = selectedHours;
-                // return false;
-                isValid = false;
+                return false;
             } else {
                 errorMessage1.style.display = "none"; // Hide error message if fixed
             }
@@ -434,8 +313,7 @@
             if (!selectedHours1 || selectedHours1.value.trim() === "") {
                 errorMessage2.style.display = "block"; // Show error message
                 firstErrorField = selectedHours1;
-                // return false;
-                isValid = false;
+                return false;
             } else {
                 errorMessage2.style.display = "none"; // Hide error message if fixed
             }
@@ -448,8 +326,7 @@
             if (!selectedHours2 || selectedHours2.value.trim() === "") {
                 errorMessage.style.display = "block"; // Show error message
                 firstErrorField = selectedHours2;
-                // return false;
-                isValid = false;
+                return false;
             } else {
                 errorMessage.style.display = "none"; // Hide error message if fixed
             }
@@ -459,12 +336,11 @@
         if (firstErrorField) {
             firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
             firstErrorField.focus();
-            // return false; 
-            isValid = false;
+            return false; // Prevent form submission
         }
 
-        // return true; // Allow form submission if no errors
-        return isValid;
+        return true; // Allow form submission if no errors
+
     }
 
     function handleNextClick() {
@@ -485,30 +361,11 @@
             return;
         }
 
-        // Gender Toggle Variables ----------------------
-
-        let radioButtons = document.querySelectorAll('input[name="gen"]'); // Select the radio buttons
-        let otherTextContainer = document.getElementById("otherTextContainer");
-        let otherTextInput = document.getElementById("otherText");
-
-        if (!radioButtons.length) {
-            console.error(" No radio buttons found for 'gen'. Check your formfields configuration.");
-            return;
-        }
-
-        // Citizenship Toggle Variables -------------------------------------
-
-        // Conditional fields logic
-        let birthRadioButtons = document.querySelectorAll('input[name="spbrn"]');
-        let citizenshipRadioButtons = document.querySelectorAll('input[name="spcit"]');
-        let countryBirthContainer = document.getElementById("countryBirthContainer");
-        let citizenshipContainer = document.getElementById("citizenshipContainer");
-        let countryBirthInput = document.querySelector('input[name="cntbrn"]');
-        let citizenshipInput = document.querySelector('input[name="other_cit"]');
-
-        // Party Toggle Variables ------------------------------------
-
         let spbrnInputs = document.querySelectorAll("input[name='party']");
+        // let spcitInputs = document.querySelectorAll("input[name='party_closer']");
+        // let partyInputs = document.querySelectorAll("input[name='party_strong_republican']");
+        // let partyInputs2 = document.querySelectorAll("input[name='party_strong_democrat']");
+
         // 2nd question
         let otherBirthContainer = document.getElementById("otherBirthContainer");
         // 3rd question: Republican Variation
@@ -523,141 +380,51 @@
 
         let form = document.querySelector("form");
 
-
-        // Citizenship Toggle Functions -------------------------------------
-
-        function toggleBirthField_original() {
-            let selected = document.querySelector('input[name="spbrn"]:checked');
-            if (selected && selected.value === "2") {
-                countryBirthContainer.style.display = "block";
-                countryBirthInput.setAttribute("required", "true");
-                
-            } else {
-                countryBirthContainer.style.display = "none";
-                countryBirthInput.removeAttribute("required");
-                countryBirthInput.value = "";                       // Clear value when hidden
-            }
-        }
-
-        function toggleCitizenshipField_original() {
-            let selected = document.querySelector('input[name="spcit"]:checked');
-            if (selected && selected.value === "2") {
-                citizenshipContainer.style.display = "block";
-                citizenshipInput.setAttribute("required", "true");
-            } else {
-                citizenshipContainer.style.display = "none";
-                citizenshipInput.removeAttribute("required");
-                citizenshipInput.value = "";                        // Clear value when hidden
-            }
-        }
-
-        // Gender Toggle Function ------------------------------------
-
-        // Other gender toggle
-        function toggleTextBox() {
-            let otherGenderOption = document.getElementById("other");
-            let textBoxContainer = document.getElementById("otherTextContainer");
-            let textBox = document.getElementById("otherText");
-
-            if (otherGenderOption.checked) {
-                textBoxContainer.style.display = "block";  // Show text input
-            } else {
-                textBoxContainer.style.display = "none";   // Hide text input
-                textBox.value = "";  // Clear input when hidden
-            }
-        }
-    
-        // Party Toggle Functions ------------------------------------
-
+        // Require the second question if answer to the first question is 3 or 4 (ie. Other or Something Else)
         function toggleBirthField() {
             let selectedOption = document.querySelector("input[name='party']:checked");
-            if (selectedOption && (selectedOption.value === "3" || selectedOption.value === "4")) {
+            if ((selectedOption && selectedOption.value === "3") || (selectedOption && selectedOption.value === "4")) {
                 otherBirthContainer.style.display = "block";
-                birthTextInput.forEach(input => input.setAttribute("required", "true"));
+                birthTextInput.setAttribute("required", "true");
             } else {
                 otherBirthContainer.style.display = "none";
-                birthTextInput.forEach(input => {
-                    input.removeAttribute("required");
-                    input.checked = false;
-                });
+                birthTextInput.removeAttribute("required");
+                birthTextInput.value = "";  // Clear input when hidden
             }
         }
 
+        // Require the third question (Republican Variation) if answer to the first question is 1 (ie. Republican)
         function toggleCitField() {
             let selectedOption = document.querySelector("input[name='party']:checked");
+            // If selected option is "Republican"
             if (selectedOption && selectedOption.value === '1') {
                 otherCitContainer.style.display = "block";
-                citTextInput.forEach(input => input.setAttribute("required", "true"));
+                citTextInput.setAttribute("required", "true");
+                // citTextInput.forEach(input => input.setAttribute("required","true"));
             } else {
                 otherCitContainer.style.display = "none";
-                citTextInput.forEach(input => {
-                    input.removeAttribute("required");
-                    input.checked = false;
-                });
+                // citTextInput.forEach(input => input.removeAttribute("required"));
+                // citTextInput.forEach(input => input.value = "");
+                citTextInput.removeAttribute("required");
+                citTextInput.value = "";  // Clear input when hidden
             }
         }
-
+        
+        // Require the third question (Democrat Variation) if answer to the first question is 2 (ie. Democrat)
         function togglePartyField() {
             let selectedOption = document.querySelector("input[name='party']:checked");
             if (selectedOption && selectedOption.value === "2") {
                 otherPartyContainer.style.display = "block";
-                partyTextInput.forEach(input => input.setAttribute("required", "true"));
+                citPartyInput.setAttribute("required", "true");
+                // partyTextInput.forEach(input => input.setAttribute("required","true"));
             } else {
                 otherPartyContainer.style.display = "none";
-                partyTextInput.forEach(input => {
-                    input.removeAttribute("required");
-                    input.checked = false;
-                });
+                partyTextInput.removeAttribute("required");
+                partyTextInput.value = "";  // Clear input when hidden
+                // partyTextInput.forEach(input => input.removeAttribute("required"));
+                // partyTextInput.forEach(input => input.value = "");
             }
         }
-
-
-        // // Require the second question if answer to the first question is 3 or 4 (ie. Other or Something Else)
-        // function toggleBirthField() {
-        //     let selectedOption = document.querySelector("input[name='party']:checked");
-        //     if ((selectedOption && selectedOption.value === "3") || (selectedOption && selectedOption.value === "4")) {
-        //         otherBirthContainer.style.display = "block";
-        //         birthTextInput.setAttribute("required", "true");
-        //         // birthTextInput.forEach(input => input.setAttribute("required", "true"));
-        //     } else {
-        //         otherBirthContainer.style.display = "none";
-        //         birthTextInput.removeAttribute("required");
-        //         birthTextInput.value = "";  // Clear input when hidden
-        //     }
-        // }
-
-        // // Require the third question (Republican Variation) if answer to the first question is 1 (ie. Republican)
-        // function toggleCitField() {
-        //     let selectedOption = document.querySelector("input[name='party']:checked");
-        //     // If selected option is "Republican"
-        //     if (selectedOption && selectedOption.value === '1') {
-        //         otherCitContainer.style.display = "block";
-        //         citTextInput.setAttribute("required", "true");
-        //         // citTextInput.forEach(input => input.setAttribute("required","true"));
-        //     } else {
-        //         otherCitContainer.style.display = "none";
-        //         // citTextInput.forEach(input => input.removeAttribute("required"));
-        //         // citTextInput.forEach(input => input.value = "");
-        //         citTextInput.removeAttribute("required");
-        //         citTextInput.value = "";  // Clear input when hidden
-        //     }
-        // }
-        
-        // // Require the third question (Democrat Variation) if answer to the first question is 2 (ie. Democrat)
-        // function togglePartyField() {
-        //     let selectedOption = document.querySelector("input[name='party']:checked");
-        //     if (selectedOption && selectedOption.value === "2") {
-        //         otherPartyContainer.style.display = "block";
-        //         partyTextInput.setAttribute("required", "true");
-        //         // partyTextInput.forEach(input => input.setAttribute("required","true"));
-        //     } else {
-        //         otherPartyContainer.style.display = "none";
-        //         partyTextInput.removeAttribute("required");
-        //         partyTextInput.value = "";  // Clear input when hidden
-        //         // partyTextInput.forEach(input => input.removeAttribute("required"));
-        //         // partyTextInput.forEach(input => input.value = "");
-        //     }
-        // }
 
         // Retrieve values from the template safely
         let currentStep = parseInt("{{ survey_step }}", 10);  
@@ -696,39 +463,27 @@
             input.addEventListener("change", togglePartyField);
         });
 
-        // Attach event listeners
-        radioButtons.forEach(radio => {
-            radio.addEventListener("change", function() {
-                if (this.value == "3") { // If user selects "I use a different term"
-                    otherTextContainer.style.display = "block";
-                    otherTextInput.setAttribute("required","true")
-                } else {
-                    otherTextContainer.style.display = "none";
-                    otherTextInput.removeAttribute("required","true")
-                    otherTextInput.value = "";  // Clear input when hidden
-                }
-            });
-        });
-        birthRadioButtons.forEach(radio => radio.addEventListener("change", toggleBirthField_original));
-        citizenshipRadioButtons.forEach(radio => radio.addEventListener("change", toggleCitizenshipField_original));
-
-        toggleBirthField_original();
-        toggleCitizenshipField_original();
-
         // Ensure correct visibility on page load
         setTimeout(() => {
             console.log("🚀 Running visibility toggles on load");
-            toggleTextBox()
             toggleBirthField();
             toggleCitField();
             togglePartyField();
-            toggleBirthField_original();
-            toggleCitizenshipField_original();
         }, 500);
 
-        // function validateForm() {
-        //     return true;
-        // }
+        function validateForm() {
+            return true;
+        }
+
+        // Form validation before submission
+        function handleNextClick() {
+
+            if (!validateForm()) {
+                return false; // Prevent form submission if validation fails
+            }
+            updateProgress(); // Only runs if validateForm() passes
+            return true;
+        }
 
         // Change background based on survey step
         const body = document.querySelector("body");
@@ -740,16 +495,6 @@
             body.classList.add("bg-step-1");
         }
     });
-
-    // Form validation before submission
-    function handleNextClick() {
-        if (!validateForm()) {
-            return false; // Prevent form submission if validation fails
-        }
-        else {
-            return true;
-        }
-    }
 </script>
 
 {{ endblock }}
