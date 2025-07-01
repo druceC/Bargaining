@@ -103,12 +103,14 @@
     .countdown-svg {
         transform: rotate(-90deg);
         transform-origin: center;
+        z-index: 3;
     }
 
     .countdown-svg .bg {
         fill: none;
         stroke: #eee;
         stroke-width: 8;
+        z-index: 3;
     }
 
     .countdown-svg .progress {
@@ -118,6 +120,7 @@
         stroke-dasharray: 188.5;
         stroke-dashoffset: 0;
         transition: stroke-dashoffset 1s linear;
+        z-index: 3;
     }
 
     #countdown-text {
@@ -126,11 +129,12 @@
         font-weight: 600;
         transform: rotate(90deg);
         transform-origin: center;
-        z-index: 2;
+        z-index: 5;
     }
 
     .progress {
         stroke: #28a745;
+        z-index: 3;
     }
 
     .otree-timer {

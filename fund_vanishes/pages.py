@@ -822,7 +822,7 @@ class ResultsPage(BasePage):
 
     def is_displayed(self):
         # Update last round played
-        self.player.last_round_finished = self.participant.vars.get('periods_played', 0)
+        self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) + 1
 
         return (
             not self.participant.vars.get("dropout", False) 
