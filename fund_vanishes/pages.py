@@ -38,7 +38,7 @@ SURVEY_PAGES = 12
 ONLY_PFEE_CODE = "PFEE-7291AX"            # Fixed fee       
 PFEE_BONUS_CODE = "PFB-841ZC2"            # Fixed fee + Bonus
 PFEE_BONUS_SURVEY_CODE = "PFBS-993JDQ"    # Fixed fee + Bonus + Survey Fee
-PFEE_SURVEY_CODE = "PFS-323ADQ"          # Fixed fee + Bonus + Survey Fee
+PFEE_SURVEY_CODE = "PFS-323ADQ"           # Fixed fee + Survey Fee
 NO_GROUP_CODE = "NG-5582XJ"               # Fixed fee only, no grouping occurred
 DROPOUT_CODE = "DO-000XKD"                # 0 payment
 
@@ -113,7 +113,7 @@ class SyncTop(BaseWaitPage):
     # Ensures that all groups wait before proceeding
     wait_for_all_groups = False
     group_by_arrival_time = True
-    body_text = "We're matching you with other participants. <br><br> This may take a few minutes. If you are on this page for more than 5 minutes, please refresh the page..."
+    body_text = "We're matching you with other participants. <br><br> It might take between 5 to 10 minutes for the study to begin, depending on the rate at which other participants join. <br><br> If you are on this page for more than 5 minutes, please refresh the page...<br><br>"
     timeout_seconds = 600 
 
     #  Ensure page is only displayed for players who still need to play 5 rounds

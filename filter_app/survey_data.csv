@@ -479,3 +479,16 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Survey Page,Quest
 2025-06-30T02:55:56.728751,6xb3o1le,8,1,1,Intro_Questions,party_strong_democrat,
 2025-06-30T02:55:56.728768,6xb3o1le,8,1,1,Intro_Questions,inc,3
 2025-06-30T02:55:56.728785,6xb3o1le,8,1,1,Intro_Questions,inc_hh,4
+2025-07-01T02:41:02.262953,5cay95nt,1,1,1,Intro_Questions,spbrn,1
+2025-07-01T02:41:02.265796,5cay95nt,1,1,1,Intro_Questions,cntbrn,
+2025-07-01T02:41:02.265852,5cay95nt,1,1,1,Intro_Questions,spcit,1
+2025-07-01T02:41:02.265885,5cay95nt,1,1,1,Intro_Questions,other_cit,
+2025-07-01T02:41:02.265916,5cay95nt,1,1,1,Intro_Questions,gen,1
+2025-07-01T02:41:02.265947,5cay95nt,1,1,1,Intro_Questions,other_gender,
+2025-07-01T02:41:02.265977,5cay95nt,1,1,1,Intro_Questions,degree,4
+2025-07-01T02:41:02.266007,5cay95nt,1,1,1,Intro_Questions,party,1
+2025-07-01T02:41:02.266037,5cay95nt,1,1,1,Intro_Questions,party_closer,
+2025-07-01T02:41:02.266067,5cay95nt,1,1,1,Intro_Questions,party_strong_republican,1
+2025-07-01T02:41:02.266098,5cay95nt,1,1,1,Intro_Questions,party_strong_democrat,
+2025-07-01T02:41:02.266129,5cay95nt,1,1,1,Intro_Questions,inc,3
+2025-07-01T02:41:02.266159,5cay95nt,1,1,1,Intro_Questions,inc_hh,8
