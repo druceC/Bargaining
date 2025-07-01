@@ -74,6 +74,11 @@ class ExperimentInstructions(Page):
 class SampleInstructions(Page):
     def is_displayed(self):
         return self.round_number == 1
+    
+    def vars_for_template(self):
+        return {
+            'num_rounds': NUMBER_OF_ROUNDS
+        }
 
 # Mini quiz to ensure understanding of game instructions
 class QuizPage(Page):
