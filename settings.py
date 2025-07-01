@@ -21,7 +21,7 @@ SESSION_CONFIGS = [
 
 LANGUAGE_CODE = 'en'
 
-# DEBUG = False
+DEBUG = False
 
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = False  # Set to True if using points-based rewards

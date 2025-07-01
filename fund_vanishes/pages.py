@@ -114,7 +114,8 @@ class SyncTop(BaseWaitPage):
     wait_for_all_groups = False
     group_by_arrival_time = True
     body_text = "We're matching you with other participants. <br><br> It might take between 5 to 10 minutes for the study to begin, depending on the rate at which other participants join. <br><br> If you are on this page for more than 5 minutes, please refresh the page...<br><br>"
-    timeout_seconds = 600 
+    # timeout_seconds = 600 
+    timeout_seconds = 10
 
     #  Ensure page is only displayed for players who still need to play 5 rounds
     def is_displayed(self):
