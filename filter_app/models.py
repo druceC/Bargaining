@@ -213,7 +213,7 @@ class Player(BasePlayer):
     # Income ----------------------
 
     inc = models.IntegerField(
-        label="What is your personal monthly income before taxes? <br>(Please enter full amount in dollars.)",
+        label="What is your personal monthly income before taxes? (Please enter full amount in dollars.)",
         choices=[
             (1, "Less than $10,000"),
             (2, "$10,000 - $19,000"),

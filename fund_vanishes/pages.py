@@ -1260,6 +1260,7 @@ class PaymentInfo(Page):
         # True
 
     def vars_for_template(self):
+       
         if not self.participant.vars.get("dropout", False):
             self.player.survey_fee = 1
         else:
@@ -1288,6 +1289,8 @@ class PaymentInfo(Page):
         # Case 2: Not grouped 
         elif self.participant.vars.get("not_grouped", False) or self.participant.vars.get("waiting_timeout", False):
             completion_code = NO_GROUP_CODE
+            # Set survey fee as 0 if not grouped
+            final_earnings_data["survey_fee"] = 0
         # Case 3: Grouped
         elif final_earnings_data["base_fee"] > 0:
             if final_earnings_data["total_bonus"] > 0:
