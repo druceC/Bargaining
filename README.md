@@ -1,6 +1,6 @@
 # Fund Vanishes 💰 
 
-This repo contains the code for an **economics experiment** on decision-making and group dynamics for Professor Andrzej Baranski.
+This repo contains the code for an **economics experiment** on decision-making and group dynamics.
 
 ## Experiment Overview
 
