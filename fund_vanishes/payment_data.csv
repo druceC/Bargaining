@@ -53,3 +53,16 @@ Timestamp,Session_Code,Participant_ID,Group_Index,Selected_Periods,Final_Payment
 2025-06-30T02:55:16.249305,6xb3o1le,7,N/A,,2,0,1,2,NG-5582XJ
 2025-06-30T02:55:25.242505,6xb3o1le,7,N/A,,3,0,1,2,NG-5582XJ
 2025-06-30T03:03:09.295233,6xb3o1le,7,N/A,,3,0,1,2,NG-5582XJ
+2025-07-27T23:35:11.551656,qi98jfy3,1,1,,0,0,0,0,DO-000XKD
+2025-07-27T23:40:56.965640,qi98jfy3,1,1,,0,0,0,0,DO-000XKD
+2025-07-27T23:42:43.593021,qi98jfy3,4,2,,0,0,0,0,DO-000XKD
+2025-07-27T23:44:35.822779,qi98jfy3,6,2,,2,0,1,2,PFS-323ADQ
+2025-07-27T23:44:41.030054,qi98jfy3,6,2,,3,0,1,2,PFS-323ADQ
+2025-07-27T23:45:47.635648,qi98jfy3,5,2,,2,0,1,2,PFS-323ADQ
+2025-07-28T00:32:35.891296,qi98jfy3,32,N/A,,2,0,0,2,NG-5582XJ
+2025-07-28T01:23:39.267478,qi98jfy3,2,1,"{'period': 2, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 1, 'tokens': 15.0, 'usd_equivalent': 3.75}",9.25,6.25,1,2,PFBS-993JDQ
+2025-07-28T01:23:53.339470,qi98jfy3,3,1,"{'period': 2, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 1, 'tokens': 0.0, 'usd_equivalent': 0.0}",5.5,2.5,1,2,PFBS-993JDQ
+2025-07-28T01:23:56.821803,qi98jfy3,3,1,"{'period': 2, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 1, 'tokens': 0.0, 'usd_equivalent': 0.0}",5.5,2.5,1,2,PFBS-993JDQ
+2025-07-28T01:23:57.804775,qi98jfy3,3,1,"{'period': 2, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 1, 'tokens': 0.0, 'usd_equivalent': 0.0}",5.5,2.5,1,2,PFBS-993JDQ
+2025-07-28T01:23:59.203231,qi98jfy3,3,1,"{'period': 2, 'tokens': 10.0, 'usd_equivalent': 2.5},{'period': 1, 'tokens': 0.0, 'usd_equivalent': 0.0}",5.5,2.5,1,2,PFBS-993JDQ
+2025-07-28T03:03:16.437272,wc4q37yp,9,2,"{'period': 1, 'tokens': 0.0, 'usd_equivalent': 0.0}",0,0,0,0,DO-000XKD

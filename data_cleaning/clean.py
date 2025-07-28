@@ -24,33 +24,43 @@ max_round = max(round_numbers) if round_numbers else args.fallback_round
 # PAYMENT CSV
 # ---------------------------
 def generate_payment():
-    base_fee_col = f"fund_vanishes.{max_round}.player.base_fee"
-    bonus_col = f"fund_vanishes.{max_round}.player.total_bonus"
-    survey_col = f"fund_vanishes.{max_round}.player.survey_fee"
+
+    # Dynamically find the last non-null base_fee, bonus, and survey_fee for each participant
+    base_fee_cols = [f"fund_vanishes.{r}.player.base_fee" for r in range(1, max_round + 1)]
+    bonus_cols = [f"fund_vanishes.{r}.player.total_bonus" for r in range(1, max_round + 1)]
+    survey_cols = [f"fund_vanishes.{r}.player.survey_fee" for r in range(1, max_round + 1)]
+
+    # Select subset of columns to keep
     df_subset = df[[
         "participant.id_in_session",
         "participant.code",
         "participant._current_page_name",
-        base_fee_col,
-        bonus_col,
-        survey_col
-    ] + completion_cols].copy()
+    ] + base_fee_cols + bonus_cols + survey_cols + completion_cols].copy()
 
+    # For each participant, take the last non-null (rightmost non-null) value across rounds
+    df_subset["FixedFee"] = df_subset[base_fee_cols].bfill(axis=1).iloc[:, 0].fillna(0)
+    df_subset["Bonus"] = df_subset[bonus_cols].bfill(axis=1).iloc[:, 0].fillna(0)
+    df_subset["SurveyFee"] = df_subset[survey_cols].bfill(axis=1).iloc[:, 0].fillna(0)
+
+    # Extract completion code
     df_subset["CompletionCode"] = df_subset[completion_cols].bfill(axis=1).iloc[:, 0]
-    df_subset[base_fee_col] = df_subset.apply(
-        lambda row: 0 if row["participant._current_page_name"] != "PaymentInfo" else row[base_fee_col],
-        axis=1
+
+    # Calculate total payment
+    df_subset["TotalPayment"] = (
+        df_subset["FixedFee"] + df_subset["Bonus"] + df_subset["SurveyFee"]
     )
-    df_subset["TotalPayment"] = df_subset[base_fee_col].fillna(0) + df_subset[bonus_col].fillna(0) + df_subset[survey_col].fillna(0)
+
+    # Extract completion code
+    df_subset["CompletionCode"] = df_subset[completion_cols].bfill(axis=1).iloc[:, 0]
+
+    # Rename columns for better clarity
     df_subset.rename(columns={
         "participant.id_in_session": "SessionID",
         "participant.code": "ParticipantCode",
         "participant._current_page_name": "FinalPageVisited",
-        base_fee_col: "FixedFee",
-        bonus_col: "Bonus",
-        survey_col: "SurveyFee"
     }, inplace=True)
 
+    # Export the final payment summary to CSV
     df_subset[[
         "SessionID", "ParticipantCode", "FinalPageVisited", "CompletionCode",
         "FixedFee", "Bonus", "SurveyFee", "TotalPayment"
@@ -114,17 +124,24 @@ def generate_time():
 # GAME CSV
 # ---------------------------
 def generate_game():
+    # Intialize list to store all row dictionaries for each player 
     records = []
     for _, row in df.iterrows():
+
+        # Extract and store participant-level metadata
         base_data = {
             "SessionID": row.get("participant.id_in_session"),
             "ParticipantCode": row.get("participant.code"),
             "FinalPageVisited": row.get("participant._current_page_name"),
+            "LastRoundPlayed": row.get(f"fund_vanishes.{max_round}.player.last_round_finished"),
             "GroupID": pd.to_numeric(row.get("fund_vanishes.1.player.group_id_9"), errors="coerce"),
             "ID_in_Group": row.get("fund_vanishes.1.player.id_in_group"),
             "Treatment": "Priming" if row.get("fund_vanishes.1.player.is_priming") == 1 else "Baseline",
         }
+
+
         for r in range(1, max_round + 1):
+            # Extract round-specific variables
             round_data = {
                 "Round": r,
                 "SubgroupID": row.get(f"fund_vanishes.{r}.player.subgroup_id"),
@@ -133,17 +150,34 @@ def generate_game():
                 "S2": row.get(f"fund_vanishes.{r}.player.s2"),
                 "S3": row.get(f"fund_vanishes.{r}.player.s3"),
                 "Role": row.get(f"fund_vanishes.{r}.player.player_role"),
+                "Selected_Proposal": row.get(f"fund_vanishes.{r}.group.selected_proposals_str"),
                 "Vote": row.get(f"fund_vanishes.{r}.player.vote"),
                 "Approved": row.get(f"fund_vanishes.{r}.group.approved"),
+                "Num_of_Approvals": row.get(f"fund_vanishes.{r}.group.total_votes"),
                 "Earnings": row.get(f"fund_vanishes.{r}.player.earnings"),
                 "CompletionCode": row.get(f"fund_vanishes.{r}.player.completion_code")
             }
+
+             # Overwrite role if proposal is empty
+            if round_data["Selected_Proposal"] == '{}':
+                round_data["Role"] = "NA"
             round_data["SelfProposal"] = max((p for p in [round_data["S1"], round_data["S2"], round_data["S3"]] if pd.notnull(p)), default=None)
             records.append({**base_data, **round_data})
 
     df_game = pd.DataFrame.from_records(records)
     df_game["GroupID"] = pd.to_numeric(df_game["GroupID"], errors="coerce").astype("Int64")
+
+    # Define the desired column order
+    desired_order = [
+        "SessionID", "ParticipantCode", "FinalPageVisited", "LastRoundPlayed", "GroupID", "ID_in_Group", "Treatment", "Round", "SubgroupID", "ID_in_Subgroup",
+        "S1", "S2", "S3", "SelfProposal", "Role", "Selected_Proposal", 
+        "Vote", "Approved", "Num_of_Approvals", "Earnings", "CompletionCode"
+    ]
+
+    # Reorder the DataFrame columns
+    df_game = df_game.reindex(columns=desired_order)
     df_game.to_csv(os.path.join(output_dir, "game.csv"), index=False)
+
     print(f"✅ game.csv generated with {len(df_game)} rows using round {max_round}.")
 
 # ---------------------------
@@ -184,6 +218,6 @@ def generate_survey():
 
 # Main calls
 generate_payment()
-generate_time()
+# generate_time()
 generate_game()
 generate_survey()

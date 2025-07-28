@@ -114,7 +114,7 @@ class SyncTop(BaseWaitPage):
     wait_for_all_groups = False
     group_by_arrival_time = True
     body_text = "We're matching you with other participants. <br><br> It might take between 5 to 10 minutes for the study to begin, depending on the rate at which other participants join. <br><br> If you are on this page for more than 10 minutes, please refresh the page...<br><br>"
-    timeout_seconds = 600 
+    timeout_seconds = 600           # 10 minute timeout duration
 
     #  Ensure page is only displayed for players who still need to play 5 rounds
     def is_displayed(self):
@@ -821,8 +821,8 @@ class ResultsPage(BasePage):
     timeout_seconds = RESULTS_TIMEOUT
 
     def is_displayed(self):
-        # Update last round played
-        self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) + 1
+        # # Update last round played
+        # self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) 
 
         return (
             not self.participant.vars.get("dropout", False) 
@@ -877,6 +877,7 @@ class ResultsPage(BasePage):
 
         # Count votes and check if proposal is approved
         total_votes = sum(p.vote for p in subgroup_players)
+        self.group.total_votes = total_votes
         proposal_approved = total_votes >= 2
         self.group.approved = proposal_approved    # Store approval status
 
@@ -1188,6 +1189,9 @@ class DropoutNotice(Page):
         }
     
     def before_next_page(self):
+        # Update last round played
+        self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) 
+        # Update fixed fee to 0
         self.player.survey_fee = 0
         self.player.game_end_time = time.time()       
 
@@ -1198,6 +1202,11 @@ class NotGroupedNotice(Page):
         if self.participant.vars.get("not_grouped", False) or self.participant.vars.get("waiting_timeout", False):
             self.player.ungrouped = True
             return True
+        
+        # Update player's final payment to be the fixed fee
+        final_earnings_data = self.player.final_earnings()
+        final_earnings_data["base_fee"] = 2
+        
         return False
 
         # self.player.ungrouped = True
@@ -1220,6 +1229,8 @@ class DropoutNoticeOtherPlayers(Page):
         return self.group.drop_out_detected and not self.participant.vars.get("dropout", False)
 
     def before_next_page(self):
+        # Update last round played
+        self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) 
         # Mark that dropout has been handled
         self.group.drop_out_finalized = True
 

@@ -106,7 +106,12 @@ class Subsession(BaseSubsession):
 
             # Determine group index by checking how many groups have been created so far
             existing_groups = subsession.get_groups()
-            group_index = len(existing_groups)  # 1-based index
+            # group_index = len(existing_groups)  # 1-based index
+            if existing_groups:
+                last_id = max(g.id_in_subsession for g in existing_groups)
+                group_index = last_id + 1
+            else:
+                group_index = 1
 
             # Assign priming/baseline treatment
             is_priming = group_index % 2 == 1  # Odd = priming, even = baseline
@@ -278,6 +283,9 @@ class Group(BaseGroup):
             print(f"\n[DEBUG] Not enough proposals submitted yet. Current count: {len(proposals)}/3\n")  
     
     # DECISION PAGE ---------------------------------------------------------
+
+    # Number of people who approved the proposal
+    total_votes = models.IntegerField(initial=0)
 
     # Indicates whether the proposal was approved by the majority (>2 approved)
     approved = models.BooleanField(initial=False)
