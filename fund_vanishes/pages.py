@@ -918,7 +918,7 @@ class ResultsPage(BasePage):
             print(f"\n[DEBUG] After storing earnings, all_earnings for Player {id_in_subgroup}: {p.all_earnings}")
 
         # Handle final earnings only if in last round (optional)
-        if self.group.current_period == 5:
+        if self.group.current_period == 3:
             for p in self.group.get_players():
                 p.final_earnings()
 
