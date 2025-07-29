@@ -97,7 +97,7 @@ class Subsession(BaseSubsession):
     def group_by_arrival_time_method(subsession, waiting_players):
         
         eligible = [p for p in waiting_players]    # Create a list of players in SyncTop page
-        group_size = 3
+        group_size = 9
 
         # Case 1: Create group of 9
         if (len(eligible)) >= group_size:
@@ -542,7 +542,7 @@ class Player(BasePlayer):
 
 
         # If already computed, reuse it
-        if "final_earnings_data" in participant.vars:
+        if "final_earnings_data" in participant.vars and self.round_number >= 3:
             return participant.vars["final_earnings_data"]
 
         # Load earnings from participant.vars instead of self.all_earnings

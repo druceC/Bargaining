@@ -1418,3 +1418,39 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Survey Page,Quest
 2025-07-28T03:10:20.831020,wc4q37yp,36,3,priming,1,Priming,Priming,gen_cgi,6
 2025-07-28T03:10:20.831054,wc4q37yp,36,3,priming,1,Priming,Priming,qp3,2
 2025-07-28T03:10:20.831079,wc4q37yp,36,3,priming,1,Priming,Priming,qp4,not sure
+2025-07-29T05:53:58.213909,wsd9nba8,3,2,baseline,4,Baseline,Baseline,qp1,2
+2025-07-29T05:53:58.215708,wsd9nba8,3,2,baseline,4,Baseline,Baseline,gen_cgi,2
+2025-07-29T05:53:58.215749,wsd9nba8,3,2,baseline,4,Baseline,Baseline,qp3,1
+2025-07-29T05:53:58.215774,wsd9nba8,3,2,baseline,4,Baseline,Baseline,qp4,ot sure
+2025-07-29T06:01:06.051700,817h90lw,1,2,baseline,5,Baseline,Baseline,qp1,2
+2025-07-29T06:01:06.053747,817h90lw,1,2,baseline,5,Baseline,Baseline,gen_cgi,2
+2025-07-29T06:01:06.053776,817h90lw,1,2,baseline,5,Baseline,Baseline,qp3,2
+2025-07-29T06:01:06.053794,817h90lw,1,2,baseline,5,Baseline,Baseline,qp4,bargaining
+2025-07-29T06:01:26.790455,817h90lw,2,2,baseline,5,Baseline,Baseline,qp1,2
+2025-07-29T06:01:26.793430,817h90lw,2,2,baseline,5,Baseline,Baseline,gen_cgi,1
+2025-07-29T06:01:26.793460,817h90lw,2,2,baseline,5,Baseline,Baseline,qp3,2
+2025-07-29T06:01:26.793479,817h90lw,2,2,baseline,5,Baseline,Baseline,qp4,2
+2025-07-29T06:02:38.993814,817h90lw,6,3,priming,1,Priming,Priming,qp1,2
+2025-07-29T06:02:38.997098,817h90lw,6,3,priming,1,Priming,Priming,gen_cgi,2
+2025-07-29T06:02:38.997134,817h90lw,6,3,priming,1,Priming,Priming,qp3,2
+2025-07-29T06:02:38.997157,817h90lw,6,3,priming,1,Priming,Priming,qp4,12
+2025-07-29T06:02:45.309991,817h90lw,5,3,priming,1,Priming,Priming,qp1,3
+2025-07-29T06:02:45.311518,817h90lw,5,3,priming,1,Priming,Priming,gen_cgi,2
+2025-07-29T06:02:45.311552,817h90lw,5,3,priming,1,Priming,Priming,qp3,4
+2025-07-29T06:02:45.311573,817h90lw,5,3,priming,1,Priming,Priming,qp4,bargaining
+2025-07-29T06:02:52.302947,817h90lw,4,3,priming,1,Priming,Priming,qp1,3
+2025-07-29T06:02:52.303644,817h90lw,4,3,priming,1,Priming,Priming,gen_cgi,2
+2025-07-29T06:02:52.303656,817h90lw,4,3,priming,1,Priming,Priming,qp3,4
+2025-07-29T06:02:52.303666,817h90lw,4,3,priming,1,Priming,Priming,qp4,apples
+2025-07-29T06:07:12.575110,817h90lw,10,4,baseline,3,Baseline,Baseline,qp1,2
+2025-07-29T06:07:12.576714,817h90lw,10,4,baseline,3,Baseline,Baseline,gen_cgi,1
+2025-07-29T06:07:12.576747,817h90lw,10,4,baseline,3,Baseline,Baseline,qp3,2
+2025-07-29T06:07:12.576773,817h90lw,10,4,baseline,3,Baseline,Baseline,qp4,not sure
+2025-07-29T06:08:10.025243,817h90lw,11,4,baseline,3,Baseline,Baseline,qp1,2
+2025-07-29T06:08:10.027060,817h90lw,11,4,baseline,3,Baseline,Baseline,gen_cgi,1
+2025-07-29T06:08:10.027092,817h90lw,11,4,baseline,3,Baseline,Baseline,qp3,2
+2025-07-29T06:08:10.027113,817h90lw,11,4,baseline,3,Baseline,Baseline,qp4,not sure
+2025-07-29T06:08:21.886282,817h90lw,12,4,baseline,3,Baseline,Baseline,qp1,2
+2025-07-29T06:08:21.887336,817h90lw,12,4,baseline,3,Baseline,Baseline,gen_cgi,2
+2025-07-29T06:08:21.887359,817h90lw,12,4,baseline,3,Baseline,Baseline,qp3,2
+2025-07-29T06:08:21.887378,817h90lw,12,4,baseline,3,Baseline,Baseline,qp4,apples

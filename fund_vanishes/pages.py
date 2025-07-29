@@ -30,7 +30,7 @@ PROPOSAL_TIMEOUT_2 = 30                # 2nd Chance Proposer Page
 VOTE_TIMEOUT_2 = 30                    # 2nd Chance Voter Page
 RESULTS_TIMEOUT = 30                   # Results Page timeout
 
-# Variables for progress bar 
+# Variables for progress bar s
 INTRO_QUESTIONS = 4
 SURVEY_PAGES = 12
 
@@ -918,9 +918,9 @@ class ResultsPage(BasePage):
             print(f"\n[DEBUG] After storing earnings, all_earnings for Player {id_in_subgroup}: {p.all_earnings}")
 
         # Handle final earnings only if in last round (optional)
-        if self.group.current_period == 3:
-            for p in self.group.get_players():
-                p.final_earnings()
+        # if self.group.current_period == 3:
+        #     for p in self.group.get_players():
+        #         p.final_earnings()
 
         # # Period for display
         p_period = self.participant.vars.get('periods_played', 0)
@@ -1809,19 +1809,19 @@ page_sequence = [
     Baseline,             # Only show for baseline treatment groups
 
     # Final Survey
-    # Part1,                  # Voting and Proposing Considerations
-    # Part2,                  # Age, Risk, Occupation
-    # Part3,                  # Power index
-    # Part4,                  # atq 1, 2, 3 (ie. math questions)
-    # Part5,                  # Econ Courses, Party Like, Party, Party Prox
-    # Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
-    # Part7,                  # Religion, (Specify Religion)
-    # GenderAttitudes,        # Gender attitudes
-    # MWC,                    # Assign to even ID players
-    # MWC_bonus,              # Assign to odd ID players
-    # SchwartzHierarchy,      # Schwartz hierarchy
-    # Part8,                  # Retaliation, Retaliation_Other
-    # Bonus,                  # bonus + enjoy question
+    Part1,                  # Voting and Proposing Considerations
+    Part2,                  # Age, Risk, Occupation
+    Part3,                  # Power index
+    Part4,                  # atq 1, 2, 3 (ie. math questions)
+    Part5,                  # Econ Courses, Party Like, Party, Party Prox
+    Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
+    Part7,                  # Religion, (Specify Religion)
+    GenderAttitudes,        # Gender attitudes
+    MWC,                    # Assign to even ID players
+    MWC_bonus,              # Assign to odd ID players
+    SchwartzHierarchy,      # Schwartz hierarchy
+    Part8,                  # Retaliation, Retaliation_Other
+    Bonus,                  # bonus + enjoy question
     
     # Display Total Earnings 
     NotGroupedNotice,
