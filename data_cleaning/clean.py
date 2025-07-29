@@ -221,6 +221,6 @@ def generate_survey():
 
 # Main calls
 generate_payment()
-# generate_time()
+generate_time()
 generate_game()
 generate_survey()
