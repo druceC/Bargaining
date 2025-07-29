@@ -1454,3 +1454,15 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Survey Page,Quest
 2025-07-29T06:08:21.887336,817h90lw,12,4,baseline,3,Baseline,Baseline,gen_cgi,2
 2025-07-29T06:08:21.887359,817h90lw,12,4,baseline,3,Baseline,Baseline,qp3,2
 2025-07-29T06:08:21.887378,817h90lw,12,4,baseline,3,Baseline,Baseline,qp4,apples
+2025-07-29T06:45:16.608794,piubi24o,1,2,baseline,3,Baseline,Baseline,qp1,2
+2025-07-29T06:45:16.611019,piubi24o,1,2,baseline,3,Baseline,Baseline,gen_cgi,3
+2025-07-29T06:45:16.611058,piubi24o,1,2,baseline,3,Baseline,Baseline,qp3,2
+2025-07-29T06:45:16.611083,piubi24o,1,2,baseline,3,Baseline,Baseline,qp4,not sure
+2025-07-29T06:45:26.445632,piubi24o,2,2,baseline,3,Baseline,Baseline,qp1,2
+2025-07-29T06:45:26.447023,piubi24o,2,2,baseline,3,Baseline,Baseline,gen_cgi,2
+2025-07-29T06:45:26.447060,piubi24o,2,2,baseline,3,Baseline,Baseline,qp3,3
+2025-07-29T06:45:26.447083,piubi24o,2,2,baseline,3,Baseline,Baseline,qp4,masculinity
+2025-07-29T06:45:35.228526,piubi24o,3,2,baseline,3,Baseline,Baseline,qp1,2
+2025-07-29T06:45:35.229917,piubi24o,3,2,baseline,3,Baseline,Baseline,gen_cgi,3
+2025-07-29T06:45:35.229946,piubi24o,3,2,baseline,3,Baseline,Baseline,qp3,2
+2025-07-29T06:45:35.229968,piubi24o,3,2,baseline,3,Baseline,Baseline,qp4,not sure
