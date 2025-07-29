@@ -592,7 +592,7 @@ class Player(BasePlayer):
             # Select two unique random periods from all_earnings_list
             selected_entries = random.sample(all_earnings_list, min(2, len(all_earnings_list)))
             # Only give survey fee if all rounds have been completed
-            if(len(all_earnings_list)>=5):
+            if(len(all_earnings_list)>=3):
                 survey_fee = 1 
             else:
                 survey_fee = 1

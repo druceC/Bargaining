@@ -1809,19 +1809,19 @@ page_sequence = [
     Baseline,             # Only show for baseline treatment groups
 
     # Final Survey
-    Part1,                  # Voting and Proposing Considerations
-    Part2,                  # Age, Risk, Occupation
-    Part3,                  # Power index
-    Part4,                  # atq 1, 2, 3 (ie. math questions)
-    Part5,                  # Econ Courses, Party Like, Party, Party Prox
-    Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
-    Part7,                  # Religion, (Specify Religion)
-    GenderAttitudes,        # Gender attitudes
-    MWC,                    # Assign to even ID players
-    MWC_bonus,              # Assign to odd ID players
-    SchwartzHierarchy,      # Schwartz hierarchy
-    Part8,                  # Retaliation, Retaliation_Other
-    Bonus,                  # bonus + enjoy question
+    # Part1,                  # Voting and Proposing Considerations
+    # Part2,                  # Age, Risk, Occupation
+    # Part3,                  # Power index
+    # Part4,                  # atq 1, 2, 3 (ie. math questions)
+    # Part5,                  # Econ Courses, Party Like, Party, Party Prox
+    # Part6,                  # plop_unempl, plop_comp, plop_incdist, plop_priv, plop_luckeffort, democracy_obedience
+    # Part7,                  # Religion, (Specify Religion)
+    # GenderAttitudes,        # Gender attitudes
+    # MWC,                    # Assign to even ID players
+    # MWC_bonus,              # Assign to odd ID players
+    # SchwartzHierarchy,      # Schwartz hierarchy
+    # Part8,                  # Retaliation, Retaliation_Other
+    # Bonus,                  # bonus + enjoy question
     
     # Display Total Earnings 
     NotGroupedNotice,
