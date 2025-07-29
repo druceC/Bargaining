@@ -609,3 +609,16 @@ Timestamp,Session_Code,Participant_ID,Group_ID,Treatment,Round,Survey Page,Quest
 2025-07-27T23:47:09.877595,qi98jfy3,36,1,1,Intro_Questions,party_strong_democrat,1
 2025-07-27T23:47:09.877613,qi98jfy3,36,1,1,Intro_Questions,inc,4
 2025-07-27T23:47:09.877631,qi98jfy3,36,1,1,Intro_Questions,inc_hh,4
+2025-07-29T00:17:51.914786,ymfbq4kx,1,1,1,Intro_Questions,spbrn,1
+2025-07-29T00:17:51.916715,ymfbq4kx,1,1,1,Intro_Questions,cntbrn,
+2025-07-29T00:17:51.916737,ymfbq4kx,1,1,1,Intro_Questions,spcit,2
+2025-07-29T00:17:51.916754,ymfbq4kx,1,1,1,Intro_Questions,other_cit,American Samoa
+2025-07-29T00:17:51.916771,ymfbq4kx,1,1,1,Intro_Questions,gen,1
+2025-07-29T00:17:51.916787,ymfbq4kx,1,1,1,Intro_Questions,other_gender,
+2025-07-29T00:17:51.916803,ymfbq4kx,1,1,1,Intro_Questions,degree,4
+2025-07-29T00:17:51.916819,ymfbq4kx,1,1,1,Intro_Questions,party,2
+2025-07-29T00:17:51.916835,ymfbq4kx,1,1,1,Intro_Questions,party_closer,
+2025-07-29T00:17:51.916851,ymfbq4kx,1,1,1,Intro_Questions,party_strong_republican,
+2025-07-29T00:17:51.916867,ymfbq4kx,1,1,1,Intro_Questions,party_strong_democrat,1
+2025-07-29T00:17:51.916883,ymfbq4kx,1,1,1,Intro_Questions,inc,3
+2025-07-29T00:17:51.916899,ymfbq4kx,1,1,1,Intro_Questions,inc_hh,3

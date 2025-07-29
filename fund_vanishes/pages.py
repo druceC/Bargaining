@@ -823,6 +823,7 @@ class ResultsPage(BasePage):
     def is_displayed(self):
         # # Update last round played
         # self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) 
+        self.player.last_round_finished = self.round_number
 
         return (
             not self.participant.vars.get("dropout", False) 
@@ -1190,7 +1191,7 @@ class DropoutNotice(Page):
     
     def before_next_page(self):
         # Update last round played
-        self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) 
+        # self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) 
         # Update fixed fee to 0
         self.player.survey_fee = 0
         self.player.game_end_time = time.time()       
@@ -1230,7 +1231,7 @@ class DropoutNoticeOtherPlayers(Page):
 
     def before_next_page(self):
         # Update last round played
-        self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) 
+        # self.player.last_round_finished = (self.participant.vars.get('periods_played', 0)) 
         # Mark that dropout has been handled
         self.group.drop_out_finalized = True
 

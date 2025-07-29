@@ -161,7 +161,10 @@ def generate_game():
              # Overwrite role if proposal is empty
             if round_data["Selected_Proposal"] == '{}':
                 round_data["Role"] = "NA"
+
+            # Self proposal
             round_data["SelfProposal"] = max((p for p in [round_data["S1"], round_data["S2"], round_data["S3"]] if pd.notnull(p)), default=None)
+
             records.append({**base_data, **round_data})
 
     df_game = pd.DataFrame.from_records(records)
