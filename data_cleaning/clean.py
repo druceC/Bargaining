@@ -71,6 +71,7 @@ def generate_payment():
 # TIME CSV
 # ---------------------------
 def generate_time():
+    max_round = 3
     game_start_col = f"fund_vanishes.1.player.game_start_time"
     game_end_col = f"fund_vanishes.{max_round}.player.game_end_time"
     experiment_end_col = f"fund_vanishes.{max_round}.player.experiment_end_time"
@@ -124,6 +125,7 @@ def generate_time():
 # GAME CSV
 # ---------------------------
 def generate_game():
+
     # Intialize list to store all row dictionaries for each player 
     records = []
     for _, row in df.iterrows():
@@ -133,14 +135,21 @@ def generate_game():
             "SessionID": row.get("participant.id_in_session"),
             "ParticipantCode": row.get("participant.code"),
             "FinalPageVisited": row.get("participant._current_page_name"),
-            "LastRoundPlayed": row.get(f"fund_vanishes.{max_round}.player.last_round_finished"),
+            "LastRoundPlayed": row.get(f"fund_vanishes.3.player.last_round_finished"),
             "GroupID": pd.to_numeric(row.get("fund_vanishes.1.player.group_id_9"), errors="coerce"),
             "ID_in_Group": row.get("fund_vanishes.1.player.id_in_group"),
             "Treatment": "Priming" if row.get("fund_vanishes.1.player.is_priming") == 1 else "Baseline",
         }
 
+        # Overwrite lastround if empty
+        if base_data["LastRoundPlayed"] == '0':
+            # Set to round 2 last round
+            base_data["LastRoundPlayed"] == row.get(f"fund_vanishes.2.player.last_round_finished")
+            if base_data["LastRoundPlayed"] == '0':
+                base_data["LastRoundPlayed"] == row.get(f"fund_vanishes.1.player.last_round_finished")
 
-        for r in range(1, max_round + 1):
+
+        for r in range(1, max_round):
             # Extract round-specific variables
             round_data = {
                 "Round": r,
@@ -149,7 +158,7 @@ def generate_game():
                 "S1": row.get(f"fund_vanishes.{r}.player.s1"),
                 "S2": row.get(f"fund_vanishes.{r}.player.s2"),
                 "S3": row.get(f"fund_vanishes.{r}.player.s3"),
-                "Role": row.get(f"fund_vanishes.{r}.player.player_role"),
+                # "Role": row.get(f"fund_vanishes.{r}.player.player_role"),
                 "Selected_Proposal": row.get(f"fund_vanishes.{r}.group.selected_proposals_str"),
                 "Vote": row.get(f"fund_vanishes.{r}.player.vote"),
                 "Approved": row.get(f"fund_vanishes.{r}.group.approved"),
@@ -172,8 +181,8 @@ def generate_game():
 
     # Define the desired column order
     desired_order = [
-        "SessionID", "ParticipantCode", "FinalPageVisited", "LastRoundPlayed", "GroupID", "ID_in_Group", "Treatment", "Round", "SubgroupID", "ID_in_Subgroup",
-        "S1", "S2", "S3", "SelfProposal", "Role", "Selected_Proposal", 
+        "SessionID", "ParticipantCode", "FinalPageVisited", "GroupID", "ID_in_Group", "Treatment", "Round", "SubgroupID", "ID_in_Subgroup",
+        "S1", "S2", "S3", "SelfProposal", "Selected_Proposal", 
         "Vote", "Approved", "Num_of_Approvals", "Earnings", "CompletionCode"
     ]
 
