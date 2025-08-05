@@ -1,4 +1,4 @@
-# Fund Vanishes: oTree Experiment
+# Fund Vanishes: oTree 💰
 
 This repo contains the code for an experimental economics game on group decision-making and resource division.
 
@@ -27,7 +27,7 @@ This is an oTree app built in Python with HTML templates. It includes two main a
 
 ---
 
-## ⚙Setup Instructions
+## ⚙ Setup 
 
 1. Clone the repo  
    ```bash
